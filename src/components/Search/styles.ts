@@ -5,11 +5,13 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   margin-top: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   background-color: #fff;
   width: 272px;
   border-radius: 10px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-  height: 36px;
+  height: 48px;
+  padding-right: 18px;
 `
 
 export const Header = styled.div`
@@ -21,6 +23,8 @@ export const Header = styled.div`
 export const SearchInput = styled.input`
   border: none;
   outline: none;
+  width: 240px;
+  font-family: Montserrat;
   &&::-webkit-input-placeholder {
     color: #C3C3C3;
     font-weight: 300;

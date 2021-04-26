@@ -5,7 +5,7 @@ import { ReactComponent as SearchIcon } from '../../assets/images/LeftBar/icons/
 const Search = () => {
   return (
     <Container>
-      <SearchIcon style={{ marginLeft: '10px', marginRight: '6px' }} />
+      <SearchIcon style={{ marginLeft: '10px', marginRight: '12px' }} />
       <SearchInput type="text" placeholder="search exercise, muslce..." />
     </Container>
   )

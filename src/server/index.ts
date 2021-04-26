@@ -48,5 +48,5 @@ export default runServer
 // SetLoop <{ set: Set[] (Array length equals the number of loops), loops: number, totalSetTime: number }>
 // obs.: totalSetTime equals (((each exercise restTime) + setLoopTime)*loops)
 
-// Training <{ sets: SetLoop[], totalTrainingTime: number}>
+// Training <{ sets: SetLoop[], afflictedAreas: string[], totalTrainingTime: number}>
 // obs.: totalTrainingTime
