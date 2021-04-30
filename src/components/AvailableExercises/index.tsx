@@ -1,7 +1,7 @@
 import { RouteHandler } from 'miragejs/server'
 import React, { useEffect, useState } from 'react'
 import runServer from '../../server'
-import Banana from '../Banana'
+import Banana from '../HorizontalScrollingImages'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
 import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
 import { Container, ExerciseAreaText, ExerciseAreaContainer, ExercisesImagesContainer } from './styles'
@@ -11,37 +11,12 @@ interface ExercisesProps {
   legs: Exercise[] | [] | object[];
 }
 
-interface Exercise {
+export interface Exercise {
   id: string;
   name: string;
   image: string;
   restTime?: string;
 }
-
-// One item component
-// selected prop will be passed
-const MenuItem = ({ text, selected }: { text: string, selected: any }) => {
-  return <div>{text}</div>;
-};
-
-// All items component
-// Important! add unique key
-export const Menu = (list: any, selected: any) =>
-  list.map((exercise: Exercise) => {
-    console.log('AQUI')
-    console.log(exercise)
-    const { image, name } = exercise;
-
-    return <MenuItem text={name} key={name} selected={selected} />;
-  });
-
-
-const Arrow = ({ text }: { text: string }) => <div>{text}</div>
-
-
-const ArrowLeft = Arrow({ text: '<' });
-const ArrowRight = Arrow({ text: '>' });
-
 
 const AvailableExercises = () => {
   runServer()
@@ -66,7 +41,7 @@ const AvailableExercises = () => {
         <ExerciseAreaText>Chest</ExerciseAreaText>
       </ExerciseAreaContainer>
       <ExercisesImagesContainer>
-        <Banana />
+        <Banana list={exercises.chest} />
       </ExercisesImagesContainer>
       <ExerciseAreaContainer>
         <LegIcon />
