@@ -1,7 +1,7 @@
 import { RouteHandler } from 'miragejs/server'
 import React, { useEffect, useState } from 'react'
 import runServer from '../../server'
-import Banana from '../HorizontalScrollingImages'
+import MuscleGroupList from '../HorizontalScrollingImages'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
 import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
 import { Container, ExerciseAreaText, ExerciseAreaContainer, ExercisesImagesContainer } from './styles'
@@ -20,7 +20,6 @@ export interface Exercise {
 
 const AvailableExercises = () => {
   runServer()
-  const [selected, setSelected] = useState<string>('item1')
   const [exercises, setExercises] = useState<ExercisesProps | any>({
     chest: [],
     legs: []
@@ -41,12 +40,16 @@ const AvailableExercises = () => {
         <ExerciseAreaText>Chest</ExerciseAreaText>
       </ExerciseAreaContainer>
       <ExercisesImagesContainer>
-        <Banana list={exercises.chest} />
+        <MuscleGroupList list={exercises.chest} />
       </ExercisesImagesContainer>
       <ExerciseAreaContainer>
         <LegIcon />
         <ExerciseAreaText>Legs</ExerciseAreaText>
       </ExerciseAreaContainer>
+      <ExercisesImagesContainer>
+        <MuscleGroupList list={exercises.legs} />
+      </ExercisesImagesContainer>
+
     </Container>
   )
 }
