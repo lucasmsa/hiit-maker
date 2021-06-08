@@ -1,43 +1,82 @@
-import React, { Component, useState } from 'react';
-import ScrollMenu from 'react-horizontal-scrolling-menu';
-import { ReactComponent as RightArrow } from '../../assets/images/LeftBar/icons/right_arrow.svg'
-import { ReactComponent as LeftArrow } from '../../assets/images/LeftBar/icons/left_arrow.svg'
+import React, { Component, useEffect, useState } from 'react';
 import { Exercise } from '../AvailableExercises'
-import { App, ActiveItem, NotActiveItem } from './styles';
+import {
+  Container,
+  ActiveItem,
+  NotActiveItem,
+  HorizontalScroll,
+  ShadowLeftArrow,
+  ShadowRightArrow,
+  TooltipText,
+  TooltipContainer,
+  ExerciseItemContainer,
+  Tooltip,
+  BalloonTip,
+  NotActiveItemContainer,
+} from './styles';
+import ReactTooltip from 'react-tooltip';
 
 interface ExercisesListProps {
   list: Exercise[]
 }
 
-const SingleExercise = ({ image, selected }: { image: any, selected: any }) => {
-  return selected
-    ? <ActiveItem src={image} />
-    : <NotActiveItem src={image} />
+interface SingleExerciseProps {
+  key: string;
+  name: string;
+  image: string;
+  index: number;
+}
+
+const SingleExercise = ({ key, name, image, index }: SingleExerciseProps) => {
+  const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
+
+  return (
+    <ExerciseItemContainer
+      onMouseEnter={() => setSelectedTooltip(true)}
+      onMouseLeave={() => setSelectedTooltip(false)}
+    >
+      <NotActiveItemContainer>
+        <TooltipContainer
+          selectedTooltip={selectedTooltip}
+        >
+          <Tooltip>
+            <TooltipText>{name}</TooltipText>
+          </Tooltip>
+          <BalloonTip />
+        </TooltipContainer>
+      </NotActiveItemContainer>
+      <NotActiveItem
+        src={image} />
+    </ExerciseItemContainer>
+  )
 };
 
-export const ExercisesContainer = (list: any, selected: any) =>
-  list.map((el: any) => {
+export const ExercisesContainer = (list: any) =>
+  list.map((el: any, index: number) => {
     const { id, name, image } = el;
 
-    return <SingleExercise image={image} key={id} selected={selected} />;
+    return <SingleExercise key={id} image={image} name={name} index={index} />;
   });
 
-const selected = 'item1';
+
 
 const HorizontalScrollingImages = ({ list }: ExercisesListProps) => {
   const [selectedItem, setSelectedItem] = useState<any>('item1')
-  const exercisesList = ExercisesContainer(list, selected)
+  const exercisesList = ExercisesContainer(list)
+
+  const onDragEnd = (result: any) => { }
 
   return (
-    <App>
-      <ScrollMenu
+    <Container>
+      <ReactTooltip id="exercise" />
+      <HorizontalScroll
         data={exercisesList}
-        arrowLeft={/*<LeftArrow style={{ cursor: 'pointer' }} />*/null}
-        arrowRight={/*<RightArrow style={{ cursor: 'pointer' }} */null}
+        arrowLeft={<ShadowLeftArrow />}
+        arrowRight={<ShadowRightArrow />}
         selected={selectedItem}
         onSelect={(key: any) => setSelectedItem(key)}
       />
-    </App>
+    </Container >
   );
 }
 

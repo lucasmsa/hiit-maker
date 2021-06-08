@@ -12,8 +12,6 @@ const LeftBar = () => {
         <Branding />
       </Header>
       <IconsContainer>
-        {/* <Dumbell src="/images/LeftBar/icons/github_icon.svg" />
-        <Dumbell src="/images/LeftBar/icons/info_icon.svg" /> */}
       </IconsContainer>
       <Search />
       <AvailableExercises />

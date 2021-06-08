@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
   margin-left: 18px;
   background-color: #EE373F;
   width: 280px;
@@ -15,7 +14,7 @@ export const ExerciseAreaContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 24px;
+  margin-top: 36px;
 `
 
 export const ExerciseAreaText = styled.h1`

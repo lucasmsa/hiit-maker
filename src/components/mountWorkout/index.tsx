@@ -15,7 +15,11 @@ import { ReactComponent as PlusIconCounter } from '../../assets/images/midSectio
 import { ReactComponent as MinusIconCounter } from '../../assets/images/midSection/minus-set-counter-icon.svg'
 import PushUp from '../../assets/images/ExercisesMedia/chest/young-man-doing-push-ups-fitness-club_23-2147949580.jpg'
 
-export default function MountWorkout() {
+interface WorkoutProps {
+  id?: string
+}
+
+export default function MountWorkout({ id }: WorkoutProps) {
   const [trainingSetCounter, setTrainingSetCounter] = useState<number>(0)
 
   const handleExerciseCounter = useCallback((option: 'plus' | 'minus') => {
@@ -40,7 +44,7 @@ export default function MountWorkout() {
       <FooterContainer>
         <PlusContainer>
           <PlusIcon />
-          <PlusInfoText>Create an exercise or drag and drop here</PlusInfoText>
+          <PlusInfoText>Click on an exercise to add it to your training set</PlusInfoText>
         </PlusContainer>
         <SetCounter>
           <PlusIconCounter
