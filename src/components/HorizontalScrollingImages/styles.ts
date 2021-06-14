@@ -11,30 +11,36 @@ export const Container = styled.div`
   height: 80px;
 `
 
-export const ActiveItem = styled.img`
-  border: 1px green solid;
-  max-width: 100px;
-  max-height: 100px;
-  padding: 0 12px;
-  userSelect: none;
-  cursor: pointer;
+export const ActiveItemContainer = styled.div`
+  display: flex;
+  border: 4px solid #42bf79;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 12px;
 `
 
 export const NotActiveItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 12px;
+`
+
+export const ExerciseWithTooltipContainer = styled.div`
   margin: 0;
   padding: 0;
 `
 
-export const NotActiveItem = styled.img`
-  padding: 0 12px;
+export const Item = styled.img`
   userSelect: none;
   cursor: pointer;
   border: none;
   user-drag: none;
   -webkit-user-drag: none;
-  width: 108px;
+  width: 84px;
   height: 60px;
-  border-radius: 20%; 
+  border-radius: 12px;
 `
 
 export const HorizontalScroll = styled(ScrollMenu)`
@@ -68,8 +74,8 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
 
 export const Tooltip = styled.div`
   position: absolute;
-  transform: translateX(-45px) translateY(-10px);
-  width: 130px;
+  transform: translateX(-37.5px) translateY(-10px);
+  width: 110px;
   height: 20px;
   display: flex;
   background: #EBEBEB;
@@ -84,7 +90,7 @@ export const TooltipText = styled.h3`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 8px;
   color: #282828;
 `
 

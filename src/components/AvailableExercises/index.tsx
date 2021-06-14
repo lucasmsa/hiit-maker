@@ -20,6 +20,7 @@ export interface Exercise {
 
 const AvailableExercises = () => {
   runServer()
+  const [selectedExercise, setSelectedExercise] = useState<string>('')
   const [exercises, setExercises] = useState<ExercisesProps | any>({
     chest: [],
     legs: []
@@ -40,14 +41,28 @@ const AvailableExercises = () => {
         <ExerciseAreaText>Chest</ExerciseAreaText>
       </ExerciseAreaContainer>
       <ExercisesImagesContainer>
-        <MuscleGroupList list={exercises.chest} />
+        <MuscleGroupList
+          selectedExercise={selectedExercise}
+          setSelectedExercise={(key: any) => {
+            console.log(key)
+            setSelectedExercise(key)
+          }}
+          list={exercises.chest}
+        />
       </ExercisesImagesContainer>
       <ExerciseAreaContainer>
         <LegIcon />
         <ExerciseAreaText>Legs</ExerciseAreaText>
       </ExerciseAreaContainer>
       <ExercisesImagesContainer>
-        <MuscleGroupList list={exercises.legs} />
+        <MuscleGroupList
+          selectedExercise={selectedExercise}
+          setSelectedExercise={(key: any) => {
+            console.log(key)
+            setSelectedExercise(key)
+          }}
+          list={exercises.legs}
+        />
       </ExercisesImagesContainer>
 
     </Container>

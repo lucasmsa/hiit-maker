@@ -2,8 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { Exercise } from '../AvailableExercises'
 import {
   Container,
-  ActiveItem,
-  NotActiveItem,
+  Item,
   HorizontalScroll,
   ShadowLeftArrow,
   ShadowRightArrow,
@@ -12,22 +11,27 @@ import {
   ExerciseItemContainer,
   Tooltip,
   BalloonTip,
+  ActiveItemContainer,
   NotActiveItemContainer,
+  ExerciseWithTooltipContainer,
 } from './styles';
-import ReactTooltip from 'react-tooltip';
 
 interface ExercisesListProps {
-  list: Exercise[]
+  list: Exercise[];
+  selectedExercise: string;
+  setSelectedExercise: (key: any) => void;
 }
 
 interface SingleExerciseProps {
-  key: string;
+  id: number;
+  key: number;
   name: string;
   image: string;
   index: number;
+  selectedItem: string;
 }
 
-const SingleExercise = ({ key, name, image, index }: SingleExerciseProps) => {
+const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExerciseProps) => {
   const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
 
   return (
@@ -35,7 +39,7 @@ const SingleExercise = ({ key, name, image, index }: SingleExerciseProps) => {
       onMouseEnter={() => setSelectedTooltip(true)}
       onMouseLeave={() => setSelectedTooltip(false)}
     >
-      <NotActiveItemContainer>
+      <ExerciseWithTooltipContainer>
         <TooltipContainer
           selectedTooltip={selectedTooltip}
         >
@@ -44,37 +48,51 @@ const SingleExercise = ({ key, name, image, index }: SingleExerciseProps) => {
           </Tooltip>
           <BalloonTip />
         </TooltipContainer>
-      </NotActiveItemContainer>
-      <NotActiveItem
-        src={image} />
+      </ExerciseWithTooltipContainer>
+      {parseInt(selectedItem) === id ?
+        <ActiveItemContainer>
+          <Item
+            src={image}
+          />
+        </ActiveItemContainer> :
+        <NotActiveItemContainer>
+          <Item
+            src={image}
+            />
+        </NotActiveItemContainer>}
     </ExerciseItemContainer>
   )
 };
 
-export const ExercisesContainer = (list: any) =>
+export const ExercisesContainer = (list: any, selected: any) =>
   list.map((el: any, index: number) => {
     const { id, name, image } = el;
-
-    return <SingleExercise key={id} image={image} name={name} index={index} />;
+    console.log(id, name, image, selected);
+    return <SingleExercise
+      key={id}
+      id={id} 
+      image={image} 
+      name={name} 
+      index={index}
+      selectedItem={selected}
+    />;
   });
 
+const ArrowLeft = <ShadowLeftArrow />
+const ArrowRight = <ShadowRightArrow />
 
-
-const HorizontalScrollingImages = ({ list }: ExercisesListProps) => {
-  const [selectedItem, setSelectedItem] = useState<any>('item1')
-  const exercisesList = ExercisesContainer(list)
-
-  const onDragEnd = (result: any) => { }
+const HorizontalScrollingImages = ({ list, selectedExercise, setSelectedExercise }: ExercisesListProps) => {
+  const exercisesList = ExercisesContainer(list, selectedExercise)
 
   return (
     <Container>
-      <ReactTooltip id="exercise" />
       <HorizontalScroll
         data={exercisesList}
-        arrowLeft={<ShadowLeftArrow />}
-        arrowRight={<ShadowRightArrow />}
-        selected={selectedItem}
-        onSelect={(key: any) => setSelectedItem(key)}
+        arrowLeft={ArrowLeft}
+        arrowRight={ArrowRight}
+        hideSingleArrow={true}
+        selected={selectedExercise}
+        onSelect={setSelectedExercise}
       />
     </Container >
   );
