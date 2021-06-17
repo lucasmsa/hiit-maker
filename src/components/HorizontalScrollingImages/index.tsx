@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState } from 'react';
 import { Exercise } from '../AvailableExercises'
+import React, { Component, useEffect, useState } from 'react';
 import {
   Container,
   Item,
@@ -30,6 +30,8 @@ interface SingleExerciseProps {
   index: number;
   selectedItem: string;
 }
+
+
 
 const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExerciseProps) => {
   const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)

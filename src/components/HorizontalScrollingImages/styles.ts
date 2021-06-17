@@ -83,7 +83,7 @@ export const Tooltip = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 0;
-  border-radius: 12px;
+  border-radius: 6px;
 `
 
 export const TooltipText = styled.h3`
