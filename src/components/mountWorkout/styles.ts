@@ -21,7 +21,7 @@ export const SetHeader = styled.h2`
 `
 
 export const FooterContainer = styled.div`
-  margin-top: 24px;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   width: 100%;

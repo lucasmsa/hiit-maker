@@ -5,7 +5,26 @@ import MuscleGroupList from '../HorizontalScrollingImages'
 import React, { useCallback, useEffect, useState } from 'react'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
 import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
-import { Container, ExerciseAreaText, ExerciseAreaContainer, ExercisesImagesContainer } from './styles'
+import { ReactComponent as CancelModalIcon } from '../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
+import {
+  Container,
+  ExerciseAreaText, 
+  ExerciseAreaContainer, 
+  ExercisesImagesContainer,
+  ModalContainer,
+  ModalTopContainer,
+  ModalContentContainer,
+  ExerciseSelectionText,
+  ModalExerciseImage,
+  ConfirmExerciseBoldText,
+  ExerciseDescriptionText,
+  ModalTextAndButtonsContainer,
+  ButtonContainer,
+  CancelButton,
+  ConfirmButton,
+  CancelButtonText,
+  ConfirmButtonText
+} from './styles'
 
 interface ExercisesProps {
   legs: Exercise[] | [] | object[];
@@ -28,6 +47,8 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    borderRadius: 20,
+    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.25)'
   },
 };
 
@@ -37,6 +58,8 @@ const AvailableExercises = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [chestExercises, setChestExercises] = useState<Exercise[] | []>([])
   const [legsExercises, setLegsExercises] = useState<Exercise[] | []>([])
+  const [cancelButtonHover, setCancelButtonHover] = useState<boolean>(false)
+  const [confirmButtonHover, setConfirmButtonHover] = useState<boolean>(false)
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     id: 0,
     name: '',
@@ -71,8 +94,8 @@ const AvailableExercises = () => {
   const handleSpecificExercise = useCallback((key: string) => {
     fetch(`api/exercises/${key}`)
       .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
+      .then((exerciseInfo) => {
+        setSpecificExercise(exerciseInfo)
       })
   }, [])
 
@@ -85,16 +108,42 @@ const AvailableExercises = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2>Exercise Selection</h2>
-        <button onClick={() => setModalOpen(false)}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+        <ModalContainer>
+          <ModalTopContainer>
+            <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
+            <CancelModalIcon
+              style={{ cursor: 'pointer' }}
+              onClick={() => setModalOpen(false)}
+            />
+          </ModalTopContainer>
+          <ModalContentContainer>
+            <ModalExerciseImage
+                src={specificExercise.image}
+                alt={specificExercise.name}
+              />
+            <ModalTextAndButtonsContainer>
+              <ExerciseDescriptionText>Exercise: <span style={{ color: '#EE373F'}}>{specificExercise.name.toUpperCase()}</span></ExerciseDescriptionText>
+              <ConfirmExerciseBoldText>Confirm adding this exercise to your workout</ConfirmExerciseBoldText>
+              <ButtonContainer>
+                <CancelButton
+                  onMouseEnter={() => {setCancelButtonHover(true)}}
+                  onMouseLeave={() => {setCancelButtonHover(false)}}
+                  isHovered={cancelButtonHover}
+                  onClick={() => setModalOpen(false)}
+                >
+                  <CancelButtonText>Cancel</CancelButtonText>
+                </CancelButton>
+                <ConfirmButton
+                  onMouseEnter={() => {setConfirmButtonHover(true)}}
+                  onMouseLeave={() => {setConfirmButtonHover(false)}}
+                  isHovered={confirmButtonHover}
+                >
+                  <ConfirmButtonText>Add Exercise</ConfirmButtonText>
+                </ConfirmButton>
+              </ButtonContainer>
+            </ModalTextAndButtonsContainer>
+          </ModalContentContainer>
+        </ModalContainer>
       </Modal>
       <ExerciseAreaContainer>
         <ChestIcon />
