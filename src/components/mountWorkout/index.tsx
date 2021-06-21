@@ -36,10 +36,14 @@ export default function MountWorkout({ id }: WorkoutProps) {
       <ExerciseSetCard
         name={'SQUAT WITHOUT DUMBELLS'}
         image={Squat}
+        restTime={30}
+        trainTime={60}
       />
       <ExerciseSetCard
         name={'REGULAR PUSH UPS'}
         image={PushUp}
+        restTime={30}
+        trainTime={60}
       />
       <FooterContainer>
         <PlusContainer>

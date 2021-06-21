@@ -18,9 +18,11 @@ import {
 interface ExerciseSetCardProps {
   name: string;
   image: string;
+  restTime: number;
+  trainTime: number;
 }
 
-export default function ExerciseSetCard({ name, image }: ExerciseSetCardProps) {
+export default function ExerciseSetCard({ name, image, restTime, trainTime }: ExerciseSetCardProps) {
   return (
     <Container>
       <ContentsContainer>
@@ -44,7 +46,7 @@ export default function ExerciseSetCard({ name, image }: ExerciseSetCardProps) {
               <HeaderTrainRest>TRAIN</HeaderTrainRest>
               <InputContainer>
                 <InputSurroundings>
-                  <TimeInput value='60' />
+                  <TimeInput value={trainTime} />
                 </InputSurroundings>
                 <SecondsText>seg</SecondsText>
               </InputContainer>
@@ -53,7 +55,7 @@ export default function ExerciseSetCard({ name, image }: ExerciseSetCardProps) {
               <HeaderTrainRest>REST</HeaderTrainRest>
               <InputContainer>
                 <InputSurroundings>
-                  <TimeInput value='30'></TimeInput>
+                  <TimeInput value={restTime}></TimeInput>
                 </InputSurroundings>
                 <SecondsText>seg</SecondsText>
               </InputContainer>

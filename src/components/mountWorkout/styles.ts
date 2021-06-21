@@ -2,12 +2,13 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   height: 77.5vh;
-  width: 550px;
+  width: 580px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #FFFFFF;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin-right: 8px;
   border-radius: 20px;
 `
 

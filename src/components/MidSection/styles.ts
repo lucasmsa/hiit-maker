@@ -3,10 +3,71 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+export const SetsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+`
+
+export const CurrentTrainingSetsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+`
+
+export const AddSetText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.02em;
+  color: #43C079;
+  margin-top: 4px;
+`
+
+export const AddSetContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 26px;
+  margin-bottom: 16px;
+  cursor: pointer;
+`
+
+export const RemoveSetContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`
+
+
+export const RemoveSetText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.02em;
+  color: #EE373F;
+  margin-top: 4px;
+`
+
+
+export const ExercisesContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   flex: 1;
   height: 100vh;
+  margin-left: 34px;
 `
 
 export const WorkoutContainer = styled.div``
@@ -15,6 +76,7 @@ export const HeaderTextStyle = styled.h1`
   margin-top: 64px;
   margin-bottom: 50px;
   font-family: Montserrat;
+  align-self: center;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
