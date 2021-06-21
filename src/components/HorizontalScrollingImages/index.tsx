@@ -1,5 +1,5 @@
 import { Exercise } from '../AvailableExercises'
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Item,

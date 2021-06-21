@@ -1,10 +1,5 @@
 import styled from "styled-components"
 
-interface ButtonProps {
-  isHovered: boolean;
-}
-
-
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,20 +34,22 @@ export const ModalTextAndButtonsContainer = styled.div`
 `
 
 
-export const CancelButton = styled.div<ButtonProps>`
+export const CancelButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 158px;
   height: 35px;
   border: 1px solid #282828;
-  transform: ${props => props.isHovered && `translateY(-1.5px)`};
   transition: 0.3s ease;
+  &:hover {
+    transform: translateY(-1.5px);
+  }
   border-radius: 10px;
   cursor: pointer;
 `
 
-export const ConfirmButton = styled.div<ButtonProps>`
+export const ConfirmButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,8 +57,10 @@ export const ConfirmButton = styled.div<ButtonProps>`
   height: 35px;
   background: #EE373F;
   box-shadow: 0px 1px 4px rgba(238, 55, 63, 0.25);
-  transform: ${props => props.isHovered && `translateY(-1.5px)`};
   transition: 0.3s ease;
+  &:hover {
+    transform: translateY(-1.5px);
+  }
   border-radius: 10px;
   cursor: pointer;
 `

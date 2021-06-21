@@ -1,4 +1,3 @@
-import { RouteHandler } from 'miragejs/server'
 import runServer from '../../server'
 import MuscleGroupList from '../HorizontalScrollingImages'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -33,8 +32,6 @@ const AvailableExercises = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [chestExercises, setChestExercises] = useState<Exercise[] | []>([])
   const [legsExercises, setLegsExercises] = useState<Exercise[] | []>([])
-  const [cancelButtonHover, setCancelButtonHover] = useState<boolean>(false)
-  const [confirmButtonHover, setConfirmButtonHover] = useState<boolean>(false)
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     id: 0,
     name: '',
@@ -81,12 +78,6 @@ const AvailableExercises = () => {
         modalOpen={modalOpen}
         specificExercise={specificExercise}
         closeModal={() => setModalOpen(false)}
-        cancelButtonActive={cancelButtonHover}
-        confirmButtonActive={confirmButtonHover}
-        hoverCancel={() => setCancelButtonHover(true)}
-        hoverConfirm={() => setConfirmButtonHover(true)}
-        unhoverCancel={() => setCancelButtonHover(false)}
-        unhoverConfirm={() => setConfirmButtonHover(false)}
       />
       <ExerciseAreaContainer>
         <ChestIcon />

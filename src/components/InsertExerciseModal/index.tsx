@@ -32,15 +32,9 @@ const customStyles = {
 };
 
 interface ModalProps {
-  specificExercise: Exercise;
   modalOpen: boolean;
   closeModal: () => void;
-  hoverCancel: () => void;
-  unhoverCancel: () => void;
-  hoverConfirm: () => void;
-  unhoverConfirm: () => void;
-  cancelButtonActive: boolean;
-  confirmButtonActive: boolean
+  specificExercise: Exercise;
 }
 
 
@@ -48,12 +42,6 @@ const InsertExerciseModal = ({
   specificExercise,
   modalOpen,
   closeModal,
-  hoverCancel,
-  unhoverCancel,
-  hoverConfirm,
-  unhoverConfirm,
-  cancelButtonActive,
-  confirmButtonActive
 }: ModalProps) => {
   return (
     <Modal
@@ -81,18 +69,11 @@ const InsertExerciseModal = ({
             <ConfirmExerciseBoldText>Confirm adding this exercise to your workout</ConfirmExerciseBoldText>
             <ButtonContainer>
               <CancelButton
-                onMouseEnter={hoverCancel}
-                onMouseLeave={unhoverCancel}
-                isHovered={cancelButtonActive}
                 onClick={closeModal}
               >
                 <CancelButtonText>Cancel</CancelButtonText>
               </CancelButton>
-              <ConfirmButton
-                onMouseEnter={hoverConfirm}
-                onMouseLeave={unhoverConfirm}
-                isHovered={confirmButtonActive}
-              >
+              <ConfirmButton>
                 <ConfirmButtonText>Add Exercise</ConfirmButtonText>
               </ConfirmButton>
             </ButtonContainer>
