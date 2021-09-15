@@ -1,14 +1,23 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom'
-import GlobalStyle from './styles/global'
 import Routes from './routes'
+import GlobalStyle from './styles/global'
+import { BrowserRouter } from 'react-router-dom'
+import TrainingContext from './context/TrainingContext'
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+      <TrainingContext.Provider value={{
+        training: {
+          trainSetLoops: [],
+          afflictedAreas: [],
+          totalTrainingTime: 0
+        }
+      }} >
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </TrainingContext.Provider>
       <GlobalStyle />
     </>
   );
