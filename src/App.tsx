@@ -9,10 +9,12 @@ function App() {
     <>
       <TrainingContext.Provider value={{
         training: {
+          currentSet: 0,
           trainSetLoops: [],
           afflictedAreas: [],
           totalTrainingTime: 0
-        }
+        },
+        addExerciseToCurrentSetLoop: () => {},
       }} >
         <BrowserRouter>
           <Routes />

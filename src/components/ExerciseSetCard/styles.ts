@@ -18,7 +18,8 @@ export const TimeInput = styled.input`
   outline: none;
   border: none;
   background-color: #EBEBEB;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: 200;
   text-align: center;
 `
 

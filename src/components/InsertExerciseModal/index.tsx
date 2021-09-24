@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Modal from 'react-modal'
 import {
   ModalContainer,
@@ -43,6 +43,11 @@ const InsertExerciseModal = ({
   modalOpen,
   closeModal,
 }: ModalProps) => {
+
+  const handleAddExerciseToSet = useCallback(() => { 
+    closeModal();
+  }, [closeModal])
+
   return (
     <Modal
       isOpen={modalOpen}
@@ -73,7 +78,7 @@ const InsertExerciseModal = ({
               >
                 <CancelButtonText>Cancel</CancelButtonText>
               </CancelButton>
-              <ConfirmButton>
+              <ConfirmButton onClick={() => handleAddExerciseToSet()}>
                 <ConfirmButtonText>Add Exercise</ConfirmButtonText>
               </ConfirmButton>
             </ButtonContainer>

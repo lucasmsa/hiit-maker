@@ -1,4 +1,4 @@
-import { Exercise } from "../components/AvailableExercises";
+import Exercise from "../interfaces/Exercise";
 
 export default interface TrainSet {
   exercises: Exercise[],
