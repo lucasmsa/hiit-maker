@@ -32,7 +32,7 @@ const WorkoutInformation = () => {
           <ClockText>Total Time</ClockText>
         </TotalTimeHeaderContainer>
         <TrainingDurationContainer>
-          <TrainingDurationText>{ context.training.totalTrainingTime } min</TrainingDurationText>
+          <TrainingDurationText>0 min</TrainingDurationText>
         </TrainingDurationContainer>
       </TotalTimeContainer>
       <StartTrainingContainer>
