@@ -15,8 +15,10 @@ import {
   ExerciseDescriptionText,
   ExerciseSelectionText
 } from './styles'
+import { Dispatch } from 'redux'
 import { ReactComponent as CancelModalIcon } from '../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
-import { Exercise } from '../AvailableExercises';
+import { addExercise } from '../../store/actionCreators';
+import { useDispatch, connect } from 'react-redux'
 
 const customStyles = {
   content: {
@@ -37,16 +39,17 @@ interface ModalProps {
   specificExercise: Exercise;
 }
 
-
 const InsertExerciseModal = ({
   specificExercise,
   modalOpen,
   closeModal,
 }: ModalProps) => {
+  const dispatch: Dispatch<any> = useDispatch();
 
   const handleAddExerciseToSet = useCallback(() => { 
+    dispatch(addExercise(specificExercise, 0));
     closeModal();
-  }, [closeModal])
+  }, [specificExercise, closeModal, dispatch])
 
   return (
     <Modal
@@ -89,4 +92,4 @@ const InsertExerciseModal = ({
   )
 }
 
-export default InsertExerciseModal
+export default connect(null, { addExercise })(InsertExerciseModal)

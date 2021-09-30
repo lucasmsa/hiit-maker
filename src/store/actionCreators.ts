@@ -7,6 +7,7 @@ import {
 
 
 export function addExercise(exercise: Exercise, set: number) {
+  console.log("Action dispatched [Adding exercise]")
   const action: TrainingAction = { 
     type: ADD_EXERCISE,
     payload: {
@@ -14,7 +15,6 @@ export function addExercise(exercise: Exercise, set: number) {
       set
     }
   }
-
   return action;
 }
 

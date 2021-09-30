@@ -16,16 +16,6 @@ interface ExercisesProps {
   chest: Exercise[] | [] | object[];
 }
 
-export interface Exercise {
-  id: number;
-  name: string;
-  image: string;
-  restTime?: number;
-  trainTime?: number;
-  afflictedBodyPart: string
-}
-
-
 const AvailableExercises = () => {
   runServer()
   const [selectedExercise, setSelectedExercise] = useState<string>('')
@@ -33,7 +23,6 @@ const AvailableExercises = () => {
   const [chestExercises, setChestExercises] = useState<Exercise[] | []>([])
   const [legsExercises, setLegsExercises] = useState<Exercise[] | []>([])
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
-    id: 0,
     name: '',
     afflictedBodyPart: '',
     image: '', 

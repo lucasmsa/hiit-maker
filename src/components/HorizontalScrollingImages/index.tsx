@@ -1,4 +1,3 @@
-import { Exercise } from '../AvailableExercises'
 import React, { useState } from 'react';
 import {
   Container,

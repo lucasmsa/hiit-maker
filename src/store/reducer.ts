@@ -7,10 +7,17 @@ import {
 } from './actionTypes'
 
 const initialState = {
-    currentSet: 0,
-    afflictedAreas: [],
-    totalTrainingTime: 0,
-    trainSetLoops: [],
+  currentSet: 0,
+  afflictedAreas: [],
+  totalTrainingTime: 0,
+  trainSetLoops: [{
+    loops: 0,
+    totalSetTime: 0,
+    trainSet: { 
+      exercises: [],
+      setLoopTime: 0
+    }
+  }],
 } as TrainingState
 
 interface IReducer {
@@ -27,6 +34,7 @@ const reducerFunctions = {
     const currentSet = action.payload.set
     const newExercise = action.payload.exercise
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.concat(newExercise)
+    console.log("At the reducer :)", { updatedSetExercises })
 
     return {
       ...state,

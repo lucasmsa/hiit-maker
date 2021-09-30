@@ -5,7 +5,7 @@ interface Exercise {
   image: string,
   restTime: number, 
   trainTime: number,
-  afflictedBodyParts: string
+  afflictedBodyPart: string
 }
 
 interface TrainSet {
