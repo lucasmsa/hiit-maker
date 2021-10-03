@@ -1,8 +1,10 @@
 import runServer from '../../server'
 import MuscleGroupList from '../HorizontalScrollingImages'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
 import ExerciseModal from '../InsertExerciseModal'
+import Chest from '../../database/chest.json'
+import Legs from '../../database/legs.json'
 import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
 import {
   Container,
@@ -11,13 +13,22 @@ import {
   ExercisesImagesContainer
 } from './styles'
 
-interface ExercisesProps {
-  legs: Exercise[] | [] | object[];
-  chest: Exercise[] | [] | object[];
+interface IExerciseJSON {
+  exercises: {
+    [exerciseName: string]: string
+  }
+}
+
+const exerciseJSONs = {
+  "Chest": Chest as IExerciseJSON,
+  "Legs": Legs as IExerciseJSON,
+  "Back": {} as IExerciseJSON,
+  "Abdomen": {} as IExerciseJSON,
 }
 
 const AvailableExercises = () => {
   runServer()
+  console.log(Chest)
   const [selectedExercise, setSelectedExercise] = useState<string>('')
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [chestExercises, setChestExercises] = useState<Exercise[] | []>([])
@@ -30,35 +41,40 @@ const AvailableExercises = () => {
     trainTime: 60
   })
 
+
+  const fillBodyPartExercises = (
+    setBodyPartExercises: (value: Exercise[] | ((prevVar: Exercise[]) => Exercise[])) => void,
+    bodyPart: AfflictedAreas) => {
+    for (let [exerciseName, exerciseImage] of Object.entries(exerciseJSONs[bodyPart].exercises)) {
+      setBodyPartExercises((bodyPartExercises: Exercise[]) => [...bodyPartExercises, {
+        name: exerciseName,
+        image: exerciseImage,
+        afflictedBodyPart: bodyPart,
+        restTime: 30,
+        trainTime: 60
+      }])
+    }
+  }
+
   const loadExercises = useCallback(() => {
-    fetch('api/exercises')
-      .then((res) => res.json())
-      .then((allExercises: {exercises: Exercise[]}) => {
-        allExercises.exercises.forEach((exercise: Exercise) => {
-          let { afflictedBodyPart } = exercise
-          switch (afflictedBodyPart) {
-            case 'chest':
-            setChestExercises(chestExercises => [...chestExercises, exercise])
-            break;
-            
-            case 'legs':
-            setLegsExercises(legsExercises => [...legsExercises, exercise])
-            break;  
-        }
-        })
-      })
+    fillBodyPartExercises(setChestExercises, 'Chest')
+    fillBodyPartExercises(setLegsExercises, 'Legs')
   }, [])
 
   useEffect(() => {
     loadExercises()
   }, [loadExercises])
 
-  const handleSpecificExercise = useCallback((key: string) => {
-    fetch(`api/exercises/${key}`)
-      .then((res) => res.json())
-      .then((exerciseInfo) => {
-        setSpecificExercise(exerciseInfo)
-      })
+  const handleSpecificExercise = useCallback((exerciseName: string, bodyPart: AfflictedAreas) => {
+    console.log("I AM HANDLING IT ", { exerciseName })
+    const exerciseImage = exerciseJSONs[bodyPart].exercises[exerciseName]
+    setSpecificExercise({
+      name: exerciseName,
+      image: exerciseImage,
+      afflictedBodyPart: bodyPart,
+      restTime: 30,
+      trainTime: 60
+    })
   }, [])
 
   return (
@@ -77,7 +93,7 @@ const AvailableExercises = () => {
           selectedExercise={selectedExercise}
           setSelectedExercise={(key: any) => {
             setSelectedExercise(key)
-            handleSpecificExercise(key)
+            handleSpecificExercise(key, "Chest")
             setModalOpen(true)
           }}
           list={chestExercises}
@@ -92,7 +108,7 @@ const AvailableExercises = () => {
           selectedExercise={selectedExercise}
           setSelectedExercise={(key: any) => {
             setSelectedExercise(key)
-            handleSpecificExercise(key)
+            handleSpecificExercise(key, "Legs")
             setModalOpen(true)
           }}
           list={legsExercises}

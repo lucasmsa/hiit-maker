@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
 import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
 import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
-import TrainingContext from '../../context/TrainingContext'
 import {
   Container,
   TargetMusclesContainer,
@@ -17,7 +16,6 @@ import {
 } from './styles'
 
 const WorkoutInformation = () => {
-  const context = useContext(TrainingContext)
   return (
     <Container>
       <TargetMusclesContainer>

@@ -30,8 +30,6 @@ interface SingleExerciseProps {
   selectedItem: string;
 }
 
-
-
 const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExerciseProps) => {
   const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
 
@@ -66,12 +64,11 @@ const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExercise
 };
 
 export const ExercisesContainer = (list: any, selected: any) =>
-  list.map((el: any, index: number) => {
-    const { id, name, image } = el;
-    console.log(id, name, image, selected);
+  list.map((element: any, index: number) => {
+    const { name, image } = element;
     return <SingleExercise
-      key={id}
-      id={id} 
+      key={name}
+      id={name} 
       image={image} 
       name={name} 
       index={index}

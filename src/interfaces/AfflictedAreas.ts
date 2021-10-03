@@ -1,1 +1,0 @@
-export type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Abdomen'
