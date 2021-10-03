@@ -8,18 +8,21 @@ import {
   CounterText,
   SetCounter
 } from './styles'
+import { connect, shallowEqual, useSelector } from 'react-redux'
 import ExerciseSetCard from '../ExerciseSetCard'
 import Squat from '../../assets/images/ExercisesMedia/legs/squat-challenge2.jpg'
 import { ReactComponent as PlusIcon } from '../../assets/images/midSection/plus-icon.svg'
 import { ReactComponent as PlusIconCounter } from '../../assets/images/midSection/plus-set-counter-icon.svg'
 import { ReactComponent as MinusIconCounter } from '../../assets/images/midSection/minus-set-counter-icon.svg'
+import { getTrainingSetExercises } from '../../store/selectors' 
 import PushUp from '../../assets/images/ExercisesMedia/chest/young-man-doing-push-ups-fitness-club_23-2147949580.jpg'
 
 interface WorkoutProps {
   id?: string
 }
 
-export default function MountWorkout({ id }: WorkoutProps) {
+const MountWorkout = ({ id }: WorkoutProps) => {
+  const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual)
   const [trainingSetCounter, setTrainingSetCounter] = useState<number>(0)
 
   const handleExerciseCounter = useCallback((option: 'plus' | 'minus') => {
@@ -33,7 +36,15 @@ export default function MountWorkout({ id }: WorkoutProps) {
   return (
     <Container>
       <SetHeader>Set 1</SetHeader>
-
+      {currentSetExercises.map((exercise: Exercise) => (
+        <ExerciseSetCard
+          key={exercise.name}
+          name={exercise.name}
+          image={exercise.image}
+          restTime={exercise.restTime}
+          trainTime={exercise.trainTime}
+        />
+      ))}
       <FooterContainer>
         <PlusContainer>
           <PlusIcon />
@@ -55,3 +66,6 @@ export default function MountWorkout({ id }: WorkoutProps) {
     </Container>
   )
 }
+
+
+export default connect()(MountWorkout)

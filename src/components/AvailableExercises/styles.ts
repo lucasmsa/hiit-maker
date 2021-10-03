@@ -30,6 +30,7 @@ export const ExerciseAreaText = styled.h1`
 export const ExercisesImagesContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
 `
 
 

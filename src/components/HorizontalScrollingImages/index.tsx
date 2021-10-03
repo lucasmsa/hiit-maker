@@ -22,15 +22,14 @@ interface ExercisesListProps {
 }
 
 interface SingleExerciseProps {
-  id: number;
+  id: string;
   key: number;
   name: string;
   image: string;
-  index: number;
   selectedItem: string;
 }
 
-const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExerciseProps) => {
+const SingleExercise = ({ id, name, image, selectedItem }: SingleExerciseProps) => {
   const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
 
   return (
@@ -48,12 +47,12 @@ const SingleExercise = ({ id, name, image, index, selectedItem }: SingleExercise
           <BalloonTip />
         </TooltipContainer>
       </ExerciseWithTooltipContainer>
-      {parseInt(selectedItem) === id ?
-        <ActiveItemContainer>
+      {selectedItem === id ?
+        <NotActiveItemContainer>
           <Item
             src={image}
           />
-        </ActiveItemContainer> :
+        </NotActiveItemContainer> :
         <NotActiveItemContainer>
           <Item
             src={image}
@@ -71,7 +70,6 @@ export const ExercisesContainer = (list: any, selected: any) =>
       id={name} 
       image={image} 
       name={name} 
-      index={index}
       selectedItem={selected}
     />;
   });
