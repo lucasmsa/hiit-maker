@@ -7,7 +7,7 @@ interface TooltipContainerProps {
 }
 
 export const Container = styled.div`
-  width: 280px;
+  width: 270px;
   height: 80px;
   justify-content: flex-start;
 `
@@ -51,7 +51,8 @@ export const ShadowLeftArrow = styled(LeftArrow)`
   cursor: pointer;
   -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  position: absolute;
+  position: fixed;
+  z-index: 30;
 `
 
 export const ShadowRightArrow = styled(LeftArrow)`
@@ -59,7 +60,7 @@ export const ShadowRightArrow = styled(LeftArrow)`
   transform: scaleX(-1);
   -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  position: absolute;
+  position: fixed;
 `
 
 export const ExerciseItemContainer = styled.div`

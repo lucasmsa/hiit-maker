@@ -20,9 +20,16 @@ interface ExerciseSetCardProps {
   image: string;
   restTime: number;
   trainTime: number;
+  removeExerseFromSet: () => void;
 }
 
-export default function ExerciseSetCard({ name, image, restTime, trainTime }: ExerciseSetCardProps) {
+export default function ExerciseSetCard({ 
+    name, 
+    image, 
+    restTime, 
+    trainTime, 
+    removeExerseFromSet
+}: ExerciseSetCardProps) {
   return (
     <Container>
       <ContentsContainer>
@@ -39,7 +46,12 @@ export default function ExerciseSetCard({ name, image, restTime, trainTime }: Ex
         <ExerciseNameTrainRestContainer>
           <TextAndDeleteContainer>
             <HeaderText>{name}</HeaderText>
-            <DeleteIcon width={20} height={20} />
+            <DeleteIcon
+              style={{ cursor: 'pointer' }}
+              onClick={removeExerseFromSet}
+              width={20}
+              height={20}
+            />
           </TextAndDeleteContainer>
           <TrainRestContainer>
             <TrainContainer>

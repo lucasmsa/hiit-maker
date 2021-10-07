@@ -29,7 +29,8 @@ type TrainingState = {
 type TrainingAction = {
   type: string;
   payload: {
-    exercise: IExercise;
+    index?: number;
+    exercise?: IExercise;
     set: number;
   }
 }

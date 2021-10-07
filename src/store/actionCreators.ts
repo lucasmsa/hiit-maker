@@ -18,5 +18,16 @@ export function addExercise(exercise: Exercise, set: number) {
   return action;
 }
 
+export function removeExercise(index: number, set: number) {
+  console.log("Action dispatched [Removing exercise]")
+  const action: TrainingAction = { 
+    type: REMOVE_EXERCISE,
+    payload: {
+      index,
+      set
+    }
+  }
+  return action;
+}
 
 

@@ -40,8 +40,26 @@ const reducerFunctions = {
       ...state,
       currentSet,
       trainSetLoops: state.trainSetLoops.map(
-        (content, index) => index === currentSet ?
-          { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises } }
+        (content, index) => index === currentSet
+          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
+          : content
+      )
+    }
+  },
+
+  [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
+    const currentSet = action.payload.set
+    const removeExerciseIndex = action.payload.index
+    const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises
+                                .filter((exercise, index) => index !== removeExerciseIndex)
+    console.log("At the Remove reducer :)", { updatedSetExercises })
+
+    return {
+      ...state,
+      currentSet,
+      trainSetLoops: state.trainSetLoops.map(
+        (content, index) => index === currentSet
+          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
           : content
       )
     }

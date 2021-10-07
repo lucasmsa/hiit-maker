@@ -47,17 +47,11 @@ const SingleExercise = ({ id, name, image, selectedItem }: SingleExerciseProps) 
           <BalloonTip />
         </TooltipContainer>
       </ExerciseWithTooltipContainer>
-      {selectedItem === id ?
-        <NotActiveItemContainer>
-          <Item
-            src={image}
-          />
-        </NotActiveItemContainer> :
-        <NotActiveItemContainer>
-          <Item
-            src={image}
-            />
-        </NotActiveItemContainer>}
+      <NotActiveItemContainer>
+        <Item
+          src={image}
+        />
+      </NotActiveItemContainer> 
     </ExerciseItemContainer>
   )
 };

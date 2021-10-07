@@ -66,6 +66,7 @@ const AvailableExercises = () => {
   }, [loadExercises])
 
   const handleSpecificExercise = useCallback((exerciseName: string, bodyPart: AfflictedAreas) => {
+    console.log("I AM HANDLING IT ", { exerciseName })
     const exerciseImage = exerciseJSONs[bodyPart].exercises[exerciseName]
     setSpecificExercise({
       name: exerciseName,
