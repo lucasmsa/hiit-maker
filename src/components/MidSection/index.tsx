@@ -16,7 +16,7 @@ import { ReactComponent as SelectedSetIcon } from '../../assets/images/midSectio
 import { ReactComponent as NotSelectedSetIcon } from '../../assets/images/midSection/not-selected-set.svg'
 import { ReactComponent as ConnectingLine } from '../../assets/images/midSection/connecting-line.svg'
 import {ReactComponent as RemoveSetIcon} from '../../assets/images/midSection/removeSet.svg'
-import MountWorkout from '../mountWorkout'
+import MountWorkout from '../MountWorkout'
 
 export default function MidSection() {
   return (

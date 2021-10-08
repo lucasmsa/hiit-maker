@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 420px;
+  width: 480px;
   height: 100px;
   margin-top: 30px;
   font-family: Montserrat;

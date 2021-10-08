@@ -67,3 +67,28 @@ export const CounterText = styled.h2`
   letter-spacing: 0.02em;
   color: #EBEBEB;
 `
+
+export const OperationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 100%;
+  width: 30px;
+`
+
+export const ScrollableExercisesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #908A8A;
+    opacity: 0.8;
+    border-radius: 20px;
+  }
+`;
