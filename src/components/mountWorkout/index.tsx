@@ -3,15 +3,16 @@ import { Dispatch } from 'redux'
 import {
   Container,
   SetHeader,
-  FooterContainer,
-  PlusContainer,
-  PlusInfoText,
-  CounterText,
   SetCounter,
+  CounterText,
+  PlusInfoText,
+  PlusContainer,
+  FooterContainer,
+  ExercisesLimitText,
   OperationContainer,
+  ExercisesLimitCountText,
   ScrollableExercisesContainer
 } from './styles'
-import * as Scroll from 'react-scroll'
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import ExerciseSetCard from '../ExerciseSetCard'
 import { ReactComponent as PlusIcon } from '../../assets/images/midSection/plus-icon.svg'
@@ -56,6 +57,9 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         ))}
         </ScrollableExercisesContainer>
       <FooterContainer>
+        <ExercisesLimitText>
+          Exercises Limit <ExercisesLimitCountText>{currentSetExercises.length}</ExercisesLimitCountText>/5
+        </ExercisesLimitText>
         <PlusContainer>
           <PlusInfoText>Click on an exercise to add it to your training set</PlusInfoText>
         </PlusContainer>

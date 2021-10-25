@@ -22,7 +22,7 @@ export const SetHeader = styled.h2`
 `
 
 export const FooterContainer = styled.div`
-  margin-top: auto;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -31,6 +31,7 @@ export const FooterContainer = styled.div`
 export const PlusInfoText = styled.h2`
   margin-top: 20px;
   font-family: Montserrat;
+  opacity: 0.6;
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
@@ -44,6 +45,7 @@ export const PlusContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 24px;
 `
 
 export const SetCounter = styled.div`
@@ -92,3 +94,19 @@ export const ScrollableExercisesContainer = styled.div`
     border-radius: 20px;
   }
 `;
+
+export const ExercisesLimitText = styled.h2`
+  align-self: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 20px;
+` 
+
+export const ExercisesLimitCountText = styled.span`
+  color: #EE373F;
+`

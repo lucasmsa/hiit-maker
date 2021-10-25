@@ -33,18 +33,20 @@ const reducerFunctions = {
   [ADD_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
     const newExercise = action.payload.exercise
+    const setExercises = state.trainSetLoops[currentSet].trainSet.exercises
+    console.log("At the reducer :)")
+    if (setExercises.length <= 4) {
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.concat(newExercise)
-    console.log("At the reducer :)", { updatedSetExercises })
-
-    return {
-      ...state,
-      currentSet,
-      trainSetLoops: state.trainSetLoops.map(
-        (content, index) => index === currentSet
-          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
-          : content
-      )
-    }
+      return {
+        ...state,
+        currentSet,
+        trainSetLoops: state.trainSetLoops.map(
+          (content, index) => index === currentSet
+            ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises } }
+            : content
+        )
+      }
+    } else throw new Error('You can only have 5 exercises per set');
   },
 
   [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {

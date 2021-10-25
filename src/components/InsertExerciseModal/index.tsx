@@ -47,7 +47,11 @@ const InsertExerciseModal = ({
   const dispatch: Dispatch<any> = useDispatch();
 
   const handleAddExerciseToSet = useCallback(() => { 
-    dispatch(addExercise(specificExercise, 0));
+    try {
+      dispatch(addExercise(specificExercise, 0));
+    } catch (error) {
+      console.log(error);
+    }
     closeModal();
   }, [specificExercise, closeModal, dispatch])
 
