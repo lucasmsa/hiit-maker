@@ -5,6 +5,7 @@ import GlobalStyle from './styles/global'
 import { BrowserRouter } from 'react-router-dom'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { addExercise } from './store/actionCreators';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const trainSetLoops: readonly TrainSetLoop[] = useSelector(
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <>
+      <div><Toaster/></div>
       <BrowserRouter>
         <Routes/>
       </BrowserRouter>

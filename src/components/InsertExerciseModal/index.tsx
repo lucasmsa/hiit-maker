@@ -13,12 +13,17 @@ import {
   ConfirmButtonText,
   ConfirmExerciseBoldText,
   ExerciseDescriptionText,
-  ExerciseSelectionText
+  ExerciseSelectionText,
+  ExercisesLimitToastHeaderText,
+  ExercisesLimitToastContainer,
+  ExercisesLimitToastBottomText
 } from './styles'
 import { Dispatch } from 'redux'
+import { ReactComponent as RedCircleToastIcon } from '../../assets/images/midSection/redCircle.svg'
 import { ReactComponent as CancelModalIcon } from '../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
 import { addExercise } from '../../store/actionCreators';
 import { useDispatch, connect } from 'react-redux'
+import { toast } from 'react-hot-toast'
 
 const customStyles = {
   content: {
@@ -50,6 +55,12 @@ const InsertExerciseModal = ({
     try {
       dispatch(addExercise(specificExercise, 0));
     } catch (error) {
+      toast(<ExercisesLimitToastContainer>
+              <ExercisesLimitToastHeaderText>This action is not possible</ExercisesLimitToastHeaderText>
+              <RedCircleToastIcon />
+              <ExercisesLimitToastBottomText>You have reached the maximum number of addition exercises allowed on the set</ExercisesLimitToastBottomText>
+            </ExercisesLimitToastContainer>
+      );
       console.log(error);
     }
     closeModal();
