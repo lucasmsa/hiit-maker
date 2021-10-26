@@ -31,6 +31,7 @@ export const FooterContainer = styled.div`
 export const PlusInfoText = styled.h2`
   margin-top: 20px;
   font-family: Montserrat;
+  user-select: none;
   opacity: 0.6;
   font-style: normal;
   font-weight: 300;
@@ -67,6 +68,7 @@ export const CounterText = styled.h2`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
+  user-select: none;
   color: #EBEBEB;
 `
 
@@ -99,6 +101,7 @@ export const ExercisesLimitText = styled.h2`
   align-self: center;
   font-family: Montserrat;
   font-style: normal;
+  user-select: none;
   font-weight: normal;
   font-size: 24px;
   line-height: 29px;

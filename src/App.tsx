@@ -8,20 +8,6 @@ import { addExercise } from './store/actionCreators';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
-  const trainSetLoops: readonly TrainSetLoop[] = useSelector(
-    (state: TrainingState) => state.trainSetLoops,
-    shallowEqual
-  )
-
-  const dispatch: Dispatch<any> = useDispatch();
-
-  const addNewExerciseToTraining = useCallback(
-    (exercise: Exercise, set: number) => {
-      dispatch(addExercise(exercise, set))
-    },
-    [dispatch],
-  )
-
   return (
     <>
       <div><Toaster/></div>

@@ -31,6 +31,7 @@ type TrainingAction = {
   payload: {
     index?: number;
     exercise?: IExercise;
+    loops?: number;
     set: number;
   }
 }

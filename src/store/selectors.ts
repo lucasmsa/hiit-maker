@@ -1,15 +1,20 @@
 import { DefaultRootState } from "react-redux";
 
-export const getTrainingState = (state: any) => state;
-export const getTrainSetLoops = (state: any) => state.trainSetLoops;
-export const getCurrentTrainingSet = (state: any) => state.currentSet;
-export const getTotalTrainingTime = (state: any) => state.totalTrainingTime;
-export const getTrainingSetExercises = (state: any) => {
+export const getTrainingState = (state: TrainingState) => state;
+export const getTrainSetLoops = (state: TrainingState) => state.trainSetLoops;
+export const getCurrentTrainingSet = (state: TrainingState) => state.currentSet;
+export const getTotalTrainingTime = (state: TrainingState) => state.totalTrainingTime;
+export const getTrainingSetExercises = (state: TrainingState) => {
+  const training = getTrainSetLoops(state)
   const set = getCurrentTrainingSet(state)
-  if (set <= getTrainSetLoops(state).length) {
-    const currentSetExercises = getTrainSetLoops(state)[set].trainSet.exercises;
-    return currentSetExercises;
-  } else {
-    return null;
-  }
+  const currentSetExercises = training[set].trainSet.exercises;
+
+  return currentSetExercises;
+}
+export const getTrainingSetLoopQuantity = (state: TrainingState) => {
+  const training = getTrainSetLoops(state)
+  const set = getCurrentTrainingSet(state)
+  const currentSetLoops = training[set].loops;
+  
+  return currentSetLoops;
 }
