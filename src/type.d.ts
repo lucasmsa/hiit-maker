@@ -33,6 +33,8 @@ type TrainingAction = {
     exercise?: IExercise;
     loops?: number;
     set: number;
+    restTime?: number;
+    trainTime?: number;
   }
 }
 

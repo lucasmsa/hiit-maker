@@ -31,6 +31,32 @@ export function updateCurrentSetLoopQuantity(loops: number, set: number) {
   return action;
 }
 
+export function updateExerciseRestTime(index: number, set: number, restTime: number) {
+  console.log("Action dispatched [Updating exercise Rest Time]")
+  const action: TrainingAction = { 
+    type: UPDATE_EXERCISE_REST_TIME,
+    payload: {
+      restTime,
+      index,
+      set
+    }
+  }
+  return action;
+}
+
+export function updateExerciseTrainTime(index: number, set: number, trainTime: number) {
+  const action: TrainingAction = { 
+    type: UPDATE_EXERCISE_TRAIN_TIME,
+    payload: {
+      trainTime,
+      index,
+      set
+    }
+  }
+  return action;
+}
+
+
 export function removeExercise(index: number, set: number) {
   console.log("Action dispatched [Removing exercise]")
   const action: TrainingAction = { 

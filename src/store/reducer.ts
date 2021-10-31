@@ -75,7 +75,45 @@ const reducerFunctions = {
     const removeExerciseIndex = action.payload.index
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises
                                 .filter((exercise, index) => index !== removeExerciseIndex)
-    console.log("At the Remove reducer :)", { updatedSetExercises })
+
+    return {
+      ...state,
+      currentSet,
+      trainSetLoops: state.trainSetLoops.map(
+        (content, index) => index === currentSet
+          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
+          : content
+      )
+    }
+  },
+
+  [UPDATE_EXERCISE_REST_TIME]: ({ state, action }: IReducer): TrainingState => {
+    const currentSet = action.payload.set
+    const updateExerciseIndex = action.payload.index
+    console.log("eu to aqui ow")
+    const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map((exercise, index) => {
+      if (index === updateExerciseIndex) return { ...exercise, restTime: action.payload.restTime }
+      return exercise
+    }) as Exercise[]
+
+    return {
+      ...state,
+      currentSet,
+      trainSetLoops: state.trainSetLoops.map(
+        (content, index) => index === currentSet
+          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
+          : content
+      )
+    }
+  },
+
+  [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
+    const currentSet = action.payload.set
+    const updateExerciseIndex = action.payload.index
+    const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map((exercise, index) => {
+      if (index === updateExerciseIndex) return { ...exercise, trainTime: action.payload.trainTime }
+      return exercise
+    }) as Exercise[]
 
     return {
       ...state,

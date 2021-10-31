@@ -37,7 +37,6 @@ const MountWorkout = ({ id }: WorkoutProps) => {
   
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual)
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity, shallowEqual)
-  const [trainingSetCounter, setTrainingSetCounter] = useState<number>(0)
 
   const handleExerciseCounter = useCallback((option: 'plus' | 'minus') => {
     if (currentSetExercises?.length) {
@@ -55,13 +54,14 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         <ScrollableExercisesContainer ref={scrollRef}>
         {currentSetExercises?.map((exercise: Exercise, index: number) => (
           <ExerciseSetCard
+            set={0}
+            index={index}
             key={exercise.name}
             name={exercise.name}
             image={exercise.image}
             restTime={exercise.restTime}
             trainTime={exercise.trainTime}
-            removeExerseFromSet={() => dispatch(removeExercise(index, 0))}
-            />            
+          />            
         ))}
         </ScrollableExercisesContainer>
       <FooterContainer>
