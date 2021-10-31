@@ -37,15 +37,22 @@ const reducerFunctions = {
     const currentSet = action.payload.set
     const newExercise = action.payload.exercise
     const setExercises = state.trainSetLoops[currentSet].trainSet.exercises
-    console.log("At the reducer :)")
+
     if (setExercises.length <= 4) {
-    const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.concat(newExercise)
+      const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.concat(newExercise)
+      const addedTime = newExercise.restTime + newExercise.trainTime
       return {
         ...state,
         currentSet,
         trainSetLoops: state.trainSetLoops.map(
           (content, index) => index === currentSet
-            ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises } }
+            ? { ...content, trainSet: { 
+                  ...content.trainSet, 
+                  exercises: updatedSetExercises, 
+                  setLoopTime: content.trainSet.setLoopTime + addedTime
+              },
+              totalSetTime: content.totalSetTime + addedTime 
+            }
             : content
         )
       }
@@ -55,16 +62,21 @@ const reducerFunctions = {
   [UPDATE_CURRENT_SET_LOOP_QUANTITY]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
     const amountOfLoops = action.payload.loops || 0
+    const updatedTrainSetLoops = state.trainSetLoops.map(
+      (content, index) => index === currentSet
+        ? {
+          ...content,
+          loops: amountOfLoops,
+          totalSetTime: amountOfLoops * content.trainSet.setLoopTime
+        }
+        : content
+    )
     console.log(`At the reducer, amount of loops here: ${amountOfLoops}`)
     if (amountOfLoops <= 5 && amountOfLoops >= 1) {
       return {
         ...state,
         currentSet,
-        trainSetLoops: state.trainSetLoops.map(
-          (content, index) => index === currentSet
-            ? { ...content, loops: amountOfLoops}
-            : content
-        )
+        trainSetLoops: updatedTrainSetLoops
       }
     } else throw new Error('Amount of loops must stay between boundaries');
   },
@@ -73,43 +85,64 @@ const reducerFunctions = {
   [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
     const removeExerciseIndex = action.payload.index
-    const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises
-                                .filter((exercise, index) => index !== removeExerciseIndex)
+    const currentSetExercises = state.trainSetLoops[currentSet].trainSet.exercises
+    const removedExerciseTimes = currentSetExercises[removeExerciseIndex || 0].restTime +
+                                              currentSetExercises[removeExerciseIndex || 0].trainTime
+    const updatedSetExercises = currentSetExercises
+      .filter((exercise, index) => index !== removeExerciseIndex)
+    const updatedTrainSetLoops = state.trainSetLoops.map(
+      (content, index) => index === currentSet
+        ? {
+          ...content, trainSet: {
+            ...content.trainSet,
+            exercises: updatedSetExercises,
+            setLoopTime: content.trainSet.setLoopTime - removedExerciseTimes
+          },
+          totalSetTime: content.totalSetTime - removedExerciseTimes
+        }
+        : content
+    )
 
     return {
       ...state,
       currentSet,
-      trainSetLoops: state.trainSetLoops.map(
-        (content, index) => index === currentSet
-          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
-          : content
-      )
+      trainSetLoops: updatedTrainSetLoops,
     }
   },
 
   [UPDATE_EXERCISE_REST_TIME]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
-    const updateExerciseIndex = action.payload.index
-    console.log("eu to aqui ow")
+    const updateExerciseIndex = action.payload.index || 0
+    const timeAdded = action.payload.restTime || 0
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map((exercise, index) => {
       if (index === updateExerciseIndex) return { ...exercise, restTime: action.payload.restTime }
       return exercise
     }) as Exercise[]
 
+    const updatedTrainSetLoops = state.trainSetLoops.map(
+      (content, index) => index === currentSet
+        ? {
+          ...content, trainSet: {
+            ...content.trainSet,
+            exercises: updatedSetExercises,
+            setLoopTime: content.trainSet.setLoopTime - content.trainSet.exercises[updateExerciseIndex].restTime + timeAdded
+          },
+          totalSetTime: content.totalSetTime - content.trainSet.exercises[updateExerciseIndex].restTime + timeAdded
+        }
+        : content
+    )
+
     return {
       ...state,
       currentSet,
-      trainSetLoops: state.trainSetLoops.map(
-        (content, index) => index === currentSet
-          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
-          : content
-      )
+      trainSetLoops: updatedTrainSetLoops,
     }
   },
 
   [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
-    const updateExerciseIndex = action.payload.index
+    const updateExerciseIndex = action.payload.index || 0
+    const timeAdded = action.payload.trainTime || 0
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map((exercise, index) => {
       if (index === updateExerciseIndex) return { ...exercise, trainTime: action.payload.trainTime }
       return exercise
@@ -120,7 +153,15 @@ const reducerFunctions = {
       currentSet,
       trainSetLoops: state.trainSetLoops.map(
         (content, index) => index === currentSet
-          ? { ...content, trainSet: { ...content.trainSet, exercises: updatedSetExercises }}
+          ? {
+            ...content,
+            trainSet: {
+              ...content.trainSet,
+              exercises: updatedSetExercises,
+              setLoopTime: content.trainSet.setLoopTime - content.trainSet.exercises[updateExerciseIndex].trainTime + timeAdded
+            },
+            totalSetTime: content.totalSetTime - content.trainSet.exercises[updateExerciseIndex].trainTime + timeAdded
+          }
           : content
       )
     }
