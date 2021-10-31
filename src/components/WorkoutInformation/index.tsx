@@ -14,8 +14,12 @@ import {
   TrainingDurationText,
   StartTrainingContainer
 } from './styles'
+import { shallowEqual, useSelector } from 'react-redux'
+import { getTotalTrainingTime } from '../../store/selectors'
+import secondsToMinutes from '../../utils/secondsToMinutes'
 
 const WorkoutInformation = () => {
+  const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
   return (
     <Container>
       <TargetMusclesContainer>
@@ -30,7 +34,7 @@ const WorkoutInformation = () => {
           <ClockText>Total Time</ClockText>
         </TotalTimeHeaderContainer>
         <TrainingDurationContainer>
-          <TrainingDurationText>0 min</TrainingDurationText>
+          <TrainingDurationText>{secondsToMinutes(totalTrainingTime)} min</TrainingDurationText>
         </TrainingDurationContainer>
       </TotalTimeContainer>
       <StartTrainingContainer>

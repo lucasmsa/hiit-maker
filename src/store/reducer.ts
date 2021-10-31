@@ -51,7 +51,9 @@ const reducerFunctions = {
                   exercises: updatedSetExercises, 
                   setLoopTime: content.trainSet.setLoopTime + addedTime
               },
-              totalSetTime: content.totalSetTime + addedTime 
+              totalSetTime:
+                content.totalSetTime
+                + (addedTime * content.loops)
             }
             : content
         )
@@ -98,7 +100,9 @@ const reducerFunctions = {
             exercises: updatedSetExercises,
             setLoopTime: content.trainSet.setLoopTime - removedExerciseTimes
           },
-          totalSetTime: content.totalSetTime - removedExerciseTimes
+          totalSetTime:
+            content.totalSetTime
+            - (removedExerciseTimes * content.loops)
         }
         : content
     )
@@ -127,7 +131,10 @@ const reducerFunctions = {
             exercises: updatedSetExercises,
             setLoopTime: content.trainSet.setLoopTime - content.trainSet.exercises[updateExerciseIndex].restTime + timeAdded
           },
-          totalSetTime: content.totalSetTime - content.trainSet.exercises[updateExerciseIndex].restTime + timeAdded
+          totalSetTime:
+            content.totalSetTime
+            - (content.trainSet.exercises[updateExerciseIndex].restTime * content.loops)
+            + (timeAdded * content.loops)
         }
         : content
     )
@@ -160,7 +167,10 @@ const reducerFunctions = {
               exercises: updatedSetExercises,
               setLoopTime: content.trainSet.setLoopTime - content.trainSet.exercises[updateExerciseIndex].trainTime + timeAdded
             },
-            totalSetTime: content.totalSetTime - content.trainSet.exercises[updateExerciseIndex].trainTime + timeAdded
+            totalSetTime:
+              content.totalSetTime
+              - (content.trainSet.exercises[updateExerciseIndex].trainTime * content.loops)
+              + (timeAdded * content.loops)
           }
           : content
       )
