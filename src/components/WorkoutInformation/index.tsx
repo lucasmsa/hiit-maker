@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
 import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
 import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
@@ -20,6 +20,7 @@ import secondsToMinutes from '../../utils/secondsToMinutes'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
+  const formattedTotalTrainingTime = useMemo(() => secondsToMinutes(totalTrainingTime), [totalTrainingTime]);
   return (
     <Container>
       <TargetMusclesContainer>
@@ -34,7 +35,7 @@ const WorkoutInformation = () => {
           <ClockText>Total Time</ClockText>
         </TotalTimeHeaderContainer>
         <TrainingDurationContainer>
-          <TrainingDurationText>{secondsToMinutes(totalTrainingTime)} min</TrainingDurationText>
+          <TrainingDurationText>{formattedTotalTrainingTime} min</TrainingDurationText>
         </TrainingDurationContainer>
       </TotalTimeContainer>
       <StartTrainingContainer>
