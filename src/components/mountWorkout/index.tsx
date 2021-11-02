@@ -17,7 +17,7 @@ import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import ExerciseSetCard from '../ExerciseSetCard'
 import { ReactComponent as PlusIconCounter } from '../../assets/images/midSection/plus-set-counter-icon.svg'
 import { ReactComponent as MinusIconCounter } from '../../assets/images/midSection/minus-set-counter-icon.svg'
-import { getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors' 
+import { getCurrentSet, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors' 
 import { addExercise, removeExercise, updateCurrentSetLoopQuantity } from '../../store/actionCreators'
 import toast from 'react-hot-toast'
 import ErrorToast from '../../toasts/ErrorToast'
@@ -35,34 +35,35 @@ const MountWorkout = ({ id }: WorkoutProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any|null>(null)
   
-  const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual)
-  const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity, shallowEqual)
+  const currentSet = useSelector(getCurrentSet);
+  const currentSetExercises = useSelector(getTrainingSetExercises)
+  const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity)
 
   const handleExerciseCounter = useCallback((option: 'plus' | 'minus') => {
     if (currentSetExercises?.length) {
       try {
-        dispatch(updateCurrentSetLoopQuantity(currentSetLoopQuantity + optionsOperation[option], 0));
+        dispatch(updateCurrentSetLoopQuantity(currentSetLoopQuantity + optionsOperation[option], currentSet));
       } catch (error) {
         toast(ErrorToast({message: "Set Loops must stay between 1 and 5!"}))
       }
     }
-  }, [currentSetExercises, currentSetLoopQuantity, dispatch])
+  }, [currentSet, currentSetExercises, currentSetLoopQuantity, dispatch])
 
   return (
     <Container>
-      <SetHeader>Set 1</SetHeader>
+      <SetHeader>Set {currentSet + 1}</SetHeader>
         <ScrollableExercisesContainer ref={scrollRef}>
-        {currentSetExercises?.map((exercise: Exercise, index: number) => (
-          <ExerciseSetCard
-            set={0}
+        {currentSetExercises.map((exercise: Exercise, index: number) => {
+          return <ExerciseSetCard
+            set={currentSet}
             index={index}
             key={exercise.name}
             name={exercise.name}
             image={exercise.image}
             restTime={exercise.restTime}
             trainTime={exercise.trainTime}
-          />            
-        ))}
+          />
+        })}
         </ScrollableExercisesContainer>
       <FooterContainer>
         <ExercisesLimitText>

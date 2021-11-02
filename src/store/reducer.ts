@@ -4,7 +4,10 @@ import {
   REMOVE_EXERCISE,
   UPDATE_EXERCISE_REST_TIME,
   UPDATE_EXERCISE_TRAIN_TIME,
-  UPDATE_CURRENT_SET_LOOP_QUANTITY
+  UPDATE_CURRENT_SET_LOOP_QUANTITY,
+  ADD_SET,
+  UPDATE_CURRENT_SET,
+  REMOVE_CURRENT_SET
 } from './actionTypes'
 
 const trainSetInitialState = {
@@ -60,7 +63,41 @@ const reducerFunctions = {
       }
     } else throw new Error('You can only have 5 exercises per set');
   },
+
+  [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
+    const setsQuantity = state.trainSetLoops.length
+    console.log("TO AQUI POORRA " + setsQuantity)
+
+    if (setsQuantity <= 4) {
+      const updatedSets = state.trainSetLoops.concat(trainSetInitialState)
+
+      return {
+        ...state,
+        trainSetLoops: updatedSets
+      }
+    } else throw new Error('You can only have 5 sets at most!');
+  },
   
+  [UPDATE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
+    const selectedSet = action.payload.set || 0
+    return {
+      ...state,
+      currentSet: selectedSet
+    }
+  },
+  
+  [REMOVE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
+    const selectedSet = action.payload.set || 0;
+
+    const updatedTrainSetLoops = state.trainSetLoops.filter((trainSetLoop, index) => index !== selectedSet)
+    
+    return {
+      ...state,
+      currentSet: selectedSet === 0 ? state.currentSet + 1 : state.currentSet - 1,
+      trainSetLoops: updatedTrainSetLoops
+    }
+  },
+
   [UPDATE_CURRENT_SET_LOOP_QUANTITY]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
     const amountOfLoops = action.payload.loops || 0

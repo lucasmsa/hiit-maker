@@ -17,28 +17,68 @@ import { ReactComponent as NotSelectedSetIcon } from '../../assets/images/midSec
 import { ReactComponent as ConnectingLine } from '../../assets/images/midSection/connecting-line.svg'
 import {ReactComponent as RemoveSetIcon} from '../../assets/images/midSection/removeSet.svg'
 import MountWorkout from '../MountWorkout'
+import { useDispatch, useSelector } from 'react-redux'
+import { Dispatch } from 'redux'
+import { addSet, removeSet, updateCurrentSet } from '../../store/actionCreators'
+import { getCurrentSet, getTrainSetLoops } from '../../store/selectors'
 
 export default function MidSection() {
+  const dispatch: Dispatch<any> = useDispatch();
+
+  const trainingSets = useSelector(getTrainSetLoops);
+  const currentSet = useSelector(getCurrentSet);
+  const setsQuantity = trainingSets.length;
+
   return (
     <Container>
       <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
       <ExercisesContainer>
       <SetsContainer>
         <CurrentTrainingSetsContainer>
-            <SelectedSetIcon />
-            <ConnectingLine />
-            <NotSelectedSetIcon />
-            <ConnectingLine />
-            <NotSelectedSetIcon/>
-        </CurrentTrainingSetsContainer>
-        <AddSetContainer>
-          <AddSetIcon />
-          <AddSetText>Add set</AddSetText>
-        </AddSetContainer>
-        <RemoveSetContainer>
-          <RemoveSetIcon />
-          <RemoveSetText>Remove set</RemoveSetText>
-        </RemoveSetContainer>
+          {
+              trainingSets.map((set, index) => { 
+                const setIcon = currentSet === index
+                                ? <SelectedSetIcon style={{ cursor: 'pointer' }} />
+                                : <NotSelectedSetIcon 
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => dispatch(updateCurrentSet(index))}
+                                  />
+                if (index === 0) {
+                  return (
+                    setIcon
+                  )
+                } else {
+                  return (
+                    <>
+                      <ConnectingLine />
+                      {setIcon}
+                    </>
+                  )
+                }
+              }
+            )
+          }
+          </CurrentTrainingSetsContainer>
+          {
+            trainingSets.length <= 4 && 
+            <AddSetContainer
+                onClick={() => {
+                  dispatch(addSet(currentSet))
+                  dispatch(updateCurrentSet(setsQuantity))
+              }}>
+              <AddSetIcon />
+              <AddSetText>Add set</AddSetText>
+            </AddSetContainer>
+          }
+          {
+            trainingSets.length > 1 &&
+            <RemoveSetContainer onClick={() => {
+                dispatch(removeSet(currentSet))
+              }}>
+              <RemoveSetIcon />
+              <RemoveSetText>Remove set</RemoveSetText>
+            </RemoveSetContainer>
+          }
       </SetsContainer>
         <WorkoutContainer>
           <MountWorkout />

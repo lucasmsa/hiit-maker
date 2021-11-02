@@ -1,7 +1,8 @@
 import React, { Dispatch, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as DeleteIcon } from '../../assets/images/ExerciseCardSet/delete.svg'
 import { removeExercise, updateExerciseRestTime, updateExerciseTrainTime } from '../../store/actionCreators';
+import { getCurrentSet } from '../../store/selectors';
 import {
   Container,
   InputContainer,
@@ -56,7 +57,7 @@ export default function ExerciseSetCard({
             <HeaderText>{name}</HeaderText>
             <DeleteIcon
               style={{ cursor: 'pointer' }}
-              onClick={() => dispatch(removeExercise(index, 0))}
+              onClick={() => dispatch(removeExercise(index, set))}
               width={20}
               height={20}
             />
@@ -73,7 +74,7 @@ export default function ExerciseSetCard({
                     onChange={(event) => {
                       const updatedValue = Number(event.target.value)
                       setTrainTimeInput(updatedValue);
-                      dispatch(updateExerciseTrainTime(index, 0, updatedValue));
+                      dispatch(updateExerciseTrainTime(index, set, updatedValue));
                     }}
                   />
                 </InputSurroundings>
@@ -91,7 +92,7 @@ export default function ExerciseSetCard({
                     onChange={(event) => {
                       const updatedValue = Number(event.target.value)
                       setRestTimeInput(updatedValue);
-                      dispatch(updateExerciseRestTime(index, 0, updatedValue))
+                      dispatch(updateExerciseRestTime(index, set, updatedValue))
                     }}
                   />
                 </InputSurroundings>

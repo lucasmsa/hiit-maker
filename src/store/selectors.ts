@@ -3,6 +3,7 @@ import { DefaultRootState } from "react-redux";
 export const getTrainingState = (state: TrainingState) => state;
 export const getTrainSetLoops = (state: TrainingState) => state.trainSetLoops;
 export const getCurrentTrainingSet = (state: TrainingState) => state.currentSet;
+export const getCurrentSet = (state: TrainingState) => state.currentSet;
 export const getTotalTrainingTime = (state: TrainingState) => {
   const training = getTrainSetLoops(state)
   return training.reduce((accumulator, set) => accumulator + set.totalSetTime, 0)

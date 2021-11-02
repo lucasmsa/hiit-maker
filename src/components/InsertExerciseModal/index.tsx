@@ -19,8 +19,9 @@ import { Dispatch } from 'redux'
 import ErrorToast from '../../toasts/ErrorToast'
 import { ReactComponent as CancelModalIcon } from '../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
 import { addExercise } from '../../store/actionCreators';
-import { useDispatch, connect } from 'react-redux'
+import { useDispatch, connect, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
+import { getCurrentSet } from '../../store/selectors'
 
 const customStyles = {
   content: {
@@ -47,15 +48,20 @@ const InsertExerciseModal = ({
   closeModal,
 }: ModalProps) => {
   const dispatch: Dispatch<any> = useDispatch();
+  const currentSet = useSelector(getCurrentSet);
 
   const handleAddExerciseToSet = useCallback(() => { 
     try {
-      dispatch(addExercise(specificExercise, 0));
+      const addExercisePromise = (dispatch: any) => new Promise((resolve: any, reject) => {
+        dispatch(addExercise(specificExercise, currentSet));
+        resolve();
+      })
+      addExercisePromise(dispatch);
     } catch (error) {
       toast(ErrorToast({ message: 'You have reached the maximum number of exercises allowed on the set'}));
     }
     closeModal();
-  }, [specificExercise, closeModal, dispatch])
+  }, [closeModal, dispatch, specificExercise, currentSet])
 
   return (
     <Modal

@@ -3,7 +3,10 @@ import {
   REMOVE_EXERCISE,
   UPDATE_EXERCISE_REST_TIME,
   UPDATE_EXERCISE_TRAIN_TIME,
-  UPDATE_CURRENT_SET_LOOP_QUANTITY
+  UPDATE_CURRENT_SET_LOOP_QUANTITY,
+  ADD_SET,
+  UPDATE_CURRENT_SET,
+  REMOVE_CURRENT_SET
 } from './actionTypes';
 
 
@@ -13,6 +16,39 @@ export function addExercise(exercise: Exercise, set: number) {
     type: ADD_EXERCISE,
     payload: {
       exercise,
+      set
+    }
+  }
+  return action;
+}
+
+export function removeSet(set: number) {
+  console.log("Action dispatched [Removing set]")
+  const action: TrainingAction = { 
+    type: REMOVE_CURRENT_SET,
+    payload: {
+      set
+    }
+  }
+  return action;
+}
+
+export function updateCurrentSet(set: number) {
+  console.log("Action dispatched [Update current set]")
+  const action: TrainingAction = { 
+    type: UPDATE_CURRENT_SET,
+    payload: {
+      set
+    }
+  }
+  return action;
+}
+
+export function addSet(set: number) {
+  console.log("Action dispatched [Adding set]")
+  const action: TrainingAction = { 
+    type: ADD_SET,
+    payload: {
       set
     }
   }

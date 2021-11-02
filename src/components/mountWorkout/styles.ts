@@ -22,7 +22,7 @@ export const SetHeader = styled.h2`
 `
 
 export const FooterContainer = styled.div`
-  margin-top: 24px;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -84,8 +84,8 @@ export const OperationContainer = styled.div`
 export const ScrollableExercisesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 340px;
   overflow-y: scroll;
+  margin-bottom: 36px;
   ::-webkit-scrollbar {
     width: 5px;
   }

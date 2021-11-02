@@ -35,11 +35,12 @@ export const AddSetContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 26px;
-  margin-bottom: 16px;
   cursor: pointer;
+  width: 56.4px;
 `
 
 export const RemoveSetContainer = styled.div`
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;

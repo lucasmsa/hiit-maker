@@ -15,12 +15,14 @@ import {
   StartTrainingContainer
 } from './styles'
 import { shallowEqual, useSelector } from 'react-redux'
-import { getTotalTrainingTime } from '../../store/selectors'
+import { getCurrentSet, getTotalTrainingTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors'
 import secondsToMinutes from '../../utils/secondsToMinutes'
+import ExerciseSetCard from '../ExerciseSetCard'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
   const formattedTotalTrainingTime = useMemo(() => secondsToMinutes(totalTrainingTime), [totalTrainingTime]);
+  
   return (
     <Container>
       <TargetMusclesContainer>
