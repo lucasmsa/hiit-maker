@@ -80,6 +80,7 @@ const reducerFunctions = {
   
   [UPDATE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0
+
     return {
       ...state,
       currentSet: selectedSet

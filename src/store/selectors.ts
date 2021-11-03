@@ -12,9 +12,9 @@ export const getTrainingSetExercises = (state: TrainingState) => {
   const training = getTrainSetLoops(state)
   const set = getCurrentTrainingSet(state)
   const currentSetExercises = training[set].trainSet.exercises;
-
   return currentSetExercises;
 }
+
 export const getTrainingSetLoopQuantity = (state: TrainingState) => {
   const training = getTrainSetLoops(state)
   const set = getCurrentTrainingSet(state)

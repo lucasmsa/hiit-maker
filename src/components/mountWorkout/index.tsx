@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Dispatch } from 'redux'
 import {
   Container,
@@ -35,9 +35,27 @@ const MountWorkout = ({ id }: WorkoutProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any|null>(null)
   
-  const currentSet = useSelector(getCurrentSet);
-  const currentSetExercises = useSelector(getTrainingSetExercises)
+  const currentSet = useSelector(getCurrentSet, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity)
+  const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual)
+
+  const [currentSetExercisesState, setCurrentSetExercisesState] = useState(currentSetExercises)
+  const [currentSetState, setCurrentSetState] = useState(currentSet)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (currentSetState !== currentSet) {
+      setTimeout(() => {
+        setLoading(true)
+        setCurrentSetState(currentSet)
+        setCurrentSetExercisesState(currentSetExercises)
+        setLoading(false)
+      }, 100)
+    } else {
+      setCurrentSetExercisesState(currentSetExercises)
+    }
+
+  }, [currentSet, currentSetExercises, currentSetState])
 
   const handleExerciseCounter = useCallback((option: 'plus' | 'minus') => {
     if (currentSetExercises?.length) {
@@ -53,8 +71,8 @@ const MountWorkout = ({ id }: WorkoutProps) => {
     <Container>
       <SetHeader>Set {currentSet + 1}</SetHeader>
         <ScrollableExercisesContainer ref={scrollRef}>
-        {currentSetExercises.map((exercise: Exercise, index: number) => {
-          return <ExerciseSetCard
+        {loading ? <></> : currentSetExercisesState.map((exercise: Exercise, index: number) => (
+          <ExerciseSetCard
             set={currentSet}
             index={index}
             key={exercise.name}
@@ -62,8 +80,8 @@ const MountWorkout = ({ id }: WorkoutProps) => {
             image={exercise.image}
             restTime={exercise.restTime}
             trainTime={exercise.trainTime}
-          />
-        })}
+          />))
+        }
         </ScrollableExercisesContainer>
       <FooterContainer>
         <ExercisesLimitText>

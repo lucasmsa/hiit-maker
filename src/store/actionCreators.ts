@@ -41,7 +41,20 @@ export function updateCurrentSet(set: number) {
       set
     }
   }
+  
   return action;
+}
+
+const delayedActionMiddleware = (store: any) => (next: any) => (action: any) => {
+  console.log("here on the middleware")
+  if (action.type === UPDATE_CURRENT_SET) {
+    setTimeout(() => {
+      next(action)
+    }, 1000)
+    return
+  }
+
+  return next(action)
 }
 
 export function addSet(set: number) {
