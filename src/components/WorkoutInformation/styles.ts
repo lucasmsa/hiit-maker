@@ -18,7 +18,10 @@ export const TargetMusclesContainer = styled.div`
 
 export const MuscleGroupImagesContainer = styled.div`
   margin-top: 42px;
-  margin-left: 16px;
+  display: flex;
+  flex-direction: row;  
+  width: 100%;
+  justify-content: space-around;
 `
 
 export const TotalTimeContainer = styled.div`
@@ -42,7 +45,14 @@ export const HeaderTexts = styled.h2`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.02em;
+  align-items: center;
+  margin-left: 12px;
   color: #282828;
+`
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 export const ClockText = styled.h2`

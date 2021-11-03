@@ -1,4 +1,3 @@
-import runServer from '../../server'
 import MuscleGroupList from '../HorizontalScrollingImages'
 import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
@@ -27,7 +26,6 @@ const exerciseJSONs = {
 }
 
 const AvailableExercises = () => {
-  runServer()
   console.log(Chest)
   const [selectedExercise, setSelectedExercise] = useState<string>('')
   const [modalOpen, setModalOpen] = useState<boolean>(false);

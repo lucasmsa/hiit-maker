@@ -1,5 +1,3 @@
-import { DefaultRootState } from "react-redux";
-
 export const getTrainingState = (state: TrainingState) => state;
 export const getTrainSetLoops = (state: TrainingState) => state.trainSetLoops;
 export const getCurrentTrainingSet = (state: TrainingState) => state.currentSet;

@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react'
 import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
 import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
 import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
+import { ReactComponent as TargetMusclesIcon } from '../../assets/images/WorkoutInformation/icons/targetMuscles.svg'
 import {
   Container,
   TargetMusclesContainer,
@@ -12,7 +13,8 @@ import {
   TotalTimeHeaderContainer,
   TrainingDurationContainer,
   TrainingDurationText,
-  StartTrainingContainer
+  StartTrainingContainer,
+  HeaderContainer
 } from './styles'
 import { shallowEqual, useSelector } from 'react-redux'
 import { getCurrentSet, getTotalTrainingTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors'
@@ -26,7 +28,10 @@ const WorkoutInformation = () => {
   return (
     <Container>
       <TargetMusclesContainer>
-        <HeaderTexts>Target muscles</HeaderTexts>
+        <HeaderContainer>
+          <TargetMusclesIcon/>
+          <HeaderTexts>Target muscles</HeaderTexts>
+        </HeaderContainer>
         <MuscleGroupImagesContainer>
           <TargetMusclesFront />
         </MuscleGroupImagesContainer>

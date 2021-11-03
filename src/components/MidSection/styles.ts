@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const SetsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-right: 16px;
 `
 
@@ -27,6 +28,22 @@ export const AddSetText = styled.h3`
   letter-spacing: 0.02em;
   color: #43C079;
   margin-top: 4px;
+`
+
+export const SetsLimitText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.02em;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+  align-self: center;
+`
+
+export const SetsLimitCountText = styled.span`
+  color: #EE373F
 `
 
 export const AddSetContainer = styled.div`

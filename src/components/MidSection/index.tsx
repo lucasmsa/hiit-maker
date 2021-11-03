@@ -10,6 +10,8 @@ import {
   RemoveSetContainer,
   ExercisesContainer, 
   CurrentTrainingSetsContainer,
+  SetsLimitText,
+  SetsLimitCountText,
 } from './styles'
 import { ReactComponent as AddSetIcon } from '../../assets/images/midSection/addSet.svg'
 import { ReactComponent as SelectedSetIcon } from '../../assets/images/midSection/selected-set.svg'
@@ -33,52 +35,53 @@ export default function MidSection() {
     <Container>
       <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
       <ExercisesContainer>
-      <SetsContainer>
-        <CurrentTrainingSetsContainer>
-          {
-              trainingSets.map((set, index) => { 
-                const setIcon = currentSet === index
-                                ? <SelectedSetIcon style={{ cursor: 'pointer' }} />
-                                : <NotSelectedSetIcon 
-                                    style={{ cursor: 'pointer' }}
-                                    onClick={() => dispatch(updateCurrentSet(index))}
-                                  />
-                if (index === 0) {
-                  return (
-                    setIcon
-                  )
-                } else {
-                  return (
-                    <>
-                      <ConnectingLine />
-                      {setIcon}
-                    </>
-                  )
+        <SetsContainer>
+          <SetsLimitText>Set Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5</SetsLimitText>
+          <CurrentTrainingSetsContainer>
+            {
+                trainingSets.map((set, index) => { 
+                  const setIcon = currentSet === index
+                                  ? <SelectedSetIcon style={{ cursor: 'pointer' }} />
+                                  : <NotSelectedSetIcon 
+                                      style={{ cursor: 'pointer' }}
+                                      onClick={() => dispatch(updateCurrentSet(index))}
+                                    />
+                  if (index === 0) {
+                    return (
+                      setIcon
+                    )
+                  } else {
+                    return (
+                      <>
+                        <ConnectingLine />
+                        {setIcon}
+                      </>
+                    )
+                  }
                 }
-              }
-            )
-          }
-          </CurrentTrainingSetsContainer>
-          {
-            trainingSets.length <= 4 && 
-            <AddSetContainer
-                onClick={() => {
-                  dispatch(addSet(currentSet))
-                  dispatch(updateCurrentSet(setsQuantity))
-              }}>
-              <AddSetIcon />
-              <AddSetText>Add set</AddSetText>
-            </AddSetContainer>
-          }
-          {
-            trainingSets.length > 1 &&
-            <RemoveSetContainer onClick={() => {
-                dispatch(removeSet(currentSet))
-              }}>
-              <RemoveSetIcon />
-              <RemoveSetText>Remove set</RemoveSetText>
-            </RemoveSetContainer>
-          }
+              )
+            }
+            </CurrentTrainingSetsContainer>
+            {
+              trainingSets.length <= 4 && 
+              <AddSetContainer
+                  onClick={() => {
+                    dispatch(addSet(currentSet))
+                    dispatch(updateCurrentSet(setsQuantity))
+                }}>
+                <AddSetIcon />
+                <AddSetText>Add set</AddSetText>
+              </AddSetContainer>
+            }
+            {
+              trainingSets.length > 1 &&
+              <RemoveSetContainer onClick={() => {
+                  dispatch(removeSet(currentSet))
+                }}>
+                <RemoveSetIcon />
+                <RemoveSetText>Remove set</RemoveSetText>
+              </RemoveSetContainer>
+            }
       </SetsContainer>
         <WorkoutContainer>
           <MountWorkout />
