@@ -45,7 +45,7 @@ export default function ExerciseSetCard({
         <img
           style={{
             width: '95px',
-            height: '80px',
+            height: '70px',
             borderRadius: '10px',
             marginRight: '24px'
           }}

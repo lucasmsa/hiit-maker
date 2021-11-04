@@ -1,4 +1,4 @@
-type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Abdomen'
+type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core'
 
 interface Exercise {
   name: string, 

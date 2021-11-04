@@ -1,14 +1,19 @@
 import MuscleGroupList from '../HorizontalScrollingImages'
-import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
+import React, { FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
+import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
+import { ReactComponent as BackIcon } from '../../assets/images/LeftBar/icons/back_icon.svg'
+import { ReactComponent as CoreIcon } from '../../assets/images/LeftBar/icons/core_icon.svg'
 import ExerciseModal from '../InsertExerciseModal'
 import Chest from '../../database/chest.json'
 import Legs from '../../database/legs.json'
-import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
+import Back from '../../database/back.json'
+import Core from '../../database/core.json'
 import {
   Container,
+  ExerciseAreaContainer,
   ExerciseAreaText, 
-  ExerciseAreaContainer, 
+  ExerciseHeaderContainer, 
   ExercisesImagesContainer
 } from './styles'
 
@@ -21,8 +26,8 @@ interface IExerciseJSON {
 const exerciseJSONs = {
   "Chest": Chest as IExerciseJSON,
   "Legs": Legs as IExerciseJSON,
-  "Back": {} as IExerciseJSON,
-  "Abdomen": {} as IExerciseJSON,
+  "Back": Back as IExerciseJSON,
+  "Core": Core as IExerciseJSON,
 }
 
 const AvailableExercises = () => {
@@ -31,6 +36,8 @@ const AvailableExercises = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [chestExercises, setChestExercises] = useState<Exercise[] | []>([])
   const [legsExercises, setLegsExercises] = useState<Exercise[] | []>([])
+  const [coreExercises, setCoreExercises] = useState<Exercise[] | []>([])
+  const [backExercises, setBackExercises] = useState<Exercise[] | []>([])
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     name: '',
     afflictedBodyPart: '',
@@ -38,7 +45,17 @@ const AvailableExercises = () => {
     restTime: 30,
     trainTime: 60
   })
+  
+  const exerciseContainerObject = (icon: JSX.Element, list: [] | Exercise[]) => ({
+    "Icon": icon, "list": list
+  })
 
+  const exerciseContainer = [
+    { "Chest": exerciseContainerObject(<ChestIcon />, chestExercises) },
+    { "Legs": exerciseContainerObject(<LegIcon />, legsExercises) },
+    { "Back": exerciseContainerObject(<BackIcon />, backExercises) },
+    { "Core": exerciseContainerObject(<CoreIcon />, coreExercises) }
+  ]
 
   const fillBodyPartExercises = (
     setBodyPartExercises: (value: Exercise[] | ((prevVar: Exercise[]) => Exercise[])) => void,
@@ -55,8 +72,12 @@ const AvailableExercises = () => {
   }
 
   const loadExercises = useCallback(() => {
-    fillBodyPartExercises(setChestExercises, 'Chest')
-    fillBodyPartExercises(setLegsExercises, 'Legs')
+    [{ 'Chest': setChestExercises }, { 'Legs': setLegsExercises }, { 'Back': setBackExercises }, { 'Core': setCoreExercises }].map((exercise) => {
+      const afflictedBodyPart = Object.keys(exercise)[0] as AfflictedAreas
+      const setBodyPartExercises = Object.values(exercise)[0] as (value: Exercise[] | ((prevVar: Exercise[]) => Exercise[])) => void
+
+      return fillBodyPartExercises(setBodyPartExercises, afflictedBodyPart)
+    })
   }, [])
 
   useEffect(() => {
@@ -64,7 +85,6 @@ const AvailableExercises = () => {
   }, [loadExercises])
 
   const handleSpecificExercise = useCallback((exerciseName: string, bodyPart: AfflictedAreas) => {
-    console.log("I AM HANDLING IT ", { exerciseName })
     const exerciseImage = exerciseJSONs[bodyPart].exercises[exerciseName]
     setSpecificExercise({
       name: exerciseName,
@@ -82,36 +102,32 @@ const AvailableExercises = () => {
         specificExercise={specificExercise}
         closeModal={() => setModalOpen(false)}
       />
-      <ExerciseAreaContainer>
-        <ChestIcon />
-        <ExerciseAreaText>Chest</ExerciseAreaText>
-      </ExerciseAreaContainer>
-      <ExercisesImagesContainer>
-        <MuscleGroupList
-          selectedExercise={selectedExercise}
-          setSelectedExercise={(key: any) => {
-            setSelectedExercise(key)
-            handleSpecificExercise(key, "Chest")
-            setModalOpen(true)
-          }}
-          list={chestExercises}
-        />
-      </ExercisesImagesContainer>
-      <ExerciseAreaContainer>
-        <LegIcon />
-        <ExerciseAreaText>Legs</ExerciseAreaText>
-      </ExerciseAreaContainer>
-      <ExercisesImagesContainer>
-        <MuscleGroupList
-          selectedExercise={selectedExercise}
-          setSelectedExercise={(key: any) => {
-            setSelectedExercise(key)
-            handleSpecificExercise(key, "Legs")
-            setModalOpen(true)
-          }}
-          list={legsExercises}
-        />
-      </ExercisesImagesContainer>
+      
+       {exerciseContainer.map((element: any, index) => {
+        const bodyPart = Object.keys(element)[0] as AfflictedAreas
+        const icon = element[bodyPart].Icon
+        const exerciseList = element[bodyPart].list
+
+         return (
+          <ExerciseAreaContainer>
+            <ExerciseHeaderContainer>
+            {icon}
+            <ExerciseAreaText>{bodyPart}</ExerciseAreaText>
+            </ExerciseHeaderContainer>
+            <ExercisesImagesContainer>
+              <MuscleGroupList
+                selectedExercise={selectedExercise}
+                setSelectedExercise={(key: any) => {
+                  setSelectedExercise(key)
+                  handleSpecificExercise(key, bodyPart)
+                  setModalOpen(true)
+                }}
+                list={exerciseList}
+              />
+             </ExercisesImagesContainer>
+          </ExerciseAreaContainer>
+        )
+      })}
 
     </Container>
   )

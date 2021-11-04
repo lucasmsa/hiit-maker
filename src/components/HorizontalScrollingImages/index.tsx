@@ -10,7 +10,6 @@ import {
   ExerciseItemContainer,
   Tooltip,
   BalloonTip,
-  ActiveItemContainer,
   NotActiveItemContainer,
   ExerciseWithTooltipContainer,
 } from './styles';

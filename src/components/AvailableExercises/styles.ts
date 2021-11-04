@@ -7,15 +7,18 @@ export const Container = styled.div`
   background-color: #EE373F;
   width: 280px;
   height: 100vh;
-  padding-top: 42px;
+  padding-top: 12px;
 `
 
-export const ExerciseAreaContainer = styled.div`
+export const ExerciseHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 36px;
 `
+
+export const ExerciseAreaContainer = styled.div`
+  margin-top: 26px;
+`;
 
 export const ExerciseAreaText = styled.h1`
   font-family: Montserrat;

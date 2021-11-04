@@ -12,15 +12,6 @@ export const Container = styled.div`
   justify-content: flex-start;
 `
 
-export const ActiveItemContainer = styled.div`
-  display: flex;
-  border: 4px solid #42bf79;
-  border-radius: 16px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 12px;
-`
-
 export const NotActiveItemContainer = styled.div`
   display: flex;
   align-items: center;
@@ -68,7 +59,7 @@ export const ExerciseItemContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 120px;
+  height: 100px;
 `
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`
@@ -83,10 +74,8 @@ export const Tooltip = styled.div`
   height: 20px;
   display: flex;
   background: #EBEBEB;
-  margin-bottom: -50px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0;
   border-radius: 6px;
 `
 
