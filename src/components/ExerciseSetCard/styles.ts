@@ -13,16 +13,6 @@ export const ExerciseNameTrainRestContainer = styled.div``
 
 export const RestContainer = styled.div``
 
-export const TimeInput = styled.input`
-  width: 24px;
-  outline: none;
-  border: none;
-  background-color: #EBEBEB;
-  font-size: 14px;
-  font-weight: 200;
-  text-align: center;
-`
-
 export const HeaderText = styled.h2`
   font-style: normal;
   font-weight: 500;

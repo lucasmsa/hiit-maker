@@ -10,13 +10,14 @@ interface Exercise {
 
 interface TrainSet {
   exercises: Exercise[],
-  setLoopTime: number
+  setLoopTime: number,
 }
 
 interface TrainSetLoop {
   trainSet: TrainSet,
   loops: number,
-  totalSetTime: number
+  totalSetTime: number,
+  setRestTime: number,
 }
 
 type TrainingState = {
@@ -35,6 +36,7 @@ type TrainingAction = {
     set: number;
     restTime?: number;
     trainTime?: number;
+    setRestTime?: number;
   }
 }
 

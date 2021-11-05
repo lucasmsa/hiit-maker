@@ -1,5 +1,5 @@
 import MuscleGroupList from '../HorizontalScrollingImages'
-import React, { FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
 import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
 import { ReactComponent as BackIcon } from '../../assets/images/LeftBar/icons/back_icon.svg'

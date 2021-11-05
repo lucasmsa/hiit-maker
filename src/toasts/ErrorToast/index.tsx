@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { ReactComponent as RedCircleToastIcon } from '../../assets/images/midSection/redCircle.svg'
 import {
   ExercisesLimitToastHeaderText,

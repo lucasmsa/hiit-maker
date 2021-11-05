@@ -1,19 +1,16 @@
 import React, { Dispatch, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ReactComponent as DeleteIcon } from '../../assets/images/ExerciseCardSet/delete.svg'
 import { removeExercise, updateExerciseRestTime, updateExerciseTrainTime } from '../../store/actionCreators';
-import { getCurrentSet } from '../../store/selectors';
+import isNumeric from '../../utils/isNumeric';
+import TimeInput from '../TimeInput';
 import {
   Container,
-  InputContainer,
   ContentsContainer, ExerciseNameTrainRestContainer,
   HeaderText,
   HeaderTrainRest,
-  InputSurroundings,
   RestContainer,
-  SecondsText,
   TextAndDeleteContainer,
-  TimeInput,
   TrainRestContainer,
   TrainContainer
 } from './styles'
@@ -65,39 +62,35 @@ export default function ExerciseSetCard({
           <TrainRestContainer>
             <TrainContainer>
               <HeaderTrainRest>TRAIN</HeaderTrainRest>
-              <InputContainer>
-                <InputSurroundings>
-                  <TimeInput
-                    maxLength={3}
-                    pattern="[0-9]{3}"
-                    value={trainTimeInput}
-                    onChange={(event) => {
-                      const updatedValue = Number(event.target.value)
-                      setTrainTimeInput(updatedValue);
-                      dispatch(updateExerciseTrainTime(index, set, updatedValue));
-                    }}
-                  />
-                </InputSurroundings>
-                <SecondsText>seg</SecondsText>
-              </InputContainer>
+              <TimeInput
+                value={trainTimeInput}
+                onChange={(event: any) => {
+                  if (isNumeric(event.target.value)) {
+                    const updatedValue = Number(event.target.value)
+                    setTrainTimeInput(updatedValue);
+                    dispatch(updateExerciseTrainTime(index, set, updatedValue))
+                  } else if (event.target.value === '') {
+                    setTrainTimeInput(0);
+                    dispatch(updateExerciseTrainTime(index, set, 0))
+                  }
+                }}
+              />
             </TrainContainer>
             <RestContainer>
               <HeaderTrainRest>REST</HeaderTrainRest>
-              <InputContainer>
-                <InputSurroundings>
-                  <TimeInput
-                    maxLength={3}
-                    pattern="[0-9]{3}"
-                    value={restTimeInput}
-                    onChange={(event) => {
-                      const updatedValue = Number(event.target.value)
-                      setRestTimeInput(updatedValue);
-                      dispatch(updateExerciseRestTime(index, set, updatedValue))
-                    }}
-                  />
-                </InputSurroundings>
-                <SecondsText>seg</SecondsText>
-              </InputContainer>
+              <TimeInput
+                value={restTimeInput}
+                onChange={(event: any) => {
+                  if (isNumeric(event.target.value)) {
+                    const updatedValue = Number(event.target.value)
+                    setRestTimeInput(updatedValue);
+                    dispatch(updateExerciseRestTime(index, set, updatedValue))
+                  } else if (event.target.value === '') {
+                    setRestTimeInput(0);
+                    dispatch(updateExerciseRestTime(index, set, 0))
+                  }
+                }}
+              />
             </RestContainer>
           </TrainRestContainer>
         </ExerciseNameTrainRestContainer>

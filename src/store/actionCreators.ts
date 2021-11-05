@@ -1,12 +1,13 @@
 import {
+  ADD_SET,
   ADD_EXERCISE,
   REMOVE_EXERCISE,
+  REMOVE_CURRENT_SET,
+  UPDATE_CURRENT_SET,
   UPDATE_EXERCISE_REST_TIME,
   UPDATE_EXERCISE_TRAIN_TIME,
   UPDATE_CURRENT_SET_LOOP_QUANTITY,
-  ADD_SET,
-  UPDATE_CURRENT_SET,
-  REMOVE_CURRENT_SET
+  UPDATE_SET_REST_TIME,
 } from './actionTypes';
 
 
@@ -53,6 +54,19 @@ export function addSet(set: number) {
       set
     }
   }
+  return action;
+}
+
+export function updateSetRest(set: number, setRestTime: number) {
+  console.log("Action dispatched [Update set rest]")
+  const action: TrainingAction = { 
+    type: UPDATE_SET_REST_TIME,
+    payload: {
+      set,
+      setRestTime
+    }
+  }
+  
   return action;
 }
 

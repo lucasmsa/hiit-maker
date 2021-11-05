@@ -28,20 +28,20 @@ export const FooterContainer = styled.div`
   width: 100%;
 `
 
-export const PlusInfoText = styled.h2`
+export const SetRestTest = styled.h2`
   margin-top: 20px;
-  font-family: Montserrat;
+  margin-bottom: 8px;
   user-select: none;
-  opacity: 0.6;
+  font-family: Montserrat;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: rgba(0, 0, 0, 0.87);
 `
 
-export const PlusContainer = styled.div`
+export const SetRestContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

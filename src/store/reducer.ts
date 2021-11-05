@@ -1,5 +1,4 @@
 import { 
-  ACTION_TYPES,
   ADD_EXERCISE,
   REMOVE_EXERCISE,
   UPDATE_EXERCISE_REST_TIME,
@@ -7,7 +6,8 @@ import {
   UPDATE_CURRENT_SET_LOOP_QUANTITY,
   ADD_SET,
   UPDATE_CURRENT_SET,
-  REMOVE_CURRENT_SET
+  REMOVE_CURRENT_SET,
+  UPDATE_SET_REST_TIME
 } from './actionTypes'
 
 const trainSetInitialState = {
@@ -16,7 +16,8 @@ const trainSetInitialState = {
   trainSet: {
     exercises: [],
     setLoopTime: 0
-  }
+  },
+  setRestTime: 0
 }
 
 const initialState = {
@@ -77,6 +78,23 @@ const reducerFunctions = {
       }
     } else throw new Error('You can only have 5 sets at most!');
   },
+
+  [UPDATE_SET_REST_TIME]: ({ state, action }: IReducer): TrainingState => { 
+    const currentSet = action.payload.set
+    const setRestTime = action.payload.setRestTime || 0
+
+    return {
+      ...state,
+      trainSetLoops: state.trainSetLoops.map(
+        (content, index) => index === currentSet
+          ? {
+            ...content,
+            setRestTime
+          }
+          : content
+      )
+    }
+  },
   
   [UPDATE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0
@@ -120,7 +138,6 @@ const reducerFunctions = {
       }
     } else throw new Error('Amount of loops must stay between boundaries');
   },
-
 
   [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
@@ -186,6 +203,7 @@ const reducerFunctions = {
 
   [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
+    console.log(state.trainSetLoops[currentSet])
     const updateExerciseIndex = action.payload.index || 0
     const timeAdded = action.payload.trainTime || 0
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map((exercise, index) => {

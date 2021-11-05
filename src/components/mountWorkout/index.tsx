@@ -5,22 +5,24 @@ import {
   SetHeader,
   SetCounter,
   CounterText,
-  PlusInfoText,
-  PlusContainer,
+  SetRestTest,
+  SetRestContainer,
   FooterContainer,
   ExercisesLimitText,
   OperationContainer,
   ExercisesLimitCountText,
-  ScrollableExercisesContainer
+  ScrollableExercisesContainer,
 } from './styles'
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import ExerciseSetCard from '../ExerciseSetCard'
 import { ReactComponent as PlusIconCounter } from '../../assets/images/midSection/plus-set-counter-icon.svg'
 import { ReactComponent as MinusIconCounter } from '../../assets/images/midSection/minus-set-counter-icon.svg'
-import { getCurrentSet, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors' 
-import { addExercise, removeExercise, updateCurrentSetLoopQuantity } from '../../store/actionCreators'
+import { getCurrentSet, getSetRestTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors' 
+import { updateCurrentSetLoopQuantity, updateSetRest } from '../../store/actionCreators'
 import toast from 'react-hot-toast'
 import ErrorToast from '../../toasts/ErrorToast'
+import TimeInput from '../TimeInput'
+import isNumeric from '../../utils/isNumeric'
 
 interface WorkoutProps {
   id?: string
@@ -35,11 +37,13 @@ const MountWorkout = ({ id }: WorkoutProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any|null>(null)
   
+  const setRestTime = useSelector(getSetRestTime)
   const currentSet = useSelector(getCurrentSet, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity)
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual)
 
   const [currentSetExercisesState, setCurrentSetExercisesState] = useState(currentSetExercises)
+  const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime)
   const [currentSetState, setCurrentSetState] = useState(currentSet)
   const [loading, setLoading] = useState(false)
 
@@ -87,9 +91,26 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         <ExercisesLimitText>
           Exercises Limit <ExercisesLimitCountText>{currentSetExercises?.length}</ExercisesLimitCountText>/5
         </ExercisesLimitText>
-        <PlusContainer>
-          <PlusInfoText>Click on an exercise to add it to your training set</PlusInfoText>
-        </PlusContainer>
+        <SetRestContainer>
+          {currentSetExercises.length ? (
+            <>
+            <SetRestTest>SET REST</SetRestTest>
+            <TimeInput
+              value={setRestTimeInput}
+              onChange={(event: any) => {
+                if (isNumeric(event.target.value)) {
+                  const updatedValue = Number(event.target.value)
+                  setSetRestTimeInput(updatedValue);
+                  dispatch(updateSetRest(currentSet, updatedValue))
+                } else if (event.target.value === '') {
+                  setSetRestTimeInput(0);
+                  dispatch(updateSetRest(currentSet, 0))
+                }
+              }}
+            />
+            </>
+          ) : <></>}
+        </SetRestContainer>
         <SetCounter>
           <OperationContainer
             onClick={() => handleExerciseCounter('plus')}

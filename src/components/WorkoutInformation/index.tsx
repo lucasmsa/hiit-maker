@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
 import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
 import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
@@ -17,9 +17,8 @@ import {
   HeaderContainer
 } from './styles'
 import { shallowEqual, useSelector } from 'react-redux'
-import { getCurrentSet, getTotalTrainingTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors'
+import { getTotalTrainingTime } from '../../store/selectors'
 import secondsToMinutes from '../../utils/secondsToMinutes'
-import ExerciseSetCard from '../ExerciseSetCard'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
