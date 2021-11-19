@@ -32,7 +32,7 @@ export const SecondsText = styled.h3`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: rgba(0, 0, 0, 0.87);
 `
 
 export const InputContainer = styled.div`

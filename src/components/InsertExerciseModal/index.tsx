@@ -51,15 +51,17 @@ const InsertExerciseModal = ({
   const currentSet = useSelector(getCurrentSet);
 
   const handleAddExerciseToSet = useCallback(() => { 
-    try {
-      const addExercisePromise = (dispatch: any) => new Promise((resolve: any, reject) => {
+    
+    const addExercisePromise = (dispatch: any) => new Promise((resolve: any, reject) => {
+        try {
         dispatch(addExercise(specificExercise, currentSet));
         resolve();
+      } catch (error) {
+          toast(ErrorToast({ message: 'You have reached the maximum number of exercises allowed on the set'}));
+        }
       })
       addExercisePromise(dispatch);
-    } catch (error) {
-      toast(ErrorToast({ message: 'You have reached the maximum number of exercises allowed on the set'}));
-    }
+   
     closeModal();
   }, [closeModal, dispatch, specificExercise, currentSet])
 

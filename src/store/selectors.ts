@@ -7,6 +7,10 @@ export const getTotalTrainingTime = (state: TrainingState) => {
   return training.reduce((accumulator, set) => accumulator + set.totalSetTime + set.setRestTime, 0)
 };
 
+export const getAfflictedBodyParts = (state: TrainingState) => {
+  return state.afflictedAreas
+};
+
 export const getTrainingSetExercises = (state: TrainingState) => {
   const training = getTrainSetLoops(state)
   const set = getCurrentSet(state)

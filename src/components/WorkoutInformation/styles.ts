@@ -20,7 +20,7 @@ export const MuscleGroupImagesContainer = styled.div`
   margin-top: 42px;
   display: flex;
   flex-direction: row;  
-  width: 80%;
+  width: 60%;
   justify-content: space-around;
   align-self: center;
 `
@@ -31,6 +31,16 @@ export const TotalTimeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+
+export const FrontContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const BackContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 export const TotalTimeHeaderContainer = styled.div`

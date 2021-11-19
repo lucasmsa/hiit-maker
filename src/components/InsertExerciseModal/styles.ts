@@ -3,6 +3,8 @@ import styled from "styled-components"
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 3;
+  position: relative;
 `
 
 export const ModalTopContainer = styled.div`
