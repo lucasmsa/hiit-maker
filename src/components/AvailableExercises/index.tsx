@@ -46,7 +46,7 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
   const [backExercises, setBackExercises] = useState<Exercise[] | []>([])
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     name: '',
-    afflictedBodyPart: '',
+    afflictedBodyPart: undefined,
     image: '',
     restTime: 30,
     trainTime: 60

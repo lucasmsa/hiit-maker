@@ -22,7 +22,12 @@ const trainSetInitialState = {
 
 const initialState = {
   currentSet: 0,
-  afflictedAreas: [],
+  afflictedAreas: {
+    'Chest': 0,
+    'Legs': 0,
+    'Back': 0,
+    'Core': 0
+  },
   totalTrainingTime: 0,
   trainSetLoops: [trainSetInitialState],
 } as TrainingState
@@ -39,7 +44,7 @@ interface IReducerFunctions {
 const reducerFunctions = {
   [ADD_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set
-    const newExercise = action.payload.exercise
+    const newExercise = action.payload.exercise!
     const setExercises = state.trainSetLoops[currentSet].trainSet.exercises
 
     if (setExercises.length <= 4) {
@@ -48,6 +53,7 @@ const reducerFunctions = {
       return {
         ...state,
         currentSet,
+        afflictedAreas: {...state.afflictedAreas, [newExercise.afflictedBodyPart!]: state.afflictedAreas[newExercise.afflictedBodyPart] + 1},
         trainSetLoops: state.trainSetLoops.map(
           (content, index) => index === currentSet
             ? { ...content, trainSet: { 
@@ -143,6 +149,7 @@ const reducerFunctions = {
     const currentSet = action.payload.set
     const removeExerciseIndex = action.payload.index
     const currentSetExercises = state.trainSetLoops[currentSet].trainSet.exercises
+    const exerciseToBeRemoved = currentSetExercises[removeExerciseIndex!]
     const removedExerciseTimes = currentSetExercises[removeExerciseIndex || 0].restTime +
                                               currentSetExercises[removeExerciseIndex || 0].trainTime
     const updatedSetExercises = currentSetExercises
@@ -165,6 +172,7 @@ const reducerFunctions = {
     return {
       ...state,
       currentSet,
+      afflictedAreas: {...state.afflictedAreas, [exerciseToBeRemoved.afflictedBodyPart!]: state.afflictedAreas[exerciseToBeRemoved.afflictedBodyPart] - 1},
       trainSetLoops: updatedTrainSetLoops,
     }
   },

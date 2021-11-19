@@ -20,8 +20,9 @@ export const MuscleGroupImagesContainer = styled.div`
   margin-top: 42px;
   display: flex;
   flex-direction: row;  
-  width: 100%;
+  width: 80%;
   justify-content: space-around;
+  align-self: center;
 `
 
 export const TotalTimeContainer = styled.div`

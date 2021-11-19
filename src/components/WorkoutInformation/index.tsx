@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
+import { ReactComponent as TargetMusclesBack } from '../../assets/images/WorkoutInformation/targetMusclesBack.svg'
 import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
 import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
 import { ReactComponent as TargetMusclesIcon } from '../../assets/images/WorkoutInformation/icons/targetMuscles.svg'
@@ -33,6 +34,7 @@ const WorkoutInformation = () => {
         </HeaderContainer>
         <MuscleGroupImagesContainer>
           <TargetMusclesFront />
+          <TargetMusclesBack />
         </MuscleGroupImagesContainer>
       </TargetMusclesContainer>
       <TotalTimeContainer>

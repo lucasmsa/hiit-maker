@@ -1,11 +1,15 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core'
 
+type IAfflictedAreasCounter<AfflictedAreas> = {
+  [Property in keyof AfflictedAreas]: number
+}
+
 interface Exercise {
   name: string, 
   image: string,
   restTime: number, 
   trainTime: number,
-  afflictedBodyPart: string
+  afflictedBodyPart?: AfflictedAreas
 }
 
 interface TrainSet {
@@ -23,7 +27,7 @@ interface TrainSetLoop {
 type TrainingState = {
   currentSet: number;
   trainSetLoops: TrainSetLoop[],
-  afflictedAreas: AfflictedAreas[],
+  afflictedAreas: IAfflictedAreasCounter,
   totalTrainingTime: number
 }
 
@@ -31,7 +35,7 @@ type TrainingAction = {
   type: string;
   payload: {
     index?: number;
-    exercise?: IExercise;
+    exercise?: Exercise;
     loops?: number;
     set: number;
     restTime?: number;
