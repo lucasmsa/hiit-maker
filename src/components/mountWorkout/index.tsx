@@ -17,7 +17,7 @@ import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import ExerciseSetCard from '../ExerciseSetCard'
 import { ReactComponent as PlusIconCounter } from '../../assets/images/midSection/plus-set-counter-icon.svg'
 import { ReactComponent as MinusIconCounter } from '../../assets/images/midSection/minus-set-counter-icon.svg'
-import { getCurrentSet, getSetRestTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors' 
+import { getCurrentSet, getSetRestTime, getTrainingSetExercises, getTrainingSetLoopQuantity } from '../../store/selectors'
 import { updateCurrentSetLoopQuantity, updateSetRest } from '../../store/actionCreators'
 import toast from 'react-hot-toast'
 import ErrorToast from '../../toasts/ErrorToast'
@@ -35,8 +35,8 @@ const optionsOperation = {
 
 const MountWorkout = ({ id }: WorkoutProps) => {
   const dispatch: Dispatch<any> = useDispatch();
-  const scrollRef = useRef<any|null>(null)
-  
+  const scrollRef = useRef<any | null>(null)
+
   const setRestTime = useSelector(getSetRestTime)
   const currentSet = useSelector(getCurrentSet, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity)
@@ -66,7 +66,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
       try {
         dispatch(updateCurrentSetLoopQuantity(currentSetLoopQuantity + optionsOperation[option], currentSet));
       } catch (error) {
-        toast(ErrorToast({message: "Set Loops must stay between 1 and 5!"}))
+        toast(ErrorToast({ message: "Set Loops must stay between 1 and 5!" }))
       }
     }
   }, [currentSet, currentSetExercises, currentSetLoopQuantity, dispatch])
@@ -74,7 +74,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
   return (
     <Container>
       <SetHeader>Set {currentSet + 1}</SetHeader>
-        <ScrollableExercisesContainer ref={scrollRef}>
+      <ScrollableExercisesContainer ref={scrollRef}>
         {loading ? <></> : currentSetExercisesState.map((exercise: Exercise, index: number) => (
           <ExerciseSetCard
             set={currentSet}
@@ -86,7 +86,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
             trainTime={exercise.trainTime}
           />))
         }
-        </ScrollableExercisesContainer>
+      </ScrollableExercisesContainer>
       <FooterContainer>
         <ExercisesLimitText>
           Exercises Limit <ExercisesLimitCountText>{currentSetExercises?.length}</ExercisesLimitCountText>/5
@@ -94,20 +94,20 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         <SetRestContainer>
           {currentSetExercises.length ? (
             <>
-            <SetRestTest>SET REST</SetRestTest>
-            <TimeInput
-              value={setRestTimeInput}
-              onChange={(event: any) => {
-                if (isNumeric(event.target.value)) {
-                  const updatedValue = Number(event.target.value)
-                  setSetRestTimeInput(updatedValue);
-                  dispatch(updateSetRest(currentSet, updatedValue))
-                } else if (event.target.value === '') {
-                  setSetRestTimeInput(0);
-                  dispatch(updateSetRest(currentSet, 0))
-                }
-              }}
-            />
+              <SetRestTest>SET REST</SetRestTest>
+              <TimeInput
+                value={setRestTimeInput}
+                onChange={(event: any) => {
+                  if (isNumeric(event.target.value)) {
+                    const updatedValue = Number(event.target.value)
+                    setSetRestTimeInput(updatedValue);
+                    dispatch(updateSetRest(currentSet, updatedValue))
+                  } else if (event.target.value === '') {
+                    setSetRestTimeInput(0);
+                    dispatch(updateSetRest(currentSet, 0))
+                  }
+                }}
+              />
             </>
           ) : <></>}
         </SetRestContainer>
@@ -121,7 +121,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
             />
           </OperationContainer>
           <CounterText>
-            {currentSetExercises?.length ? currentSetLoopQuantity : 0} {( !currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'TIMES' : 'TIME'}
+            {currentSetExercises?.length ? currentSetLoopQuantity : 0} {(!currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'TIMES' : 'TIME'}
           </CounterText>
           <OperationContainer
             onClick={() => handleExerciseCounter('minus')}
