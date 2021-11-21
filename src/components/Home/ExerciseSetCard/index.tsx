@@ -1,12 +1,20 @@
 import React, { Dispatch, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg'
-import { removeExercise, updateExerciseRestTime, updateExerciseTrainTime } from '../../../store/actionCreators';
+import { 
+  removeExercise, 
+  removeSet, 
+  updateCurrentSet, 
+  updateExerciseRestTime, 
+  updateExerciseTrainTime
+} from '../../../store/actionCreators';
+import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
 import isNumeric from '../../../utils/isNumeric';
 import TimeInput from '../TimeInput';
 import {
   Container,
-  ContentsContainer, ExerciseNameTrainRestContainer,
+  ContentsContainer,
+  ExerciseNameTrainRestContainer,
   HeaderText,
   HeaderTrainRest,
   RestContainer,
@@ -35,6 +43,8 @@ export default function ExerciseSetCard({
   const dispatch: Dispatch<any> = useDispatch();
   const [restTimeInput, setRestTimeInput] = useState(restTime);
   const [trainTimeInput, setTrainTimeInput] = useState(trainTime);
+  const trainSetLoops = useSelector(getTrainSetLoops);
+  const currentTrainingSetExercises = useSelector(getTrainingSetExercises)
   
   return (
     <Container>
@@ -54,7 +64,16 @@ export default function ExerciseSetCard({
             <HeaderText>{name}</HeaderText>
             <DeleteIcon
               style={{ cursor: 'pointer' }}
-              onClick={() => dispatch(removeExercise(index, set))}
+              onClick={() => {
+                dispatch(removeExercise(index, set))
+                if ((currentTrainingSetExercises.length === 1 && trainSetLoops.length > 1)
+                ) {
+                  dispatch(removeSet(set))
+                  if (set === 0) {
+                    dispatch(updateCurrentSet(set))
+                  }
+                }
+              }}
               width={20}
               height={20}
             />

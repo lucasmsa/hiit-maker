@@ -113,9 +113,7 @@ const reducerFunctions = {
   
   [REMOVE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0;
-
     const updatedTrainSetLoops = state.trainSetLoops.filter((trainSetLoop, index) => index !== selectedSet)
-    
     return {
       ...state,
       currentSet: selectedSet === 0 ? state.currentSet + 1 : state.currentSet - 1,

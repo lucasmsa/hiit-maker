@@ -26,7 +26,7 @@ import {
 } from './styles'
 import { toast } from 'react-hot-toast'
 import { shallowEqual, useSelector } from 'react-redux'
-import { getTotalTrainingTime, getAfflictedBodyParts, getTrainingSetExercises } from '../../../store/selectors'
+import { getTotalTrainingTime, getAfflictedBodyParts } from '../../../store/selectors'
 import secondsToMinutes from '../../../utils/secondsToMinutes'
 import ErrorToast from '../../../toasts/ErrorToast'
 

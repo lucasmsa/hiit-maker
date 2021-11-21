@@ -22,13 +22,15 @@ import MountWorkout from '../MountWorkout'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dispatch } from 'redux'
 import { addSet, removeSet, updateCurrentSet } from '../../../store/actionCreators'
-import { getCurrentSet, getTrainSetLoops } from '../../../store/selectors'
+import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors'
+import toast from 'react-hot-toast'
+import ErrorToast from '../../../toasts/ErrorToast'
 
 export default function MidSection() {
   const dispatch: Dispatch<any> = useDispatch();
-
   const trainingSets = useSelector(getTrainSetLoops);
   const currentSet = useSelector(getCurrentSet);
+  const currentTrainingSetExercises = useSelector(getTrainingSetExercises)
   const setsQuantity = trainingSets.length;
 
   return (
@@ -65,18 +67,25 @@ export default function MidSection() {
             {
               trainingSets.length <= 4 && 
               <AddSetContainer
-                  onClick={() => {
+                onClick={() => {
+                  if (currentTrainingSetExercises.length) { 
                     dispatch(addSet(currentSet))
                     dispatch(updateCurrentSet(setsQuantity))
+                  } else {
+                    toast(ErrorToast({ message: 'You must have at least one exercise on the current set before you add new ones'}));
+                  }
                 }}>
                 <AddSetIcon />
                 <AddSetText>Add set</AddSetText>
               </AddSetContainer>
             }
             {
-              trainingSets.length > 1 &&
+              (trainingSets.length > 1) &&
               <RemoveSetContainer onClick={() => {
-                  dispatch(removeSet(currentSet))
+                dispatch(removeSet(currentSet))
+                if (currentSet === 0) {
+                  dispatch(updateCurrentSet(currentSet))
+                }
                 }}>
                 <RemoveSetIcon />
                 <RemoveSetText>Remove set</RemoveSetText>
