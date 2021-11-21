@@ -1,13 +1,15 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom'
-import GlobalStyle from './styles/global'
 import Routes from './routes'
+import GlobalStyle from './styles/global'
+import { BrowserRouter } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <>
+      <div><Toaster/></div>
       <BrowserRouter>
-        <Routes />
+        <Routes/>
       </BrowserRouter>
       <GlobalStyle />
     </>

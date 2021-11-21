@@ -6,7 +6,7 @@ import {
   Container
 } from './styles'
 
-const Home = () => {
+const Workout = () => {
   return (
     <Container>
       <LeftBar />
@@ -16,4 +16,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Workout
