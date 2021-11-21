@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Header, IconsContainer } from './styles'
-import { ReactComponent as Branding } from '../../assets/images/LeftBar/branding.svg'
+import { ReactComponent as Branding } from '../../../assets/images/LeftBar/branding.svg'
 import AvailableExercises from '../AvailableExercises'
 import Search from '../Search'
 

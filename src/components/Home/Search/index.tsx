@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, SearchInput } from './styles'
-import { ReactComponent as SearchIcon } from '../../assets/images/LeftBar/icons/search_icon.svg'
+import { ReactComponent as SearchIcon } from '../../../assets/images/LeftBar/icons/search_icon.svg'
 
 interface SearchProps {
   changeExerciseSearch: (value: string) => void

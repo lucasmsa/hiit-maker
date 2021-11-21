@@ -13,16 +13,16 @@ import {
   SetsLimitText,
   SetsLimitCountText,
 } from './styles'
-import { ReactComponent as AddSetIcon } from '../../assets/images/midSection/addSet.svg'
-import { ReactComponent as SelectedSetIcon } from '../../assets/images/midSection/selected-set.svg'
-import { ReactComponent as NotSelectedSetIcon } from '../../assets/images/midSection/not-selected-set.svg'
-import { ReactComponent as ConnectingLine } from '../../assets/images/midSection/connecting-line.svg'
-import {ReactComponent as RemoveSetIcon} from '../../assets/images/midSection/removeSet.svg'
+import { ReactComponent as AddSetIcon } from '../../../assets/images/midSection/addSet.svg'
+import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg'
+import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg'
+import { ReactComponent as ConnectingLine } from '../../../assets/images/midSection/connecting-line.svg'
+import {ReactComponent as RemoveSetIcon} from '../../../assets/images/midSection/removeSet.svg'
 import MountWorkout from '../MountWorkout'
 import { useDispatch, useSelector } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addSet, removeSet, updateCurrentSet } from '../../store/actionCreators'
-import { getCurrentSet, getTrainSetLoops } from '../../store/selectors'
+import { addSet, removeSet, updateCurrentSet } from '../../../store/actionCreators'
+import { getCurrentSet, getTrainSetLoops } from '../../../store/selectors'
 
 export default function MidSection() {
   const dispatch: Dispatch<any> = useDispatch();

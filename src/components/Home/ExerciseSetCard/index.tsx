@@ -1,8 +1,8 @@
 import React, { Dispatch, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { ReactComponent as DeleteIcon } from '../../assets/images/ExerciseCardSet/delete.svg'
-import { removeExercise, updateExerciseRestTime, updateExerciseTrainTime } from '../../store/actionCreators';
-import isNumeric from '../../utils/isNumeric';
+import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg'
+import { removeExercise, updateExerciseRestTime, updateExerciseTrainTime } from '../../../store/actionCreators';
+import isNumeric from '../../../utils/isNumeric';
 import TimeInput from '../TimeInput';
 import {
   Container,

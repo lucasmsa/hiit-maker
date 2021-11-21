@@ -2,15 +2,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import MuscleGroupList from '../HorizontalScrollingImages'
 import React, { useCallback, useEffect, useState } from 'react'
-import { ReactComponent as ChestIcon } from '../../assets/images/LeftBar/icons/chest_icon.svg'
-import { ReactComponent as LegIcon } from '../../assets/images/LeftBar/icons/legs_icon.svg'
-import { ReactComponent as BackIcon } from '../../assets/images/LeftBar/icons/back_icon.svg'
-import { ReactComponent as CoreIcon } from '../../assets/images/LeftBar/icons/core_icon.svg'
+import { ReactComponent as ChestIcon } from '../../../assets/images/LeftBar/icons/chest_icon.svg'
+import { ReactComponent as LegIcon } from '../../../assets/images/LeftBar/icons/legs_icon.svg'
+import { ReactComponent as BackIcon } from '../../../assets/images/LeftBar/icons/back_icon.svg'
+import { ReactComponent as CoreIcon } from '../../../assets/images/LeftBar/icons/core_icon.svg'
 import ExerciseModal from '../InsertExerciseModal'
-import Chest from '../../database/chest.json'
-import Legs from '../../database/legs.json'
-import Back from '../../database/back.json'
-import Core from '../../database/core.json'
+import Chest from '../../../database/chest.json'
+import Legs from '../../../database/legs.json'
+import Back from '../../../database/back.json'
+import Core from '../../../database/core.json'
 import {
   Container,
   ExerciseAreaContainer,

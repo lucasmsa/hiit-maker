@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import ScrollMenu from 'react-horizontal-scrolling-menu';
-import { ReactComponent as LeftArrow } from '../../assets/images/LeftBar/icons/left_arrow.svg'
+import { ReactComponent as LeftArrow } from '../../../assets/images/LeftBar/icons/left_arrow.svg'
 
 interface TooltipContainerProps {
   selectedTooltip: boolean

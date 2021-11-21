@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react'
-import { ReactComponent as TargetMusclesFront } from '../../assets/images/WorkoutInformation/targetMusclesFront.svg'
-import { ReactComponent as TargetMusclesBack } from '../../assets/images/WorkoutInformation/targetMusclesBack.svg'
-import { ReactComponent as ClockIcon } from '../../assets/images/WorkoutInformation/icons/clock.svg'
-import { ReactComponent as PlayButton } from '../../assets/images/WorkoutInformation/play_button.svg'
-import { ReactComponent as TargetMusclesIcon } from '../../assets/images/WorkoutInformation/icons/targetMuscles.svg'
-import { ReactComponent as ColoredChestIcon } from '../../assets/images/WorkoutInformation/coloredChest.svg'
-import { ReactComponent as ColoredAbsIcon } from '../../assets/images/WorkoutInformation/coloredAbs.svg'
-import { ReactComponent as ColoredBackIcon } from '../../assets/images/WorkoutInformation/coloredBack.svg'
-import { ReactComponent as ColoredLegsIcon } from '../../assets/images/WorkoutInformation/coloredLegs.svg'
+import React, { useMemo, useState } from 'react'
+import { ReactComponent as TargetMusclesFront } from '../../../assets/images/WorkoutInformation/targetMusclesFront.svg'
+import { ReactComponent as TargetMusclesBack } from '../../../assets/images/WorkoutInformation/targetMusclesBack.svg'
+import { ReactComponent as ClockIcon } from '../../../assets/images/WorkoutInformation/icons/clock.svg'
+import { ReactComponent as TargetMusclesIcon } from '../../../assets/images/WorkoutInformation/icons/targetMuscles.svg'
+import { ReactComponent as ColoredChestIcon } from '../../../assets/images/WorkoutInformation/coloredChest.svg'
+import { ReactComponent as ColoredAbsIcon } from '../../../assets/images/WorkoutInformation/coloredAbs.svg'
+import { ReactComponent as ColoredBackIcon } from '../../../assets/images/WorkoutInformation/coloredBack.svg'
+import { ReactComponent as ColoredLegsIcon } from '../../../assets/images/WorkoutInformation/coloredLegs.svg'
 import {
   Container,
   TargetMusclesContainer,
@@ -21,17 +20,20 @@ import {
   StartTrainingContainer,
   FrontContainer,
   BackContainer,
-  HeaderContainer
+  HeaderContainer,
+  PlayButton,
+  PlayButtonHovered
 } from './styles'
 import { shallowEqual, useSelector } from 'react-redux'
-import { getTotalTrainingTime, getAfflictedBodyParts } from '../../store/selectors'
-import secondsToMinutes from '../../utils/secondsToMinutes'
+import { getTotalTrainingTime, getAfflictedBodyParts } from '../../../store/selectors'
+import secondsToMinutes from '../../../utils/secondsToMinutes'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
   const afflictedBodyParts = useSelector(getAfflictedBodyParts, shallowEqual) || {}
   const formattedTotalTrainingTime = useMemo(() => secondsToMinutes(totalTrainingTime), [totalTrainingTime]);
-  
+  const [playButtonHovered, setPlayButtonHovered] = useState(false)
+
   return (
     <Container>
       <TargetMusclesContainer>
@@ -56,7 +58,7 @@ const WorkoutInformation = () => {
                 position: 'relative',
                 top: '38%',
                 left: '50%',
-                opacity: afflictedBodyParts.Core ? 1 : 0
+                opacity: afflictedBodyParts.Core
               }} 
             />
             <ColoredLegsIcon
@@ -65,7 +67,7 @@ const WorkoutInformation = () => {
                 position: 'relative',
                 top: '55%',
                 left: '32%',
-                opacity: afflictedBodyParts.Legs ? 1 : 0
+                opacity: afflictedBodyParts.Legs
               }} 
             />
             <TargetMusclesFront
@@ -97,7 +99,14 @@ const WorkoutInformation = () => {
       </TotalTimeContainer>
       <StartTrainingContainer>
         <HeaderTexts>Start now</HeaderTexts>
-        <PlayButton style={{ marginTop: '36px' }} />
+        {playButtonHovered
+          ? <PlayButtonHovered
+            onMouseLeave={() => setPlayButtonHovered(false)}
+          />
+          : <PlayButton
+              onMouseEnter={() => setPlayButtonHovered(true)}
+          />
+        }
       </StartTrainingContainer>
     </Container>
   )

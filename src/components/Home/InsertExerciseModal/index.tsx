@@ -16,12 +16,12 @@ import {
   ExerciseSelectionText,
 } from './styles'
 import { Dispatch } from 'redux'
-import ErrorToast from '../../toasts/ErrorToast'
-import { ReactComponent as CancelModalIcon } from '../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
-import { addExercise } from '../../store/actionCreators';
+import ErrorToast from '../../../toasts/ErrorToast'
+import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
+import { addExercise } from '../../../store/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
-import { getCurrentSet } from '../../store/selectors'
+import { getCurrentSet } from '../../../store/selectors'
 
 const customStyles = {
   content: {
