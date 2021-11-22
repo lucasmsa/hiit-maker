@@ -26,25 +26,26 @@ import {
 } from './styles'
 import { toast } from 'react-hot-toast'
 import { shallowEqual, useSelector } from 'react-redux'
-import { getTotalTrainingTime, getAfflictedBodyParts } from '../../../store/selectors'
+import { getTotalTrainingTime, getAfflictedBodyParts, getTrainSetLoops } from '../../../store/selectors'
 import secondsToMinutes from '../../../utils/secondsToMinutes'
 import ErrorToast from '../../../toasts/ErrorToast'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
   const afflictedBodyParts = useSelector(getAfflictedBodyParts, shallowEqual) || {}
+  const trainSetLoops = useSelector(getTrainSetLoops, shallowEqual) || {}
   const formattedTotalTrainingTime = useMemo(() => secondsToMinutes(totalTrainingTime), [totalTrainingTime]);
   const [playButtonHovered, setPlayButtonHovered] = useState(false)
 
-  const atLeastOneExerciseWasAdded = () => {
-    return Object.entries(afflictedBodyParts).some(([_bodyPart, amountOfExercises]) => { 
-      return amountOfExercises as number > 0
+  const atLeastOneExerciseWasAddedOnEverySet = () => {
+    return trainSetLoops.every((trainSetLoop) => { 
+      return trainSetLoop.trainSet.exercises.length !== 0
     })
   }
 
   const handlePlayButtonClick = () => {
-    if (!atLeastOneExerciseWasAdded()) {
-      toast(ErrorToast({ message: 'You must have at least one exercise to start a new training'}));
+    if (!atLeastOneExerciseWasAddedOnEverySet()) {
+      toast(ErrorToast({ message: 'You must have at least one exercise on every set to start a new workout'}));
     }
 
 
