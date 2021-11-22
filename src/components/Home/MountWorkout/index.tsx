@@ -54,7 +54,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         setCurrentSetState(currentSet)
         setCurrentSetExercisesState(currentSetExercises)
         setLoading(false)
-      }, 100)
+      }, 250)
     } else {
       setCurrentSetExercisesState(currentSetExercises)
     }
