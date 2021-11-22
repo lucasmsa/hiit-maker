@@ -104,11 +104,8 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
       Object.entries(exerciseJSONs[bodyPart].exercises)
               .filter(exerciseInfo => {
                 const exerciseName = exerciseInfo[0]
-                const nameRegex = new RegExp(`(${searchExercise})`, 'i')
-                const nameMatch = exerciseName.match(nameRegex)
-                const matchResult = nameMatch ? !!nameMatch[0] : false
-
-                return matchResult
+                
+                return exerciseName.toLowerCase().includes(searchExercise.toLowerCase())
               }
       ), bodyPart)
     
