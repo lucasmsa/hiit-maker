@@ -121,7 +121,7 @@ const MountWorkout = ({ id }: WorkoutProps) => {
             />
           </OperationContainer>
           <CounterText>
-            {currentSetExercises?.length ? currentSetLoopQuantity : 0} {(!currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'TIMES' : 'TIME'}
+            {currentSetExercises?.length ? currentSetLoopQuantity : 0} {(!currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'TIMES' : 'TIME '}
           </CounterText>
           <OperationContainer
             onClick={() => handleExerciseCounter('minus')}

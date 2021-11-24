@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ScrollMenu from 'react-horizontal-scrolling-menu';
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import { ReactComponent as LeftArrow } from '../../../assets/images/LeftBar/icons/left_arrow.svg'
 
 interface TooltipContainerProps {
@@ -7,9 +7,11 @@ interface TooltipContainerProps {
 }
 
 export const Container = styled.div`
-  width: 270px;
-  height: 80px;
-  justify-content: flex-start;
+  min-width: 270px;
+  height: 100px;
+  justify-content: center;
+  margin-left: -24px;
+  overflow: hidden;
 `
 
 export const NotActiveItemContainer = styled.div`
@@ -42,8 +44,6 @@ export const ShadowLeftArrow = styled(LeftArrow)`
   cursor: pointer;
   -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  position: fixed;
-  z-index: 30;
 `
 
 export const ShadowRightArrow = styled(LeftArrow)`
@@ -51,7 +51,6 @@ export const ShadowRightArrow = styled(LeftArrow)`
   transform: scaleX(-1);
   -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  position: fixed;
 `
 
 export const ExerciseItemContainer = styled.div`
@@ -60,6 +59,7 @@ export const ExerciseItemContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100px;
+  width: 108px;
 `
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`
@@ -93,4 +93,22 @@ export const BalloonTip = styled.div`
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid #EBEBEB;
+`
+
+export const ArrowButton = styled.button`
+  cursor: pointer;
+  display: flex; 
+  min-width: 20px;
+  height: 120px;
+  flex-direction: column;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+  justify-content: center;
+  right: 1%;
+  user-select: none;
+  align-items: center;
 `

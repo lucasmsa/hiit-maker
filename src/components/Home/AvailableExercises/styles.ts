@@ -17,7 +17,7 @@ export const ExerciseHeaderContainer = styled.div`
 `
 
 export const ExerciseAreaContainer = styled.div`
-  margin-top: 26px;
+  margin-top: 6px;
 `;
 
 export const ExerciseAreaText = styled.h1`
@@ -35,5 +35,3 @@ export const ExercisesImagesContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
 `
-
-
