@@ -29,6 +29,9 @@ import { shallowEqual, useSelector } from 'react-redux'
 import { getTotalTrainingTime, getAfflictedBodyParts, getTrainSetLoops } from '../../../store/selectors'
 import secondsToMinutes from '../../../utils/secondsToMinutes'
 import ErrorToast from '../../../toasts/ErrorToast'
+import {
+  Link
+} from "react-router-dom";
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
@@ -45,11 +48,30 @@ const WorkoutInformation = () => {
 
   const handlePlayButtonClick = () => {
     if (!atLeastOneExerciseWasAddedOnEverySet()) {
-      toast(ErrorToast({ message: 'You must have at least one exercise on every set to start a new workout', cannotBuildWorkout: true}));
-    } else {
-
+      toast(ErrorToast({ message: 'You must have at least one exercise on every set to start a new workout', cannotBuildWorkout: true }));
     }
   }
+  
+  const playButtonWithoutLink = (
+    <>
+    {
+      playButtonHovered
+      ? <PlayButtonHovered
+        onClick={handlePlayButtonClick}
+        onMouseLeave={() => setPlayButtonHovered(false)}
+      />
+      : <PlayButton
+        onMouseEnter={() => setPlayButtonHovered(true)}
+      />
+    }
+  </>
+  )
+
+  const playButtonWithLink = (
+    <Link to={atLeastOneExerciseWasAddedOnEverySet() ? "/workout" : "/"}>
+      {playButtonWithoutLink}
+    </Link>
+  )
 
   return (
     <Container>
@@ -116,15 +138,7 @@ const WorkoutInformation = () => {
       </TotalTimeContainer>
       <StartTrainingContainer>
         <HeaderTexts>Start now</HeaderTexts>
-        {playButtonHovered
-          ? <PlayButtonHovered
-              onClick={handlePlayButtonClick}
-              onMouseLeave={() => setPlayButtonHovered(false)}
-          />
-          : <PlayButton
-              onMouseEnter={() => setPlayButtonHovered(true)}
-          />
-        }
+        {playButtonWithLink}
       </StartTrainingContainer>
     </Container>
   )

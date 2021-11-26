@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <div><Toaster/></div>
-      <BrowserRouter>
+      <BrowserRouter >
         <Routes/>
       </BrowserRouter>
       <GlobalStyle />
