@@ -17,6 +17,7 @@ export const ExercisesLimitToastHeaderText = styled.h1`
   font-weight: normal;
   font-size: 16px;
   line-height: 29px;
+  margin-bottom: 12px;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.87);
 `;
@@ -30,5 +31,5 @@ export const ExercisesLimitToastBottomText = styled.h1`
   text-align: center;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.6);
-  margin-top: 8px;
+  margin-top: 12px;
 `;

@@ -45,10 +45,10 @@ const WorkoutInformation = () => {
 
   const handlePlayButtonClick = () => {
     if (!atLeastOneExerciseWasAddedOnEverySet()) {
-      toast(ErrorToast({ message: 'You must have at least one exercise on every set to start a new workout'}));
+      toast(ErrorToast({ message: 'You must have at least one exercise on every set to start a new workout', cannotBuildWorkout: true}));
+    } else {
+
     }
-
-
   }
 
   return (

@@ -10,8 +10,7 @@ const Workout = () => {
   return (
     <Container>
       <LeftBar />
-      <MidSection />
-      <WorkoutInformation />
+      Batatante
     </Container>
   )
 }
