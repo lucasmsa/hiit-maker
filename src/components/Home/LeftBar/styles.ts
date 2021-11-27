@@ -1,4 +1,11 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import { ReactComponent as Arrow } from '../../../assets/images/WorkoutScreen/arrow-collapse.svg'
+import { fadeInLeft, fadeIn } from 'react-animations';
+
+
+const workoutContainerAnimation = keyframes`${fadeInLeft}`;
+
+const collapsedContainerAnimation = keyframes`${fadeIn}`;
 
 export const Container = styled.div`
   display: flex;
@@ -10,10 +17,66 @@ export const Container = styled.div`
   padding-top: 42px;
 `
 
+export const WorkoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #EE373F;
+  animation: 0.2s ${workoutContainerAnimation};
+  animation-timing-function: linear;
+  justify-content: flex-start;
+  width: 325px;
+  height: 100vh;
+  padding-top: 42px;
+`
+
+export const CollapsedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  animation: 0.1s ${collapsedContainerAnimation};
+  align-items: flex-end;
+  justify-content: center;
+  background-color: #EE373F;
+  width: 36px;
+  height: 100vh;
+  padding-top: 42px;
+  border-radius: 0px 20px 20px 0px;
+`
+
+export const CollapsedArrowContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: white;
+  margin-right: -36px;
+  cursor: pointer;
+  align-self: flex-end;
+`
+
+export const CollapsedArrowRight = styled(Arrow)`
+`
+
+export const CollapsedArrowLeft = styled(Arrow)`
+  transform: scaleX(-1);
+`
+
 export const Header = styled.div`
   padding: 0;
   display: flex;
   flex-direction: row;
+`
+
+export const HeaderWorkout = styled.div`
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -42px;
 `
 
 export const Dumbell = styled.img`

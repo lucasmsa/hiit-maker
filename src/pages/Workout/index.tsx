@@ -7,7 +7,7 @@ import {
 const Workout = () => {
   return (
     <Container>
-      <LeftBar />
+      <LeftBar isWorkout/>
       Batatante
     </Container>
   )

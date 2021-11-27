@@ -20,7 +20,9 @@
     "miragejs": "^0.1.41",
     "moment": "^2.29.1",
     "react": "^16.13.1",
+    "react-animations": "^1.0.0",
     "react-beautiful-dnd": "^13.1.0",
+    "react-collapse": "^5.1.1",
     "react-dom": "^16.13.1",
     "react-horizontal-scrolling-menu": "^2.6.1",
     "react-hot-toast": "^2.1.1",
@@ -28,6 +30,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-scroll": "^1.8.4",
+    "react-show": "^3.0.4",
     "react-toastify": "^8.0.3",
     "react-tooltip": "^4.2.21",
     "redux": "^4.1.1",
@@ -57,6 +60,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-animations": "^1.0.0",
+    "@types/react-collapse": "^5.0.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
