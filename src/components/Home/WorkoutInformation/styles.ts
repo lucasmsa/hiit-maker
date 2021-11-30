@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { DarkGray, Rage, White } from '../../../styles/global'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  background-color: ${White};
   width: 325px;
   height: 100vh;
   padding-top: 42px;
@@ -58,7 +59,7 @@ export const HeaderTexts = styled.h2`
   letter-spacing: 0.02em;
   align-items: center;
   margin-left: 12px;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const HeaderContainer = styled.div`
@@ -74,7 +75,7 @@ export const ClockText = styled.h2`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const TrainingDurationContainer = styled.div``
@@ -86,7 +87,7 @@ export const TrainingDurationText = styled.h3`
   font-weight: 500;
   font-size: 24px;
   letter-spacing: 0.02em;
-  color: #EE373F;
+  color: ${Rage};
 `
 
 export const StartTrainingContainer = styled.div`

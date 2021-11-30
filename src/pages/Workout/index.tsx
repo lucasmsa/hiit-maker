@@ -1,5 +1,6 @@
 import React from 'react'
-import LeftBar from '../../components/Home/LeftBar'
+import LeftBarWorkout from '../../components/Workout/LeftBarWorkout'
+import SetsProgress from '../../components/Workout/SetsProgress'
 import {
   Container
 } from './styles'
@@ -7,8 +8,8 @@ import {
 const Workout = () => {
   return (
     <Container>
-      <LeftBar isWorkout/>
-      Batatante
+      <LeftBarWorkout />
+      <SetsProgress />
     </Container>
   )
 }

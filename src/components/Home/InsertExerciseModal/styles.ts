@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { DarkGray, LightGray, Rage } from "../../../styles/global"
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -57,7 +58,7 @@ export const ConfirmButton = styled.div`
   justify-content: center;
   width: 158px;
   height: 35px;
-  background: #EE373F;
+  background: ${Rage};
   box-shadow: 0px 1px 4px rgba(238, 55, 63, 0.25);
   transition: 0.3s ease;
   &:hover {
@@ -74,7 +75,7 @@ export const CancelButtonText = styled.h4`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const ConfirmButtonText = styled.h4`
@@ -84,7 +85,7 @@ export const ConfirmButtonText = styled.h4`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #EBEBEB;
+  color: ${LightGray};
 `
 
 export const ExerciseSelectionText = styled.h1`
@@ -94,7 +95,7 @@ export const ExerciseSelectionText = styled.h1`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const ExerciseDescriptionText = styled.h3`
@@ -104,7 +105,7 @@ export const ExerciseDescriptionText = styled.h3`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
   margin-bottom: 16px;
 `
 
@@ -115,7 +116,7 @@ export const ConfirmExerciseBoldText = styled.h2`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
   margin-bottom: 32px;
 `
 

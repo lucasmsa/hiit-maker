@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { LightGray, TransparentDarkBlack } from '../../../styles/global'
 
 export const Input = styled.input`
   width: 24px;
   outline: none;
   border: none;
-  background-color: #EBEBEB;
+  background-color: ${LightGray};
   font-size: 14px;
   font-weight: 200;
   text-align: center;
@@ -15,7 +16,7 @@ export const Input = styled.input`
 `
 
 export const InputSurroundings = styled.div` 
-  background: #EBEBEB;
+  background: ${LightGray};
   border-radius: 10px;
   width: 32px;
   height: 23px;
@@ -32,7 +33,7 @@ export const SecondsText = styled.h3`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${TransparentDarkBlack};
 `
 
 export const InputContainer = styled.div`

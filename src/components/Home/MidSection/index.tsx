@@ -26,7 +26,7 @@ import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../
 import toast from 'react-hot-toast'
 import ErrorToast from '../../../toasts/ErrorToast'
 
-export default function MidSection() {
+const MidSection = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const trainingSets = useSelector(getTrainSetLoops);
   const currentSet = useSelector(getCurrentSet);
@@ -99,3 +99,5 @@ export default function MidSection() {
   </Container>
   )
 }
+
+export default MidSection

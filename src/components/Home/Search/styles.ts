@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { White } from '../../../styles/global'
 
 export const Container = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   margin-top: 12px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-  background-color: #fff;
+  background-color: ${White};
   width: 272px;
   border-radius: 10px;
   height: 48px;

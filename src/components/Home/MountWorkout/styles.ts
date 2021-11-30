@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { LightGray, Rage, TransparentDarkBlack, White } from '../../../styles/global'
 
 export const Container = styled.div`
   height: 77.5vh;
@@ -6,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #FFFFFF;
+  background: ${White};
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   margin-right: 8px;
   border-radius: 20px;
@@ -38,7 +39,7 @@ export const SetRestTest = styled.h2`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${TransparentDarkBlack};
 `
 
 export const SetRestContainer = styled.div`
@@ -58,7 +59,7 @@ export const SetCounter = styled.div`
   height: 54px;
   width: 100%;
   border-radius: 20px;
-  background: #EE373F;
+  background: ${Rage};
 `
 
 export const CounterText = styled.h2`
@@ -69,7 +70,7 @@ export const CounterText = styled.h2`
   line-height: 17px;
   letter-spacing: 0.02em;
   user-select: none;
-  color: #EBEBEB;
+  color: ${LightGray};
 `
 
 export const OperationContainer = styled.div`
@@ -106,10 +107,10 @@ export const ExercisesLimitText = styled.h2`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${TransparentDarkBlack};
   margin-bottom: 20px;
 ` 
 
 export const ExercisesLimitCountText = styled.span`
-  color: #EE373F;
+  color: ${Rage};
 `

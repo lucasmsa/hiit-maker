@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import { TransparentDarkBlack, TransparentLightBlack } from "../../styles/global";
 
 export const ExercisesLimitToastContainer = styled.div`
   padding: 16px;
   font-family: Montserrat;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: ${TransparentLightBlack};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +20,7 @@ export const ExercisesLimitToastHeaderText = styled.h1`
   line-height: 29px;
   margin-bottom: 12px;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${TransparentDarkBlack};
 `;
 
 export const ExercisesLimitToastBottomText = styled.h1`

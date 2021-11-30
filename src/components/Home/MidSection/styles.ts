@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DarkGray, FennelFiesta, Rage, TransparentLightBlack } from '../../../styles/global'
 
 export const Container = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ export const AddSetText = styled.h3`
   font-size: 9px;
   line-height: 11px;
   letter-spacing: 0.02em;
-  color: #43C079;
+  color: ${FennelFiesta};
   margin-top: 4px;
 `
 
@@ -37,13 +38,13 @@ export const SetsLimitText = styled.h3`
   font-size: 9px;
   line-height: 11px;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.6);
+  color: ${TransparentLightBlack};
   margin-bottom: 8px;
   align-self: center;
 `
 
 export const SetsLimitCountText = styled.span`
-  color: #EE373F
+  color: ${Rage}
 `
 
 export const AddSetContainer = styled.div`
@@ -73,7 +74,7 @@ export const RemoveSetText = styled.h3`
   font-size: 9px;
   line-height: 11px;
   letter-spacing: 0.02em;
-  color: #EE373F;
+  color: ${Rage};
   margin-top: 4px;
 `
 
@@ -100,5 +101,5 @@ export const HeaderTextStyle = styled.h1`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
 `

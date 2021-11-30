@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { LightGray, Rage } from '../../../styles/global';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 18px;
-  background-color: #EE373F;
+  background-color: ${Rage};
   width: 280px;
   height: 100vh;
   padding-top: 12px;
@@ -27,7 +28,7 @@ export const ExerciseAreaText = styled.h1`
   font-size: 20px;
   letter-spacing: 0.02em;
   margin-left: 6px;
-  color: #EBEBEB;
+  color: ${LightGray};
 `
 
 export const ExercisesImagesContainer = styled.div`

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DarkGray } from '../../../styles/global'
 
 export const Container = styled.div`
   width: 480px;
@@ -21,7 +22,7 @@ export const HeaderText = styled.h2`
   letter-spacing: 0.02em;
   margin-top: 0;
   margin-bottom: 0;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 
@@ -32,7 +33,7 @@ export const HeaderTrainRest = styled.h2`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
   margin-top: 0;
   margin-bottom: 0;
 `
@@ -44,7 +45,7 @@ export const SecondsText = styled.h3`
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.02em;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const TrainRestContainer = styled.div`

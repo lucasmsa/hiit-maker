@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import { ReactComponent as LeftArrow } from '../../../assets/images/LeftBar/icons/left_arrow.svg'
+import { DarkGray, LightGray } from '../../../styles/global';
 
 interface TooltipContainerProps {
   selectedTooltip: boolean
@@ -73,7 +74,7 @@ export const Tooltip = styled.div`
   width: 110px;
   height: 20px;
   display: flex;
-  background: #EBEBEB;
+  background: ${LightGray};
   align-items: center;
   justify-content: center;
   border-radius: 6px;
@@ -84,7 +85,7 @@ export const TooltipText = styled.h3`
   font-style: normal;
   font-weight: normal;
   font-size: 8px;
-  color: #282828;
+  color: ${DarkGray};
 `
 
 export const BalloonTip = styled.div`
@@ -92,7 +93,7 @@ export const BalloonTip = styled.div`
   height: 0; 
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
-  border-top: 20px solid #EBEBEB;
+  border-top: 20px solid ${LightGray};
 `
 
 export const ArrowButton = styled.button`
