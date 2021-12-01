@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { White } from '../../../styles/global'
+import { TransparentBlackShadow, White } from '../../../styles/global'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 12px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 4px ${TransparentBlackShadow};
   background-color: ${White};
   width: 272px;
   border-radius: 10px;

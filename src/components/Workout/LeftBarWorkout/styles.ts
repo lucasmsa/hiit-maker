@@ -3,7 +3,6 @@ import { ReactComponent as Arrow } from '../../../assets/images/WorkoutScreen/ar
 import { fadeInLeft, fadeIn } from 'react-animations';
 import { Rage, White } from '../../../styles/global';
 
-
 const workoutContainerAnimation = keyframes`${fadeInLeft}`;
 
 const collapsedContainerAnimation = keyframes`${fadeIn}`;

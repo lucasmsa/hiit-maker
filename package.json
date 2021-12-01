@@ -21,6 +21,7 @@
     "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-animations": "^1.0.0",
+    "react-aspect-ratio": "^1.0.50",
     "react-beautiful-dnd": "^13.1.0",
     "react-collapse": "^5.1.1",
     "react-dom": "^16.13.1",

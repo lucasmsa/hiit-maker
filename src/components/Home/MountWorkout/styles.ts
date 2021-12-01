@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { LightGray, Rage, TransparentDarkBlack, White } from '../../../styles/global'
+import { LightGray, Rage, TransparentBlackShadow, TransparentDarkBlack, White } from '../../../styles/global'
 
 export const Container = styled.div`
   height: 77.5vh;
@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background: ${White};
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 4px ${TransparentBlackShadow};
   margin-right: 8px;
   border-radius: 20px;
 `
@@ -86,7 +86,7 @@ export const ScrollableExercisesContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   ::-webkit-scrollbar {
     width: 5px;
   }

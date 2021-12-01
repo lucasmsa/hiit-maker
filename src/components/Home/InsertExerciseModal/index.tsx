@@ -22,6 +22,7 @@ import { addExercise } from '../../../store/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { getCurrentSet } from '../../../store/selectors'
+import { TransparentBlackShadow } from '../../../styles/global'
 
 const customStyles = {
   content: {
@@ -32,7 +33,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: 20,
-    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.25)'
+    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
   },
 };
 
