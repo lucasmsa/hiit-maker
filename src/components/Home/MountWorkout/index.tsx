@@ -112,25 +112,25 @@ const MountWorkout = ({ id }: WorkoutProps) => {
           ) : <></>}
         </SetRestContainer>
         <SetCounter>
-          <OperationContainer
-            onClick={() => handleExerciseCounter('plus')}
-            style={{ marginRight: '24px' }}
-          >
-            <PlusIconCounter
-              style={{ cursor: 'pointer' }}
-            />
-          </OperationContainer>
-          <CounterText>
-            {currentSetExercises?.length ? currentSetLoopQuantity : 0} {(!currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'TIMES' : 'TIME '}
-          </CounterText>
-          <OperationContainer
-            onClick={() => handleExerciseCounter('minus')}
-            style={{ marginLeft: '24px' }}
-          >
-            <MinusIconCounter
-              style={{ cursor: 'pointer' }}
-            />
-          </OperationContainer>
+            <OperationContainer
+              onClick={() => handleExerciseCounter('plus')}
+              style={{ marginRight: '24px' }}
+            >
+              <PlusIconCounter
+                style={{ cursor: 'pointer' }}
+              />
+            </OperationContainer>
+            <CounterText>
+              {currentSetExercises?.length ? currentSetLoopQuantity : 0} {(!currentSetExercises?.length || currentSetLoopQuantity !== 1) ? 'SET REPETITIONS' : 'SET REPETITION '}
+            </CounterText>
+            <OperationContainer
+              onClick={() => handleExerciseCounter('minus')}
+              style={{ marginLeft: '24px' }}
+            >
+              <MinusIconCounter
+                style={{ cursor: 'pointer' }}
+              />
+              </OperationContainer>
         </SetCounter>
       </FooterContainer>
     </Container>

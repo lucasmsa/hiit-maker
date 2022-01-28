@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 import { LightGray, Rage, TransparentBlackShadow, TransparentDarkBlack } from '../../../styles/global'
+import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg'
+import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg'
+import { ReactComponent as ConnectingLine } from '../../../assets/images/WorkoutScreen/connecting-line-workout.svg'
 
 export const Container = styled.div`
   display: flex;
@@ -13,7 +16,7 @@ export const ExerciseText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 150%;
+  font-size: 1.5vw;
   line-height: 29px;
   margin-left: 15%;
   letter-spacing: 0.02em;
@@ -36,7 +39,7 @@ export const TrainingTimeClockText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 250%;
+  font-size: 3vw;
   line-height: 98px;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -61,9 +64,10 @@ export const BottomContainer = styled.div`
 export const TrainingTimeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-top: 1%;
   margin-left: 0;
   margin-bottom: 0;
 `
@@ -82,7 +86,7 @@ export const TrainingTimeRedText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1.5vw;
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${Rage};
@@ -106,7 +110,7 @@ export const ProgressBlockTimesBottom = styled.div`
   align-items: center;
   background: ${Rage};
   width: 100%;
-  height: 64px;
+  height: 4.5vh;
   box-shadow: 0px 1px 2px rgba(238, 55, 63, 0.5);
   border-radius: 20px;
   margin-top: auto; 
@@ -116,7 +120,7 @@ export const ProgressBlockBottomText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1vw;
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${LightGray};
@@ -128,7 +132,7 @@ export const ProgressBlockHeaderText = styled.h2`
   font-weight: 600;
   align-self: center;
   margin-top: 4%;
-  font-size: 14px;
+  font-size: 1vw;
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${Rage};
@@ -141,6 +145,7 @@ export const ExercisesOnSetContainer = styled.div`
   margin-left: 5%;
   margin-right: 5%;
   overflow-y: scroll;
+  height: 70%;
   margin-bottom: 24px;
   ::-webkit-scrollbar {
     width: 5px;
@@ -157,7 +162,7 @@ export const ExercisesOnSetText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 0.7vw;
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -179,4 +184,16 @@ export const DotsContainer = styled.div`
 export const ExercisesOnSetDots = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+export const StyledSelectedSetIcon = styled(SelectedSetIcon)`
+  cursor: pointer;
+  transform: scale(125%);
+`
+
+export const StyledNotSelectedSetIcon = styled(NotSelectedSetIcon)`
+  cursor: pointer;
+`
+
+export const StyledConnectingLine = styled(ConnectingLine)`
 `

@@ -7,22 +7,19 @@ import { ReactComponent as ColoredChestIcon } from '../../../assets/images/Worko
 import { ReactComponent as ColoredAbsIcon } from '../../../assets/images/WorkoutInformation/coloredAbs.svg'
 import { ReactComponent as ColoredBackIcon } from '../../../assets/images/WorkoutInformation/coloredBack.svg'
 import { ReactComponent as ColoredLegsIcon } from '../../../assets/images/WorkoutInformation/coloredLegs.svg'
+import { ReactComponent as ManRunningIcon } from '../../../assets/images/WorkoutInformation/icons/manRunning.svg'
 import {
   Container,
   TargetMusclesContainer,
-  HeaderTexts,
   MuscleGroupImagesContainer,
   TotalTimeContainer,
-  ClockText,
-  TotalTimeHeaderContainer,
   TrainingDurationContainer,
   TrainingDurationText,
   StartTrainingContainer,
   FrontContainer,
   BackContainer,
-  HeaderContainer,
   PlayButton,
-  PlayButtonHovered
+  PlayButtonHovered,
 } from './styles'
 import { toast } from 'react-hot-toast'
 import { shallowEqual, useSelector } from 'react-redux'
@@ -32,6 +29,7 @@ import ErrorToast from '../../../toasts/ErrorToast'
 import {
   Link
 } from "react-router-dom";
+import InformationHeaderSection from '../InformationHeaderSection'
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0
@@ -56,11 +54,11 @@ const WorkoutInformation = () => {
     <>
     {
       playButtonHovered
-      ? <PlayButtonHovered
+          ? <PlayButtonHovered
         onClick={handlePlayButtonClick}
         onMouseLeave={() => setPlayButtonHovered(false)}
       />
-      : <PlayButton
+          : <PlayButton
         onMouseEnter={() => setPlayButtonHovered(true)}
       />
     }
@@ -68,7 +66,7 @@ const WorkoutInformation = () => {
   )
 
   const playButtonWithLink = (
-    <Link to={atLeastOneExerciseWasAddedOnEverySet() ? "/workout" : "/"}>
+    <Link style={{ alignSelf: 'center' }} to={atLeastOneExerciseWasAddedOnEverySet() ? "/workout" : "/"}>
       {playButtonWithoutLink}
     </Link>
   )
@@ -76,10 +74,7 @@ const WorkoutInformation = () => {
   return (
     <Container>
       <TargetMusclesContainer>
-        <HeaderContainer>
-          <TargetMusclesIcon/>
-          <HeaderTexts>Target muscles</HeaderTexts>
-        </HeaderContainer>
+        <InformationHeaderSection backgroundColor={'BLACK'} icon={<TargetMusclesIcon />} title={'Target muscles'} />
         <MuscleGroupImagesContainer>
           <FrontContainer>
             <ColoredChestIcon
@@ -128,16 +123,13 @@ const WorkoutInformation = () => {
         </MuscleGroupImagesContainer>
       </TargetMusclesContainer>
       <TotalTimeContainer>
-        <TotalTimeHeaderContainer>
-          <ClockIcon />
-          <ClockText>Total Time</ClockText>
-        </TotalTimeHeaderContainer>
+        <InformationHeaderSection icon={<ClockIcon />} title={'Total Time'} backgroundColor={'BLACK'}/>
         <TrainingDurationContainer>
           <TrainingDurationText>{formattedTotalTrainingTime} min</TrainingDurationText>
         </TrainingDurationContainer>
       </TotalTimeContainer>
       <StartTrainingContainer>
-        <HeaderTexts>Start now</HeaderTexts>
+        <InformationHeaderSection icon={<ManRunningIcon />} title={'Start now'} backgroundColor={'RED'}/>
         {playButtonWithLink}
       </StartTrainingContainer>
     </Container>

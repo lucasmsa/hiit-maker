@@ -59,7 +59,7 @@ export const SetCounter = styled.div`
   height: 54px;
   width: 100%;
   border-radius: 20px;
-  background: ${Rage};
+  background: ${TransparentDarkBlack};
 `
 
 export const CounterText = styled.h2`

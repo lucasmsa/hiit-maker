@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DarkGray, Rage, White } from '../../../styles/global'
+import { DarkGray, Rage, TransparentDarkBlack, White } from '../../../styles/global'
 
 export const Container = styled.div`
   display: flex;
@@ -9,6 +9,7 @@ export const Container = styled.div`
   width: 325px;
   height: 100vh;
   padding-top: 42px;
+  overflow-x: hidden;
 `
 export const TargetMusclesContainer = styled.div`
   display: flex;
@@ -30,8 +31,8 @@ export const TotalTimeContainer = styled.div`
   margin-top: 108px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `
 
 export const FrontContainer = styled.div`
@@ -59,12 +60,32 @@ export const HeaderTexts = styled.h2`
   letter-spacing: 0.02em;
   align-items: center;
   margin-left: 12px;
-  color: ${DarkGray};
+  color: ${White};
 `
 
 export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
+  background: ${TransparentDarkBlack};
+  width: 130%;
+  height: 46px;
+  margin-right: 32px;
+  padding-left: 48px;
+`
+
+export const InformationContianer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 130%;
+  margin-right: 42px;
+`
+
+export const LemmeSee = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-bottom: 46px solid white;
+  border-right: 24px solid transparent;
 `
 
 export const ClockText = styled.h2`
@@ -78,7 +99,9 @@ export const ClockText = styled.h2`
   color: ${DarkGray};
 `
 
-export const TrainingDurationContainer = styled.div``
+export const TrainingDurationContainer = styled.div`
+  align-self: center;
+`
 
 export const TrainingDurationText = styled.h3`
   font-family: Montserrat;
@@ -94,7 +117,8 @@ export const StartTrainingContainer = styled.div`
   margin-top: 80px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 `
 
 export const PlayButton = styled.div`

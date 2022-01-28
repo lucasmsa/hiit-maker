@@ -2,11 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { AspectRatio } from 'react-aspect-ratio';
 import { ReactComponent as StopButton } from '../../../assets/images/WorkoutScreen/stop_button.svg'
-import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg'
-import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg'
-import { ReactComponent as ConnectingLine } from '../../../assets/images/WorkoutScreen/connecting-line-workout.svg'
 import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
-import { BottomContainer, Container, DotsContainer, ExerciseImage, ExercisesOnSetContainer, ExercisesOnSetText, ExerciseText, HeaderTextContainer, InsideSetContainer, ProgressBlock, ProgressBlockBottomText, ProgressBlockHeaderText, ProgressBlockTimesBottom, RedExerciseText, TrainingProgressContainer, TrainingTimeClockText, TrainingTimeContainer, TrainingTimeRedText } from './styles';
+import { BottomContainer, Container, DotsContainer, ExerciseImage, ExercisesOnSetContainer, ExercisesOnSetText, ExerciseText, HeaderTextContainer, InsideSetContainer, ProgressBlock, ProgressBlockBottomText, ProgressBlockHeaderText, ProgressBlockTimesBottom, RedExerciseText, StyledConnectingLine, StyledNotSelectedSetIcon, StyledSelectedSetIcon, TrainingProgressContainer, TrainingTimeClockText, TrainingTimeContainer, TrainingTimeRedText } from './styles';
 
 const SetsProgress = () => {
   const trainingSets = useSelector(getTrainSetLoops);
@@ -15,7 +12,6 @@ const SetsProgress = () => {
   const setsQuantity = trainingSets.length;
   const exercisesMock = [{ name: 'SQUAT WITHOUT DUMBELLS' }, { name: 'PUSH UPS' },
     { name: 'CRUNCHES' }, { name: 'PUSH UPS' }, { name: 'CRUNCHES' },
-    { name: 'PUSH UPS' }, { name: 'CRUNCHES' }
   ]
 
   return (
@@ -48,9 +44,8 @@ const SetsProgress = () => {
               {
                 exercisesMock.map((set, index) => { 
                   const setIcon = currentSet === index
-                                  ? <SelectedSetIcon style={{ cursor: 'pointer' }} />
-                                  : <NotSelectedSetIcon 
-                                      style={{ cursor: 'pointer' }}
+                                  ? <StyledSelectedSetIcon  />
+                                  : <StyledNotSelectedSetIcon 
                                       onClick={() => {}}
                                     />
                   return (
@@ -61,14 +56,14 @@ const SetsProgress = () => {
                         {set.name}
                       </ExercisesOnSetText>
                       <DotsContainer>
-                        {index !== 0 && <ConnectingLine />}
+                        {index !== 0 && <StyledConnectingLine />}
                         {setIcon}
                       </DotsContainer>
                     </InsideSetContainer>
                   )
                 }
               )
-            }
+              } 
             </ExercisesOnSetContainer>
             <ProgressBlockTimesBottom>
               <ProgressBlockBottomText>{`${'5'} Times`}</ProgressBlockBottomText>
@@ -81,4 +76,4 @@ const SetsProgress = () => {
 }
 
 
-export default  SetsProgress;
+export default SetsProgress;
