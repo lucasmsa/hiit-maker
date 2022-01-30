@@ -1,15 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { AspectRatio } from 'react-aspect-ratio';
 import { ReactComponent as StopButton } from '../../../assets/images/WorkoutScreen/stop_button.svg'
-import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
+import { getCurrentSet } from '../../../store/selectors';
 import { BottomContainer, Container, DotsContainer, ExerciseImage, ExercisesOnSetContainer, ExercisesOnSetText, ExerciseText, HeaderTextContainer, InsideSetContainer, ProgressBlock, ProgressBlockBottomText, ProgressBlockHeaderText, ProgressBlockTimesBottom, RedExerciseText, StyledConnectingLine, StyledNotSelectedSetIcon, StyledSelectedSetIcon, TrainingProgressContainer, TrainingTimeClockText, TrainingTimeContainer, TrainingTimeRedText } from './styles';
 
 const SetsProgress = () => {
-  const trainingSets = useSelector(getTrainSetLoops);
   const currentSet = useSelector(getCurrentSet);
-  const currentTrainingSetExercises = useSelector(getTrainingSetExercises)
-  const setsQuantity = trainingSets.length;
   const exercisesMock = [{ name: 'SQUAT WITHOUT DUMBELLS' }, { name: 'PUSH UPS' },
     { name: 'CRUNCHES' }, { name: 'PUSH UPS' }, { name: 'CRUNCHES' },
   ]

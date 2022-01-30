@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Rage, TransparentDarkBlack, White } from '../../../styles/global'
 
 interface HeaderContainerProps {
-  color: 'BLACK' | 'RED'
+  color: 'BLACK' | 'RED';
 }
 
 export const HeaderTexts = styled.h2`
@@ -21,7 +21,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   display: flex;
   align-items: center;
   background: ${({ color }) => color === 'BLACK' ? TransparentDarkBlack : Rage};
-  width: 130%;
+  width: 120%;
   height: 46px;
   margin-right: 32px;
   padding-left: 48px;
@@ -30,7 +30,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
 export const InformationContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 130%;
+  width: 120%;
   margin-right: 42px;
 `
 

@@ -12,6 +12,10 @@ import {
   CurrentTrainingSetsContainer,
   SetsLimitText,
   SetsLimitCountText,
+  HeaderTextContainer,
+  RightTriangle,
+  HorizontalDumbell,
+  HeaderInfoContainer,
 } from './styles'
 import { ReactComponent as AddSetIcon } from '../../../assets/images/midSection/addSet.svg'
 import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg'
@@ -35,7 +39,13 @@ const MidSection = () => {
 
   return (
     <Container>
-      <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
+      <HeaderInfoContainer>
+        <HeaderTextContainer>
+          <HorizontalDumbell />
+          <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
+        </HeaderTextContainer>
+        <RightTriangle />
+      </HeaderInfoContainer>
       <ExercisesContainer>
         <SetsContainer>
           <SetsLimitText>Set Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5</SetsLimitText>
