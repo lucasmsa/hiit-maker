@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DarkGray, FennelFiesta, Rage, TransparentLightBlack, White } from '../../../styles/global'
+import { FennelFiesta, Rage, TransparentLightBlack, White } from '../../../styles/global'
 import { ReactComponent as HorizontalDumbellIcon} from '../../../assets/images/midSection/horizontal-dumbell.svg'
 
 
