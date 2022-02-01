@@ -9,7 +9,7 @@ import {
 const Home = () => {
   return (
     <Container>
-      <LeftBar />
+      <LeftBar isHomePage/>
       <MidSection />
       <WorkoutInformation />
     </Container>

@@ -6,7 +6,11 @@ import AvailableExercises from '../AvailableExercises'
 import Search from '../Search'
 import { GITHUB_LINK } from '../../../config/contants';
 
-const LeftBar = () => {
+interface LeftBarProps {
+  isHomePage: boolean;
+}
+
+const LeftBar = ({ isHomePage }: LeftBarProps) => {
   const [searchExercise, setExerciseSearch] = useState<string>('')
   return (
     <Container>
@@ -22,12 +26,15 @@ const LeftBar = () => {
           <SettingsIcon />
         </Link>
       </IconsContainer>
-      <Search
-        changeExerciseSearch={(value: string) => setExerciseSearch(value)}
-      />
-      <AvailableExercises
-        searchExercise={searchExercise}
-      />
+      {isHomePage ? 
+        <>
+          <Search
+            changeExerciseSearch={(value: string) => setExerciseSearch(value)}
+          />
+          <AvailableExercises
+            searchExercise={searchExercise}
+          />
+        </> : <></>}
     </Container>
   )
 }

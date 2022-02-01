@@ -1,11 +1,13 @@
 import React from 'react'
-import MidSection from '../../components/Home/MidSection'
+import LeftBar from '../../components/Home/LeftBar'
+import SettingsMenu from '../../components/Settings/SettingsMenu'
 import { Container } from './styles'
 
 const Settings = () => {
   return (
     <Container>
-      <MidSection />
+      <LeftBar isHomePage={false}></LeftBar>
+      <SettingsMenu />
     </Container>
   )
 }
