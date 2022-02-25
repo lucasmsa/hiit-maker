@@ -56,7 +56,7 @@ const reducerFunctions = {
         currentSet,
         afflictedAreas: {
           ...state.afflictedAreas,
-          [newExercise.afflictedBodyPart!]: state.afflictedAreas[newExercise.afflictedBodyPart] + 1
+          [newExercise.afflictedBodyPart!]: state.afflictedAreas[newExercise.afflictedBodyPart]
         },
         trainSetLoops: state.trainSetLoops.map((content, index) =>
           index === currentSet

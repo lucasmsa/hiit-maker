@@ -37,13 +37,12 @@ interface AvailableExercisesProps {
 }
 
 const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
-  console.log('Here am I', searchExercise);
   const [selectedExercise, setSelectedExercise] = useState<string>('');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [chestExercises, setChestExercises] = useState<Exercise[] | []>([]);
-  const [legsExercises, setLegsExercises] = useState<Exercise[] | []>([]);
-  const [coreExercises, setCoreExercises] = useState<Exercise[] | []>([]);
-  const [backExercises, setBackExercises] = useState<Exercise[] | []>([]);
+  const [chestExercises, setChestExercises] = useState<Exercise[]>([]);
+  const [legsExercises, setLegsExercises] = useState<Exercise[]>([]);
+  const [coreExercises, setCoreExercises] = useState<Exercise[]>([]);
+  const [backExercises, setBackExercises] = useState<Exercise[]>([]);
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     name: '',
     afflictedBodyPart: undefined,
@@ -57,6 +56,18 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
     { Legs: setLegsExercises },
     { Back: setBackExercises },
     { Core: setCoreExercises }
+  ];
+
+  const exerciseContainerObject = (icon: JSX.Element, list: Exercise[]) => ({
+    Icon: icon,
+    list: list
+  });
+
+  const exerciseContainer: object[] = [
+    { Chest: exerciseContainerObject(<ChestIcon />, chestExercises) },
+    { Legs: exerciseContainerObject(<LegIcon />, legsExercises) },
+    { Back: exerciseContainerObject(<BackIcon />, backExercises) },
+    { Core: exerciseContainerObject(<CoreIcon />, coreExercises) }
   ];
 
   const loadExercises = useCallback(
@@ -77,20 +88,8 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
     loadExercises(searchExercise);
   }, [loadExercises]);
 
-  const exerciseContainerObject = (icon: JSX.Element, list: [] | Exercise[]) => ({
-    Icon: icon,
-    list: list
-  });
-
-  const exerciseContainer = [
-    { Chest: exerciseContainerObject(<ChestIcon />, chestExercises) },
-    { Legs: exerciseContainerObject(<LegIcon />, legsExercises) },
-    { Back: exerciseContainerObject(<BackIcon />, backExercises) },
-    { Core: exerciseContainerObject(<CoreIcon />, coreExercises) }
-  ];
-
   const exerciseNameAndImageToExerciseCard = (
-    exercises: [string, string][],
+    exercises: Pairs<string, string>,
     bodyPart: AfflictedAreas
   ) => {
     exercises.forEach((exerciseInfo, index, array) => {

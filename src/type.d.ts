@@ -44,4 +44,7 @@ type TrainingAction = {
   };
 };
 
+type Pair<T, K> = [T, K];
+type Pairs<T, K> = Pair<T, K>[];
+
 type DispatchType = (args: TrainingAction) => TrainingAction;
