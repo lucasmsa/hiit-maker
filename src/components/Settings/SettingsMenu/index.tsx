@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Dispatch } from 'redux';
 import {
   Container,
@@ -12,7 +12,11 @@ import {
   ExercisesLimitText,
   OperationContainer,
   ExercisesLimitCountText,
-  SettingsHeaderIcon
+  SettingsHeaderIcon,
+  SettingsContentContainer,
+  SettingsConfigurationOptionContainer,
+  SettingsConfigurationOptionText,
+  SettingsConfigurationOptionHighlightText
 } from './styles';
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as PlusIconCounter } from '../../../assets/images/midSection/plus-set-counter-icon.svg';
@@ -26,6 +30,7 @@ import {
 import { updateCurrentSetLoopQuantity } from '../../../store/actionCreators';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
+import TimeInput from '../../Home/TimeInput';
 
 interface WorkoutProps {
   id?: string;
@@ -43,6 +48,29 @@ const SettingsMenu = ({ id }: WorkoutProps) => {
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
   const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime);
+
+  const possibleConfigurations = [
+    'EXERCISE REST',
+    'EXERCISE TRAIN',
+    'FINAL REST',
+    'SET REPETITIONS'
+  ];
+
+  const settingsConfigurationsOption = useCallback(
+    (highlightedText: string) => (
+      <SettingsConfigurationOptionContainer>
+        <SettingsConfigurationOptionText>
+          DEFAULT{' '}
+          <SettingsConfigurationOptionHighlightText>
+            {highlightedText}
+          </SettingsConfigurationOptionHighlightText>{' '}
+          TIME
+        </SettingsConfigurationOptionText>
+        <TimeInput value={60} onChange={(event: ChangeEvent<HTMLInputElement>) => {}} />
+      </SettingsConfigurationOptionContainer>
+    ),
+    []
+  );
 
   const handleExerciseCounter = useCallback(
     (option: 'plus' | 'minus') => {
@@ -68,6 +96,11 @@ const SettingsMenu = ({ id }: WorkoutProps) => {
         <SettingsHeaderIcon />
         <SettingsHeaderText>Settings</SettingsHeaderText>
       </SettingsHeaderContainer>
+      <SettingsContentContainer>
+        {possibleConfigurations.map((configuration: string) =>
+          settingsConfigurationsOption(configuration)
+        )}
+      </SettingsContentContainer>
       <FooterContainer>
         <ExercisesLimitText>
           Exercises Limit{' '}
@@ -85,8 +118,7 @@ const SettingsMenu = ({ id }: WorkoutProps) => {
         <SetCounter>
           <OperationContainer
             onClick={() => handleExerciseCounter('plus')}
-            style={{ marginRight: '24px' }}
-          >
+            style={{ marginRight: '24px' }}>
             <PlusIconCounter style={{ cursor: 'pointer' }} />
           </OperationContainer>
           <CounterText>
@@ -97,8 +129,7 @@ const SettingsMenu = ({ id }: WorkoutProps) => {
           </CounterText>
           <OperationContainer
             onClick={() => handleExerciseCounter('minus')}
-            style={{ marginLeft: '24px' }}
-          >
+            style={{ marginLeft: '24px' }}>
             <MinusIconCounter style={{ cursor: 'pointer' }} />
           </OperationContainer>
         </SetCounter>

@@ -12,7 +12,7 @@ import { ReactComponent as ConnectingLine } from '../../../assets/images/Workout
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 64px;
+  margin-left: 4rem;
   width: 65%;
   height: 100%;
 `;
@@ -22,7 +22,7 @@ export const ExerciseText = styled.h2`
   font-style: normal;
   font-weight: normal;
   font-size: 1.5vw;
-  line-height: 29px;
+  line-height: 1.8125rem;
   margin-left: 15%;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -32,7 +32,7 @@ export const HeaderTextContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 28px 0;
+  margin: 1.75rem 0;
 `;
 
 export const RedExerciseText = styled.span`
@@ -45,7 +45,7 @@ export const TrainingTimeClockText = styled.h2`
   font-style: normal;
   font-weight: normal;
   font-size: 3vw;
-  line-height: 98px;
+  line-height: 6.125rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
 `;
@@ -53,10 +53,10 @@ export const TrainingTimeClockText = styled.h2`
 export const ExerciseImage = styled.img`
   width: 70%;
   height: 45%;
-  filter: drop-shadow(0px 1px 2px ${TransparentBlackShadow});
+  filter: drop-shadow(0rem 0.0625rem 0.125rem ${TransparentBlackShadow});
   align-self: center;
-  border-radius: 10px;
-  margin-bottom: 24px;
+  border-radius: 0.625rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const BottomContainer = styled.div`
@@ -92,20 +92,20 @@ export const TrainingTimeRedText = styled.h2`
   font-style: normal;
   font-weight: 600;
   font-size: 1.5vw;
-  line-height: 17px;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${Rage};
 `;
 
 export const ProgressBlock = styled.div`
   display: flex;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   align-self: flex-start;
   flex-direction: column;
   width: 65%;
   margin-left: 5%;
   height: 100%;
-  box-shadow: 0px 1px 4px ${TransparentBlackShadow};
+  box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
 `;
 
 export const ProgressBlockTimesBottom = styled.div`
@@ -116,8 +116,8 @@ export const ProgressBlockTimesBottom = styled.div`
   background: ${Rage};
   width: 100%;
   height: 4.5vh;
-  box-shadow: 0px 1px 2px rgba(238, 55, 63, 0.5);
-  border-radius: 20px;
+  box-shadow: 0rem 0.0625rem 0.125rem rgba(238, 55, 63, 0.5);
+  border-radius: 1.25rem;
   margin-top: auto;
 `;
 
@@ -126,7 +126,7 @@ export const ProgressBlockBottomText = styled.h2`
   font-style: normal;
   font-weight: 600;
   font-size: 1vw;
-  line-height: 17px;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${LightGray};
 `;
@@ -138,7 +138,7 @@ export const ProgressBlockHeaderText = styled.h2`
   align-self: center;
   margin-top: 4%;
   font-size: 1vw;
-  line-height: 17px;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${Rage};
   margin-bottom: 4%;
@@ -151,15 +151,15 @@ export const ExercisesOnSetContainer = styled.div`
   margin-right: 5%;
   overflow-y: scroll;
   height: 70%;
-  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 0.3125rem;
   }
 
   ::-webkit-scrollbar-thumb {
     background: #908a8a;
     opacity: 0.8;
-    border-radius: 20px;
+    border-radius: 1.25rem;
   }
 `;
 
@@ -168,7 +168,7 @@ export const ExercisesOnSetText = styled.h2`
   font-style: normal;
   font-weight: 600;
   font-size: 0.7vw;
-  line-height: 17px;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
 `;

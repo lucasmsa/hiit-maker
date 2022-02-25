@@ -8,10 +8,10 @@ interface TooltipContainerProps {
 }
 
 export const Container = styled.div`
-  min-width: 270px;
-  height: 100px;
+  min-width: 16.875rem;
+  height: 6.25rem;
   justify-content: center;
-  margin-left: -24px;
+  margin-left: -1.5rem;
   overflow: hidden;
 `;
 
@@ -19,7 +19,7 @@ export const NotActiveItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 12px;
+  margin: 0 0.75rem;
 `;
 
 export const ExerciseWithTooltipContainer = styled.div`
@@ -33,9 +33,9 @@ export const Item = styled.img`
   border: none;
   user-drag: none;
   -webkit-user-drag: none;
-  width: 84px;
-  height: 60px;
-  border-radius: 12px;
+  width: 5.25rem;
+  height: 3.75rem;
+  border-radius: 0.75rem;
 `;
 
 export const HorizontalScroll = styled(ScrollMenu)``;
@@ -58,8 +58,8 @@ export const ExerciseItemContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100px;
-  width: 108px;
+  height: 6.25rem;
+  width: 6.75rem;
 `;
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`
@@ -73,20 +73,20 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
 export const Tooltip = styled.div`
   position: absolute;
   transform: translateX(-37.5px) translateY(-10px);
-  width: 110px;
-  height: 20px;
+  width: 6.875rem;
+  height: 1.25rem;
   display: flex;
   background: ${LightGray};
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 0.375rem;
 `;
 
 export const TooltipText = styled.h3`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 8px;
+  font-size: 0.5rem;
   color: ${DarkGray};
 `;
 
@@ -101,8 +101,8 @@ export const BalloonTip = styled.div`
 export const ArrowButton = styled.button`
   cursor: pointer;
   display: flex;
-  min-width: 20px;
-  height: 120px;
+  min-width: 1.25rem;
+  height: 7.5rem;
   flex-direction: column;
   background: none;
   color: inherit;

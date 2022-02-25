@@ -11,7 +11,7 @@ export const SetsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 16px;
+  margin-right: 1rem;
 `;
 
 export const CurrentTrainingSetsContainer = styled.div`
@@ -25,27 +25,27 @@ export const AddSetText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 9px;
-  line-height: 11px;
+  font-size: 0.5625rem;
+  line-height: 0.6875rem;
   letter-spacing: 0.02em;
   color: ${FennelFiesta};
-  margin-top: 4px;
+  margin-top: 0.25rem;
 `;
 
 export const HorizontalDumbell = styled(HorizontalDumbellIcon)`
   margin-left: auto;
-  margin-right: -36px;
+  margin-right: -2.25rem;
 `;
 
 export const SetsLimitText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 9px;
-  line-height: 11px;
+  font-size: 0.5625rem;
+  line-height: 0.6875rem;
   letter-spacing: 0.02em;
   color: ${TransparentLightBlack};
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   align-self: center;
 `;
 
@@ -58,13 +58,13 @@ export const AddSetContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 26px;
+  margin-top: 1.625rem;
   cursor: pointer;
-  width: 56.4px;
+  width: 3.525rem;
 `;
 
 export const RemoveSetContainer = styled.div`
-  margin-top: 16px;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,10 +76,10 @@ export const HeaderTextContainer = styled.div`
   display: flex;
   align-items: center;
   background: ${Rage};
-  height: 46px;
+  height: 2.875rem;
   width: 90%;
-  margin-left: -56px;
-  margin-top: 42px;
+  margin-left: -3.5rem;
+  margin-top: 2.625rem;
 `;
 
 export const HeaderInfoContainer = styled.div`
@@ -90,21 +90,21 @@ export const HeaderInfoContainer = styled.div`
 export const RightTriangle = styled.div`
   width: 0;
   height: 0;
-  border-bottom: 46px solid white;
-  border-left: 24px solid transparent;
+  border-bottom: 2.875rem solid white;
+  border-left: 1.5rem solid transparent;
   align-self: flex-end;
-  margin-left: -24px;
+  margin-left: -1.5rem;
 `;
 
 export const RemoveSetText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 9px;
-  line-height: 11px;
+  font-size: 0.5625rem;
+  line-height: 0.6875rem;
   letter-spacing: 0.02em;
   color: ${Rage};
-  margin-top: 4px;
+  margin-top: 0.25rem;
 `;
 
 export const ExercisesContainer = styled.div`
@@ -114,7 +114,7 @@ export const ExercisesContainer = styled.div`
   justify-content: flex-start;
   flex: 1;
   height: 100vh;
-  margin-left: 34px;
+  margin-left: 2.125rem;
 `;
 
 export const WorkoutContainer = styled.div``;
@@ -124,10 +124,10 @@ export const HeaderTextStyle = styled.h1`
   align-self: center;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
   letter-spacing: 0.02em;
   color: ${White};
   margin-left: auto;
-  margin-right: 36px;
+  margin-right: 2.25rem;
 `;

@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { LightGray, TransparentDarkBlack } from '../../../styles/global';
 
 export const Input = styled.input`
-  width: 24px;
+  width: 1.5rem;
   outline: none;
   border: none;
   background-color: ${LightGray};
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 200;
   text-align: center;
 
@@ -17,21 +17,21 @@ export const Input = styled.input`
 
 export const InputSurroundings = styled.div`
   background: ${LightGray};
-  border-radius: 10px;
-  width: 32px;
-  height: 23px;
+  border-radius: 0.625rem;
+  width: 2rem;
+  height: 1.4375rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 4px;
+  margin-right: 0.25rem;
 `;
 
 export const SecondsText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 300;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 0.875rem;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
 `;

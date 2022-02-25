@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { TransparentDarkBlack, TransparentLightBlack } from '../../styles/global';
 
 export const ExercisesLimitToastContainer = styled.div`
-  padding: 16px;
+  padding: 1rem;
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: ${TransparentLightBlack};
   display: flex;
   flex-direction: column;
@@ -16,9 +16,9 @@ export const ExercisesLimitToastHeaderText = styled.h1`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
-  line-height: 29px;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.8125rem;
+  margin-bottom: 0.75rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
 `;
@@ -27,10 +27,10 @@ export const ExercisesLimitToastBottomText = styled.h1`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 12px;
-  line-height: 17px;
+  font-size: 0.75rem;
+  line-height: 1.0625rem;
   text-align: center;
   letter-spacing: 0.02em;
   color: rgba(0, 0, 0, 0.6);
-  margin-top: 12px;
+  margin-top: 0.75rem;
 `;

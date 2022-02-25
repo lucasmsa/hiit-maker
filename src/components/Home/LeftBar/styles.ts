@@ -9,9 +9,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${Rage};
-  width: 325px;
+  width: 20.3125rem;
   height: 100vh;
-  padding-top: 42px;
+  padding-top: 2.625rem;
 `;
 
 export const Header = styled.div`
@@ -21,16 +21,16 @@ export const Header = styled.div`
 `;
 
 export const IconsContainer = styled.div`
-  margin-top: 28px;
-  margin-bottom: 8px;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
-  width: 106px;
+  width: 6.625rem;
   justify-content: space-evenly;
 `;
 
 export const SettingsIcon = styled(Settings)`
-  margin-top: 2px;
+  margin-top: 0.125rem;
   cursor: pointer;
 `;
 

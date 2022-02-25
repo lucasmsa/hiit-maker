@@ -6,9 +6,9 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: ${White};
-  width: 325px;
+  width: 20.3125rem;
   height: 100vh;
-  padding-top: 42px;
+  padding-top: 2.625rem;
   overflow-x: hidden;
 `;
 export const TargetMusclesContainer = styled.div`
@@ -19,7 +19,7 @@ export const TargetMusclesContainer = styled.div`
 `;
 
 export const MuscleGroupImagesContainer = styled.div`
-  margin-top: 42px;
+  margin-top: 2.625rem;
   display: flex;
   flex-direction: row;
   width: 60%;
@@ -28,7 +28,7 @@ export const MuscleGroupImagesContainer = styled.div`
 `;
 
 export const TotalTimeContainer = styled.div`
-  margin-top: 108px;
+  margin-top: 6.75rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,11 +55,11 @@ export const HeaderTexts = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
   letter-spacing: 0.02em;
   align-items: center;
-  margin-left: 12px;
+  margin-left: 0.75rem;
   color: ${White};
 `;
 
@@ -68,33 +68,33 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background: ${TransparentDarkBlack};
   width: 130%;
-  height: 46px;
-  margin-right: 32px;
-  padding-left: 48px;
+  height: 2.875rem;
+  margin-right: 2rem;
+  padding-left: 3rem;
 `;
 
 export const InformationContianer = styled.div`
   display: flex;
   flex-direction: row;
   width: 130%;
-  margin-right: 42px;
+  margin-right: 2.625rem;
 `;
 
 export const LemmeSee = styled.div`
   position: absolute;
   width: 0;
   height: 0;
-  border-bottom: 46px solid white;
-  border-right: 24px solid transparent;
+  border-bottom: 2.875rem solid white;
+  border-right: 1.5rem solid transparent;
 `;
 
 export const ClockText = styled.h2`
-  margin-left: 14px;
+  margin-left: 0.875rem;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
   letter-spacing: 0.02em;
   color: ${DarkGray};
 `;
@@ -105,16 +105,16 @@ export const TrainingDurationContainer = styled.div`
 
 export const TrainingDurationText = styled.h3`
   font-family: Montserrat;
-  margin-top: 12px;
+  margin-top: 0.75rem;
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5rem;
   letter-spacing: 0.02em;
   color: ${Rage};
 `;
 
 export const StartTrainingContainer = styled.div`
-  margin-top: 80px;
+  margin-top: 5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -123,14 +123,14 @@ export const StartTrainingContainer = styled.div`
 
 export const PlayButton = styled.div`
   cursor: pointer;
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   background: radial-gradient(rgba(238, 55, 63, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
   border-radius: 50%;
   position: relative;
   display: block;
-  margin: 56px auto 0 auto;
-  box-shadow: 0px 0px 25px 3px rgba(245, 135, 140, 0.8);
+  margin: 3.5rem auto 0 auto;
+  box-shadow: 0rem 0rem 1.5625rem 0.1875rem rgba(245, 135, 140, 0.8);
   &:after {
     content: '';
     position: absolute;
@@ -141,9 +141,9 @@ export const PlayButton = styled.div`
     transform-origin: center center;
     width: 0;
     height: 0;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-left: 25px solid #fff;
+    border-top: 0.9375rem solid transparent;
+    border-bottom: 0.9375rem solid transparent;
+    border-left: 1.5625rem solid #fff;
     z-index: 100;
     -webkit-transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
     transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -168,7 +168,7 @@ export const PlayButtonHovered = styled(PlayButton)`
     animation-timing-function: steps;
     opacity: 1;
     border-radius: 50%;
-    border: 5px solid rgba(255, 255, 255, 0.75);
+    border: 0.3125rem solid rgba(255, 255, 255, 0.75);
     top: -30%;
     left: -30%;
     background: rgba(198, 16, 0, 0);
@@ -179,8 +179,8 @@ export const PlayButtonHovered = styled(PlayButton)`
       -webkit-transform: scale(0.6);
       transform: scale(0.6);
       opacity: 1;
-      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
-        0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0rem 0rem 1.5625rem 0.1875rem rgba(255, 255, 255, 0.75),
+        0rem 0rem 1.5625rem 0.625rem rgba(255, 255, 255, 0.75);
     }
     100% {
       -webkit-transform: scale(1);
@@ -195,8 +195,8 @@ export const PlayButtonHovered = styled(PlayButton)`
       -webkit-transform: scale(0.6);
       transform: scale(0.6);
       opacity: 1;
-      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
-        0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0rem 0rem 1.5625rem 0.1875rem rgba(255, 255, 255, 0.75),
+        0rem 0rem 1.5625rem 0.625rem rgba(255, 255, 255, 0.75);
     }
     100% {
       -webkit-transform: scale(1, 1);

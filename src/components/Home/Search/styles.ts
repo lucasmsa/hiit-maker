@@ -5,13 +5,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 12px;
-  box-shadow: 0px 1px 4px ${TransparentBlackShadow};
+  margin-top: 0.75rem;
+  box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
   background-color: ${White};
-  width: 272px;
-  border-radius: 10px;
-  height: 48px;
-  padding-right: 18px;
+  width: 17rem;
+  border-radius: 0.625rem;
+  height: 3rem;
+  padding-right: 1.125rem;
 `;
 
 export const Header = styled.div`
@@ -23,7 +23,7 @@ export const Header = styled.div`
 export const SearchInput = styled.input`
   border: none;
   outline: none;
-  width: 240px;
+  width: 15rem;
   font-family: Montserrat;
   &&::-webkit-input-placeholder {
     color: #c3c3c3;
@@ -48,5 +48,5 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchIcon = styled.img`
-  margin: 0 14px;
+  margin: 0 0.875rem;
 `;
