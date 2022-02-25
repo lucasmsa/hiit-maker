@@ -5,18 +5,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './App';
 import reducer from './store/reducer';
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store: Store<TrainingState, TrainingAction>
-  & {
-    dispatch: DispatchType
-} = createStore(
-      reducer,
-      composeWithDevTools(applyMiddleware(thunk)));
+const store: Store<TrainingState, TrainingAction> & {
+  dispatch: DispatchType;
+} = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );

@@ -1,7 +1,7 @@
-import React from 'react'
-import LeftBar from '../../components/Home/LeftBar'
-import SettingsMenu from '../../components/Settings/SettingsMenu'
-import { Container } from './styles'
+import React from 'react';
+import LeftBar from '../../components/Home/LeftBar';
+import SettingsMenu from '../../components/Settings/SettingsMenu';
+import { Container } from './styles';
 
 const Settings = () => {
   return (
@@ -9,7 +9,7 @@ const Settings = () => {
       <LeftBar isHomePage={false}></LeftBar>
       <SettingsMenu />
     </Container>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

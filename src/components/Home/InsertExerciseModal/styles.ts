@@ -1,41 +1,40 @@
-import styled from "styled-components"
-import { DarkGray, LightGray, Rage } from "../../../styles/global"
+import styled from 'styled-components';
+import { DarkGray, LightGray, Rage } from '../../../styles/global';
 
 export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 3;
   position: relative;
-`
+`;
 
 export const ModalTopContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 export const ModalContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 30px;
-`
+`;
 
 export const ModalExerciseImage = styled.img`
   display: block;
-  max-width:120px;
-  max-height:100px;
+  max-width: 120px;
+  max-height: 100px;
   width: auto;
   height: auto;
   border-radius: 10px;
-`
+`;
 
 export const ModalTextAndButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 20px;
-`
-
+`;
 
 export const CancelButton = styled.div`
   display: flex;
@@ -50,7 +49,7 @@ export const CancelButton = styled.div`
   }
   border-radius: 10px;
   cursor: pointer;
-`
+`;
 
 export const ConfirmButton = styled.div`
   display: flex;
@@ -66,7 +65,7 @@ export const ConfirmButton = styled.div`
   }
   border-radius: 10px;
   cursor: pointer;
-`
+`;
 
 export const CancelButtonText = styled.h4`
   font-family: Montserrat;
@@ -76,7 +75,7 @@ export const CancelButtonText = styled.h4`
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${DarkGray};
-`
+`;
 
 export const ConfirmButtonText = styled.h4`
   font-family: Montserrat;
@@ -86,7 +85,7 @@ export const ConfirmButtonText = styled.h4`
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${LightGray};
-`
+`;
 
 export const ExerciseSelectionText = styled.h1`
   font-family: Montserrat;
@@ -96,7 +95,7 @@ export const ExerciseSelectionText = styled.h1`
   line-height: 29px;
   letter-spacing: 0.02em;
   color: ${DarkGray};
-`
+`;
 
 export const ExerciseDescriptionText = styled.h3`
   font-family: Montserrat;
@@ -107,7 +106,7 @@ export const ExerciseDescriptionText = styled.h3`
   letter-spacing: 0.02em;
   color: ${DarkGray};
   margin-bottom: 16px;
-`
+`;
 
 export const ConfirmExerciseBoldText = styled.h2`
   font-family: Montserrat;
@@ -118,10 +117,10 @@ export const ConfirmExerciseBoldText = styled.h2`
   letter-spacing: 0.02em;
   color: ${DarkGray};
   margin-bottom: 32px;
-`
+`;
 
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-`
+`;

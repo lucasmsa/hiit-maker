@@ -1,15 +1,15 @@
-import React from 'react'
-import { ReactComponent as RedCircleToastIcon } from '../../assets/images/midSection/redCircle.svg'
-import { ReactComponent as CannotBuildWorkoutIcon } from '../../assets/images/midSection/cannotBuildWorkout.svg'
+import React from 'react';
+import { ReactComponent as RedCircleToastIcon } from '../../assets/images/midSection/redCircle.svg';
+import { ReactComponent as CannotBuildWorkoutIcon } from '../../assets/images/midSection/cannotBuildWorkout.svg';
 import {
   ExercisesLimitToastHeaderText,
   ExercisesLimitToastContainer,
   ExercisesLimitToastBottomText
-} from './styles'
+} from './styles';
 
 interface ErrorToastProps {
-  message: string,
-  cannotBuildWorkout?: boolean
+  message: string;
+  cannotBuildWorkout?: boolean;
 }
 
 const ErrorToast = ({ message, cannotBuildWorkout }: ErrorToastProps) => {
@@ -17,9 +17,9 @@ const ErrorToast = ({ message, cannotBuildWorkout }: ErrorToastProps) => {
     <ExercisesLimitToastContainer>
       <ExercisesLimitToastHeaderText>This action is not possible</ExercisesLimitToastHeaderText>
       {cannotBuildWorkout! ? <CannotBuildWorkoutIcon /> : <RedCircleToastIcon />}
-      <ExercisesLimitToastBottomText>{ message }</ExercisesLimitToastBottomText>
+      <ExercisesLimitToastBottomText>{message}</ExercisesLimitToastBottomText>
     </ExercisesLimitToastContainer>
-  )
-}
+  );
+};
 
-export default ErrorToast
+export default ErrorToast;

@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { TransparentDarkBlack, TransparentLightBlack } from "../../styles/global";
+import styled from 'styled-components';
+import { TransparentDarkBlack, TransparentLightBlack } from '../../styles/global';
 
 export const ExercisesLimitToastContainer = styled.div`
   padding: 16px;
@@ -10,7 +10,7 @@ export const ExercisesLimitToastContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const ExercisesLimitToastHeaderText = styled.h1`
   font-family: Montserrat;

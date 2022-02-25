@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
-import { Container, GithubIcon, GithubIconLink, Header, IconsContainer, InformationIcon, SettingsIcon } from './styles'
-import { ReactComponent as Branding } from '../../../assets/images/LeftBar/branding.svg'
-import { Link } from "react-router-dom";
-import AvailableExercises from '../AvailableExercises'
-import Search from '../Search'
+import React, { useState } from 'react';
+import {
+  Container,
+  GithubIcon,
+  GithubIconLink,
+  Header,
+  IconsContainer,
+  InformationIcon,
+  SettingsIcon
+} from './styles';
+import { ReactComponent as Branding } from '../../../assets/images/LeftBar/branding.svg';
+import { Link } from 'react-router-dom';
+import AvailableExercises from '../AvailableExercises';
+import Search from '../Search';
 import { GITHUB_LINK } from '../../../config/contants';
 
 interface LeftBarProps {
@@ -11,7 +19,7 @@ interface LeftBarProps {
 }
 
 const LeftBar = ({ isHomePage }: LeftBarProps) => {
-  const [searchExercise, setExerciseSearch] = useState<string>('')
+  const [searchExercise, setExerciseSearch] = useState<string>('');
   return (
     <Container>
       <Header>
@@ -22,21 +30,20 @@ const LeftBar = ({ isHomePage }: LeftBarProps) => {
           <GithubIcon />
         </GithubIconLink>
         <InformationIcon />
-        <Link to='/settings'>
+        <Link to="/settings">
           <SettingsIcon />
         </Link>
       </IconsContainer>
-      {isHomePage ? 
+      {isHomePage ? (
         <>
-          <Search
-            changeExerciseSearch={(value: string) => setExerciseSearch(value)}
-          />
-          <AvailableExercises
-            searchExercise={searchExercise}
-          />
-        </> : <></>}
+          <Search changeExerciseSearch={(value: string) => setExerciseSearch(value)} />
+          <AvailableExercises searchExercise={searchExercise} />
+        </>
+      ) : (
+        <></>
+      )}
     </Container>
-  )
-}
+  );
+};
 
-export default LeftBar
+export default LeftBar;

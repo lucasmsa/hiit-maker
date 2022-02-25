@@ -1,10 +1,10 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import { ScrollMenu } from 'react-horizontal-scrolling-menu';
-import { ReactComponent as LeftArrow } from '../../../assets/images/LeftBar/icons/left_arrow.svg'
+import { ReactComponent as LeftArrow } from '../../../assets/images/LeftBar/icons/left_arrow.svg';
 import { DarkGray, LightGray } from '../../../styles/global';
 
 interface TooltipContainerProps {
-  selectedTooltip: boolean
+  selectedTooltip: boolean;
 }
 
 export const Container = styled.div`
@@ -13,22 +13,22 @@ export const Container = styled.div`
   justify-content: center;
   margin-left: -24px;
   overflow: hidden;
-`
+`;
 
 export const NotActiveItemContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 12px;
-`
+`;
 
 export const ExerciseWithTooltipContainer = styled.div`
   margin: 0;
   padding: 0;
-`
+`;
 
 export const Item = styled.img`
-  userSelect: none;
+  userselect: none;
   cursor: pointer;
   border: none;
   user-drag: none;
@@ -36,23 +36,22 @@ export const Item = styled.img`
   width: 84px;
   height: 60px;
   border-radius: 12px;
-`
+`;
 
-export const HorizontalScroll = styled(ScrollMenu)`
-`
+export const HorizontalScroll = styled(ScrollMenu)``;
 
 export const ShadowLeftArrow = styled(LeftArrow)`
   cursor: pointer;
-  -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-`
+  -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.4));
+`;
 
 export const ShadowRightArrow = styled(LeftArrow)`
   cursor: pointer;
   transform: scaleX(-1);
-  -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, .4));
-`
+  -webkit-filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.4));
+`;
 
 export const ExerciseItemContainer = styled.div`
   display: flex;
@@ -61,12 +60,15 @@ export const ExerciseItemContainer = styled.div`
   justify-content: center;
   height: 100px;
   width: 108px;
-`
+`;
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`
-  transition: ${props => (props.selectedTooltip ? `width 0.25s, height 0.25s, opacity 0.25s 0.25s;` : `width 0.25s 0.25s, height 0.25s 0.25s, opacity 0.25s;`)}
-  opacity: ${props => (props.selectedTooltip ? 1 : 0)}
-`
+  transition: ${(props) =>
+    props.selectedTooltip
+      ? `width 0.25s, height 0.25s, opacity 0.25s 0.25s;`
+      : `width 0.25s 0.25s, height 0.25s 0.25s, opacity 0.25s;`}
+  opacity: ${(props) => (props.selectedTooltip ? 1 : 0)}
+`;
 
 export const Tooltip = styled.div`
   position: absolute;
@@ -78,7 +80,7 @@ export const Tooltip = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-`
+`;
 
 export const TooltipText = styled.h3`
   font-family: Roboto;
@@ -86,19 +88,19 @@ export const TooltipText = styled.h3`
   font-weight: normal;
   font-size: 8px;
   color: ${DarkGray};
-`
+`;
 
 export const BalloonTip = styled.div`
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 20px solid ${LightGray};
-`
+`;
 
 export const ArrowButton = styled.button`
   cursor: pointer;
-  display: flex; 
+  display: flex;
   min-width: 20px;
   height: 120px;
   flex-direction: column;
@@ -112,4 +114,4 @@ export const ArrowButton = styled.button`
   right: 1%;
   user-select: none;
   align-items: center;
-`
+`;

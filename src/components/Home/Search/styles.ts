@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { TransparentBlackShadow, White } from '../../../styles/global'
+import styled from 'styled-components';
+import { TransparentBlackShadow, White } from '../../../styles/global';
 
 export const Container = styled.div`
   display: flex;
@@ -12,13 +12,13 @@ export const Container = styled.div`
   border-radius: 10px;
   height: 48px;
   padding-right: 18px;
-`
+`;
 
 export const Header = styled.div`
   padding: 0;
   display: flex;
   flex-direction: row;
-`
+`;
 
 export const SearchInput = styled.input`
   border: none;
@@ -26,27 +26,27 @@ export const SearchInput = styled.input`
   width: 240px;
   font-family: Montserrat;
   &&::-webkit-input-placeholder {
-    color: #C3C3C3;
+    color: #c3c3c3;
     font-weight: 300;
   }
-  
+
   &&::-moz-placeholder {
-    color: #C3C3C3;
+    color: #c3c3c3;
     font-weight: 300;
   }
-  
+
   &&:-ms-input-placeholder {
-    color: #C3C3C3;
+    color: #c3c3c3;
     font-weight: 300;
   }
-  
+
   &&:-moz-placeholder {
     /* Firefox 18- */
-    color: #C3C3C3;
+    color: #c3c3c3;
     font-weight: 300;
   }
-`
+`;
 
 export const SearchIcon = styled.img`
   margin: 0 14px;
-`
+`;

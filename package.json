@@ -43,7 +43,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -66,7 +69,14 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
     "babel-plugin-inline-react-svg": "^2.0.1",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.0",
+    "prettier": "^2.5.1",
     "redux-devtools-extension": "^2.13.9"
   }
 }

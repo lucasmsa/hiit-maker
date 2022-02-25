@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { VisibilityContext } from "react-horizontal-scrolling-menu";
+import React, { useContext, useEffect, useState } from 'react';
+import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import {
   ArrowButton,
   BalloonTip,
@@ -13,7 +13,7 @@ import {
   ShadowRightArrow,
   Tooltip,
   TooltipContainer,
-  TooltipText,
+  TooltipText
 } from './styles';
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
@@ -47,12 +47,12 @@ const preventDefault = (ev: Event) => {
 };
 
 const enableBodyScroll = () => {
-  document && document.removeEventListener("wheel", preventDefault, false);
+  document && document.removeEventListener('wheel', preventDefault, false);
 };
 
 const disableBodyScroll = () => {
   document &&
-    document.addEventListener("wheel", preventDefault, {
+    document.addEventListener('wheel', preventDefault, {
       passive: false
     });
 };
@@ -72,18 +72,18 @@ function usePreventBodyScroll() {
 }
 
 function onWheel(apiObj: scrollVisibilityApiType, ev: React.WheelEvent): void {
-    const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
-  
-    if (isThouchpad) {
-      ev.stopPropagation();
-      return;
-    }
-  
-    if (ev.deltaY < 0) {
-      apiObj.scrollNext();
-    } else if (ev.deltaY > 0) {
-      apiObj.scrollPrev();
-    }
+  const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
+
+  if (isThouchpad) {
+    ev.stopPropagation();
+    return;
+  }
+
+  if (ev.deltaY < 0) {
+    apiObj.scrollNext();
+  } else if (ev.deltaY > 0) {
+    apiObj.scrollPrev();
+  }
 }
 
 function HorizontalScrollingImages({
@@ -94,59 +94,38 @@ function HorizontalScrollingImages({
   const { disableScroll, enableScroll } = usePreventBodyScroll();
 
   return (
-    <Container
-      onMouseEnter={disableScroll}
-      onMouseLeave={enableScroll}
-    >
-        <HorizontalScroll
-          LeftArrow={LeftArrow}
-          RightArrow={RightArrow}
-          onWheel={onWheel}
-        >
-          {list.map(({ name, image }) => (
-            <Card
-              itemId={name} 
-              key={name}
-              name={name}
-              image={image}
-              onClick={() => {
-                setSelectedExercise(name)
-              }}
-              selected={selectedExercise}
-            />)
-          )}
+    <Container onMouseEnter={disableScroll} onMouseLeave={enableScroll}>
+      <HorizontalScroll LeftArrow={LeftArrow} RightArrow={RightArrow} onWheel={onWheel}>
+        {list.map(({ name, image }) => (
+          <Card
+            itemId={name}
+            key={name}
+            name={name}
+            image={image}
+            onClick={() => {
+              setSelectedExercise(name);
+            }}
+            selected={selectedExercise}
+          />
+        ))}
       </HorizontalScroll>
     </Container>
   );
 }
 
-function Arrow({
-  children,
-  disabled,
-  onClick
-}: ArrowProps) {
+function Arrow({ children, disabled, onClick }: ArrowProps) {
   return (
-    <ArrowButton
-      disabled={disabled}
-      onClick={onClick}
-      style={{ opacity: disabled ? "0" : "1" }}
-    >
+    <ArrowButton disabled={disabled} onClick={onClick} style={{ opacity: disabled ? '0' : '1' }}>
       {children}
     </ArrowButton>
   );
 }
 
 export function LeftArrow() {
-  const {
-    isFirstItemVisible,
-    scrollPrev,
-    visibleItemsWithoutSeparators,
-    initComplete
-  } = useContext(VisibilityContext);
+  const { isFirstItemVisible, scrollPrev, visibleItemsWithoutSeparators, initComplete } =
+    useContext(VisibilityContext);
 
-  const [disabled, setDisabled] = useState(
-    !initComplete || (initComplete && isFirstItemVisible)
-  );
+  const [disabled, setDisabled] = useState(!initComplete || (initComplete && isFirstItemVisible));
   useEffect(() => {
     if (visibleItemsWithoutSeparators.length) {
       setDisabled(isFirstItemVisible);
@@ -161,11 +140,8 @@ export function LeftArrow() {
 }
 
 export function RightArrow() {
-  const {
-    isLastItemVisible,
-    scrollNext,
-    visibleItemsWithoutSeparators
-  } = useContext(VisibilityContext);
+  const { isLastItemVisible, scrollNext, visibleItemsWithoutSeparators } =
+    useContext(VisibilityContext);
 
   const [disabled, setDisabled] = useState(
     !visibleItemsWithoutSeparators.length && isLastItemVisible
@@ -184,7 +160,7 @@ export function RightArrow() {
 }
 
 const SingleExercise = ({ id, name, image, selectedItem, onClick }: SingleExerciseProps) => {
-  const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
+  const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false);
 
   return (
     <ExerciseItemContainer
@@ -192,9 +168,7 @@ const SingleExercise = ({ id, name, image, selectedItem, onClick }: SingleExerci
       onMouseLeave={() => setSelectedTooltip(false)}
     >
       <ExerciseWithTooltipContainer>
-        <TooltipContainer
-          selectedTooltip={selectedTooltip}
-        >
+        <TooltipContainer selectedTooltip={selectedTooltip}>
           <Tooltip>
             <TooltipText>{name}</TooltipText>
           </Tooltip>
@@ -208,9 +182,9 @@ const SingleExercise = ({ id, name, image, selectedItem, onClick }: SingleExerci
           }}
           src={image}
         />
-      </NotActiveItemContainer> 
+      </NotActiveItemContainer>
     </ExerciseItemContainer>
-  )
+  );
 };
 
 function Card({
@@ -220,18 +194,18 @@ function Card({
   image,
   name
 }: {
-  itemId: string,
-  onClick: any,
-  selected: any,
-  name: any,
-  image: string,
+  itemId: string;
+  onClick: any;
+  selected: any;
+  name: any;
+  image: string;
 }) {
   return (
     <SingleExercise
       key={name}
-      id={name} 
-      image={image} 
-      name={name} 
+      id={name}
+      image={image}
+      name={name}
       selectedItem={selected}
       onClick={onClick}
     />

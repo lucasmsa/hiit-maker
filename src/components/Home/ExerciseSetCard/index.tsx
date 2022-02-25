@@ -1,11 +1,11 @@
-import React, { Dispatch, useState } from 'react'
+import React, { Dispatch, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg'
-import { 
-  removeExercise, 
-  removeSet, 
-  updateCurrentSet, 
-  updateExerciseRestTime, 
+import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg';
+import {
+  removeExercise,
+  removeSet,
+  updateCurrentSet,
+  updateExerciseRestTime,
   updateExerciseTrainTime
 } from '../../../store/actionCreators';
 import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
@@ -21,7 +21,7 @@ import {
   TextAndDeleteContainer,
   TrainRestContainer,
   TrainContainer
-} from './styles'
+} from './styles';
 
 interface ExerciseSetCardProps {
   set: number;
@@ -32,19 +32,19 @@ interface ExerciseSetCardProps {
   trainTime: number;
 }
 
-export default function ExerciseSetCard({ 
-    name, 
-    index,
-    set,
-    image, 
-    restTime, 
-    trainTime, 
+export default function ExerciseSetCard({
+  name,
+  index,
+  set,
+  image,
+  restTime,
+  trainTime
 }: ExerciseSetCardProps) {
   const dispatch: Dispatch<any> = useDispatch();
   const [restTimeInput, setRestTimeInput] = useState(restTime);
   const [trainTimeInput, setTrainTimeInput] = useState(trainTime);
   const trainSetLoops = useSelector(getTrainSetLoops);
-  const currentTrainingSetExercises = useSelector(getTrainingSetExercises)
+  const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
   
   return (
     <Container>
@@ -57,7 +57,7 @@ export default function ExerciseSetCard({
             marginRight: '24px'
           }}
           src={image}
-          alt='sample-exercise-img'
+          alt="sample-exercise-img"
         />
         <ExerciseNameTrainRestContainer>
           <TextAndDeleteContainer>
@@ -65,12 +65,11 @@ export default function ExerciseSetCard({
             <DeleteIcon
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                dispatch(removeExercise(index, set))
-                if ((currentTrainingSetExercises.length === 1 && trainSetLoops.length > 1)
-                ) {
-                  dispatch(removeSet(set))
+                dispatch(removeExercise(index, set));
+                if (currentTrainingSetExercises.length === 1 && trainSetLoops.length > 1) {
+                  dispatch(removeSet(set));
                   if (set === 0) {
-                    dispatch(updateCurrentSet(set))
+                    dispatch(updateCurrentSet(set));
                   }
                 }
               }}
@@ -85,12 +84,12 @@ export default function ExerciseSetCard({
                 value={trainTimeInput}
                 onChange={(event: any) => {
                   if (isNumeric(event.target.value)) {
-                    const updatedValue = Number(event.target.value)
+                    const updatedValue = Number(event.target.value);
                     setTrainTimeInput(updatedValue);
-                    dispatch(updateExerciseTrainTime(index, set, updatedValue))
+                    dispatch(updateExerciseTrainTime(index, set, updatedValue));
                   } else if (event.target.value === '') {
                     setTrainTimeInput(0);
-                    dispatch(updateExerciseTrainTime(index, set, 0))
+                    dispatch(updateExerciseTrainTime(index, set, 0));
                   }
                 }}
               />
@@ -101,12 +100,12 @@ export default function ExerciseSetCard({
                 value={restTimeInput}
                 onChange={(event: any) => {
                   if (isNumeric(event.target.value)) {
-                    const updatedValue = Number(event.target.value)
+                    const updatedValue = Number(event.target.value);
                     setRestTimeInput(updatedValue);
-                    dispatch(updateExerciseRestTime(index, set, updatedValue))
+                    dispatch(updateExerciseRestTime(index, set, updatedValue));
                   } else if (event.target.value === '') {
                     setRestTimeInput(0);
-                    dispatch(updateExerciseRestTime(index, set, 0))
+                    dispatch(updateExerciseRestTime(index, set, 0));
                   }
                 }}
               />
@@ -115,5 +114,5 @@ export default function ExerciseSetCard({
         </ExerciseNameTrainRestContainer>
       </ContentsContainer>
     </Container>
-  )
+  );
 }

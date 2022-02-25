@@ -1,9 +1,7 @@
-import React from 'react'
-import LeftBarWorkout from '../../components/Workout/LeftBarWorkout'
-import SetsProgress from '../../components/Workout/SetsProgress'
-import {
-  Container
-} from './styles'
+import React from 'react';
+import LeftBarWorkout from '../../components/Workout/LeftBarWorkout';
+import SetsProgress from '../../components/Workout/SetsProgress';
+import { Container } from './styles';
 
 const Workout = () => {
   return (
@@ -11,7 +9,7 @@ const Workout = () => {
       <LeftBarWorkout />
       <SetsProgress />
     </Container>
-  )
-}
+  );
+};
 
-export default Workout
+export default Workout;

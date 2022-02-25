@@ -1,5 +1,5 @@
-import styled, { keyframes } from 'styled-components'
-import { ReactComponent as Arrow } from '../../../assets/images/WorkoutScreen/arrow-collapse.svg'
+import styled, { keyframes } from 'styled-components';
+import { ReactComponent as Arrow } from '../../../assets/images/WorkoutScreen/arrow-collapse.svg';
 import { fadeInLeft, fadeIn } from 'react-animations';
 import { Rage, White } from '../../../styles/global';
 
@@ -9,7 +9,7 @@ const collapsedContainerAnimation = keyframes`${fadeIn}`;
 
 export const CollapsedContainerWrapper = styled.div`
   width: 325px;
-`
+`;
 
 export const WorkoutContainer = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ export const WorkoutContainer = styled.div`
   width: 325px;
   height: 100vh;
   padding-top: 42px;
-`
+`;
 
 export const CollapsedContainer = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const CollapsedContainer = styled.div`
   height: 100vh;
   padding-top: 42px;
   border-radius: 0px 20px 20px 0px;
-`
+`;
 
 export const CollapsedArrowContainer = styled.div`
   display: flex;
@@ -51,33 +51,32 @@ export const CollapsedArrowContainer = styled.div`
   margin-right: -36px;
   cursor: pointer;
   align-self: flex-end;
-`
+`;
 
-export const CollapsedArrowRight = styled(Arrow)`
-`
+export const CollapsedArrowRight = styled(Arrow)``;
 
 export const CollapsedArrowLeft = styled(Arrow)`
   transform: scaleX(-1);
-`
+`;
 
 export const Header = styled.div`
   padding: 0;
   display: flex;
   flex-direction: row;
-`
+`;
 
 export const HeaderWorkout = styled.div`
   padding: 0;
   display: flex;
   flex-direction: row;
   margin-bottom: -42px;
-`
+`;
 
 export const Dumbell = styled.img`
   margin: 0;
   width: 32px;
   height: 32px;
-`
+`;
 
 export const HeaderLeftText = styled.h1`
   color: ${White};
@@ -88,7 +87,7 @@ export const HeaderLeftText = styled.h1`
   font-size: 36px;
   line-height: 43px;
   letter-spacing: 0.02em;
-`
+`;
 
 export const IconsContainer = styled.div`
   margin-top: 28px;
@@ -97,4 +96,4 @@ export const IconsContainer = styled.div`
   flex-direction: row;
   width: 100px;
   justify-content: space-evenly;
-`
+`;

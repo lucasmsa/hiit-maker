@@ -1,7 +1,7 @@
-import React from "react";
-import { Input, InputContainer, InputSurroundings, SecondsText } from "./styles";
+import React from 'react';
+import { Input, InputContainer, InputSurroundings, SecondsText } from './styles';
 
-interface TimeInputProps { 
+interface TimeInputProps {
   value: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -21,7 +21,7 @@ const TimeInput = ({ value, onChange }: TimeInputProps) => {
       </InputSurroundings>
       <SecondsText>seg</SecondsText>
     </InputContainer>
-  )
-}
+  );
+};
 
 export default TimeInput;

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { DarkGray, Rage, TransparentDarkBlack, White } from '../../../styles/global'
+import styled from 'styled-components';
+import { DarkGray, Rage, TransparentDarkBlack, White } from '../../../styles/global';
 
 export const Container = styled.div`
   display: flex;
@@ -10,22 +10,22 @@ export const Container = styled.div`
   height: 100vh;
   padding-top: 42px;
   overflow-x: hidden;
-`
+`;
 export const TargetMusclesContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-`
+`;
 
 export const MuscleGroupImagesContainer = styled.div`
   margin-top: 42px;
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   width: 60%;
   justify-content: space-around;
   align-self: center;
-`
+`;
 
 export const TotalTimeContainer = styled.div`
   margin-top: 108px;
@@ -33,23 +33,23 @@ export const TotalTimeContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-`
+`;
 
 export const FrontContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const BackContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 export const TotalTimeHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const HeaderTexts = styled.h2`
   font-family: Montserrat;
@@ -61,7 +61,7 @@ export const HeaderTexts = styled.h2`
   align-items: center;
   margin-left: 12px;
   color: ${White};
-`
+`;
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -71,14 +71,14 @@ export const HeaderContainer = styled.div`
   height: 46px;
   margin-right: 32px;
   padding-left: 48px;
-`
+`;
 
 export const InformationContianer = styled.div`
   display: flex;
   flex-direction: row;
   width: 130%;
   margin-right: 42px;
-`
+`;
 
 export const LemmeSee = styled.div`
   position: absolute;
@@ -86,7 +86,7 @@ export const LemmeSee = styled.div`
   height: 0;
   border-bottom: 46px solid white;
   border-right: 24px solid transparent;
-`
+`;
 
 export const ClockText = styled.h2`
   margin-left: 14px;
@@ -97,11 +97,11 @@ export const ClockText = styled.h2`
   line-height: 29px;
   letter-spacing: 0.02em;
   color: ${DarkGray};
-`
+`;
 
 export const TrainingDurationContainer = styled.div`
   align-self: center;
-`
+`;
 
 export const TrainingDurationText = styled.h3`
   font-family: Montserrat;
@@ -111,7 +111,7 @@ export const TrainingDurationText = styled.h3`
   font-size: 24px;
   letter-spacing: 0.02em;
   color: ${Rage};
-`
+`;
 
 export const StartTrainingContainer = styled.div`
   margin-top: 80px;
@@ -119,20 +119,20 @@ export const StartTrainingContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-`
+`;
 
 export const PlayButton = styled.div`
   cursor: pointer;
   width: 100px;
   height: 100px;
-  background: radial-gradient( rgba(238, 55, 63, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
+  background: radial-gradient(rgba(238, 55, 63, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
   border-radius: 50%;
   position: relative;
   display: block;
   margin: 56px auto 0 auto;
   box-shadow: 0px 0px 25px 3px rgba(245, 135, 140, 0.8);
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 50%;
     top: 50%;
@@ -148,11 +148,11 @@ export const PlayButton = styled.div`
     -webkit-transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
     transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
-`
+`;
 
-export const PlayButtonHovered = styled(PlayButton)`  
+export const PlayButtonHovered = styled(PlayButton)`
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     width: 150%;
     height: 150%;
@@ -168,7 +168,7 @@ export const PlayButtonHovered = styled(PlayButton)`
     animation-timing-function: steps;
     opacity: 1;
     border-radius: 50%;
-    border: 5px solid rgba(255, 255, 255, .75);
+    border: 5px solid rgba(255, 255, 255, 0.75);
     top: -30%;
     left: -30%;
     background: rgba(198, 16, 0, 0);
@@ -179,14 +179,14 @@ export const PlayButtonHovered = styled(PlayButton)`
       -webkit-transform: scale(0.6);
       transform: scale(0.6);
       opacity: 1;
-      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75), 0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
+        0px 0px 25px 10px rgba(255, 255, 255, 0.75);
     }
     100% {
       -webkit-transform: scale(1);
       transform: scale(1);
       opacity: 0;
       box-shadow: none;
-
     }
   }
 
@@ -195,14 +195,14 @@ export const PlayButtonHovered = styled(PlayButton)`
       -webkit-transform: scale(0.6);
       transform: scale(0.6);
       opacity: 1;
-      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75), 0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+      box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
+        0px 0px 25px 10px rgba(255, 255, 255, 0.75);
     }
     100% {
       -webkit-transform: scale(1, 1);
       transform: scale(1);
       opacity: 0;
       box-shadow: none;
-
     }
   }
-`
+`;

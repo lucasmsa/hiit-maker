@@ -1,12 +1,12 @@
-import React from 'react'
-import { Container, SearchInput } from './styles'
-import { ReactComponent as SearchIcon } from '../../../assets/images/LeftBar/icons/search_icon.svg'
+import React from 'react';
+import { Container, SearchInput } from './styles';
+import { ReactComponent as SearchIcon } from '../../../assets/images/LeftBar/icons/search_icon.svg';
 
 interface SearchProps {
-  changeExerciseSearch: (value: string) => void
+  changeExerciseSearch: (value: string) => void;
 }
 
-const Search = ({ changeExerciseSearch } : SearchProps) => {
+const Search = ({ changeExerciseSearch }: SearchProps) => {
   return (
     <Container>
       <SearchIcon style={{ marginLeft: '10px', marginRight: '12px' }} />
@@ -17,7 +17,7 @@ const Search = ({ changeExerciseSearch } : SearchProps) => {
         onChange={(e) => changeExerciseSearch(e.target.value)}
       />
     </Container>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

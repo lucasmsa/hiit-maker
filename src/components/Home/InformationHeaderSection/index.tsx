@@ -1,5 +1,5 @@
-import React from 'react'
-import { InformationContainer, HeaderContainer, HeaderTexts, LeftTriangle } from './styles'
+import React from 'react';
+import { InformationContainer, HeaderContainer, HeaderTexts, LeftTriangle } from './styles';
 
 interface InformationHeaderSectionProps {
   icon: any;
@@ -7,7 +7,11 @@ interface InformationHeaderSectionProps {
   backgroundColor: 'BLACK' | 'RED';
 }
 
-const InformationHeaderSection = ({icon, title, backgroundColor}: InformationHeaderSectionProps) => {
+const InformationHeaderSection = ({
+  icon,
+  title,
+  backgroundColor
+}: InformationHeaderSectionProps) => {
   return (
     <InformationContainer>
       <LeftTriangle />
@@ -16,7 +20,7 @@ const InformationHeaderSection = ({icon, title, backgroundColor}: InformationHea
         <HeaderTexts>{title}</HeaderTexts>
       </HeaderContainer>
     </InformationContainer>
-  )
-}
+  );
+};
 
-export default InformationHeaderSection
+export default InformationHeaderSection;
