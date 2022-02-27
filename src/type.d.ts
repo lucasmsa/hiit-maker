@@ -24,7 +24,15 @@ interface TrainSetLoop {
   setRestTime: number;
 }
 
+interface TrainingDefaultValues {
+  exerciseRestTime: number;
+  exerciseTrainTime: number;
+  finalRestTime: number;
+  setRepetitions: number;
+}
+
 type TrainingState = {
+  trainingDefaultValues: TrainingDefaultValues;
   currentSet: number;
   trainSetLoops: TrainSetLoop[];
   afflictedAreas: IAfflictedAreasCounter;

@@ -9,7 +9,7 @@ import {
 import { ReactComponent as SettingsHeader } from '../../../assets/images/SettingsScreen/settings-header-icon.svg';
 
 export const Container = styled.div`
-  margin-left: 16%;
+  margin-left: 5%;
   margin-top: 10%;
   height: 77.5vh;
   width: 41vw;
@@ -50,29 +50,9 @@ export const FooterContainer = styled.div`
   width: 100%;
 `;
 
-export const SetRestTest = styled.h2`
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
-  user-select: none;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 0.875rem;
-  line-height: 1.0625rem;
-  letter-spacing: 0.02em;
-  color: ${TransparentDarkBlack};
-`;
-
-export const SetRestContainer = styled.div`
+export const SaveChangesContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
-`;
-
-export const SetCounter = styled.div`
-  display: flex;
+  cursor: pointer;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -81,26 +61,6 @@ export const SetCounter = styled.div`
   width: 100%;
   border-radius: 1.25rem;
   background: ${TransparentDarkBlack};
-`;
-
-export const CounterText = styled.h2`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.0625rem;
-  letter-spacing: 0.02em;
-  user-select: none;
-  color: ${LightGray};
-`;
-
-export const OperationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  height: 100%;
-  width: 1.875rem;
 `;
 
 export const ScrollableExercisesContainer = styled.div`
@@ -117,19 +77,6 @@ export const ScrollableExercisesContainer = styled.div`
     opacity: 0.8;
     border-radius: 1.25rem;
   }
-`;
-
-export const ExercisesLimitText = styled.h2`
-  align-self: center;
-  font-family: Montserrat;
-  font-style: normal;
-  user-select: none;
-  font-weight: normal;
-  font-size: 1.5rem;
-  line-height: 1.8125rem;
-  letter-spacing: 0.02em;
-  color: ${TransparentDarkBlack};
-  margin-bottom: 1.25rem;
 `;
 
 export const ExercisesLimitCountText = styled.span`
@@ -166,4 +113,27 @@ export const SettingsConfigurationOptionText = styled.h3`
 
 export const SettingsConfigurationOptionHighlightText = styled.span`
   color: ${Rage};
+`;
+
+export const SaveChangesText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.0625rem;
+  letter-spacing: 0.02em;
+  color: ${LightGray};
+`;
+
+export const RestoreSettingsText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  color: ${Rage};
+  text-decoration: underline;
+  align-self: center;
 `;

@@ -120,3 +120,10 @@ export const ExercisesLimitText = styled.h2`
 export const ExercisesLimitCountText = styled.span`
   color: ${Rage};
 `;
+
+export const CountTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 10rem;
+`;

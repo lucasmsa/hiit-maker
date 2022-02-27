@@ -8,6 +8,7 @@ export const getTotalTrainingTime = (state: TrainingState) => {
 };
 
 export const getAfflictedBodyParts = (state: TrainingState) => {
+  console.log('here, at afflicted body parts ', state);
   return state.afflictedAreas;
 };
 

@@ -11,7 +11,8 @@ import {
   ExercisesLimitText,
   OperationContainer,
   ExercisesLimitCountText,
-  ScrollableExercisesContainer
+  ScrollableExercisesContainer,
+  CountTextContainer
 } from './styles';
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ExerciseSetCard from '../ExerciseSetCard';
@@ -133,20 +134,20 @@ const MountWorkout = ({ id }: WorkoutProps) => {
         <SetCounter>
           <OperationContainer
             onClick={() => handleExerciseCounter('plus')}
-            style={{ marginRight: '24px' }}
-          >
+            style={{ marginRight: '24px' }}>
             <PlusIconCounter style={{ cursor: 'pointer' }} />
           </OperationContainer>
-          <CounterText>
-            {currentSetExercises?.length ? currentSetLoopQuantity : 0}{' '}
-            {!currentSetExercises?.length || currentSetLoopQuantity !== 1
-              ? 'SET REPETITIONS'
-              : 'SET REPETITION '}
-          </CounterText>
+          <CountTextContainer>
+            <CounterText>
+              {currentSetExercises?.length ? currentSetLoopQuantity : 0}{' '}
+              {!currentSetExercises?.length || currentSetLoopQuantity !== 1
+                ? 'SET REPETITIONS'
+                : 'SET REPETITION '}
+            </CounterText>
+          </CountTextContainer>
           <OperationContainer
             onClick={() => handleExerciseCounter('minus')}
-            style={{ marginLeft: '24px' }}
-          >
+            style={{ marginLeft: '24px' }}>
             <MinusIconCounter style={{ cursor: 'pointer' }} />
           </OperationContainer>
         </SetCounter>
