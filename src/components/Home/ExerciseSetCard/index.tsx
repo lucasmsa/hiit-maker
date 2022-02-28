@@ -45,7 +45,7 @@ export default function ExerciseSetCard({
   const [trainTimeInput, setTrainTimeInput] = useState(trainTime);
   const trainSetLoops = useSelector(getTrainSetLoops);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
-  
+
   return (
     <Container>
       <ContentsContainer>
@@ -87,9 +87,9 @@ export default function ExerciseSetCard({
                     const updatedValue = Number(event.target.value);
                     setTrainTimeInput(updatedValue);
                     dispatch(updateExerciseTrainTime(index, set, updatedValue));
-                  } else if (event.target.value === '') {
-                    setTrainTimeInput(0);
-                    dispatch(updateExerciseTrainTime(index, set, 0));
+                  } else if (event.target.value === '' || event.target.value < 6) {
+                    setTrainTimeInput(5);
+                    dispatch(updateExerciseTrainTime(index, set, 5));
                   }
                 }}
               />

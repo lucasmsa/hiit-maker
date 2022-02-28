@@ -15,37 +15,45 @@ import {
   RestoreSettingsText
 } from './styles';
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
-import {
-  getCurrentSet,
-  getSetRestTime,
-  getTrainingDefaultValues,
-  getTrainingSetExercises,
-  getTrainingSetLoopQuantity
-} from '../../../store/selectors';
-import { updateCurrentSetLoopQuantity } from '../../../store/actionCreators';
-import toast from 'react-hot-toast';
-import ErrorToast from '../../../toasts/ErrorToast';
+import { getSetRestTime, getTrainingDefaultValues } from '../../../store/selectors';
 import TimeInput from '../../Home/TimeInput';
 
 const SettingsMenu = () => {
   const dispatch: Dispatch<any> = useDispatch();
-  const setRestTime = useSelector(getSetRestTime);
   const trainingDefaultValues = useSelector(getTrainingDefaultValues, shallowEqual);
-  const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
-  const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
-  const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime);
-
-  // type PossibleConfigurations =
-  //   | 'EXERCISE REST'
-  //   | 'EXERCISE TRAIN'
-  //   | 'FINAL REST'
-  //   | 'SET REPETITIONS';
+  type PossibleConfigurations =
+    | 'exerciseRestTime'
+    | 'exerciseTrainTime'
+    | 'finalRestTime'
+    | 'setRepetitions';
+  const [newTrainingDefaultValues, setNewTrainingDefaultValues] = useState({
+    exerciseRestTime: trainingDefaultValues.exerciseRestTime,
+    exerciseTrainTime: trainingDefaultValues.exerciseTrainTime,
+    finalRestTime: trainingDefaultValues.finalRestTime,
+    setRepetitions: trainingDefaultValues.setRepetitions
+  });
 
   const configurationValues = {
-    'EXERCISE REST': trainingDefaultValues.exerciseRestTime,
-    'EXERCISE TRAIN': trainingDefaultValues.exerciseTrainTime,
-    'FINAL REST': trainingDefaultValues.finalRestTime,
-    'SET REPETITIONS': trainingDefaultValues.setRepetitions
+    'EXERCISE REST': 'exerciseRestTime',
+    'EXERCISE TRAIN': 'exerciseTrainTime',
+    'FINAL REST': 'finalRestTime',
+    'SET REPETITIONS': 'setRepetitions'
+  } as { [key in string]: PossibleConfigurations };
+
+  const configurationBoundaries = {
+    exerciseRestTime: { min: 0, max: 999 },
+    exerciseTrainTime: { min: 5, max: 999 },
+    finalRestTime: { min: 0, max: 999 },
+    setRepetitions: { min: 1, max: 5 }
+  } as { [key in PossibleConfigurations]: { min: number; max: number } };
+
+  const handleBoundaries = (value: string, label: PossibleConfigurations) => {
+    const { min, max } = configurationBoundaries[label];
+    let newValue = value !== '' ? Number(value) : min;
+    newValue < min && (newValue = min);
+    newValue > max && (newValue = max);
+
+    return newValue;
   };
 
   const settingsConfigurationsOption = useCallback(
@@ -61,7 +69,14 @@ const SettingsMenu = () => {
         <TimeInput
           label={highlightedText === 'SET REPETITIONS' ? 'SET_RELATED' : 'EXERCISE_RELATED'}
           value={value}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {}}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            const { value } = event.target;
+            const newValue = handleBoundaries(value, configurationValues[highlightedText]);
+            return setNewTrainingDefaultValues((oldState) => ({
+              ...oldState,
+              [configurationValues[highlightedText]]: newValue
+            }));
+          }}
         />
       </SettingsConfigurationOptionContainer>
     ),
@@ -75,10 +90,15 @@ const SettingsMenu = () => {
         <SettingsHeaderText>Settings</SettingsHeaderText>
       </SettingsHeaderContainer>
       <SettingsContentContainer>
-        {Object.entries(configurationValues).map((configuration: Pair<string, number>) => {
-          const [highlightedText, value] = configuration;
-          return settingsConfigurationsOption(highlightedText, value);
-        })}
+        {Object.entries(configurationValues).map(
+          (configuration: Pair<string, PossibleConfigurations>) => {
+            const [highlightedText, labelName] = configuration;
+            return settingsConfigurationsOption(
+              highlightedText,
+              newTrainingDefaultValues[labelName]
+            );
+          }
+        )}
       </SettingsContentContainer>
       <FooterContainer>
         <RestoreSettingsText>RESTORE SETTINGS</RestoreSettingsText>
