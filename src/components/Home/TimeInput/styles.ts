@@ -10,8 +10,13 @@ export const Input = styled.input`
   font-weight: 200;
   text-align: center;
 
-  & ::selection {
+  &::selection {
     background: #0934;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
   }
 `;
 

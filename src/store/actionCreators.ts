@@ -1,3 +1,4 @@
+import { PossibleConfigurations } from '../utils/settings/possibleConfigurations';
 import {
   ADD_SET,
   ADD_EXERCISE,
@@ -7,7 +8,8 @@ import {
   UPDATE_EXERCISE_REST_TIME,
   UPDATE_EXERCISE_TRAIN_TIME,
   UPDATE_CURRENT_SET_LOOP_QUANTITY,
-  UPDATE_SET_REST_TIME
+  UPDATE_SET_REST_TIME,
+  UPDATE_DEFAULT_TRAINING_VALUES
 } from './actionTypes';
 
 export function addExercise(exercise: Exercise, set: number) {
@@ -63,6 +65,21 @@ export function updateSetRest(set: number, setRestTime: number) {
     payload: {
       set,
       setRestTime
+    }
+  };
+
+  return action;
+}
+
+export function updateDefaultTrainingValues(defaultTrainingValues: {
+  [key in PossibleConfigurations]: number;
+}) {
+  console.log('Action dispatched [Update default training values]');
+  const action: TrainingAction = {
+    type: UPDATE_DEFAULT_TRAINING_VALUES,
+    payload: {
+      defaultTrainingValues,
+      set: 0
     }
   };
 

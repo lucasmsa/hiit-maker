@@ -49,6 +49,7 @@ type TrainingAction = {
     restTime?: number;
     trainTime?: number;
     setRestTime?: number;
+    defaultTrainingValues?: TrainingDefaultValues;
   };
 };
 

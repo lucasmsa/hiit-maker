@@ -7,7 +7,8 @@ import {
   ADD_SET,
   UPDATE_CURRENT_SET,
   REMOVE_CURRENT_SET,
-  UPDATE_SET_REST_TIME
+  UPDATE_SET_REST_TIME,
+  UPDATE_DEFAULT_TRAINING_VALUES
 } from './actionTypes';
 
 const trainSetInitialState = {
@@ -100,6 +101,15 @@ const reducerFunctions = {
         trainSetLoops: updatedSets
       };
     } else throw new Error('You can only have 5 sets at most!');
+  },
+
+  [UPDATE_DEFAULT_TRAINING_VALUES]: ({ state, action }: IReducer): TrainingState => {
+    const { defaultTrainingValues } = action.payload;
+
+    return {
+      ...state,
+      trainingDefaultValues: defaultTrainingValues as TrainingDefaultValues
+    };
   },
 
   [UPDATE_SET_REST_TIME]: ({ state, action }: IReducer): TrainingState => {

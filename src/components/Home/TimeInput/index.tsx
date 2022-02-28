@@ -8,20 +8,20 @@ interface TimeInputProps {
 }
 
 const TimeInput = ({ value, onChange, label }: TimeInputProps) => {
-  const SET_CONDITIONAL_MIN = label === 'SET_RELATED' ? 1 : 0;
-  const SET_CONDITIONAL_MAX = label === 'SET_RELATED' ? 999 : 5;
   const SET_CONDITIONAL_LABEL = label === 'SET_RELATED' ? 'reps' : 'segs';
-  const SET_CONDITIONAL_LENGTH = label === 'SET_RELATED' ? 1 : 3;
+
+  const handleFocus = (event: any) => event.target.select();
 
   return (
     <InputContainer>
       <InputSurroundings>
         <Input
-          min={SET_CONDITIONAL_MIN}
-          max={SET_CONDITIONAL_MAX}
-          maxLength={SET_CONDITIONAL_LENGTH}
+          type={label === 'SET_RELATED' ? 'number' : 'text'}
+          min={0}
+          max={999}
+          maxLength={3}
           value={value}
-          onFocus={(event) => event.target.select()}
+          onFocus={handleFocus}
           onChange={(event) => onChange(event)}
         />
       </InputSurroundings>

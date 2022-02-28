@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {
+  DarkGray,
   LightGray,
   Rage,
   TransparentBlackShadow,
@@ -7,6 +8,10 @@ import {
   White
 } from '../../../styles/global';
 import { ReactComponent as SettingsHeader } from '../../../assets/images/SettingsScreen/settings-header-icon.svg';
+
+interface SaveChangesTextProps {
+  activated: boolean;
+}
 
 export const Container = styled.div`
   margin-left: 5%;
@@ -115,14 +120,15 @@ export const SettingsConfigurationOptionHighlightText = styled.span`
   color: ${Rage};
 `;
 
-export const SaveChangesText = styled.h3`
+export const SaveChangesText = styled.h3<SaveChangesTextProps>`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
-  color: ${LightGray};
+  transition: color 0.2s ease-in-out;
+  color: ${(props) => (props.activated ? LightGray : `rgba(235, 235, 235, 0.5)`)};
 `;
 
 export const RestoreSettingsText = styled.h3`
