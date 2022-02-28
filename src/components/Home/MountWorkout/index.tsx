@@ -22,6 +22,7 @@ import {
   getCurrentSet,
   getSetRestTime,
   getTrainingSetExercises,
+  getTrainingDefaultValues,
   getTrainingSetLoopQuantity
 } from '../../../store/selectors';
 import { updateCurrentSetLoopQuantity, updateSetRest } from '../../../store/actionCreators';
@@ -42,12 +43,10 @@ const optionsOperation = {
 const MountWorkout = ({ id }: WorkoutProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any | null>(null);
-
   const setRestTime = useSelector(getSetRestTime);
   const currentSet = useSelector(getCurrentSet, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
-
   const [currentSetExercisesState, setCurrentSetExercisesState] = useState(currentSetExercises);
   const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime);
   const [currentSetState, setCurrentSetState] = useState(currentSet);

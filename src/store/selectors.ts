@@ -26,6 +26,10 @@ export const getSetRestTime = (state: TrainingState) => {
   return training[set].setRestTime;
 };
 
+export const getTrainingDefaultValues = (state: TrainingState) => {
+  return state.trainingDefaultValues;
+};
+
 export const getTrainingSetLoopQuantity = (state: TrainingState) => {
   const training = getTrainSetLoops(state);
   const set = getCurrentSet(state);

@@ -36,8 +36,6 @@ import InformationHeaderSection from '../InformationHeaderSection';
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0;
   const afflictedBodyParts = useSelector(getAfflictedBodyParts, shallowEqual) || {};
-  console.log('AFFLICTED BODY PARTS ', afflictedBodyParts);
-  console.log('TOTAL TRAINING TIME: ', totalTrainingTime);
   const trainSetLoops = useSelector(getTrainSetLoops, shallowEqual) || {};
   const formattedTotalTrainingTime = useMemo(
     () => secondsToMinutes(totalTrainingTime),

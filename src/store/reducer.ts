@@ -20,6 +20,12 @@ const trainSetInitialState = {
   setRestTime: 0
 };
 
+const configurableTrainSetInitialState = (loops: number, setRestTime: number) => ({
+  ...trainSetInitialState,
+  loops,
+  setRestTime
+});
+
 const initialState = {
   currentSet: 0,
   afflictedAreas: {
@@ -27,6 +33,12 @@ const initialState = {
     Legs: 0,
     Back: 0,
     Core: 0
+  },
+  trainingDefaultValues: {
+    exerciseRestTime: 30,
+    exerciseTrainTime: 60,
+    finalRestTime: 0,
+    setRepetitions: 1
   },
   totalTrainingTime: 0,
   trainSetLoops: [trainSetInitialState]
@@ -77,10 +89,11 @@ const reducerFunctions = {
 
   [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
     const setsQuantity = state.trainSetLoops.length;
-    console.log('TO AQUI POORRA ' + setsQuantity);
 
     if (setsQuantity <= 4) {
-      const updatedSets = state.trainSetLoops.concat(trainSetInitialState);
+      const { setRepetitions, finalRestTime } = state.trainingDefaultValues;
+      const newSetState = configurableTrainSetInitialState(setRepetitions, finalRestTime);
+      const updatedSets = state.trainSetLoops.concat(newSetState);
 
       return {
         ...state,

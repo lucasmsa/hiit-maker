@@ -18,6 +18,7 @@ import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   getCurrentSet,
   getSetRestTime,
+  getTrainingDefaultValues,
   getTrainingSetExercises,
   getTrainingSetLoopQuantity
 } from '../../../store/selectors';
@@ -29,20 +30,26 @@ import TimeInput from '../../Home/TimeInput';
 const SettingsMenu = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const setRestTime = useSelector(getSetRestTime);
-  const currentSet = useSelector(getCurrentSet, shallowEqual);
+  const trainingDefaultValues = useSelector(getTrainingDefaultValues, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
   const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime);
 
-  const possibleConfigurations = [
-    'EXERCISE REST',
-    'EXERCISE TRAIN',
-    'FINAL REST',
-    'SET REPETITIONS'
-  ];
+  // type PossibleConfigurations =
+  //   | 'EXERCISE REST'
+  //   | 'EXERCISE TRAIN'
+  //   | 'FINAL REST'
+  //   | 'SET REPETITIONS';
+
+  const configurationValues = {
+    'EXERCISE REST': trainingDefaultValues.exerciseRestTime,
+    'EXERCISE TRAIN': trainingDefaultValues.exerciseTrainTime,
+    'FINAL REST': trainingDefaultValues.finalRestTime,
+    'SET REPETITIONS': trainingDefaultValues.setRepetitions
+  };
 
   const settingsConfigurationsOption = useCallback(
-    (highlightedText: string) => (
+    (highlightedText: string, value: number) => (
       <SettingsConfigurationOptionContainer>
         <SettingsConfigurationOptionText>
           DEFAULT{' '}
@@ -53,7 +60,7 @@ const SettingsMenu = () => {
         </SettingsConfigurationOptionText>
         <TimeInput
           label={highlightedText === 'SET REPETITIONS' ? 'SET_RELATED' : 'EXERCISE_RELATED'}
-          value={45}
+          value={value}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {}}
         />
       </SettingsConfigurationOptionContainer>
@@ -68,9 +75,10 @@ const SettingsMenu = () => {
         <SettingsHeaderText>Settings</SettingsHeaderText>
       </SettingsHeaderContainer>
       <SettingsContentContainer>
-        {possibleConfigurations.map((configuration: string) =>
-          settingsConfigurationsOption(configuration)
-        )}
+        {Object.entries(configurationValues).map((configuration: Pair<string, number>) => {
+          const [highlightedText, value] = configuration;
+          return settingsConfigurationsOption(highlightedText, value);
+        })}
       </SettingsContentContainer>
       <FooterContainer>
         <RestoreSettingsText>RESTORE SETTINGS</RestoreSettingsText>

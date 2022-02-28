@@ -6,6 +6,7 @@ import { ReactComponent as ChestIcon } from '../../../assets/images/LeftBar/icon
 import { ReactComponent as LegIcon } from '../../../assets/images/LeftBar/icons/legs_icon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/images/LeftBar/icons/back_icon.svg';
 import { ReactComponent as CoreIcon } from '../../../assets/images/LeftBar/icons/core_icon.svg';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ExerciseModal from '../InsertExerciseModal';
 import Chest from '../../../database/chest.json';
 import Legs from '../../../database/legs.json';
@@ -18,6 +19,7 @@ import {
   ExerciseHeaderContainer,
   ExercisesImagesContainer
 } from './styles';
+import { getTrainingDefaultValues } from '../../../store/selectors';
 
 interface IExerciseJSON {
   exercises: {
@@ -43,12 +45,13 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
   const [legsExercises, setLegsExercises] = useState<Exercise[]>([]);
   const [coreExercises, setCoreExercises] = useState<Exercise[]>([]);
   const [backExercises, setBackExercises] = useState<Exercise[]>([]);
+  const trainingDefaultValues = useSelector(getTrainingDefaultValues, shallowEqual);
   const [specificExercise, setSpecificExercise] = useState<Exercise>({
     name: '',
     afflictedBodyPart: undefined,
     image: '',
-    restTime: 30,
-    trainTime: 60
+    restTime: trainingDefaultValues.exerciseRestTime,
+    trainTime: trainingDefaultValues.exerciseTrainTime
   });
 
   const bodyPartsSetStates = [
