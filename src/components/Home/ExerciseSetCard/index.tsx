@@ -1,4 +1,4 @@
-import React, { Dispatch, useState } from 'react';
+import React, { ChangeEvent, Dispatch, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg';
 import {
@@ -9,7 +9,7 @@ import {
   updateExerciseTrainTime
 } from '../../../store/actionCreators';
 import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
-import isNumeric from '../../../utils/isNumeric';
+import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 import TimeInput from '../TimeInput';
 import {
   Container,
@@ -45,6 +45,34 @@ export default function ExerciseSetCard({
   const [trainTimeInput, setTrainTimeInput] = useState(trainTime);
   const trainSetLoops = useSelector(getTrainSetLoops);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>, type: 'TRAIN' | 'REST') => {
+    const { value } = event.target;
+    if (isNaN(+value)) return;
+    return type === 'TRAIN' ? setTrainTimeInput(value as any) : setRestTimeInput(value as any);
+  };
+
+  const handleInputFocusOut = (event: any, type: 'TRAIN' | 'REST') => {
+    const { value } = event.target;
+    const eventFunctionalities = {
+      TRAIN: {
+        min: configurationBoundaries.exerciseTrainTime.min,
+        set: (value: number) => setTrainTimeInput(value),
+        dispatch: (value: number) => dispatch(updateExerciseTrainTime(index, set, value))
+      },
+      REST: {
+        min: configurationBoundaries.exerciseRestTime.min,
+        set: (value: number) => setRestTimeInput(value),
+        dispatch: (value: number) => dispatch(updateExerciseRestTime(index, set, value))
+      }
+    };
+    if (value === '' || Number(value) < eventFunctionalities[type].min) {
+      eventFunctionalities[type].set(eventFunctionalities[type].min);
+      eventFunctionalities[type].dispatch(eventFunctionalities[type].min);
+    } else {
+      eventFunctionalities[type].dispatch(Number(value));
+    }
+  };
 
   return (
     <Container>
@@ -82,32 +110,20 @@ export default function ExerciseSetCard({
               <HeaderTrainRest>TRAIN</HeaderTrainRest>
               <TimeInput
                 value={trainTimeInput}
-                onChange={(event: any) => {
-                  if (isNumeric(event.target.value)) {
-                    const updatedValue = Number(event.target.value);
-                    setTrainTimeInput(updatedValue);
-                    dispatch(updateExerciseTrainTime(index, set, updatedValue));
-                  } else if (event.target.value === '' || event.target.value < 6) {
-                    setTrainTimeInput(5);
-                    dispatch(updateExerciseTrainTime(index, set, 5));
-                  }
-                }}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(event, 'TRAIN')
+                }
+                onFocusOut={(event: any) => handleInputFocusOut(event, 'TRAIN')}
               />
             </TrainContainer>
             <RestContainer>
               <HeaderTrainRest>REST</HeaderTrainRest>
               <TimeInput
                 value={restTimeInput}
-                onChange={(event: any) => {
-                  if (isNumeric(event.target.value)) {
-                    const updatedValue = Number(event.target.value);
-                    setRestTimeInput(updatedValue);
-                    dispatch(updateExerciseRestTime(index, set, updatedValue));
-                  } else if (event.target.value === '') {
-                    setRestTimeInput(0);
-                    dispatch(updateExerciseRestTime(index, set, 0));
-                  }
-                }}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  handleInputChange(event, 'REST')
+                }
+                onFocusOut={(event: any) => handleInputFocusOut(event, 'REST')}
               />
             </RestContainer>
           </TrainRestContainer>

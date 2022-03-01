@@ -23,6 +23,9 @@ const TimeInput = ({ value, onChange, onFocusOut, label }: TimeInputProps) => {
           maxLength={3}
           value={value}
           onFocus={handleFocus}
+          onKeyPress={(event) =>
+            event.key === 'Enter' && onFocusOut ? onFocusOut(event) : undefined
+          }
           onBlur={onFocusOut ? onFocusOut : undefined}
           onChange={(event) => onChange(event)}
         />

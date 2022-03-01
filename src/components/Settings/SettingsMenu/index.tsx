@@ -21,6 +21,7 @@ import { INITIAL_DEFAULT_VALUES } from '../../../config/contants';
 import { PossibleConfigurations } from '../../../utils/settings/possibleConfigurations';
 import { handleBoundaries } from '../../../utils/settings/handleBoundaries';
 import ConfirmChangesModal from '../ConfirmChangesModal';
+import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 
 const SettingsMenu = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -42,13 +43,6 @@ const SettingsMenu = () => {
     'SET REPETITIONS': 'setRepetitions'
   } as { [key in string]: PossibleConfigurations };
 
-  const configurationBoundaries = {
-    exerciseRestTime: { min: 0, max: 999 },
-    exerciseTrainTime: { min: 0, max: 999 },
-    finalRestTime: { min: 0, max: 999 },
-    setRepetitions: { min: 1, max: 5 }
-  } as { [key in PossibleConfigurations]: { min: number; max: number } };
-
   const containsEqualDefaultValues = (element: Pair<string, number>) => {
     const [key, value] = element;
     return value !== INITIAL_DEFAULT_VALUES[key as PossibleConfigurations];
@@ -67,7 +61,6 @@ const SettingsMenu = () => {
       finalRestTime: INITIAL_DEFAULT_VALUES.finalRestTime,
       setRepetitions: INITIAL_DEFAULT_VALUES.setRepetitions
     }));
-    console.log(newTrainingDefaultValues);
   }, []);
 
   const settingsConfigurationsOption = useCallback(
@@ -101,7 +94,7 @@ const SettingsMenu = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             const { value } = event.target;
             const configurationLabel = configurationValues[highlightedText];
-
+            if (isNaN(+value)) return;
             return setNewTrainingDefaultValues((oldState) => ({
               ...oldState,
               [configurationLabel]: value

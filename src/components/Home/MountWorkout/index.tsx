@@ -30,6 +30,7 @@ import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';
 import isNumeric from '../../../utils/isNumeric';
+import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 
 interface WorkoutProps {
   id?: string;
@@ -115,13 +116,17 @@ const MountWorkout = ({ id }: WorkoutProps) => {
               <TimeInput
                 value={setRestTimeInput}
                 onChange={(event: any) => {
-                  if (isNumeric(event.target.value)) {
-                    const updatedValue = Number(event.target.value);
-                    setSetRestTimeInput(updatedValue);
-                    dispatch(updateSetRest(currentSet, updatedValue));
-                  } else if (event.target.value === '') {
-                    setSetRestTimeInput(0);
-                    dispatch(updateSetRest(currentSet, 0));
+                  const { value } = event.target;
+                  if (isNaN(+value)) return;
+                  return setSetRestTimeInput(value as any);
+                }}
+                onFocusOut={(event: any) => {
+                  const { value } = event.target;
+                  if (value === '' || Number(value) < configurationBoundaries.finalRestTime.min) {
+                    setSetRestTimeInput(configurationBoundaries.finalRestTime.min);
+                    dispatch(updateSetRest(currentSet, configurationBoundaries.finalRestTime.min));
+                  } else {
+                    dispatch(updateSetRest(currentSet, Number(value)));
                   }
                 }}
               />
