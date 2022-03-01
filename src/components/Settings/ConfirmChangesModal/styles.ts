@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { DarkGray, LightGray, Rage } from '../../../styles/global';
+import { ReactComponent as SaveChanges } from '../../../assets/images/SettingsScreen/save-icon.svg';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -21,15 +22,6 @@ export const ModalContentContainer = styled.div`
   margin-top: 1.875rem;
 `;
 
-export const ModalExerciseImage = styled.img`
-  display: block;
-  max-width: 7.5rem;
-  max-height: 6.25rem;
-  width: auto;
-  height: auto;
-  border-radius: 0.625rem;
-`;
-
 export const ModalTextAndButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,26 +37,16 @@ export const CancelButton = styled.div`
   border: 0.0625rem solid #282828;
   transition: 0.3s ease;
   &:hover {
-    transform: translateY(-1.5008px);
+    transform: translateY(-0.0938rem);
   }
   border-radius: 0.625rem;
   cursor: pointer;
 `;
 
-export const ConfirmButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 9.875rem;
-  height: 2.1875rem;
+export const ConfirmButton = styled(CancelButton)`
+  border: 0;
   background: ${Rage};
   box-shadow: 0px 0.0625rem 0.25rem rgba(238, 55, 63, 0.25);
-  transition: 0.3s ease;
-  &:hover {
-    transform: translateY(-0.0938rem);
-  }
-  border-radius: 0.625rem;
-  cursor: pointer;
 `;
 
 export const CancelButtonText = styled.h4`
@@ -97,17 +79,6 @@ export const ExerciseSelectionText = styled.h1`
   color: ${DarkGray};
 `;
 
-export const ExerciseDescriptionText = styled.h3`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 0.875rem;
-  line-height: 1.0625rem;
-  letter-spacing: 0.02em;
-  color: ${DarkGray};
-  margin-bottom: 1rem;
-`;
-
 export const ConfirmExerciseBoldText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
@@ -123,4 +94,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+`;
+
+export const SaveChangesIcon = styled(SaveChanges)`
+  align-self: center;
+  margin-bottom: 1.25rem;
 `;

@@ -102,8 +102,8 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
         name: exerciseName,
         image: exerciseImage,
         afflictedBodyPart: bodyPart,
-        restTime: 30,
-        trainTime: 60
+        restTime: trainingDefaultValues.exerciseRestTime,
+        trainTime: trainingDefaultValues.exerciseTrainTime
       } as any;
     }, exercises);
 
@@ -147,8 +147,8 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
       name: exerciseName,
       image: exerciseImage,
       afflictedBodyPart: bodyPart,
-      restTime: 30,
-      trainTime: 60
+      restTime: trainingDefaultValues.exerciseRestTime,
+      trainTime: trainingDefaultValues.exerciseTrainTime
     });
   }, []);
 

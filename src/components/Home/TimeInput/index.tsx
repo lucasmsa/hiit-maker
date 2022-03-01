@@ -4,7 +4,7 @@ import { Input, InputContainer, InputSurroundings, SecondsText } from './styles'
 interface TimeInputProps {
   value: number;
   label?: 'SET_RELATED' | 'EXERCISE_RELATED';
-  onFocusOut?: (event: any) => void;
+  onFocusOut: (event: any) => void;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -23,11 +23,12 @@ const TimeInput = ({ value, onChange, onFocusOut, label }: TimeInputProps) => {
           maxLength={3}
           value={value}
           onFocus={handleFocus}
-          onKeyPress={(event) =>
-            event.key === 'Enter' && onFocusOut ? onFocusOut(event) : undefined
-          }
-          onBlur={onFocusOut ? onFocusOut : undefined}
-          onChange={(event) => onChange(event)}
+          onKeyPress={(event) => (event.key === 'Enter' ? onFocusOut(event) : undefined)}
+          onBlur={label !== 'SET_RELATED' ? onFocusOut : undefined}
+          onChange={(event) => {
+            onChange(event);
+            label === 'SET_RELATED' && onFocusOut(event);
+          }}
         />
       </InputSurroundings>
       <SecondsText>{SET_CONDITIONAL_LABEL}</SecondsText>

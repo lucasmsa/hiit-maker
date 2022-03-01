@@ -32,19 +32,15 @@ import TimeInput from '../TimeInput';
 import isNumeric from '../../../utils/isNumeric';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 
-interface WorkoutProps {
-  id?: string;
-}
-
 const optionsOperation = {
   plus: 1,
   minus: -1
 };
 
-const MountWorkout = ({ id }: WorkoutProps) => {
+const MountWorkout = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any | null>(null);
-  const setRestTime = useSelector(getSetRestTime);
+  const setRestTime = useSelector(getSetRestTime, shallowEqual);
   const currentSet = useSelector(getCurrentSet, shallowEqual);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);

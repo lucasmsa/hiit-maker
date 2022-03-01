@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import {
   ModalContainer,
   ModalTopContainer,
-  ModalExerciseImage,
   ModalTextAndButtonsContainer,
   ModalContentContainer,
   ButtonContainer,
@@ -12,13 +11,13 @@ import {
   ConfirmButton,
   ConfirmButtonText,
   ConfirmExerciseBoldText,
-  ExerciseDescriptionText,
-  ExerciseSelectionText
+  ExerciseSelectionText,
+  SaveChangesIcon
 } from './styles';
 import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
-import { addExercise, updateDefaultTrainingValues } from '../../../store/actionCreators';
+import { updateDefaultTrainingValues } from '../../../store/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { getCurrentSet } from '../../../store/selectors';
@@ -70,31 +69,26 @@ const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalP
   return (
     <Modal
       isOpen={modalOpen}
-      // onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>
-          <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
+          <ExerciseSelectionText>Confirm changes?</ExerciseSelectionText>
           <CancelModalIcon style={{ cursor: 'pointer' }} onClick={closeModal} />
         </ModalTopContainer>
         <ModalContentContainer>
-          {/* <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} /> */}
           <ModalTextAndButtonsContainer>
-            <ExerciseDescriptionText>
-              Exercise:{' '}
-              {/* <span style={{ color: '#EE373F' }}>{specificExercise.name.toUpperCase()}</span> */}
-            </ExerciseDescriptionText>
+            <SaveChangesIcon />
             <ConfirmExerciseBoldText>
-              Confirm adding this exercise to your workout
+              Confirm adding new default values for your exercise training times
             </ConfirmExerciseBoldText>
             <ButtonContainer>
               <CancelButton onClick={closeModal}>
                 <CancelButtonText>Cancel</CancelButtonText>
               </CancelButton>
               <ConfirmButton onClick={() => handleChangeDefaultValues()}>
-                <ConfirmButtonText>Pintoca!</ConfirmButtonText>
+                <ConfirmButtonText>Confirm</ConfirmButtonText>
               </ConfirmButton>
             </ButtonContainer>
           </ModalTextAndButtonsContainer>

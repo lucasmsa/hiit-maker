@@ -25,6 +25,7 @@ const configurableTrainSetInitialState = (loops: number, setRestTime: number) =>
   ...trainSetInitialState,
   loops,
   setRestTime
+  // totalSetTime: loops * setRestTime
 });
 
 const initialState = {
@@ -69,7 +70,7 @@ const reducerFunctions = {
         currentSet,
         afflictedAreas: {
           ...state.afflictedAreas,
-          [newExercise.afflictedBodyPart!]: true
+          [newExercise.afflictedBodyPart!]: state.afflictedAreas[newExercise.afflictedBodyPart] + 1
         },
         trainSetLoops: state.trainSetLoops.map((content, index) =>
           index === currentSet
@@ -94,6 +95,7 @@ const reducerFunctions = {
     if (setsQuantity <= 4) {
       const { setRepetitions, finalRestTime } = state.trainingDefaultValues;
       const newSetState = configurableTrainSetInitialState(setRepetitions, finalRestTime);
+      console.log('over here, thats the new set state', newSetState);
       const updatedSets = state.trainSetLoops.concat(newSetState);
 
       return {
