@@ -83,17 +83,28 @@ const SettingsMenu = () => {
         <TimeInput
           label={highlightedText === 'SET REPETITIONS' ? 'SET_RELATED' : 'EXERCISE_RELATED'}
           value={value}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            !changesWereMade && setChangesWereMade(true);
+          onFocusOut={(event: any) => {
             const { value } = event.target;
-            const newValue = handleBoundaries(
-              value,
-              configurationValues[highlightedText],
-              configurationBoundaries
-            );
+            const configurationLabel = configurationValues[highlightedText];
+
+            const newValue = handleBoundaries(value, configurationLabel, configurationBoundaries);
+
+            !changesWereMade &&
+              newValue !== newTrainingDefaultValues[configurationLabel] &&
+              setChangesWereMade(true);
+
             return setNewTrainingDefaultValues((oldState) => ({
               ...oldState,
               [configurationValues[highlightedText]]: newValue
+            }));
+          }}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            const { value } = event.target;
+            const configurationLabel = configurationValues[highlightedText];
+
+            return setNewTrainingDefaultValues((oldState) => ({
+              ...oldState,
+              [configurationLabel]: value
             }));
           }}
         />
