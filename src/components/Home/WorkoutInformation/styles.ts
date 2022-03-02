@@ -107,8 +107,8 @@ export const TrainingDurationText = styled.h3`
   font-family: Montserrat;
   margin-top: 0.75rem;
   font-style: normal;
-  font-weight: 500;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 3rem;
   letter-spacing: 0.02em;
   color: ${Rage};
 `;

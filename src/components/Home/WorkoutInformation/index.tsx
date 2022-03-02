@@ -28,7 +28,7 @@ import {
   getAfflictedBodyParts,
   getTrainSetLoops
 } from '../../../store/selectors';
-import secondsToMinutes from '../../../utils/secondsToMinutes';
+import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { Link } from 'react-router-dom';
 import InformationHeaderSection from '../InformationHeaderSection';
@@ -38,7 +38,7 @@ const WorkoutInformation = () => {
   const afflictedBodyParts = useSelector(getAfflictedBodyParts, shallowEqual) || {};
   const trainSetLoops = useSelector(getTrainSetLoops, shallowEqual) || {};
   const formattedTotalTrainingTime = useMemo(
-    () => secondsToMinutes(totalTrainingTime),
+    () => secondsToHourFormat(totalTrainingTime),
     [totalTrainingTime]
   );
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
@@ -141,7 +141,7 @@ const WorkoutInformation = () => {
           backgroundColor={'BLACK'}
         />
         <TrainingDurationContainer>
-          <TrainingDurationText>{formattedTotalTrainingTime} min</TrainingDurationText>
+          <TrainingDurationText>{formattedTotalTrainingTime}</TrainingDurationText>
         </TrainingDurationContainer>
       </TotalTimeContainer>
       <StartTrainingContainer>
