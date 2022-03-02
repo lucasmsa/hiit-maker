@@ -22,14 +22,12 @@ import {
   getCurrentSet,
   getSetRestTime,
   getTrainingSetExercises,
-  getTrainingDefaultValues,
   getTrainingSetLoopQuantity
 } from '../../../store/selectors';
 import { updateCurrentSetLoopQuantity, updateSetRest } from '../../../store/actionCreators';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';
-import isNumeric from '../../../utils/isNumeric';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 
 const optionsOperation = {
@@ -40,8 +38,8 @@ const optionsOperation = {
 const MountWorkout = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const scrollRef = useRef<any | null>(null);
-  const setRestTime = useSelector(getSetRestTime, shallowEqual);
   const currentSet = useSelector(getCurrentSet, shallowEqual);
+  const setRestTime = useSelector(getSetRestTime);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
   const [currentSetExercisesState, setCurrentSetExercisesState] = useState(currentSetExercises);
@@ -50,6 +48,7 @@ const MountWorkout = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setSetRestTimeInput(setRestTime);
     if (currentSetState !== currentSet) {
       setTimeout(() => {
         setLoading(true);
@@ -60,7 +59,7 @@ const MountWorkout = () => {
     } else {
       setCurrentSetExercisesState(currentSetExercises);
     }
-  }, [currentSet, currentSetExercises, currentSetState]);
+  }, [currentSet, currentSetExercises, currentSetState, setRestTime]);
 
   const handleExerciseCounter = useCallback(
     (option: 'plus' | 'minus') => {
@@ -118,9 +117,9 @@ const MountWorkout = () => {
                 }}
                 onFocusOut={(event: any) => {
                   const { value } = event.target;
-                  if (value === '' || Number(value) < configurationBoundaries.finalRestTime.min) {
-                    setSetRestTimeInput(configurationBoundaries.finalRestTime.min);
-                    dispatch(updateSetRest(currentSet, configurationBoundaries.finalRestTime.min));
+                  if (value === '' || Number(value) < configurationBoundaries.setRestTime.min) {
+                    setSetRestTimeInput(configurationBoundaries.setRestTime.min);
+                    dispatch(updateSetRest(currentSet, configurationBoundaries.setRestTime.min));
                   } else {
                     dispatch(updateSetRest(currentSet, Number(value)));
                   }

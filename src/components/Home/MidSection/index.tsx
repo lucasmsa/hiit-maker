@@ -36,6 +36,11 @@ const MidSection = () => {
   const currentSet = useSelector(getCurrentSet);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
   const setsQuantity = trainingSets.length;
+  console.log('at the mid section, here are the training sets', trainingSets);
+  console.log(
+    'at the mid section, here are the training set exercises',
+    currentTrainingSetExercises
+  );
 
   return (
     <Container>
@@ -55,9 +60,10 @@ const MidSection = () => {
             {trainingSets.map((set, index) => {
               const setIcon =
                 currentSet === index ? (
-                  <SelectedSetIcon style={{ cursor: 'pointer' }} />
+                  <SelectedSetIcon key={index} style={{ cursor: 'pointer' }} />
                 ) : (
                   <NotSelectedSetIcon
+                    key={index}
                     style={{ cursor: 'pointer' }}
                     onClick={() => dispatch(updateCurrentSet(index))}
                   />
@@ -88,8 +94,7 @@ const MidSection = () => {
                     })
                   );
                 }
-              }}
-            >
+              }}>
               <AddSetIcon />
               <AddSetText>Add set</AddSetText>
             </AddSetContainer>
@@ -101,8 +106,7 @@ const MidSection = () => {
                 if (currentSet === 0) {
                   dispatch(updateCurrentSet(currentSet));
                 }
-              }}
-            >
+              }}>
               <RemoveSetIcon />
               <RemoveSetText>Remove set</RemoveSetText>
             </RemoveSetContainer>

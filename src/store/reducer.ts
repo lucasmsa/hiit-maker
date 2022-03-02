@@ -1,3 +1,4 @@
+import { INITIAL_DEFAULT_VALUES } from '../config/contants';
 import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,
@@ -12,20 +13,19 @@ import {
 } from './actionTypes';
 
 const trainSetInitialState = {
-  loops: 1,
+  loops: INITIAL_DEFAULT_VALUES.setRepetitions,
   totalSetTime: 0,
   trainSet: {
     exercises: [],
     setLoopTime: 0
   },
-  setRestTime: 0
+  setRestTime: INITIAL_DEFAULT_VALUES.setRestTime
 };
 
 const configurableTrainSetInitialState = (loops: number, setRestTime: number) => ({
   ...trainSetInitialState,
   loops,
   setRestTime
-  // totalSetTime: loops * setRestTime
 });
 
 const initialState = {
@@ -37,10 +37,10 @@ const initialState = {
     Core: 0
   },
   trainingDefaultValues: {
-    exerciseRestTime: 30,
-    exerciseTrainTime: 60,
-    finalRestTime: 0,
-    setRepetitions: 1
+    exerciseRestTime: INITIAL_DEFAULT_VALUES.exerciseRestTime,
+    exerciseTrainTime: INITIAL_DEFAULT_VALUES.exerciseTrainTime,
+    setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,
+    setRepetitions: INITIAL_DEFAULT_VALUES.setRepetitions
   },
   totalTrainingTime: 0,
   trainSetLoops: [trainSetInitialState]
@@ -93,8 +93,8 @@ const reducerFunctions = {
     const setsQuantity = state.trainSetLoops.length;
 
     if (setsQuantity <= 4) {
-      const { setRepetitions, finalRestTime } = state.trainingDefaultValues;
-      const newSetState = configurableTrainSetInitialState(setRepetitions, finalRestTime);
+      const { setRepetitions, setRestTime } = state.trainingDefaultValues;
+      const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
       console.log('over here, thats the new set state', newSetState);
       const updatedSets = state.trainSetLoops.concat(newSetState);
 

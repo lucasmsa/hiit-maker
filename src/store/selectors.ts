@@ -4,11 +4,14 @@ export const getCurrentSet = (state: TrainingState) => state.currentSet;
 
 export const getTotalTrainingTime = (state: TrainingState) => {
   const training = getTrainSetLoops(state);
-  return training.reduce((accumulator, set) => accumulator + set.totalSetTime + set.setRestTime, 0);
+  return training.reduce(
+    (accumulator, set) =>
+      accumulator + set.totalSetTime + (set.trainSet.exercises.length ? set.setRestTime : 0),
+    0
+  );
 };
 
 export const getAfflictedBodyParts = (state: TrainingState) => {
-  console.log('here, at afflicted body parts ', state);
   return state.afflictedAreas;
 };
 
@@ -22,7 +25,7 @@ export const getTrainingSetExercises = (state: TrainingState) => {
 export const getSetRestTime = (state: TrainingState) => {
   const training = getTrainSetLoops(state);
   const set = getCurrentSet(state);
-
+  console.log('I AM AT THE GETSETRESTTIME SELECTOR', training[set].setRestTime);
   return training[set].setRestTime;
 };
 

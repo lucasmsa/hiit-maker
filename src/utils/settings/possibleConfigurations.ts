@@ -1,5 +1,5 @@
 export type PossibleConfigurations =
   | 'exerciseRestTime'
   | 'exerciseTrainTime'
-  | 'finalRestTime'
+  | 'setRestTime'
   | 'setRepetitions';

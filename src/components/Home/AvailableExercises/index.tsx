@@ -6,7 +6,7 @@ import { ReactComponent as ChestIcon } from '../../../assets/images/LeftBar/icon
 import { ReactComponent as LegIcon } from '../../../assets/images/LeftBar/icons/legs_icon.svg';
 import { ReactComponent as BackIcon } from '../../../assets/images/LeftBar/icons/back_icon.svg';
 import { ReactComponent as CoreIcon } from '../../../assets/images/LeftBar/icons/core_icon.svg';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import ExerciseModal from '../InsertExerciseModal';
 import Chest from '../../../database/chest.json';
 import Legs from '../../../database/legs.json';
@@ -166,7 +166,7 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
         const exerciseList = element[bodyPart].list;
 
         return exerciseList.length ? (
-          <ExerciseAreaContainer>
+          <ExerciseAreaContainer key={index}>
             <ExerciseHeaderContainer>
               {icon}
               <ExerciseAreaText>{bodyPart}</ExerciseAreaText>

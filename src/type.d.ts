@@ -27,7 +27,7 @@ interface TrainSetLoop {
 interface TrainingDefaultValues {
   exerciseRestTime: number;
   exerciseTrainTime: number;
-  finalRestTime: number;
+  setRestTime: number;
   setRepetitions: number;
 }
 

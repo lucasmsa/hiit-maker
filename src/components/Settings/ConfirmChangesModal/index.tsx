@@ -18,9 +18,8 @@ import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
 import { updateDefaultTrainingValues } from '../../../store/actionCreators';
-import { useDispatch, connect, useSelector } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { getCurrentSet } from '../../../store/selectors';
 import { TransparentBlackShadow } from '../../../styles/global';
 import { PossibleConfigurations } from '../../../utils/settings/possibleConfigurations';
 
@@ -45,7 +44,6 @@ interface ModalProps {
 
 const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalProps) => {
   const dispatch: Dispatch<any> = useDispatch();
-  const currentSet = useSelector(getCurrentSet);
 
   const handleChangeDefaultValues = useCallback(() => {
     const updateDefaultValuesPromise = (dispatch: any) =>
@@ -64,7 +62,7 @@ const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalP
     updateDefaultValuesPromise(dispatch);
 
     closeModal();
-  }, [closeModal, dispatch, currentSet]);
+  }, [closeModal, dispatch, newDefaultValues]);
 
   return (
     <Modal

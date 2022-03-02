@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
-import { Dispatch } from 'redux';
 import {
   Container,
   SettingsHeaderContainer,
@@ -14,7 +13,7 @@ import {
   SaveChangesContainer,
   RestoreSettingsText
 } from './styles';
-import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { connect, shallowEqual, useSelector } from 'react-redux';
 import { getTrainingDefaultValues } from '../../../store/selectors';
 import TimeInput from '../../Home/TimeInput';
 import { INITIAL_DEFAULT_VALUES } from '../../../config/contants';
@@ -24,7 +23,6 @@ import ConfirmChangesModal from '../ConfirmChangesModal';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 
 const SettingsMenu = () => {
-  const dispatch: Dispatch<any> = useDispatch();
   const trainingDefaultValues = useSelector(getTrainingDefaultValues, shallowEqual);
   const [changesWereMade, setChangesWereMade] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -32,14 +30,14 @@ const SettingsMenu = () => {
   const [newTrainingDefaultValues, setNewTrainingDefaultValues] = useState({
     exerciseRestTime: trainingDefaultValues.exerciseRestTime,
     exerciseTrainTime: trainingDefaultValues.exerciseTrainTime,
-    finalRestTime: trainingDefaultValues.finalRestTime,
+    setRestTime: trainingDefaultValues.setRestTime,
     setRepetitions: trainingDefaultValues.setRepetitions
   });
 
   const configurationValues = {
-    'EXERCISE REST': 'exerciseRestTime',
     'EXERCISE TRAIN': 'exerciseTrainTime',
-    'FINAL REST': 'finalRestTime',
+    'EXERCISE REST': 'exerciseRestTime',
+    'FINAL REST': 'setRestTime',
     'SET REPETITIONS': 'setRepetitions'
   } as { [key in string]: PossibleConfigurations };
 
@@ -58,10 +56,10 @@ const SettingsMenu = () => {
       ...oldState,
       exerciseRestTime: INITIAL_DEFAULT_VALUES.exerciseRestTime,
       exerciseTrainTime: INITIAL_DEFAULT_VALUES.exerciseTrainTime,
-      finalRestTime: INITIAL_DEFAULT_VALUES.finalRestTime,
+      setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,
       setRepetitions: INITIAL_DEFAULT_VALUES.setRepetitions
     }));
-  }, []);
+  }, [changesWereMade, newTrainingDefaultValues]);
 
   const settingsConfigurationsOption = useCallback(
     (highlightedText: string, value: number) => (
@@ -103,7 +101,7 @@ const SettingsMenu = () => {
         />
       </SettingsConfigurationOptionContainer>
     ),
-    []
+    [changesWereMade, configurationValues, newTrainingDefaultValues]
   );
 
   return (

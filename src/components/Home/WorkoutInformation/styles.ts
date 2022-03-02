@@ -28,7 +28,7 @@ export const MuscleGroupImagesContainer = styled.div`
 `;
 
 export const TotalTimeContainer = styled.div`
-  margin-top: 6.75rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -114,7 +114,7 @@ export const TrainingDurationText = styled.h3`
 `;
 
 export const StartTrainingContainer = styled.div`
-  margin-top: 5rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -129,7 +129,7 @@ export const PlayButton = styled.div`
   border-radius: 50%;
   position: relative;
   display: block;
-  margin: 3.5rem auto 0 auto;
+  margin: 2.5rem auto 0 auto;
   box-shadow: 0rem 0rem 1.5625rem 0.1875rem rgba(245, 135, 140, 0.8);
   &:after {
     content: '';
