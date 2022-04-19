@@ -108,8 +108,20 @@ const reducerFunctions = {
   [UPDATE_DEFAULT_TRAINING_VALUES]: ({ state, action }: IReducer): TrainingState => {
     const { defaultTrainingValues } = action.payload;
 
+    const updatedTrainSetLoops = state.trainSetLoops.map((content) => {
+      const setContainsExercise = content.trainSet.exercises.length > 0;
+      return setContainsExercise
+        ? content
+        : {
+            ...content,
+            loops: defaultTrainingValues!.setRepetitions,
+            setRestTime: defaultTrainingValues!.setRestTime
+          };
+    });
+
     return {
       ...state,
+      trainSetLoops: updatedTrainSetLoops,
       trainingDefaultValues: defaultTrainingValues as TrainingDefaultValues
     };
   },

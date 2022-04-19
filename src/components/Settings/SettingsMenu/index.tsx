@@ -131,6 +131,7 @@ const SettingsMenu = () => {
           RESTORE SETTINGS
         </RestoreSettingsText>
         <SaveChangesContainer
+          activated={changesWereMade}
           onClick={() => {
             changesWereMade && setModalOpen(true);
           }}>

@@ -8,7 +8,7 @@ import {
 } from '../../../styles/global';
 import { ReactComponent as SettingsHeader } from '../../../assets/images/SettingsScreen/settings-header-icon.svg';
 
-interface SaveChangesTextProps {
+interface SaveChangesProps {
   activated: boolean;
 }
 
@@ -54,7 +54,7 @@ export const FooterContainer = styled.div`
   width: 100%;
 `;
 
-export const SaveChangesContainer = styled.div`
+export const SaveChangesContainer = styled.div<SaveChangesProps>`
   display: flex;
   cursor: pointer;
   flex-direction: row;
@@ -64,7 +64,7 @@ export const SaveChangesContainer = styled.div`
   height: 3.375rem;
   width: 100%;
   border-radius: 1.25rem;
-  background: ${TransparentDarkBlack};
+  background: ${(props) => (props.activated ? TransparentDarkBlack : '#C7C7C7')};
 `;
 
 export const ScrollableExercisesContainer = styled.div`
@@ -119,7 +119,7 @@ export const SettingsConfigurationOptionHighlightText = styled.span`
   color: ${Rage};
 `;
 
-export const SaveChangesText = styled.h3<SaveChangesTextProps>`
+export const SaveChangesText = styled.h3<SaveChangesProps>`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -127,7 +127,7 @@ export const SaveChangesText = styled.h3<SaveChangesTextProps>`
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   transition: color 0.2s ease-in-out;
-  color: ${(props) => (props.activated ? LightGray : `rgba(235, 235, 235, 0.5)`)};
+  color: ${(props) => (props.activated ? LightGray : White)};
 `;
 
 export const RestoreSettingsText = styled.h3`
