@@ -25,7 +25,6 @@ export const getTrainingSetExercises = (state: TrainingState) => {
 export const getSetRestTime = (state: TrainingState) => {
   const training = getTrainSetLoops(state);
   const set = getCurrentSet(state);
-  console.log('I AM AT THE GETSETRESTTIME SELECTOR', training[set].setRestTime);
   return training[set].setRestTime;
 };
 

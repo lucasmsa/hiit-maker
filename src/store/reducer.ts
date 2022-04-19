@@ -37,6 +37,7 @@ const initialState = {
     Core: 0
   },
   trainingDefaultValues: {
+    warmupTime: INITIAL_DEFAULT_VALUES.warmupTime,
     exerciseRestTime: INITIAL_DEFAULT_VALUES.exerciseRestTime,
     exerciseTrainTime: INITIAL_DEFAULT_VALUES.exerciseTrainTime,
     setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,

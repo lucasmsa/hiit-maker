@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { SetStateAction, useCallback } from 'react';
 import Modal from 'react-modal';
 import {
   ModalContainer,
@@ -39,10 +39,20 @@ const customStyles = {
 interface ModalProps {
   modalOpen: boolean;
   closeModal: () => void;
+  newChangesWereMade: () => void;
+  setLastTrainingDefaultValues: (newDefaultValues: {
+    [key in PossibleConfigurations]: number;
+  }) => void;
   newDefaultValues: { [key in PossibleConfigurations]: number };
 }
 
-const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalProps) => {
+const ConfirmChangesModal = ({
+  modalOpen,
+  closeModal,
+  newDefaultValues,
+  newChangesWereMade,
+  setLastTrainingDefaultValues
+}: ModalProps) => {
   const dispatch: Dispatch<any> = useDispatch();
 
   const handleChangeDefaultValues = useCallback(() => {
@@ -59,7 +69,11 @@ const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalP
           );
         }
       });
+
     updateDefaultValuesPromise(dispatch);
+
+    newChangesWereMade();
+    setLastTrainingDefaultValues(newDefaultValues);
 
     closeModal();
   }, [closeModal, dispatch, newDefaultValues]);
@@ -97,3 +111,6 @@ const ConfirmChangesModal = ({ modalOpen, closeModal, newDefaultValues }: ModalP
 };
 
 export default connect()(ConfirmChangesModal);
+function setChangesWereMade(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}

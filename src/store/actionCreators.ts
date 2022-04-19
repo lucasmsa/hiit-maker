@@ -13,7 +13,6 @@ import {
 } from './actionTypes';
 
 export function addExercise(exercise: Exercise, set: number) {
-  console.log('Action dispatched [Adding exercise]');
   const action: TrainingAction = {
     type: ADD_EXERCISE,
     payload: {
@@ -25,7 +24,6 @@ export function addExercise(exercise: Exercise, set: number) {
 }
 
 export function removeSet(set: number) {
-  console.log('Action dispatched [Removing set]');
   const action: TrainingAction = {
     type: REMOVE_CURRENT_SET,
     payload: {
@@ -36,7 +34,6 @@ export function removeSet(set: number) {
 }
 
 export function updateCurrentSet(set: number) {
-  console.log('Action dispatched [Update current set]');
   const action: TrainingAction = {
     type: UPDATE_CURRENT_SET,
     payload: {
@@ -48,7 +45,6 @@ export function updateCurrentSet(set: number) {
 }
 
 export function addSet(set: number) {
-  console.log('Action dispatched [Adding set]');
   const action: TrainingAction = {
     type: ADD_SET,
     payload: {
@@ -59,7 +55,6 @@ export function addSet(set: number) {
 }
 
 export function updateSetRest(set: number, setRestTime: number) {
-  console.log('Action dispatched [Update set rest]');
   const action: TrainingAction = {
     type: UPDATE_SET_REST_TIME,
     payload: {
@@ -74,7 +69,6 @@ export function updateSetRest(set: number, setRestTime: number) {
 export function updateDefaultTrainingValues(defaultTrainingValues: {
   [key in PossibleConfigurations]: number;
 }) {
-  console.log('Action dispatched [Update default training values]');
   const action: TrainingAction = {
     type: UPDATE_DEFAULT_TRAINING_VALUES,
     payload: {
@@ -87,7 +81,6 @@ export function updateDefaultTrainingValues(defaultTrainingValues: {
 }
 
 export function updateCurrentSetLoopQuantity(loops: number, set: number) {
-  console.log('Action dispatched [Updating current set loop quantity]');
   const action: TrainingAction = {
     type: UPDATE_CURRENT_SET_LOOP_QUANTITY,
     payload: {
@@ -99,7 +92,6 @@ export function updateCurrentSetLoopQuantity(loops: number, set: number) {
 }
 
 export function updateExerciseRestTime(index: number, set: number, restTime: number) {
-  console.log('Action dispatched [Updating exercise Rest Time]');
   const action: TrainingAction = {
     type: UPDATE_EXERCISE_REST_TIME,
     payload: {
@@ -124,7 +116,6 @@ export function updateExerciseTrainTime(index: number, set: number, trainTime: n
 }
 
 export function removeExercise(index: number, set: number) {
-  console.log('Action dispatched [Removing exercise]');
   const action: TrainingAction = {
     type: REMOVE_EXERCISE,
     payload: {

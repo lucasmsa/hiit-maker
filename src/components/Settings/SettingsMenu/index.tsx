@@ -28,13 +28,18 @@ const SettingsMenu = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [newTrainingDefaultValues, setNewTrainingDefaultValues] = useState({
+    warmupTime: trainingDefaultValues.warmupTime,
     exerciseRestTime: trainingDefaultValues.exerciseRestTime,
     exerciseTrainTime: trainingDefaultValues.exerciseTrainTime,
     setRestTime: trainingDefaultValues.setRestTime,
     setRepetitions: trainingDefaultValues.setRepetitions
   });
 
+  const [lastTrainingDefaultValues, setLastTrainingDefaultValues] =
+    useState(newTrainingDefaultValues);
+
   const configurationValues = {
+    'WARMUP TIME': 'warmupTime',
     'EXERCISE TRAIN': 'exerciseTrainTime',
     'EXERCISE REST': 'exerciseRestTime',
     'FINAL REST': 'setRestTime',
@@ -48,12 +53,13 @@ const SettingsMenu = () => {
 
   const handleRestoreDefaultSettings = useCallback(() => {
     if (!changesWereMade) {
-      Object.entries(newTrainingDefaultValues).some(containsEqualDefaultValues) &&
+      Object.entries(lastTrainingDefaultValues).some(containsEqualDefaultValues) &&
         setChangesWereMade(true);
     }
 
     setNewTrainingDefaultValues((oldState) => ({
       ...oldState,
+      warmupTime: INITIAL_DEFAULT_VALUES.warmupTime,
       exerciseRestTime: INITIAL_DEFAULT_VALUES.exerciseRestTime,
       exerciseTrainTime: INITIAL_DEFAULT_VALUES.exerciseTrainTime,
       setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,
@@ -109,6 +115,10 @@ const SettingsMenu = () => {
       <ConfirmChangesModal
         newDefaultValues={newTrainingDefaultValues}
         modalOpen={modalOpen}
+        setLastTrainingDefaultValues={(newDefaultValues) =>
+          setLastTrainingDefaultValues(newDefaultValues)
+        }
+        newChangesWereMade={() => setChangesWereMade(false)}
         closeModal={() => setModalOpen(false)}
       />
       <SettingsHeaderContainer>
