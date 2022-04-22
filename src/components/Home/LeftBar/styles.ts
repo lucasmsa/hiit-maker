@@ -1,43 +1,44 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { Rage } from '../../../styles/global';
+import { ReactComponent as Information } from '../../../assets/images/LeftBar/icons/information-icon.svg';
+import { ReactComponent as Github } from '../../../assets/images/LeftBar/icons/github-icon.svg';
+import { ReactComponent as Settings } from '../../../assets/images/LeftBar/icons/settings-icon.svg';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #EE373F;
-  width: 325px;
+  background-color: ${Rage};
+  width: 20.3125rem;
   height: 100vh;
-  padding-top: 42px;
-`
+  padding-top: 2.625rem;
+`;
 
 export const Header = styled.div`
   padding: 0;
   display: flex;
   flex-direction: row;
-`
-
-export const Dumbell = styled.img`
-  margin: 0;
-  width: 32px;
-  height: 32px;
-`
-
-export const HeaderLeftText = styled.h1`
-  color: #fff;
-  font-style: normal;
-  font-family: Montserrat;
-  text-shadow: 0.1px 0.1px 5px #541612;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 43px;
-  letter-spacing: 0.02em;
-`
+`;
 
 export const IconsContainer = styled.div`
-  margin-top: 28px;
-  margin-bottom: 16px;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
-  width: 100px;
+  width: 6.625rem;
   justify-content: space-evenly;
-`
+`;
+
+export const SettingsIcon = styled(Settings)`
+  margin-top: 0.125rem;
+  cursor: pointer;
+`;
+
+export const GithubIcon = styled(Github)`
+  cursor: pointer;
+`;
+export const InformationIcon = styled(Information)`
+  cursor: pointer;
+`;
+
+export const GithubIconLink = styled.a``;

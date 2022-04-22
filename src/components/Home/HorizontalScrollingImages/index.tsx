@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import {
+  ArrowButton,
+  BalloonTip,
   Container,
-  Item,
+  ExerciseItemContainer,
+  ExerciseWithTooltipContainer,
   HorizontalScroll,
+  Item,
+  NotActiveItemContainer,
   ShadowLeftArrow,
   ShadowRightArrow,
-  TooltipText,
-  TooltipContainer,
-  ExerciseItemContainer,
   Tooltip,
-  BalloonTip,
-  NotActiveItemContainer,
-  ExerciseWithTooltipContainer,
+  TooltipContainer,
+  TooltipText
 } from './styles';
+
+type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
 interface ExercisesListProps {
   list: Exercise[];
@@ -26,10 +30,137 @@ interface SingleExerciseProps {
   name: string;
   image: string;
   selectedItem: string;
+  onClick: (key: any) => void;
 }
 
-const SingleExercise = ({ id, name, image, selectedItem }: SingleExerciseProps) => {
-  const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false)
+interface ArrowProps {
+  children: React.ReactNode;
+  disabled: boolean;
+  onClick: VoidFunction;
+}
+
+const preventDefault = (ev: Event) => {
+  if (ev.preventDefault) {
+    ev.preventDefault();
+  }
+  ev.returnValue = false;
+};
+
+const enableBodyScroll = () => {
+  document && document.removeEventListener('wheel', preventDefault, false);
+};
+
+const disableBodyScroll = () => {
+  document &&
+    document.addEventListener('wheel', preventDefault, {
+      passive: false
+    });
+};
+
+function usePreventBodyScroll() {
+  const [hidden, setHidden] = React.useState(false);
+
+  React.useEffect(() => {
+    hidden ? disableBodyScroll() : enableBodyScroll();
+
+    return enableBodyScroll;
+  }, [hidden]);
+
+  const disableScroll = React.useCallback(() => setHidden(true), []);
+  const enableScroll = React.useCallback(() => setHidden(false), []);
+  return { disableScroll, enableScroll };
+}
+
+function onWheel(apiObj: scrollVisibilityApiType, ev: React.WheelEvent): void {
+  const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
+
+  if (isThouchpad) {
+    ev.stopPropagation();
+    return;
+  }
+
+  if (ev.deltaY < 0) {
+    apiObj.scrollNext();
+  } else if (ev.deltaY > 0) {
+    apiObj.scrollPrev();
+  }
+}
+
+function HorizontalScrollingImages({
+  selectedExercise,
+  setSelectedExercise,
+  list
+}: ExercisesListProps) {
+  const { disableScroll, enableScroll } = usePreventBodyScroll();
+
+  return (
+    <Container onMouseEnter={disableScroll} onMouseLeave={enableScroll}>
+      <HorizontalScroll LeftArrow={LeftArrow} RightArrow={RightArrow} onWheel={onWheel}>
+        {list.map(({ name, image }) => (
+          <Card
+            itemId={name}
+            key={name}
+            name={name}
+            image={image}
+            onClick={() => {
+              setSelectedExercise(name);
+            }}
+            selected={selectedExercise}
+          />
+        ))}
+      </HorizontalScroll>
+    </Container>
+  );
+}
+
+function Arrow({ children, disabled, onClick }: ArrowProps) {
+  return (
+    <ArrowButton disabled={disabled} onClick={onClick} style={{ opacity: disabled ? '0' : '1' }}>
+      {children}
+    </ArrowButton>
+  );
+}
+
+export function LeftArrow() {
+  const { isFirstItemVisible, scrollPrev, visibleItemsWithoutSeparators, initComplete } =
+    useContext(VisibilityContext);
+
+  const [disabled, setDisabled] = useState(!initComplete || (initComplete && isFirstItemVisible));
+  useEffect(() => {
+    if (visibleItemsWithoutSeparators.length) {
+      setDisabled(isFirstItemVisible);
+    }
+  }, [isFirstItemVisible, visibleItemsWithoutSeparators]);
+
+  return (
+    <Arrow disabled={disabled} onClick={() => scrollPrev()}>
+      <ShadowLeftArrow />
+    </Arrow>
+  );
+}
+
+export function RightArrow() {
+  const { isLastItemVisible, scrollNext, visibleItemsWithoutSeparators } =
+    useContext(VisibilityContext);
+
+  const [disabled, setDisabled] = useState(
+    !visibleItemsWithoutSeparators.length && isLastItemVisible
+  );
+  useEffect(() => {
+    if (visibleItemsWithoutSeparators.length) {
+      setDisabled(isLastItemVisible);
+    }
+  }, [isLastItemVisible, visibleItemsWithoutSeparators]);
+
+  return (
+    <Arrow disabled={disabled} onClick={() => scrollNext()}>
+      <ShadowRightArrow />
+    </Arrow>
+  );
+}
+
+const SingleExercise = ({ id, name, image, selectedItem, onClick }: SingleExerciseProps) => {
+  const [selectedTooltip, setSelectedTooltip] = useState<boolean>(false);
 
   return (
     <ExerciseItemContainer
@@ -37,9 +168,7 @@ const SingleExercise = ({ id, name, image, selectedItem }: SingleExerciseProps) 
       onMouseLeave={() => setSelectedTooltip(false)}
     >
       <ExerciseWithTooltipContainer>
-        <TooltipContainer
-          selectedTooltip={selectedTooltip}
-        >
+        <TooltipContainer selectedTooltip={selectedTooltip}>
           <Tooltip>
             <TooltipText>{name}</TooltipText>
           </Tooltip>
@@ -48,43 +177,39 @@ const SingleExercise = ({ id, name, image, selectedItem }: SingleExerciseProps) 
       </ExerciseWithTooltipContainer>
       <NotActiveItemContainer>
         <Item
+          onClick={() => {
+            onClick(name);
+          }}
           src={image}
         />
-      </NotActiveItemContainer> 
+      </NotActiveItemContainer>
     </ExerciseItemContainer>
-  )
+  );
 };
 
-export const ExercisesContainer = (list: any, selected: any) =>
-  list.map((element: any, index: number) => {
-    const { name, image } = element;
-    return <SingleExercise
-      key={name}
-      id={name} 
-      image={image} 
-      name={name} 
-      selectedItem={selected}
-    />;
-  });
-
-const ArrowLeft = <ShadowLeftArrow />
-const ArrowRight = <ShadowRightArrow />
-
-const HorizontalScrollingImages = ({ list, selectedExercise, setSelectedExercise }: ExercisesListProps) => {
-  const exercisesList = ExercisesContainer(list, selectedExercise)
-
+function Card({
+  itemId,
+  onClick,
+  selected,
+  image,
+  name
+}: {
+  itemId: string;
+  onClick: any;
+  selected: any;
+  name: any;
+  image: string;
+}) {
   return (
-    <Container>
-      <HorizontalScroll
-        data={exercisesList}
-        arrowLeft={ArrowLeft}
-        arrowRight={ArrowRight}
-        hideSingleArrow={true}
-        selected={selectedExercise}
-        onSelect={setSelectedExercise}
-      />
-    </Container >
+    <SingleExercise
+      key={name}
+      id={name}
+      image={image}
+      name={name}
+      selectedItem={selected}
+      onClick={onClick}
+    />
   );
 }
 
-export default HorizontalScrollingImages
+export default HorizontalScrollingImages;

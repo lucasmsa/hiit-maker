@@ -1,4 +1,4 @@
 // TODO
-const waitForDispatch = (store: any, actionType: any) => { }
+const waitForDispatch = (store: any, actionType: any) => {};
 
-export default waitForDispatch
+export default waitForDispatch;

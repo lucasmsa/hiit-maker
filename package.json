@@ -20,26 +20,33 @@
     "miragejs": "^0.1.41",
     "moment": "^2.29.1",
     "react": "^16.13.1",
+    "react-animations": "^1.0.0",
+    "react-aspect-ratio": "^1.0.50",
     "react-beautiful-dnd": "^13.1.0",
+    "react-collapse": "^5.1.1",
     "react-dom": "^16.13.1",
-    "react-horizontal-scrolling-menu": "^0.7.10",
+    "react-horizontal-scrolling-menu": "^2.6.1",
     "react-hot-toast": "^2.1.1",
     "react-modal": "^3.14.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-scroll": "^1.8.4",
+    "react-show": "^3.0.4",
     "react-toastify": "^8.0.3",
     "react-tooltip": "^4.2.21",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.0",
-    "typescript": "~3.7.2"
+    "typescript": "^4.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -56,11 +63,23 @@
       "last 1 safari version"
     ]
   },
+  "resolutions": {
+    "**/@typescript-eslint/eslint-plugin": "^5.12.1",
+    "**/@typescript-eslint/parser": "^5.12.1"
+  },
   "devDependencies": {
+    "@types/react-animations": "^1.0.0",
+    "@types/react-collapse": "^5.0.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
     "babel-plugin-inline-react-svg": "^2.0.1",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.0",
+    "prettier": "^2.5.1",
     "redux-devtools-extension": "^2.13.9"
   }
 }

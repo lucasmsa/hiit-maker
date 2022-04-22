@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import Modal from 'react-modal'
+import React, { useCallback } from 'react';
+import Modal from 'react-modal';
 import {
   ModalContainer,
   ModalTopContainer,
@@ -13,15 +13,16 @@ import {
   ConfirmButtonText,
   ConfirmExerciseBoldText,
   ExerciseDescriptionText,
-  ExerciseSelectionText,
-} from './styles'
-import { Dispatch } from 'redux'
-import ErrorToast from '../../../toasts/ErrorToast'
-import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg'
+  ExerciseSelectionText
+} from './styles';
+import { Dispatch } from 'redux';
+import ErrorToast from '../../../toasts/ErrorToast';
+import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
 import { addExercise } from '../../../store/actionCreators';
-import { useDispatch, connect, useSelector } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import { getCurrentSet } from '../../../store/selectors'
+import { useDispatch, connect, useSelector } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { getCurrentSet } from '../../../store/selectors';
+import { TransparentBlackShadow } from '../../../styles/global';
 
 const customStyles = {
   content: {
@@ -32,8 +33,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: 20,
-    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.25)'
-  },
+    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
+  }
 };
 
 interface ModalProps {
@@ -42,28 +43,28 @@ interface ModalProps {
   specificExercise: Exercise;
 }
 
-const InsertExerciseModal = ({
-  specificExercise,
-  modalOpen,
-  closeModal,
-}: ModalProps) => {
+const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalProps) => {
   const dispatch: Dispatch<any> = useDispatch();
   const currentSet = useSelector(getCurrentSet);
 
-  const handleAddExerciseToSet = useCallback(() => { 
-    
-    const addExercisePromise = (dispatch: any) => new Promise((resolve: any, reject) => {
+  const handleAddExerciseToSet = useCallback(() => {
+    const addExercisePromise = (dispatch: any) =>
+      new Promise((resolve: any, reject) => {
         try {
-        dispatch(addExercise(specificExercise, currentSet));
-        resolve();
-      } catch (error) {
-          toast(ErrorToast({ message: 'You have reached the maximum number of exercises allowed on the set'}));
+          dispatch(addExercise(specificExercise, currentSet));
+          resolve();
+        } catch (error) {
+          toast(
+            ErrorToast({
+              message: 'You have reached the maximum number of exercises allowed on the set'
+            })
+          );
         }
-      })
-      addExercisePromise(dispatch);
-   
+      });
+    addExercisePromise(dispatch);
+
     closeModal();
-  }, [closeModal, dispatch, specificExercise, currentSet])
+  }, [closeModal, dispatch, specificExercise, currentSet]);
 
   return (
     <Modal
@@ -76,23 +77,20 @@ const InsertExerciseModal = ({
       <ModalContainer>
         <ModalTopContainer>
           <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
-          <CancelModalIcon
-            style={{ cursor: 'pointer' }}
-            onClick={closeModal}
-          />
+          <CancelModalIcon style={{ cursor: 'pointer' }} onClick={closeModal} />
         </ModalTopContainer>
         <ModalContentContainer>
-          <ModalExerciseImage
-              src={specificExercise.image}
-              alt={specificExercise.name}
-            />
+          <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} />
           <ModalTextAndButtonsContainer>
-            <ExerciseDescriptionText>Exercise: <span style={{ color: '#EE373F'}}>{specificExercise.name.toUpperCase()}</span></ExerciseDescriptionText>
-            <ConfirmExerciseBoldText>Confirm adding this exercise to your workout</ConfirmExerciseBoldText>
+            <ExerciseDescriptionText>
+              Exercise:{' '}
+              <span style={{ color: '#EE373F' }}>{specificExercise.name.toUpperCase()}</span>
+            </ExerciseDescriptionText>
+            <ConfirmExerciseBoldText>
+              Confirm adding this exercise to your workout
+            </ConfirmExerciseBoldText>
             <ButtonContainer>
-              <CancelButton
-                onClick={closeModal}
-              >
+              <CancelButton onClick={closeModal}>
                 <CancelButtonText>Cancel</CancelButtonText>
               </CancelButton>
               <ConfirmButton onClick={() => handleAddExerciseToSet()}>
@@ -103,7 +101,7 @@ const InsertExerciseModal = ({
         </ModalContentContainer>
       </ModalContainer>
     </Modal>
-  )
-}
+  );
+};
 
-export default connect(null, { addExercise })(InsertExerciseModal)
+export default connect(null, { addExercise })(InsertExerciseModal);

@@ -1,11 +1,15 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Home from '../pages/Home'
+import React from 'react';
+import Home from '../pages/Home';
+import Workout from '../pages/Workout';
+import { Route, Switch } from 'react-router-dom';
+import Settings from '../pages/Settings';
 
-const Routes: React.FC = () => (
+const AppRoutes: React.FC = () => (
   <Switch>
-    <Route exact path='/' component={Home} />
+    <Route path="/" exact component={Home} />
+    <Route path="/workout" exact component={Workout} />
+    <Route path="/settings" exact component={Settings} />
   </Switch>
-)
+);
 
-export default Routes
+export default AppRoutes;

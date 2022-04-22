@@ -1,19 +1,15 @@
-import React from 'react'
-import LeftBar from '../../components/Home/LeftBar'
-import MidSection from '../../components/Home/MidSection'
-import WorkoutInformation from '../../components/Home/WorkoutInformation'
-import {
-  Container
-} from './styles'
+import React from 'react';
+import LeftBarWorkout from '../../components/Workout/LeftBarWorkout';
+import SetsProgress from '../../components/Workout/SetsProgress';
+import { Container } from './styles';
 
 const Workout = () => {
   return (
     <Container>
-      <LeftBar />
-      <MidSection />
-      <WorkoutInformation />
+      <LeftBarWorkout />
+      <SetsProgress />
     </Container>
-  )
-}
+  );
+};
 
-export default Workout
+export default Workout;

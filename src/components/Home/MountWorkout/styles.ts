@@ -1,76 +1,83 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import {
+  LightGray,
+  Rage,
+  TransparentBlackShadow,
+  TransparentDarkBlack,
+  White
+} from '../../../styles/global';
 
 export const Container = styled.div`
   height: 77.5vh;
-  width: 580px;
+  width: 36.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #FFFFFF;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-  margin-right: 8px;
-  border-radius: 20px;
-`
+  background: ${White};
+  box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
+  margin-right: 0.5rem;
+  border-radius: 1.25rem;
+`;
 
 export const SetHeader = styled.h2`
-  margin-top: 20px;
-  margin-bottom: 12px;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
-`
+  font-size: 1.5rem;
+`;
 
 export const FooterContainer = styled.div`
   margin-top: auto;
   display: flex;
   flex-direction: column;
   width: 100%;
-`
+`;
 
 export const SetRestTest = styled.h2`
-  margin-top: 20px;
-  margin-bottom: 8px;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
   user-select: none;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 0.875rem;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
-`
+  color: ${TransparentDarkBlack};
+`;
 
 export const SetRestContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24px;
-`
+  margin-bottom: 1.5rem;
+`;
 
 export const SetCounter = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
-  height: 54px;
+  margin-top: 1.125rem;
+  height: 3.375rem;
   width: 100%;
-  border-radius: 20px;
-  background: #EE373F;
-`
+  border-radius: 1.25rem;
+  background: ${TransparentDarkBlack};
+`;
 
 export const CounterText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 0.875rem;
+  line-height: 1.0625rem;
   letter-spacing: 0.02em;
   user-select: none;
-  color: #EBEBEB;
-`
+  color: ${LightGray};
+`;
 
 export const OperationContainer = styled.div`
   display: flex;
@@ -78,22 +85,22 @@ export const OperationContainer = styled.div`
   justify-content: center;
   cursor: pointer;
   height: 100%;
-  width: 30px;
-`
+  width: 1.875rem;
+`;
 
 export const ScrollableExercisesContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  margin-bottom: 36px;
+  margin-bottom: 1.5rem;
   ::-webkit-scrollbar {
-    width: 5px;
+    width: 0.3125rem;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #908A8A;
+    background: #908a8a;
     opacity: 0.8;
-    border-radius: 20px;
+    border-radius: 1.25rem;
   }
 `;
 
@@ -103,13 +110,20 @@ export const ExercisesLimitText = styled.h2`
   font-style: normal;
   user-select: none;
   font-weight: normal;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
   letter-spacing: 0.02em;
-  color: rgba(0, 0, 0, 0.87);
-  margin-bottom: 20px;
-` 
+  color: ${TransparentDarkBlack};
+  margin-bottom: 1.25rem;
+`;
 
 export const ExercisesLimitCountText = styled.span`
-  color: #EE373F;
-`
+  color: ${Rage};
+`;
+
+export const CountTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 10rem;
+`;
