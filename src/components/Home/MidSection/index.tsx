@@ -57,7 +57,7 @@ const MidSection = () => {
             Set Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5
           </SetsLimitText>
           <CurrentTrainingSetsContainer>
-            {trainingSets.map((set, index) => {
+            {trainingSets.map((set: TrainSetLoop, index: number) => {
               const setIcon =
                 currentSet === index ? (
                   <SelectedSetIcon key={index} style={{ cursor: 'pointer' }} />

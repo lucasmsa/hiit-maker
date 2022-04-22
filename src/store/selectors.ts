@@ -4,11 +4,13 @@ export const getCurrentSet = (state: TrainingState) => state.currentSet;
 
 export const getTotalTrainingTime = (state: TrainingState) => {
   const training = getTrainSetLoops(state);
-  return training.reduce(
+  const { warmupTime } = state.trainingDefaultValues;
+  const totalExerciseTime = training.reduce(
     (accumulator, set) =>
       accumulator + set.totalSetTime + (set.trainSet.exercises.length ? set.setRestTime : 0),
     0
   );
+  return totalExerciseTime > 0 ? warmupTime + totalExerciseTime : 0;
 };
 
 export const getAfflictedBodyParts = (state: TrainingState) => {

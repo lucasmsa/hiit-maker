@@ -26,7 +26,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import {
   getTotalTrainingTime,
   getAfflictedBodyParts,
-  getTrainSetLoops
+  getTrainSetLoops,
+  getTrainingDefaultValues
 } from '../../../store/selectors';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import ErrorToast from '../../../toasts/ErrorToast';
@@ -44,7 +45,7 @@ const WorkoutInformation = () => {
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
 
   const atLeastOneExerciseWasAddedOnEverySet = () => {
-    return trainSetLoops.every((trainSetLoop) => {
+    return trainSetLoops.every((trainSetLoop: TrainSetLoop) => {
       return trainSetLoop.trainSet.exercises.length !== 0;
     });
   };

@@ -1,5 +1,10 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core';
 
+interface States {
+  training: TraininigState;
+  workoutExecution: WorkoutExecutionState;
+}
+
 type IAfflictedAreasCounter<AfflictedAreas> = {
   [Property in keyof AfflictedAreas]: number;
 };
@@ -40,6 +45,13 @@ type TrainingState = {
   totalTrainingTime: number;
 };
 
+type WorkoutExecutionState = {
+  currentSet: number;
+  currentSetLoop: number;
+  currentSetExercise: number;
+  currentActionRemainingTime: number;
+};
+
 type TrainingAction = {
   type: string;
   payload: {
@@ -51,6 +63,16 @@ type TrainingAction = {
     trainTime?: number;
     setRestTime?: number;
     defaultTrainingValues?: TrainingDefaultValues;
+  };
+};
+
+type WorkoutExecutionAction = {
+  type: string;
+  payload: {
+    set?: number;
+    exercise?: Exercise;
+    time?: number;
+    loop?: number;
   };
 };
 

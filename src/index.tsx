@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './App';
-import reducer from './store/reducer';
+import trainingReducer from './store/trainingReducer';
+import workoutExecutionReducer from './store/workoutExecutionReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store: Store<TrainingState, TrainingAction> & {
+const reducers = combineReducers({
+  training: trainingReducer,
+  workoutExecution: workoutExecutionReducer
+});
+
+const store: Store<any, any> & {
   dispatch: DispatchType;
-} = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+} = createStore(trainingReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
