@@ -14,7 +14,7 @@ import {
   RestoreSettingsText
 } from './styles';
 import { connect, shallowEqual, useSelector } from 'react-redux';
-import { getTrainingDefaultValues } from '../../../store/selectors';
+import { getTrainingDefaultValues } from '../../../store/training/selectors';
 import TimeInput from '../../Home/TimeInput';
 import { INITIAL_DEFAULT_VALUES } from '../../../config/contants';
 import { PossibleConfigurations } from '../../../utils/settings/possibleConfigurations';
@@ -52,10 +52,9 @@ const SettingsMenu = () => {
   };
 
   const handleRestoreDefaultSettings = useCallback(() => {
-    if (!changesWereMade) {
-      Object.entries(lastTrainingDefaultValues).some(containsEqualDefaultValues) &&
-        setChangesWereMade(true);
-    }
+    Object.entries(lastTrainingDefaultValues).some(containsEqualDefaultValues)
+      ? setChangesWereMade(true)
+      : setChangesWereMade(false);
 
     setNewTrainingDefaultValues((oldState) => ({
       ...oldState,
@@ -65,7 +64,7 @@ const SettingsMenu = () => {
       setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,
       setRepetitions: INITIAL_DEFAULT_VALUES.setRepetitions
     }));
-  }, [changesWereMade, newTrainingDefaultValues]);
+  }, [changesWereMade, newTrainingDefaultValues, lastTrainingDefaultValues]);
 
   const settingsConfigurationsOption = useCallback(
     (highlightedText: string, value: number) => (

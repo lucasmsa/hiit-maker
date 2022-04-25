@@ -25,8 +25,12 @@ import { ReactComponent as RemoveSetIcon } from '../../../assets/images/midSecti
 import MountWorkout from '../MountWorkout';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { addSet, removeSet, updateCurrentSet } from '../../../store/actionCreators';
-import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
+import { addSet, removeSet, updateCurrentSet } from '../../../store/training/actionCreators';
+import {
+  getCurrentSet,
+  getTrainingSetExercises,
+  getTrainSetLoops
+} from '../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 

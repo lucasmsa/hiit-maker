@@ -1,4 +1,4 @@
-import { PossibleConfigurations } from '../utils/settings/possibleConfigurations';
+import { PossibleConfigurations } from '../../utils/settings/possibleConfigurations';
 import {
   ADD_SET,
   ADD_EXERCISE,

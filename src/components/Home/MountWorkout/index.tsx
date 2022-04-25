@@ -23,8 +23,11 @@ import {
   getSetRestTime,
   getTrainingSetExercises,
   getTrainingSetLoopQuantity
-} from '../../../store/selectors';
-import { updateCurrentSetLoopQuantity, updateSetRest } from '../../../store/actionCreators';
+} from '../../../store/training/selectors';
+import {
+  updateCurrentSetLoopQuantity,
+  updateSetRest
+} from '../../../store/training/actionCreators';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';

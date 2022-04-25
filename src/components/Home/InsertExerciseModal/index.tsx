@@ -18,10 +18,10 @@ import {
 import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
-import { addExercise } from '../../../store/actionCreators';
+import { addExercise } from '../../../store/training/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { getCurrentSet } from '../../../store/selectors';
+import { getCurrentSet } from '../../../store/training/selectors';
 import { TransparentBlackShadow } from '../../../styles/global';
 
 const customStyles = {
@@ -72,8 +72,7 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
       // onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
-      contentLabel="Exercise Modal"
-    >
+      contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>
           <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { ReactComponent as StopButton } from '../../../assets/images/WorkoutScreen/stop_button.svg';
-import { getCurrentSet } from '../../../store/selectors';
+import { getCurrentSet } from '../../../store/training/selectors';
 import {
   BottomContainer,
   Container,

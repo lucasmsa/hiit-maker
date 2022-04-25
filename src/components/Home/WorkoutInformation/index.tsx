@@ -28,7 +28,7 @@ import {
   getAfflictedBodyParts,
   getTrainSetLoops,
   getTrainingDefaultValues
-} from '../../../store/selectors';
+} from '../../../store/training/selectors';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { Link } from 'react-router-dom';

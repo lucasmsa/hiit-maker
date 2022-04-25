@@ -17,7 +17,7 @@ import {
 import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
-import { updateDefaultTrainingValues } from '../../../store/actionCreators';
+import { updateDefaultTrainingValues } from '../../../store/training/actionCreators';
 import { useDispatch, connect } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { TransparentBlackShadow } from '../../../styles/global';

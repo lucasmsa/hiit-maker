@@ -7,8 +7,8 @@ import {
   updateCurrentSet,
   updateExerciseRestTime,
   updateExerciseTrainTime
-} from '../../../store/actionCreators';
-import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
+} from '../../../store/training/actionCreators';
+import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/training/selectors';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 import TimeInput from '../TimeInput';
 import {

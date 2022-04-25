@@ -4,8 +4,8 @@ import { createStore, applyMiddleware, Store, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import App from './App';
-import trainingReducer from './store/trainingReducer';
-import workoutExecutionReducer from './store/workoutExecutionReducer';
+import trainingReducer from './store/training/trainingReducer';
+import workoutExecutionReducer from './store/workoutExecution/workoutExecutionReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
@@ -15,7 +15,7 @@ const reducers = combineReducers({
 
 const store: Store<any, any> & {
   dispatch: DispatchType;
-} = createStore(trainingReducer, composeWithDevTools(applyMiddleware(thunk)));
+} = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
