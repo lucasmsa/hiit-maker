@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SetsProgress from '../SetsProgress';
 import {
   Container,
   ExerciseImage,
@@ -7,7 +8,8 @@ import {
   NextExercisesDivider,
   NextExercisesTitleText,
   NextExercisesWithImageInnerContainer,
-  NextExercisesWithImageOuterContainer
+  NextExercisesWithImageOuterContainer,
+  SetsProgreessContainer
 } from './styles';
 
 const RightBarWorkout = () => (
@@ -32,6 +34,9 @@ const RightBarWorkout = () => (
         </NextExercisesWithImageInnerContainer>
       </NextExercisesWithImageOuterContainer>
     </NextExercisesContainer>
+    <SetsProgreessContainer>
+      <SetsProgress />
+    </SetsProgreessContainer>
   </Container>
 );
 

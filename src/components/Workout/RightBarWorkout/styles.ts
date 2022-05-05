@@ -66,3 +66,11 @@ export const ExerciseName = styled.h3`
   letter-spacing: 0.02em;
   color: #ffffff;
 `;
+
+export const SetsProgreessContainer = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;

@@ -38,19 +38,19 @@ const SetsProgress = () => {
 
   return (
     <Container>
-      <HeaderTextContainer>
+      {/* <HeaderTextContainer>
         <ExerciseText>
           EXERCISE {'1'}:
           <RedExerciseText>{` ${'REGULAR SQUATS'}`.toLocaleUpperCase()}</RedExerciseText>
         </ExerciseText>
-      </HeaderTextContainer>
-      <ExerciseImage src="https://qph.fs.quoracdn.net/main-qimg-4105302bd7ccde31124497ebf4b5ce52" />
+      </HeaderTextContainer> */}
+      {/* <ExerciseImage src="https://qph.fs.quoracdn.net/main-qimg-4105302bd7ccde31124497ebf4b5ce52" /> */}
       <BottomContainer>
-        <TrainingTimeContainer>
+        {/* <TrainingTimeContainer>
           <TrainingTimeRedText>{'TRAINING TIME'.toLocaleUpperCase()}</TrainingTimeRedText>
           <TrainingTimeClockText>{'00:00:60'}</TrainingTimeClockText>
           <StopButton />
-        </TrainingTimeContainer>
+        </TrainingTimeContainer> */}
         <TrainingProgressContainer>
           <ProgressBlock>
             <ProgressBlockHeaderText>PROGRESS</ProgressBlockHeaderText>

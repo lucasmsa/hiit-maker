@@ -1,15 +1,15 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import {
   Container,
-  SettingsHeaderContainer,
   SettingsHeaderText,
+  SettingsHeaderContainer,
   FooterContainer,
   SettingsHeaderIcon,
   SettingsContentContainer,
-  SettingsConfigurationOptionContainer,
   SettingsConfigurationOptionText,
-  SettingsConfigurationOptionHighlightText,
+  SettingsConfigurationOptionContainer,
   SaveChangesText,
+  SettingsConfigurationOptionHighlightText,
   SaveChangesContainer,
   RestoreSettingsText
 } from './styles';

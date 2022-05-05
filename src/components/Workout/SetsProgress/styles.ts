@@ -3,7 +3,8 @@ import {
   LightGray,
   Rage,
   TransparentBlackShadow,
-  TransparentDarkBlack
+  TransparentDarkBlack,
+  White
 } from '../../../styles/global';
 import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg';
 import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg';
@@ -12,9 +13,7 @@ import { ReactComponent as ConnectingLine } from '../../../assets/images/Workout
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 4rem;
-  width: 65%;
-  height: 100%;
+  width: 90%;
 `;
 
 export const ExerciseText = styled.h2`
@@ -73,8 +72,6 @@ export const TrainingTimeContainer = styled.div`
   width: 100%;
   align-items: center;
   margin-top: 1%;
-  margin-left: 0;
-  margin-bottom: 0;
 `;
 
 export const TrainingProgressContainer = styled.div`
@@ -83,7 +80,6 @@ export const TrainingProgressContainer = styled.div`
   width: 100%;
   height: 100%;
   align-items: flex-start;
-  margin-bottom: 0;
   justify-content: flex-start;
 `;
 
@@ -100,11 +96,10 @@ export const TrainingTimeRedText = styled.h2`
 export const ProgressBlock = styled.div`
   display: flex;
   border-radius: 1.25rem;
-  align-self: flex-start;
+  align-self: center;
   flex-direction: column;
-  width: 65%;
-  margin-left: 5%;
-  height: 100%;
+  background: ${White};
+  width: 90%;
   box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
 `;
 
@@ -113,9 +108,9 @@ export const ProgressBlockTimesBottom = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: ${Rage};
+  background: ${TransparentDarkBlack};
   width: 100%;
-  height: 4.5vh;
+  height: 5vh;
   box-shadow: 0rem 0.0625rem 0.125rem rgba(238, 55, 63, 0.5);
   border-radius: 1.25rem;
   margin-top: auto;
@@ -141,7 +136,7 @@ export const ProgressBlockHeaderText = styled.h2`
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${Rage};
-  margin-bottom: 4%;
+  margin-bottom: 8%;
 `;
 
 export const ExercisesOnSetContainer = styled.div`
@@ -150,8 +145,7 @@ export const ExercisesOnSetContainer = styled.div`
   margin-left: 5%;
   margin-right: 5%;
   overflow-y: scroll;
-  height: 70%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
   ::-webkit-scrollbar {
     width: 0.3125rem;
   }
@@ -171,6 +165,7 @@ export const ExercisesOnSetText = styled.h2`
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
+  overflow: hidden;
 `;
 
 export const InsideSetContainer = styled.div`
@@ -179,11 +174,11 @@ export const InsideSetContainer = styled.div`
 `;
 
 export const DotsContainer = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
-  margin-left: auto;
   align-items: center;
-  margin-right: 5%;
+  right: 5%;
 `;
 
 export const ExercisesOnSetDots = styled.div`
