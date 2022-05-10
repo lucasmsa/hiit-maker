@@ -161,7 +161,7 @@ export const ExercisesOnSetText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 0.7vw;
+  font-size: 0.9vw;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -195,4 +195,8 @@ export const StyledNotSelectedSetIcon = styled(NotSelectedSetIcon)`
   cursor: pointer;
 `;
 
-export const StyledConnectingLine = styled(ConnectingLine)``;
+export const StyledConnectingLine = styled.div`
+  background: ${LightGray};
+  width: 0.125rem;
+  height: 1.75rem;
+`;

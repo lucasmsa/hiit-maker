@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Rage, White } from '../../../styles/global';
 
 export const Container = styled.div`
-  width: 30vw;
+  width: 40vw;
   height: 100vh;
   background: ${Rage};
   margin-left: auto;
@@ -26,7 +26,7 @@ export const NextExercisesTitleText = styled.h2`
 `;
 
 export const NextExercisesDivider = styled.div`
-  width: 25vw;
+  width: 80%;
   height: 0.125rem;
   background: ${White};
   margin: 1.5rem 0 2rem 0;
@@ -34,23 +34,23 @@ export const NextExercisesDivider = styled.div`
 
 export const NextExercisesWithImageOuterContainer = styled.div`
   display: flex;
-  width: 25vw;
-  height: 25vh;
   flex-direction: row;
   align-items: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
   justify-content: center;
 `;
 
 export const NextExercisesWithImageInnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   align-items: center;
 `;
 
 export const ExerciseImage = styled.img`
-  width: 9rem;
-  height: 8rem;
+  width: 9vw;
+  height: 14vh;
   border-radius: 0.625rem;
   margin-bottom: 1rem;
 `;

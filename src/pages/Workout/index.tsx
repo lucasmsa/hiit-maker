@@ -1,12 +1,12 @@
 import React from 'react';
-import LeftBarWorkout from '../../components/Workout/LeftBarWorkout';
 import RightBarWorkout from '../../components/Workout/RightBarWorkout';
-import SetsProgress from '../../components/Workout/SetsProgress';
+import WorkoutVisualization from '../../components/Workout/WorkoutVisualization';
 import { Container } from './styles';
 
 const Workout = () => {
   return (
     <Container>
+      <WorkoutVisualization />
       <RightBarWorkout />
     </Container>
   );

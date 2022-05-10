@@ -64,7 +64,7 @@ const SetsProgress = () => {
                   );
                 return (
                   <InsideSetContainer>
-                    <ExercisesOnSetText style={{ marginTop: index > 0 ? '28px' : 0 }}>
+                    <ExercisesOnSetText style={{ marginTop: index > 0 ? '1.75rem' : 0 }}>
                       {set.name}
                     </ExercisesOnSetText>
                     <DotsContainer>
@@ -76,7 +76,7 @@ const SetsProgress = () => {
               })}
             </ExercisesOnSetContainer>
             <ProgressBlockTimesBottom>
-              <ProgressBlockBottomText>{`${'5'} Times`}</ProgressBlockBottomText>
+              <ProgressBlockBottomText>{`${'3'} SET REPETITIONS LEFT`}</ProgressBlockBottomText>
             </ProgressBlockTimesBottom>
           </ProgressBlock>
         </TrainingProgressContainer>
