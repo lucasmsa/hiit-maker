@@ -33,8 +33,7 @@ export const AddSetText = styled.h3`
 `;
 
 export const HorizontalDumbell = styled(HorizontalDumbellIcon)`
-  margin-left: auto;
-  margin-right: -2.25rem;
+  width: 3.5vw;
 `;
 
 export const SetsLimitText = styled.h3`
@@ -85,6 +84,8 @@ export const HeaderTextContainer = styled.div`
 export const HeaderInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 2.5vh;
+  margin-left: -2vw;
 `;
 
 export const RightTriangle = styled.div`

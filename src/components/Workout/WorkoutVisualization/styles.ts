@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
-import { Rage } from '../../../styles/global';
+import { Rage, TransparentDarkBlack } from '../../../styles/global';
 import { ReactComponent as Branding } from '../../../assets/images/WorkoutScreen/logo-workout.svg';
 
 export const Container = styled.div`
@@ -27,8 +27,8 @@ export const HeaderSetAndLogoContainer = styled.div`
 
 export const BannerContainer = styled.div`
   display: flex;
-  height: 50vh;
-  width: 55vw;
+  height: 45vh;
+  width: 52.5vw;
   align-self: center;
   justify-content: center;
   align-items: center;
@@ -62,4 +62,14 @@ export const BottomStatusText = styled.h2`
   line-height: 17px;
   letter-spacing: 0.02em;
   color: ${Rage};
+`;
+
+export const TimeCountdownText = styled.h3`
+  font-family: Montserrat;
+  margin-top: 2vh;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3vw;
+  letter-spacing: 0.02em;
+  color: ${TransparentDarkBlack};
 `;

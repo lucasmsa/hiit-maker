@@ -16,11 +16,11 @@ export const HeaderTexts = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.9vw;
+  font-size: 1.8vw;
   line-height: 1.8125rem;
   letter-spacing: 0.02em;
   align-items: center;
-  margin-left: 0.75rem;
+  margin-left: 1vw;
   color: ${White};
 `;
 
@@ -29,8 +29,8 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   align-items: center;
   background: ${({ color }) => (color === 'BLACK' ? TransparentDarkBlack : Rage)};
   width: ${({ small, medium }) => (small ? '90%' : medium ? '100%' : '120%')};
-  height: 2.875rem;
-  padding-left: 3rem;
+  height: 6vh;
+  padding-left: 3vw;
 `;
 
 export const InformationContainer = styled.div<InformationContainerProps>`
@@ -44,15 +44,16 @@ export const LeftTriangle = styled.div`
   position: absolute;
   width: 0;
   height: 0;
-  border-bottom: 2.875rem solid white;
-  border-right: 1.5rem solid transparent;
+  border-bottom: 6vh solid white;
+  margin-left: -0.08vw;
+  border-right: 2vw solid transparent;
 `;
 
 export const RightTriangle = styled.div`
   position: relative;
   width: 0;
   height: 0;
-  margin-left: -1.5rem;
-  border-bottom: 2.875rem solid white;
-  border-left: 1.5rem solid transparent;
+  margin-left: -2vw;
+  border-bottom: 6vh solid white;
+  border-left: 2vw solid transparent;
 `;

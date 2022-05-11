@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  BrandingIcon,
   Container,
   GithubIcon,
   GithubIconLink,
@@ -23,7 +24,7 @@ const LeftBar = ({ isHomePage }: LeftBarProps) => {
   return (
     <Container>
       <Header>
-        <Branding />
+        <BrandingIcon />
       </Header>
       <IconsContainer>
         <GithubIconLink href={GITHUB_LINK} target="_blank">

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { DarkGray, Rage, TransparentDarkBlack, White } from '../../../styles/global';
+import { ReactComponent as Clock } from '../../../assets/images/WorkoutInformation/icons/clock.svg';
+import { ReactComponent as TargetMuscles } from '../../../assets/images/WorkoutInformation/icons/targetMuscles.svg';
+import { ReactComponent as ManRunning } from '../../../assets/images/WorkoutInformation/icons/manRunning.svg';
 
 export const Container = styled.div`
   display: flex;
@@ -123,8 +126,8 @@ export const StartTrainingContainer = styled.div`
 
 export const PlayButton = styled.div`
   cursor: pointer;
-  width: 6.25rem;
-  height: 6.25rem;
+  width: 8vw;
+  height: 14.5vh;
   background: radial-gradient(rgba(238, 55, 63, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
   border-radius: 50%;
   position: relative;
@@ -154,8 +157,8 @@ export const PlayButtonHovered = styled(PlayButton)`
   &:before {
     content: '';
     position: absolute;
-    width: 150%;
-    height: 150%;
+    width: 12vw;
+    height: 22vh;
     -webkit-animation-delay: 0s;
     animation-delay: 0s;
     -webkit-animation: pulsate1 2s;
@@ -205,4 +208,14 @@ export const PlayButtonHovered = styled(PlayButton)`
       box-shadow: none;
     }
   }
+`;
+
+export const ClockIcon = styled(Clock)`
+  width: 2vw;
+`;
+export const TargetMusclesIcon = styled(TargetMuscles)`
+  width: 2vw;
+`;
+export const ManRunningIcon = styled(ManRunning)`
+  width: 2vw;
 `;

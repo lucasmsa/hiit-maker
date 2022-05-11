@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   BannerContainer,
   BannerIcon,
@@ -7,10 +7,12 @@ import {
   Container,
   HeaderContainer,
   BottomStatusText,
-  HeaderSetAndLogoContainer
+  HeaderSetAndLogoContainer,
+  TimeCountdownText
 } from './styles';
 import InformationHeaderSection from '../../Home/InformationHeaderSection';
 import { White } from '../../../styles/global';
+import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 
 const WorkoutVisualization = () => {
   const statusInformations = {
@@ -18,6 +20,7 @@ const WorkoutVisualization = () => {
     pause: { icon: 'fa6-solid:circle-pause', bottomText: 'SET PAUSED' },
     finish: { icon: 'bi:check-circle-fill', bottomText: 'TRAINING IS OVER!!!' }
   };
+  const formattedTotalTrainingTime = useMemo(() => secondsToHourFormat(0), []);
 
   return (
     <Container>
@@ -33,6 +36,7 @@ const WorkoutVisualization = () => {
       </BannerContainer>
       <BottomContainer>
         <BottomStatusText>{statusInformations['finish'].bottomText}</BottomStatusText>
+        <TimeCountdownText>{formattedTotalTrainingTime}</TimeCountdownText>
       </BottomContainer>
     </Container>
   );

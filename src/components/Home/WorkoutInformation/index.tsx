@@ -1,13 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { ReactComponent as TargetMusclesFront } from '../../../assets/images/WorkoutInformation/targetMusclesFront.svg';
 import { ReactComponent as TargetMusclesBack } from '../../../assets/images/WorkoutInformation/targetMusclesBack.svg';
-import { ReactComponent as ClockIcon } from '../../../assets/images/WorkoutInformation/icons/clock.svg';
-import { ReactComponent as TargetMusclesIcon } from '../../../assets/images/WorkoutInformation/icons/targetMuscles.svg';
 import { ReactComponent as ColoredChestIcon } from '../../../assets/images/WorkoutInformation/coloredChest.svg';
 import { ReactComponent as ColoredAbsIcon } from '../../../assets/images/WorkoutInformation/coloredAbs.svg';
 import { ReactComponent as ColoredBackIcon } from '../../../assets/images/WorkoutInformation/coloredBack.svg';
 import { ReactComponent as ColoredLegsIcon } from '../../../assets/images/WorkoutInformation/coloredLegs.svg';
-import { ReactComponent as ManRunningIcon } from '../../../assets/images/WorkoutInformation/icons/manRunning.svg';
 import {
   Container,
   TargetMusclesContainer,
@@ -19,7 +16,10 @@ import {
   FrontContainer,
   BackContainer,
   PlayButton,
-  PlayButtonHovered
+  PlayButtonHovered,
+  TargetMusclesIcon,
+  ClockIcon,
+  ManRunningIcon
 } from './styles';
 import { toast } from 'react-hot-toast';
 import { shallowEqual, useSelector } from 'react-redux';

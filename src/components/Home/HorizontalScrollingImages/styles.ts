@@ -8,7 +8,7 @@ interface TooltipContainerProps {
 }
 
 export const Container = styled.div`
-  min-width: 16.875rem;
+  min-width: 18vw;
   height: 6.25rem;
   justify-content: center;
   margin-left: -1.5rem;
@@ -33,8 +33,8 @@ export const Item = styled.img`
   border: none;
   user-drag: none;
   -webkit-user-drag: none;
-  width: 5.25rem;
-  height: 3.75rem;
+  width: 6vw;
+  height: 8vh;
   border-radius: 0.75rem;
 `;
 
@@ -58,8 +58,9 @@ export const ExerciseItemContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   height: 6.25rem;
-  width: 6.75rem;
+  width: 8vw;
 `;
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`

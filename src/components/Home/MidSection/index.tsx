@@ -33,6 +33,7 @@ import {
 } from '../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
+import InformationHeaderSection from '../InformationHeaderSection';
 
 const MidSection = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -49,11 +50,12 @@ const MidSection = () => {
   return (
     <Container>
       <HeaderInfoContainer>
-        <HeaderTextContainer>
-          <HorizontalDumbell />
-          <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
-        </HeaderTextContainer>
-        <RightTriangle />
+        <InformationHeaderSection
+          title="Create your workout with a few steps"
+          backgroundColor="RED"
+          icon={<HorizontalDumbell />}
+          reverse
+        />
       </HeaderInfoContainer>
       <ExercisesContainer>
         <SetsContainer>
