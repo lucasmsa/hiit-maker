@@ -85,7 +85,7 @@ export const HeaderInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 2.5vh;
-  margin-left: -2vw;
+  margin-left: -12vw;
 `;
 
 export const RightTriangle = styled.div`

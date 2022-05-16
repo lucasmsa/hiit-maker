@@ -15,8 +15,6 @@ import {
   StartTrainingContainer,
   FrontContainer,
   BackContainer,
-  PlayButton,
-  PlayButtonHovered,
   TargetMusclesIcon,
   ClockIcon,
   ManRunningIcon
@@ -33,6 +31,7 @@ import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { Link } from 'react-router-dom';
 import InformationHeaderSection from '../InformationHeaderSection';
+import { PlayButton, PlayButtonHovered } from '../../PlayAndStopButtons/styles';
 
 const WorkoutInformation = () => {
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0;

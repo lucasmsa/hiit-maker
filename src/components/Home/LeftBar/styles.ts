@@ -26,7 +26,6 @@ export const IconsContainer = styled.div`
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
-  width: 6.625rem;
   justify-content: space-evenly;
 `;
 
@@ -50,4 +49,10 @@ export const GithubIconLink = styled.a``;
 
 export const BrandingIcon = styled(Branding)`
   width: 15vw;
+`;
+
+export const CreateWorkoutHeaderDescriptionContainer = styled.div`
+  position: absolute;
+  left: 22vw;
+  top: 2vh;
 `;

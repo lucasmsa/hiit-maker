@@ -69,7 +69,7 @@ export const TimeCountdownText = styled.h3`
   margin-top: 2vh;
   font-style: normal;
   font-weight: 600;
-  font-size: 3vw;
+  font-size: 2vw;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
 `;

@@ -9,7 +9,7 @@ export const Container = styled.div`
   box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
   background-color: ${White};
   width: 20vw;
-  border-radius: 0.625rem;
+  border-radius: 0.625vw;
   height: 6vh;
   padding-right: 1.125rem;
 `;

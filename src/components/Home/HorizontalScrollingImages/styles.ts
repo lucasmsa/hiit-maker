@@ -9,7 +9,8 @@ interface TooltipContainerProps {
 
 export const Container = styled.div`
   min-width: 18vw;
-  height: 6.25rem;
+  height: 12vh;
+  scroll-behavior: smooth;
   justify-content: center;
   margin-left: -1.5rem;
   overflow: hidden;
@@ -59,7 +60,7 @@ export const ExerciseItemContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 6.25rem;
+  height: 12vh;
   width: 8vw;
 `;
 
@@ -73,9 +74,10 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
 
 export const Tooltip = styled.div`
   position: absolute;
+  z-index: 10;
   transform: translateX(-37.5px) translateY(-10px);
   width: 6.875rem;
-  height: 1.25rem;
+  height: 1.5rem;
   display: flex;
   background: ${LightGray};
   align-items: center;
@@ -87,7 +89,7 @@ export const TooltipText = styled.h3`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 0.5rem;
+  font-size: 70%;
   color: ${DarkGray};
 `;
 
@@ -103,7 +105,8 @@ export const ArrowButton = styled.button`
   cursor: pointer;
   display: flex;
   min-width: 1.25rem;
-  height: 7.5rem;
+  height: 8vh;
+  margin-top: 2.75vh;
   flex-direction: column;
   background: none;
   color: inherit;

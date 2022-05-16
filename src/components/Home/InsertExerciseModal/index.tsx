@@ -22,7 +22,7 @@ import { addExercise } from '../../../store/training/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { getCurrentSet } from '../../../store/training/selectors';
-import { TransparentBlackShadow } from '../../../styles/global';
+import { Rage, TransparentBlackShadow } from '../../../styles/global';
 
 const customStyles = {
   content: {
@@ -82,8 +82,7 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
           <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} />
           <ModalTextAndButtonsContainer>
             <ExerciseDescriptionText>
-              Exercise:{' '}
-              <span style={{ color: '#EE373F' }}>{specificExercise.name.toUpperCase()}</span>
+              Exercise: <span style={{ color: Rage }}>{specificExercise.name.toUpperCase()}</span>
             </ExerciseDescriptionText>
             <ConfirmExerciseBoldText>
               Confirm adding this exercise to your workout

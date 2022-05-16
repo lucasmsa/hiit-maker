@@ -20,7 +20,7 @@ export const ExerciseText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   line-height: 1.8125rem;
   margin-left: 15%;
   letter-spacing: 0.02em;
@@ -43,7 +43,7 @@ export const TrainingTimeClockText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 3vw;
+  font-size: 3rem;
   line-height: 6.125rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -87,7 +87,7 @@ export const TrainingTimeRedText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${Rage};
@@ -110,7 +110,7 @@ export const ProgressBlockTimesBottom = styled.div`
   align-items: center;
   background: ${TransparentDarkBlack};
   width: 100%;
-  height: 5vh;
+  height: 3rem;
   box-shadow: 0rem 0.0625rem 0.125rem rgba(238, 55, 63, 0.5);
   border-radius: 1.25rem;
   margin-top: auto;
@@ -120,7 +120,7 @@ export const ProgressBlockBottomText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1vw;
+  font-size: 1rem;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${LightGray};
@@ -132,7 +132,7 @@ export const ProgressBlockHeaderText = styled.h2`
   font-weight: 600;
   align-self: center;
   margin-top: 4%;
-  font-size: 1vw;
+  font-size: 1rem;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${Rage};
@@ -161,7 +161,7 @@ export const ExercisesOnSetText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 0.9vw;
+  font-size: 0.8rem;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};

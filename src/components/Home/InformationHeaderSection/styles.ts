@@ -16,11 +16,11 @@ export const HeaderTexts = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.8vw;
+  font-size: 1.5rem;
   line-height: 1.8125rem;
   letter-spacing: 0.02em;
   align-items: center;
-  margin-left: 1vw;
+  margin-left: 1rem;
   color: ${White};
 `;
 
@@ -30,7 +30,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   background: ${({ color }) => (color === 'BLACK' ? TransparentDarkBlack : Rage)};
   width: ${({ small, medium }) => (small ? '90%' : medium ? '100%' : '120%')};
   height: 6vh;
-  padding-left: 3vw;
+  padding-left: 3rem;
 `;
 
 export const InformationContainer = styled.div<InformationContainerProps>`

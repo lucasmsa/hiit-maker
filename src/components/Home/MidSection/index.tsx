@@ -49,14 +49,7 @@ const MidSection = () => {
 
   return (
     <Container>
-      <HeaderInfoContainer>
-        <InformationHeaderSection
-          title="Create your workout with a few steps"
-          backgroundColor="RED"
-          icon={<HorizontalDumbell />}
-          reverse
-        />
-      </HeaderInfoContainer>
+      <HeaderInfoContainer />
       <ExercisesContainer>
         <SetsContainer>
           <SetsLimitText>
