@@ -4,7 +4,6 @@ import {
   AddSetText,
   RemoveSetText,
   SetsContainer,
-  HeaderTextStyle,
   AddSetContainer,
   WorkoutContainer,
   RemoveSetContainer,
@@ -12,9 +11,6 @@ import {
   CurrentTrainingSetsContainer,
   SetsLimitText,
   SetsLimitCountText,
-  HeaderTextContainer,
-  RightTriangle,
-  HorizontalDumbell,
   HeaderInfoContainer
 } from './styles';
 import { ReactComponent as AddSetIcon } from '../../../assets/images/midSection/addSet.svg';
@@ -41,11 +37,6 @@ const MidSection = () => {
   const currentSet = useSelector(getCurrentSet);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
   const setsQuantity = trainingSets.length;
-  console.log('at the mid section, here are the training sets', trainingSets);
-  console.log(
-    'at the mid section, here are the training set exercises',
-    currentTrainingSetExercises
-  );
 
   return (
     <Container>

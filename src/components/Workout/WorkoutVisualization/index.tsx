@@ -13,6 +13,7 @@ import {
 import InformationHeaderSection from '../../Home/InformationHeaderSection';
 import { White } from '../../../styles/global';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
+import { PlayButtonHovered, PlayButton } from '../../PlayAndStopButtons/styles';
 
 const WorkoutVisualization = () => {
   const statusInformations = {
@@ -21,6 +22,23 @@ const WorkoutVisualization = () => {
     finish: { icon: 'bi:check-circle-fill', bottomText: 'TRAINING IS OVER!!!' }
   };
   const formattedTotalTrainingTime = useMemo(() => secondsToHourFormat(0), []);
+
+  const [playButtonHovered, setPlayButtonHovered] = useState(false);
+  const [paused, setPaused] = useState(true);
+
+  const playButton = (
+    <>
+      {playButtonHovered ? (
+        <PlayButtonHovered
+          paused={paused}
+          onClick={() => {}}
+          onMouseLeave={() => setPlayButtonHovered(false)}
+        />
+      ) : (
+        <PlayButton paused={paused} onMouseEnter={() => setPlayButtonHovered(true)} />
+      )}
+    </>
+  );
 
   return (
     <Container>
@@ -32,11 +50,12 @@ const WorkoutVisualization = () => {
         <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
       </HeaderContainer>
       <BannerContainer>
-        <BannerIcon icon={statusInformations['finish'].icon} color={White} />
+        <BannerIcon icon={statusInformations['rest'].icon} color={White} />
       </BannerContainer>
       <BottomContainer>
-        <BottomStatusText>{statusInformations['finish'].bottomText}</BottomStatusText>
+        <BottomStatusText>{statusInformations['rest'].bottomText}</BottomStatusText>
         <TimeCountdownText>{formattedTotalTrainingTime}</TimeCountdownText>
+        {playButton}
       </BottomContainer>
     </Container>
   );

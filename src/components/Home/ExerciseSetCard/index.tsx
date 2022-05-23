@@ -79,8 +79,8 @@ export default function ExerciseSetCard({
       <ContentsContainer>
         <img
           style={{
-            width: '95px',
-            height: '70px',
+            width: '7vw',
+            height: '10vh',
             borderRadius: '10px',
             marginRight: '24px'
           }}

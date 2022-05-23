@@ -1,6 +1,26 @@
 import styled from 'styled-components';
 
-export const PlayButton = styled.div`
+interface IPlayButton {
+  paused?: boolean;
+}
+
+const triangleStyle = {
+  width: '0',
+  height: '0',
+  ['border-top']: '0.9375rem solid transparent',
+  ['border-bottom']: '0.9375rem solid transparent',
+  ['border-left']: '1.5625rem solid #fff'
+};
+
+const squareStyle = {
+  ['border-top']: '1.25rem solid #fff',
+  ['border-bottom']: '1.25rem solid #fff',
+  ['border-left']: '1.25rem solid #fff',
+  ['border-right']: '1.25rem solid #fff',
+  left: '47.5%'
+};
+
+export const PlayButton = styled.div<IPlayButton>`
   cursor: pointer;
   width: 8rem;
   height: 8rem;
@@ -18,18 +38,14 @@ export const PlayButton = styled.div`
     -webkit-transform: translateX(-40%) translateY(-50%);
     transform: translateX(-40%) translateY(-50%);
     transform-origin: center center;
-    width: 0;
-    height: 0;
-    border-top: 0.9375rem solid transparent;
-    border-bottom: 0.9375rem solid transparent;
-    border-left: 1.5625rem solid #fff;
+    ${({ paused }) => (paused ? squareStyle : triangleStyle)};
     z-index: 100;
     -webkit-transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
     transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
 `;
 
-export const PlayButtonHovered = styled(PlayButton)`
+export const PlayButtonHovered = styled(PlayButton)<IPlayButton>`
   &:before {
     content: '';
     position: absolute;

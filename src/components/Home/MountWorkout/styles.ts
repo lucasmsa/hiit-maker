@@ -9,7 +9,7 @@ import {
 
 export const Container = styled.div`
   height: 77.5vh;
-  width: 36.25rem;
+  width: 41vw;
   display: flex;
   flex-direction: column;
   align-items: center;

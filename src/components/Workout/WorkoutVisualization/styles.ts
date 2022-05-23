@@ -52,6 +52,7 @@ export const BottomContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 1%;
+  margin-bottom: 2.5%;
 `;
 
 export const BottomStatusText = styled.h2`
