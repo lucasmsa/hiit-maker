@@ -7,3 +7,14 @@ export const INITIAL_DEFAULT_VALUES = {
   setRestTime: 90,
   setRepetitions: 3
 };
+
+export type WORKOUT_EXECUTION_STATUS_TYPES = {
+  [key in 'WARMUP' | 'EXERCISE' | 'REST' | 'FINISH']: string;
+};
+
+export const WORKOUT_EXECUTION_STATUS = {
+  REST: 'rest',
+  TRAIN: 'train',
+  WARMUP: 'warmup',
+  FINISH: 'finish'
+};

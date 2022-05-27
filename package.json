@@ -24,6 +24,7 @@
     "react-aspect-ratio": "^1.0.50",
     "react-beautiful-dnd": "^13.1.0",
     "react-collapse": "^5.1.1",
+    "react-countdown": "^2.3.2",
     "react-dom": "^16.13.1",
     "react-horizontal-scrolling-menu": "^2.6.1",
     "react-hot-toast": "^2.1.1",

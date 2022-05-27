@@ -1,8 +1,11 @@
+import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
+
 export const workoutExecutionInitialState = {
   currentSet: 0,
   currentSetLoop: 0,
   currentSetExercise: 0,
-  currentActionRemainingTime: 0
+  currentActionRemainingTime: 0,
+  status: WORKOUT_EXECUTION_STATUS.WARMUP
 } as WorkoutExecutionState;
 
 interface IReducer {

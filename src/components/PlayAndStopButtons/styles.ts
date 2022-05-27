@@ -7,16 +7,16 @@ interface IPlayButton {
 const triangleStyle = {
   width: '0',
   height: '0',
-  ['border-top']: '0.9375rem solid transparent',
-  ['border-bottom']: '0.9375rem solid transparent',
-  ['border-left']: '1.5625rem solid #fff'
+  'border-top': '0.9375rem solid transparent',
+  'border-bottom': '0.9375rem solid transparent',
+  'border-left': '1.5625rem solid #fff'
 };
 
 const squareStyle = {
-  ['border-top']: '1.25rem solid #fff',
-  ['border-bottom']: '1.25rem solid #fff',
-  ['border-left']: '1.25rem solid #fff',
-  ['border-right']: '1.25rem solid #fff',
+  'border-top': '1.25rem solid #fff',
+  'border-bottom': '1.25rem solid #fff',
+  'border-left': '1.25rem solid #fff',
+  'border-right': '1.25rem solid #fff',
   left: '47.5%'
 };
 

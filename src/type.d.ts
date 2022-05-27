@@ -1,7 +1,7 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core';
 
 interface States {
-  training: TraininigState;
+  training: TrainingState;
   workoutExecution: WorkoutExecutionState;
 }
 
@@ -50,6 +50,7 @@ type WorkoutExecutionState = {
   currentSetLoop: number;
   currentSetExercise: number;
   currentActionRemainingTime: number;
+  status: WORKOUT_EXECUTION_STATUS_TYPES;
 };
 
 type TrainingAction = {
