@@ -9,6 +9,10 @@ type IAfflictedAreasCounter<AfflictedAreas> = {
   [Property in keyof AfflictedAreas]: number;
 };
 
+type WORKOUT_EXECUTION_STATUS_TYPES = {
+  [key in 'WARMUP' | 'EXERCISE' | 'REST' | 'FINISH']: string;
+};
+
 interface Exercise {
   name: string;
   image: string;
@@ -50,7 +54,7 @@ type WorkoutExecutionState = {
   currentSetLoop: number;
   currentSetExercise: number;
   currentActionRemainingTime: number;
-  status: WORKOUT_EXECUTION_STATUS_TYPES;
+  status: WORKOUT_EXECUTION_STATUS;
 };
 
 type TrainingAction = {

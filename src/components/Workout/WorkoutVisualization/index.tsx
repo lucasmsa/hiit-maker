@@ -11,7 +11,7 @@ import {
   TimeCountdownText
 } from './styles';
 import InformationHeaderSection from '../../Home/InformationHeaderSection';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { White } from '../../../styles/global';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import { PlayButtonHovered, PlayButton } from '../../PlayAndStopButtons/styles';
@@ -20,9 +20,11 @@ import { getWorkoutExecutionStatus } from '../../../store/workoutExecution/selec
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
+import useCountDown from 'react-countdown-hook';
 
 const WorkoutVisualization = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
+
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
   const [paused, setPaused] = useState(true);
@@ -45,7 +47,7 @@ const WorkoutVisualization = () => {
       {playButtonHovered ? (
         <PlayButtonHovered
           paused={paused}
-          onClick={() => {}}
+          onClick={() => setPaused((oldState) => !oldState)}
           onMouseLeave={() => setPlayButtonHovered(false)}
         />
       ) : (
@@ -86,4 +88,4 @@ const WorkoutVisualization = () => {
   );
 };
 
-export default WorkoutVisualization;
+export default connect()(WorkoutVisualization);
