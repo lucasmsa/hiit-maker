@@ -1,5 +1,8 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core';
 
+type WORKOUT_EXECUTION_STATUS_TYPES = 'rest' | 'train' | 'warmup' | 'finish';
+
+type PLAY_STATE_TYPES = 'not_started' | 'playing' | 'paused';
 interface States {
   training: TrainingState;
   workoutExecution: WorkoutExecutionState;
@@ -54,7 +57,8 @@ type WorkoutExecutionState = {
   currentSetLoop: number;
   currentSetExercise: number;
   currentActionRemainingTime: number;
-  status: WORKOUT_EXECUTION_STATUS;
+  playState: PLAY_STATE_TYPES;
+  status: WORKOUT_EXECUTION_STATUS_TYPES;
 };
 
 type TrainingAction = {
@@ -74,10 +78,7 @@ type TrainingAction = {
 type WorkoutExecutionAction = {
   type: string;
   payload: {
-    set?: number;
-    exercise?: Exercise;
-    time?: number;
-    loop?: number;
+    warmupTime: number;
   };
 };
 

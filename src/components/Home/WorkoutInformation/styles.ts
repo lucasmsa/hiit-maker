@@ -38,16 +38,6 @@ export const TotalTimeContainer = styled.div`
   align-items: flex-start;
 `;
 
-export const FrontContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const BackContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 export const TotalTimeHeaderContainer = styled.div`
   display: flex;
   flex-direction: row;

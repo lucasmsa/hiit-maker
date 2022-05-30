@@ -17,6 +17,8 @@ const store: Store<any, any> & {
   dispatch: DispatchType;
 } = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
+export type RootState = ReturnType<typeof store.getState>;
+
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -13,4 +13,10 @@ export const WORKOUT_EXECUTION_STATUS = {
   TRAIN: 'train',
   WARMUP: 'warmup',
   FINISH: 'finish'
-};
+} as { [key in 'REST' | 'TRAIN' | 'WARMUP' | 'FINISH']: WORKOUT_EXECUTION_STATUS_TYPES };
+
+export const PLAY_STATE = {
+  NOT_STARTED: 'not_started',
+  PLAY: 'playing',
+  PAUSE: 'paused'
+} as { [key in 'PLAY' | 'PAUSE' | 'NOT_STARTED']: PLAY_STATE_TYPES };

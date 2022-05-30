@@ -1,10 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { ReactComponent as TargetMusclesFront } from '../../../assets/images/WorkoutInformation/targetMusclesFront.svg';
-import { ReactComponent as TargetMusclesBack } from '../../../assets/images/WorkoutInformation/targetMusclesBack.svg';
-import { ReactComponent as ColoredChestIcon } from '../../../assets/images/WorkoutInformation/coloredChest.svg';
-import { ReactComponent as ColoredAbsIcon } from '../../../assets/images/WorkoutInformation/coloredAbs.svg';
-import { ReactComponent as ColoredBackIcon } from '../../../assets/images/WorkoutInformation/coloredBack.svg';
-import { ReactComponent as ColoredLegsIcon } from '../../../assets/images/WorkoutInformation/coloredLegs.svg';
 import {
   Container,
   TargetMusclesContainer,
@@ -13,30 +7,29 @@ import {
   TrainingDurationContainer,
   TrainingDurationText,
   StartTrainingContainer,
-  FrontContainer,
-  BackContainer,
   TargetMusclesIcon,
   ClockIcon,
   ManRunningIcon
 } from './styles';
 import { toast } from 'react-hot-toast';
-import { shallowEqual, useSelector } from 'react-redux';
-import {
-  getTotalTrainingTime,
-  getAfflictedBodyParts,
-  getTrainSetLoops,
-  getTrainingDefaultValues
-} from '../../../store/training/selectors';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { getTotalTrainingTime, getTrainSetLoops } from '../../../store/training/selectors';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { Link } from 'react-router-dom';
 import InformationHeaderSection from '../InformationHeaderSection';
 import { PlayButton, PlayButtonHovered } from '../../PlayAndStopButtons/styles';
+import { startTraining } from '../../../store/workoutExecution/actionCreators';
+import { Dispatch } from 'redux';
+import MuscleGroupsSection from '../MuscleGroupsSection';
+import { getWorkoutExecutionPlayState } from '../../../store/workoutExecution/selectors';
+import { PLAY_STATE } from '../../../config/contants';
 
 const WorkoutInformation = () => {
+  const dispatch: Dispatch<any> = useDispatch();
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0;
-  const afflictedBodyParts = useSelector(getAfflictedBodyParts, shallowEqual) || {};
   const trainSetLoops = useSelector(getTrainSetLoops, shallowEqual) || {};
+  const workoutExecutionPlayState = useSelector(getWorkoutExecutionPlayState);
   const formattedTotalTrainingTime = useMemo(
     () => secondsToHourFormat(totalTrainingTime),
     [totalTrainingTime]
@@ -57,6 +50,8 @@ const WorkoutInformation = () => {
           cannotBuildWorkout: true
         })
       );
+    } else if (workoutExecutionPlayState === PLAY_STATE.NOT_STARTED) {
+      dispatch(startTraining());
     }
   };
 
@@ -90,48 +85,7 @@ const WorkoutInformation = () => {
           title={'Target muscles'}
         />
         <MuscleGroupImagesContainer>
-          <FrontContainer>
-            <ColoredChestIcon
-              style={{
-                zIndex: 2,
-                position: 'relative',
-                top: '22%',
-                left: '68%',
-                opacity: afflictedBodyParts.Chest
-              }}
-            />
-            <ColoredAbsIcon
-              style={{
-                zIndex: 2,
-                position: 'relative',
-                top: '38%',
-                left: '50%',
-                opacity: afflictedBodyParts.Core
-              }}
-            />
-            <ColoredLegsIcon
-              style={{
-                zIndex: 2,
-                position: 'relative',
-                top: '55%',
-                left: '32%',
-                opacity: afflictedBodyParts.Legs
-              }}
-            />
-            <TargetMusclesFront style={{ zIndex: 0 }} />
-          </FrontContainer>
-          <BackContainer>
-            <ColoredBackIcon
-              style={{
-                zIndex: 2,
-                position: 'relative',
-                top: '18%',
-                left: '50%',
-                opacity: afflictedBodyParts.Back
-              }}
-            />
-            <TargetMusclesBack />
-          </BackContainer>
+          <MuscleGroupsSection />
         </MuscleGroupImagesContainer>
       </TargetMusclesContainer>
       <TotalTimeContainer>
