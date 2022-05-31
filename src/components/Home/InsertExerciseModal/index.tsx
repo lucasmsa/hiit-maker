@@ -22,20 +22,8 @@ import { addExercise } from '../../../store/training/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { getCurrentSet } from '../../../store/training/selectors';
-import { Rage, TransparentBlackShadow } from '../../../styles/global';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: 20,
-    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
-  }
-};
+import { Rage } from '../../../styles/global';
+import { customModalStyles } from '../../../utils/customModalStyles';
 
 interface ModalProps {
   modalOpen: boolean;
@@ -71,7 +59,7 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
       isOpen={modalOpen}
       // onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
-      style={customStyles}
+      style={customModalStyles}
       contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>

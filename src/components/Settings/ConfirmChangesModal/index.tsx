@@ -20,21 +20,8 @@ import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBa
 import { updateDefaultTrainingValues } from '../../../store/training/actionCreators';
 import { useDispatch, connect } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { TransparentBlackShadow } from '../../../styles/global';
 import { PossibleConfigurations } from '../../../utils/settings/possibleConfigurations';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: 20,
-    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
-  }
-};
+import { customModalStyles } from '../../../utils/customModalStyles';
 
 interface ModalProps {
   modalOpen: boolean;
@@ -82,7 +69,7 @@ const ConfirmChangesModal = ({
     <Modal
       isOpen={modalOpen}
       onRequestClose={closeModal}
-      style={customStyles}
+      style={customModalStyles}
       contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>
@@ -111,6 +98,3 @@ const ConfirmChangesModal = ({
 };
 
 export default connect()(ConfirmChangesModal);
-function setChangesWereMade(arg0: boolean) {
-  throw new Error('Function not implemented.');
-}

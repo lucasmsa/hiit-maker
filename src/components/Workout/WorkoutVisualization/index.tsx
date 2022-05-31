@@ -20,11 +20,9 @@ import { getWorkoutExecutionStatus } from '../../../store/workoutExecution/selec
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
-import useCountDown from 'react-countdown-hook';
 
 const WorkoutVisualization = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
-
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
   const [paused, setPaused] = useState(true);
@@ -38,7 +36,7 @@ const WorkoutVisualization = () => {
   };
 
   const formattedStatusTime = useMemo(
-    () => secondsToHourFormat(statusTime[workoutExecutionStatus]),
+    () => secondsToHourFormat(statusTime[workoutExecutionStatus] || 0),
     []
   );
 
@@ -68,7 +66,7 @@ const WorkoutVisualization = () => {
           />
           <BrandingIcon />
         </HeaderSetAndLogoContainer>
-        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP && (
+        {(workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP) && (
           <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
         )}
       </HeaderContainer>
@@ -80,7 +78,7 @@ const WorkoutVisualization = () => {
         )}
       </BannerContainer>
       <BottomContainer>
-        <BottomStatusText>{statusInformations['rest'].bottomText}</BottomStatusText>
+        <BottomStatusText>{statusInformations[workoutExecutionStatus].bottomText}</BottomStatusText>
         <TimeCountdownText>{formattedStatusTime}</TimeCountdownText>
         {playButton}
       </BottomContainer>

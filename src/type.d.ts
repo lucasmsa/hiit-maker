@@ -1,8 +1,5 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core';
 
-type WORKOUT_EXECUTION_STATUS_TYPES = 'rest' | 'train' | 'warmup' | 'finish';
-
-type PLAY_STATE_TYPES = 'not_started' | 'playing' | 'paused';
 interface States {
   training: TrainingState;
   workoutExecution: WorkoutExecutionState;
@@ -12,8 +9,10 @@ type IAfflictedAreasCounter<AfflictedAreas> = {
   [Property in keyof AfflictedAreas]: number;
 };
 
+type WORKOUT_EXECUTION_STATUS = 'WARMUP' | 'TRAIN' | 'REST' | 'FINISH' | 'NOT_STARTED' | 'PAUSE';
+
 type WORKOUT_EXECUTION_STATUS_TYPES = {
-  [key in 'WARMUP' | 'EXERCISE' | 'REST' | 'FINISH']: string;
+  [key in WORKOUT_EXECUTION_STATUS]: WORKOUT_EXECUTION_STATUS;
 };
 
 interface Exercise {
@@ -57,8 +56,8 @@ type WorkoutExecutionState = {
   currentSetLoop: number;
   currentSetExercise: number;
   currentActionRemainingTime: number;
-  playState: PLAY_STATE_TYPES;
-  status: WORKOUT_EXECUTION_STATUS_TYPES;
+  playState: PLAY_STATE;
+  status: WORKOUT_EXECUTION_STATUS;
 };
 
 type TrainingAction = {

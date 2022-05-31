@@ -22,14 +22,14 @@ import { PlayButton, PlayButtonHovered } from '../../PlayAndStopButtons/styles';
 import { startTraining } from '../../../store/workoutExecution/actionCreators';
 import { Dispatch } from 'redux';
 import MuscleGroupsSection from '../MuscleGroupsSection';
-import { getWorkoutExecutionPlayState } from '../../../store/workoutExecution/selectors';
-import { PLAY_STATE } from '../../../config/contants';
+import { getWorkoutExecutionStatus } from '../../../store/workoutExecution/selectors';
+import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 
 const WorkoutInformation = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const totalTrainingTime = useSelector(getTotalTrainingTime, shallowEqual) || 0;
   const trainSetLoops = useSelector(getTrainSetLoops, shallowEqual) || {};
-  const workoutExecutionPlayState = useSelector(getWorkoutExecutionPlayState);
+  const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
   const formattedTotalTrainingTime = useMemo(
     () => secondsToHourFormat(totalTrainingTime),
     [totalTrainingTime]
@@ -50,7 +50,7 @@ const WorkoutInformation = () => {
           cannotBuildWorkout: true
         })
       );
-    } else if (workoutExecutionPlayState === PLAY_STATE.NOT_STARTED) {
+    } else if (workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED) {
       dispatch(startTraining());
     }
   };

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { DarkGray, LightGray, Rage } from '../../../styles/global';
 import { ReactComponent as SaveChanges } from '../../../assets/images/SettingsScreen/save-icon.svg';
+import { ReactComponent as WorkoutNotFound } from '../../../assets/images/WorkoutScreen/training-not-created.svg';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -27,13 +28,14 @@ export const ModalTextAndButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1.25rem;
+  width: 31.5625rem;
 `;
 
-export const CancelButton = styled.div`
+export const Button = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 9.875rem;
+  width: 13.75rem;
   height: 2.1875rem;
   border: 0.0625rem solid #282828;
   transition: 0.3s ease;
@@ -44,23 +46,13 @@ export const CancelButton = styled.div`
   cursor: pointer;
 `;
 
-export const ConfirmButton = styled(CancelButton)`
+export const BackToHomeButton = styled(Button)`
   border: 0;
   background: ${Rage};
   box-shadow: 0px 0.0625rem 0.25rem rgba(238, 55, 63, 0.25);
 `;
 
-export const CancelButtonText = styled.h4`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.0625rem;
-  letter-spacing: 0.02em;
-  color: ${DarkGray};
-`;
-
-export const ConfirmButtonText = styled.h4`
+export const BackToHomeButtonText = styled.h4`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -80,7 +72,7 @@ export const ExerciseSelectionText = styled.h1`
   color: ${DarkGray};
 `;
 
-export const ConfirmExerciseBoldText = styled.h2`
+export const BackToHomeBoldText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -89,6 +81,7 @@ export const ConfirmExerciseBoldText = styled.h2`
   letter-spacing: 0.02em;
   color: ${DarkGray};
   margin-bottom: 2rem;
+  text-align: center;
 `;
 
 export const ButtonContainer = styled.div`
@@ -97,7 +90,20 @@ export const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-export const SaveChangesIcon = styled(SaveChanges)`
+export const WorkoutNotFoundIcon = styled(WorkoutNotFound)`
   align-self: center;
   margin-bottom: 1.25rem;
+`;
+
+export const WorkoutNotFoundIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${Rage};
+  border-radius: 0.625rem;
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 50%;
+  align-self: center;
+  margin-bottom: 1.5rem;
 `;

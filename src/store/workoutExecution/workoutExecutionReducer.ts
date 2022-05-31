@@ -1,5 +1,4 @@
-import { PLAY_STATE, WORKOUT_EXECUTION_STATUS } from '../../config/contants';
-import { getTrainingDefaultValues } from '../training/selectors';
+import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
 import { START_WORKOUT_EXECUTION } from './actionTypes';
 
 export const workoutExecutionInitialState = {
@@ -7,8 +6,7 @@ export const workoutExecutionInitialState = {
   currentSetLoop: 0,
   currentSetExercise: 0,
   currentActionRemainingTime: 0,
-  playState: PLAY_STATE.NOT_STARTED,
-  status: WORKOUT_EXECUTION_STATUS.WARMUP
+  status: WORKOUT_EXECUTION_STATUS.NOT_STARTED
 } as WorkoutExecutionState;
 
 interface IReducer {
@@ -26,8 +24,7 @@ const reducerFunctions = {
     return {
       ...state,
       currentActionRemainingTime: payload.warmupTime,
-      status: WORKOUT_EXECUTION_STATUS.WARMUP,
-      playState: PLAY_STATE.PLAY
+      status: WORKOUT_EXECUTION_STATUS.WARMUP
     };
   }
 } as IReducerFunctions;
