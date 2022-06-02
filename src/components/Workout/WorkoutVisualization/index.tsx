@@ -20,6 +20,7 @@ import { getWorkoutExecutionStatus } from '../../../store/workoutExecution/selec
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
+import { Link } from 'react-router-dom';
 
 const WorkoutVisualization = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
@@ -64,7 +65,9 @@ const WorkoutVisualization = () => {
             small
             reverse
           />
-          <BrandingIcon />
+          <Link to='/'>
+            <BrandingIcon />
+          </Link>
         </HeaderSetAndLogoContainer>
         {(workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP) && (
           <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
