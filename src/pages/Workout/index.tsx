@@ -9,13 +9,13 @@ import { Container } from './styles';
 
 const Workout = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
-  console.log('workoutExecutionStatus', workoutExecutionStatus);
-  
+  const workoutDidNotStart = workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED
+
   return (
     <Container>
       <WorkoutVisualization />
       <RightBarWorkout />
-      <TrainingNotCreatedModal modalOpen={workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED} />
+      <TrainingNotCreatedModal modalOpen={workoutDidNotStart} />
     </Container>
   );
 };

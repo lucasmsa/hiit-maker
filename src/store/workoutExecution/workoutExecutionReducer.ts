@@ -1,5 +1,5 @@
 import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
-import { START_WORKOUT_EXECUTION } from './actionTypes';
+import { START_WORKOUT_EXECUTION, UPDATE_CURRENT_ACTION_REMAINING_TIME } from './actionTypes';
 
 export const workoutExecutionInitialState = {
   currentSet: 0,
@@ -21,10 +21,20 @@ interface IReducerFunctions {
 const reducerFunctions = {
   [START_WORKOUT_EXECUTION]: ({ state, action }: IReducer): WorkoutExecutionState => {
     const { payload } = action;
+    const { warmupTime } = payload;
     return {
       ...state,
-      currentActionRemainingTime: payload.warmupTime,
+      currentActionRemainingTime: warmupTime!,
       status: WORKOUT_EXECUTION_STATUS.WARMUP
+    };
+  },
+  [UPDATE_CURRENT_ACTION_REMAINING_TIME]: ({ state, action }: IReducer): WorkoutExecutionState => {
+    const { payload } = action;
+    const { remainingTime } = payload;
+
+    return {
+      ...state,
+      currentActionRemainingTime: remainingTime!,
     };
   }
 } as IReducerFunctions;

@@ -56,7 +56,6 @@ type WorkoutExecutionState = {
   currentSetLoop: number;
   currentSetExercise: number;
   currentActionRemainingTime: number;
-  playState: PLAY_STATE;
   status: WORKOUT_EXECUTION_STATUS;
 };
 
@@ -77,7 +76,8 @@ type TrainingAction = {
 type WorkoutExecutionAction = {
   type: string;
   payload: {
-    warmupTime: number;
+    warmupTime?: number;
+    remainingTime?: number;
   };
 };
 
