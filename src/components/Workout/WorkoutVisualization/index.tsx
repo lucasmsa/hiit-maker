@@ -21,16 +21,15 @@ import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScre
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
 import { Link } from 'react-router-dom';
-import { updateCurrentActionRemainingTime } from '../../../store/workoutExecution/actionCreators';
+import { updateCurrentActionRemainingTime, updateWorkoutExecutionStatus } from '../../../store/workoutExecution/actionCreators';
 
 const WorkoutVisualization = () => {
   const dispatch = useDispatch();
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
-  const workoutDidNotStart = workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
   const currentRemainingTime = useSelector(getCurrentActionRemainingTime);
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
-  const [paused, setPaused] = useState(true);
+  const [play, setPlay] = useState(true);
 
   const statusTime = {
     [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime
@@ -44,18 +43,24 @@ const WorkoutVisualization = () => {
     <>
       {playButtonHovered ? (
         <PlayButtonHovered
-          paused={paused}
-          onClick={() => setPaused((oldState) => !oldState)}
+          paused={play}
+          onClick={() => {
+            setPlay((oldState) => (!oldState))
+            const oldStatus = workoutExecutionStatus;
+            dispatch(updateWorkoutExecutionStatus(!play ? oldStatus : WORKOUT_EXECUTION_STATUS.PAUSE));
+          }}
           onMouseLeave={() => setPlayButtonHovered(false)}
         />
       ) : (
-        <PlayButton paused={paused} onMouseEnter={() => setPlayButtonHovered(true)} />
+        <PlayButton paused={play} onMouseEnter={() => setPlayButtonHovered(true)} />
       )}
     </>
   );
 
   useEffect(() => {
-    if (workoutDidNotStart) { 
+    if (workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
+        &&  workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.PAUSE) { 
+          console.log('I am over here, inside useEffect', { workoutExecutionStatus, currentRemainingTime });
       if (!currentRemainingTime) {
         // Interval reached the end
       };
@@ -65,7 +70,7 @@ const WorkoutVisualization = () => {
   
       return () => clearInterval(interval);
     }
-  }, [currentRemainingTime]);
+  }, [currentRemainingTime, workoutExecutionStatus]);
 
 
   const formattedStatusTime = useMemo(
