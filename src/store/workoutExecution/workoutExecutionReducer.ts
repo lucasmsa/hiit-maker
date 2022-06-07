@@ -2,10 +2,11 @@ import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
 import { START_WORKOUT_EXECUTION, UPDATE_CURRENT_ACTION_REMAINING_TIME } from './actionTypes';
 
 export const workoutExecutionInitialState = {
-  currentSet: 0,
-  currentSetLoop: 0,
-  currentSetExercise: 0,
+  currentSetIndex: 0,
+  currentSetLoopIndex: 0,
+  currentSetExerciseIndex: 0,
   currentActionRemainingTime: 0,
+  nextExercises: [],
   status: WORKOUT_EXECUTION_STATUS.NOT_STARTED
 } as WorkoutExecutionState;
 

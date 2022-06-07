@@ -20,9 +20,13 @@ export const getAfflictedBodyParts = (state: States) => {
 export const getTrainingSetExercises = (state: States) => {
   const training = getTrainSetLoops(state);
   const set = getCurrentSet(state);
+  return getCurrentSetExercises(training, set);
+};
+
+export const getCurrentSetExercises = (training: TrainSetLoop[], set: number) => {
   const currentSetExercises = training[set].trainSet.exercises;
   return currentSetExercises;
-};
+}
 
 export const getSetRestTime = (state: States) => {
   const training = getTrainSetLoops(state);

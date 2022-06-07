@@ -23,6 +23,8 @@ interface Exercise {
   afflictedBodyPart?: AfflictedAreas;
 }
 
+interface ExerciseVisualization extends Omit<Exercise, 'restTime' | 'trainTime' | 'afflictedBodyPart'> {}
+
 interface TrainSet {
   exercises: Exercise[];
   setLoopTime: number;
@@ -52,10 +54,11 @@ type TrainingState = {
 };
 
 type WorkoutExecutionState = {
-  currentSet: number;
-  currentSetLoop: number;
-  currentSetExercise: number;
+  currentSetIndex: number;
+  currentSetLoopIndex: number;
+  currentSetExerciseIndex: number;
   currentActionRemainingTime: number;
+  nextExercises: ExerciseVisualization[];
   status: WORKOUT_EXECUTION_STATUS;
 };
 

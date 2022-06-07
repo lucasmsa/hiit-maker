@@ -26,6 +26,7 @@ import { updateCurrentActionRemainingTime } from '../../../store/workoutExecutio
 const WorkoutVisualization = () => {
   const dispatch = useDispatch();
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
+  const workoutDidNotStart = workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
   const currentRemainingTime = useSelector(getCurrentActionRemainingTime);
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
@@ -54,14 +55,16 @@ const WorkoutVisualization = () => {
   );
 
   useEffect(() => {
-    if (!currentRemainingTime) {
-      // Interval reached the end
-    };
-    const interval = setInterval(() => {
-      dispatch(updateCurrentActionRemainingTime(currentRemainingTime - 1));
-    }, 1000);
-
-    return () => clearInterval(interval);
+    if (workoutDidNotStart) { 
+      if (!currentRemainingTime) {
+        // Interval reached the end
+      };
+      const interval = setInterval(() => {
+        dispatch(updateCurrentActionRemainingTime(currentRemainingTime - 1));
+      }, 1000);
+  
+      return () => clearInterval(interval);
+    }
   }, [currentRemainingTime]);
 
 
