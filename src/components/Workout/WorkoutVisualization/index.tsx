@@ -16,20 +16,28 @@ import { White } from '../../../styles/global';
 import { secondsToHourFormat } from '../../../utils/secondsToHourFormat';
 import { PlayButtonHovered, PlayButton } from '../../PlayAndStopButtons/styles';
 import { statusInformations } from '../../../utils/workout/statusInformations';
-import { getCurrentActionRemainingTime, getWorkoutExecutionStatus } from '../../../store/workoutExecution/selectors';
+import {
+  getCurrentActionRemainingTime,
+  getWorkoutExecutionPlayState,
+  getWorkoutExecutionStatus
+} from '../../../store/workoutExecution/selectors';
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
-import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
+import { PLAY_STATE, WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
 import { Link } from 'react-router-dom';
-import { updateCurrentActionRemainingTime, updateWorkoutExecutionStatus } from '../../../store/workoutExecution/actionCreators';
+import {
+  updateCurrentActionRemainingTime,
+  updatePlayState,
+  updateWorkoutExecutionStatus
+} from '../../../store/workoutExecution/actionCreators';
 
 const WorkoutVisualization = () => {
   const dispatch = useDispatch();
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
   const currentRemainingTime = useSelector(getCurrentActionRemainingTime);
+  const playState = useSelector(getWorkoutExecutionPlayState);
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
-  const [play, setPlay] = useState(true);
 
   const statusTime = {
     [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime
@@ -43,35 +51,40 @@ const WorkoutVisualization = () => {
     <>
       {playButtonHovered ? (
         <PlayButtonHovered
-          paused={play}
+          paused={playState === PLAY_STATE.PAUSE}
           onClick={() => {
-            setPlay((oldState) => (!oldState))
-            const oldStatus = workoutExecutionStatus;
-            dispatch(updateWorkoutExecutionStatus(!play ? oldStatus : WORKOUT_EXECUTION_STATUS.PAUSE));
+            dispatch(updatePlayState());
           }}
           onMouseLeave={() => setPlayButtonHovered(false)}
         />
       ) : (
-        <PlayButton paused={play} onMouseEnter={() => setPlayButtonHovered(true)} />
+        <PlayButton
+          paused={playState === PLAY_STATE.PAUSE}
+          onMouseEnter={() => setPlayButtonHovered(true)}
+        />
       )}
     </>
   );
 
   useEffect(() => {
-    if (workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
-        &&  workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.PAUSE) { 
-          console.log('I am over here, inside useEffect', { workoutExecutionStatus, currentRemainingTime });
+    if (
+      workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED &&
+      playState !== PLAY_STATE.PAUSE
+    ) {
+      console.log('I am over here, inside useEffect', {
+        workoutExecutionStatus,
+        currentRemainingTime
+      });
       if (!currentRemainingTime) {
         // Interval reached the end
-      };
+      }
       const interval = setInterval(() => {
         dispatch(updateCurrentActionRemainingTime(currentRemainingTime - 1));
       }, 1000);
-  
+
       return () => clearInterval(interval);
     }
-  }, [currentRemainingTime, workoutExecutionStatus]);
-
+  }, [currentRemainingTime, workoutExecutionStatus, playState]);
 
   const formattedStatusTime = useMemo(
     () => secondsToHourFormat(currentRemainingTime || 0),
@@ -88,11 +101,11 @@ const WorkoutVisualization = () => {
             small
             reverse
           />
-          <Link to='/'>
+          <Link to="/">
             <BrandingIcon />
           </Link>
         </HeaderSetAndLogoContainer>
-        {(workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP) && (
+        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP && (
           <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
         )}
       </HeaderContainer>

@@ -1,6 +1,11 @@
 import { Dispatch } from 'redux';
 import { RootState } from '../..';
-import { START_WORKOUT_EXECUTION, UPDATE_CURRENT_ACTION_REMAINING_TIME, UPDATE_WORKOUT_EXECUTION_STATUS } from './actionTypes';
+import {
+  START_WORKOUT_EXECUTION,
+  UPDATE_CURRENT_ACTION_REMAINING_TIME,
+  UPDATE_PLAY_STATE,
+  UPDATE_WORKOUT_EXECUTION_STATUS
+} from './actionTypes';
 
 export function startTraining() {
   return (dispatch: Dispatch, getState: RootState) => {
@@ -23,8 +28,7 @@ export function updateCurrentActionRemainingTime(remainingTime: number) {
   };
 
   return action;
-};
-
+}
 
 export function updateWorkoutExecutionStatus(status: WORKOUT_EXECUTION_STATUS) {
   const action: WorkoutExecutionAction = {
@@ -35,4 +39,13 @@ export function updateWorkoutExecutionStatus(status: WORKOUT_EXECUTION_STATUS) {
   };
 
   return action;
-};
+}
+
+export function updatePlayState() {
+  const action: WorkoutExecutionAction = {
+    type: UPDATE_PLAY_STATE,
+    payload: {}
+  };
+
+  return action;
+}
