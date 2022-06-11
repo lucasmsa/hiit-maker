@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { getNextExercises } from '../../../store/workoutExecution/selectors';
 import SetsProgress from '../SetsProgress';
 import {
   Container,
@@ -14,26 +15,20 @@ import {
 } from './styles';
 
 const RightBarWorkout = () => {
+  const nextExercises = useSelector(getNextExercises);
+
   return (
     <Container>
       <NextExercisesContainer>
         <NextExercisesTitleText>NEXT EXERCISES</NextExercisesTitleText>
         <NextExercisesDivider />
         <NextExercisesWithImageOuterContainer>
-          <NextExercisesWithImageInnerContainer>
-            <ExerciseImage
-              src="https://media.self.com/photos/5f92e43c203d630746a35e0f/4:3/w_2560%2Cc_limit/Erica_Dead-stop-push-up.jpg"
-              alt="Next Exercise"
-            />
-            <ExerciseName>PUSH UP</ExerciseName>
-          </NextExercisesWithImageInnerContainer>
-          <NextExercisesWithImageInnerContainer>
-            <ExerciseImage
-              src="https://qph.fs.quoracdn.net/main-qimg-4105302bd7ccde31124497ebf4b5ce52"
-              alt="Next Exercise"
-            />
-            <ExerciseName>REGULAR SQUATS</ExerciseName>
-          </NextExercisesWithImageInnerContainer>
+          {nextExercises.map(({ name, image }, index) => (
+            <NextExercisesWithImageInnerContainer>
+              <ExerciseImage src={image} alt="Next Exercise" />
+              <ExerciseName>{name.toUpperCase()}</ExerciseName>
+            </NextExercisesWithImageInnerContainer>
+          ))}
         </NextExercisesWithImageOuterContainer>
       </NextExercisesContainer>
       <SetsProgreessContainer>
