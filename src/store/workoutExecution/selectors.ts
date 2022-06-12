@@ -2,7 +2,7 @@ import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
 import {
   fetchCurrentNextExercise,
   IUpdatedValues
-} from '../../utils/workout/fetchCurrentNextExecise';
+} from '../../utils/workout/nextExercises/fetchCurrentNextExecise';
 import { getCurrentSetExercises, getTrainSetLoops } from '../training/selectors';
 
 export const getWorkoutExecutionState = (state: States) => state.workoutExecution;
@@ -37,5 +37,5 @@ export const getNextExercises = (state: States): ExerciseVisualization[] => {
     fetchCurrentNextExercise(updatedValues, training);
   }
 
-  return updatedValues.nextExercises;
+  return updatedValues.nextExercises!;
 };

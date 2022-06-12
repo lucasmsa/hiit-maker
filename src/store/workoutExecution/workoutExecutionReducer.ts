@@ -3,6 +3,7 @@ import {
   START_WORKOUT_EXECUTION,
   UPDATE_CURRENT_ACTION_REMAINING_TIME,
   UPDATE_PLAY_STATE,
+  UPDATE_WORKOUT_EXECUTION_ACTION_TRANSITION,
   UPDATE_WORKOUT_EXECUTION_STATUS
 } from './actionTypes';
 
@@ -64,6 +65,22 @@ const reducerFunctions = {
     return {
       ...state,
       currentActionRemainingTime: remainingTime!
+    };
+  },
+  [UPDATE_WORKOUT_EXECUTION_ACTION_TRANSITION]: ({
+    state,
+    action
+  }: IReducer): WorkoutExecutionState => {
+    const { payload } = action;
+    console.log({ payload });
+
+    return {
+      ...state,
+      currentSetExerciseIndex: payload.currentSetExerciseIndex!,
+      currentSetIndex: payload.currentSetIndex!,
+      currentSetLoopIndex: payload.currentSetLoopIndex!,
+      status: payload.status!,
+      currentActionRemainingTime: payload.currentActionRemainingTime!
     };
   }
 } as IReducerFunctions;

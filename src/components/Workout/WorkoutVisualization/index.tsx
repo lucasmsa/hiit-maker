@@ -28,7 +28,7 @@ import { Link } from 'react-router-dom';
 import {
   updateCurrentActionRemainingTime,
   updatePlayState,
-  updateWorkoutExecutionStatus
+  updateWorkoutExecutionActionTransition
 } from '../../../store/workoutExecution/actionCreators';
 
 const WorkoutVisualization = () => {
@@ -71,12 +71,9 @@ const WorkoutVisualization = () => {
       workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED &&
       playState !== PLAY_STATE.PAUSE
     ) {
-      console.log('I am over here, inside useEffect', {
-        workoutExecutionStatus,
-        currentRemainingTime
-      });
       if (!currentRemainingTime) {
-        // Interval reached the end
+        console.log('Interval reached its end');
+        dispatch(updateWorkoutExecutionActionTransition());
       }
       const interval = setInterval(() => {
         dispatch(updateCurrentActionRemainingTime(currentRemainingTime - 1));

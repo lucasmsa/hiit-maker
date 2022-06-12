@@ -1,14 +1,15 @@
 import { Dispatch } from 'redux';
-import { RootState } from '../..';
+import { updateCurrentAction } from '../../utils/workout/actionTransition/updateCurrentAction';
 import {
   START_WORKOUT_EXECUTION,
   UPDATE_CURRENT_ACTION_REMAINING_TIME,
   UPDATE_PLAY_STATE,
+  UPDATE_WORKOUT_EXECUTION_ACTION_TRANSITION,
   UPDATE_WORKOUT_EXECUTION_STATUS
 } from './actionTypes';
 
 export function startTraining() {
-  return (dispatch: Dispatch, getState: RootState) => {
+  return (dispatch: Dispatch, getState: () => States) => {
     const { warmupTime } = getState().training.trainingDefaultValues;
     const action: WorkoutExecutionAction = {
       type: START_WORKOUT_EXECUTION,
@@ -48,4 +49,24 @@ export function updatePlayState() {
   };
 
   return action;
+}
+
+export function updateWorkoutExecutionActionTransition() {
+  return (dispatch: Dispatch, getState: () => States) => {
+    const { setExerciseIndex, setIndex, setLoopIndex, status, actionRemainingTime } =
+      updateCurrentAction(getState);
+
+    const action: WorkoutExecutionAction = {
+      type: UPDATE_WORKOUT_EXECUTION_ACTION_TRANSITION,
+      payload: {
+        currentSetExerciseIndex: setExerciseIndex,
+        currentSetIndex: setIndex,
+        currentSetLoopIndex: setLoopIndex,
+        currentActionRemainingTime: actionRemainingTime,
+        status
+      }
+    };
+
+    return dispatch(action);
+  };
 }

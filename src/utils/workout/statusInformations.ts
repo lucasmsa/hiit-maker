@@ -6,5 +6,5 @@ export const statusInformations = {
   FINISH: { icon: 'bi:check-circle-fill', bottomText: 'TRAINING IS OVER!!!' },
   NOT_STARTED: { icon: 'bi:check-circle-fill', bottomText: 'YOU DID NOT START THE WORKOUT YET' }
 } as {
-  [key in WORKOUT_EXECUTION_STATUS]: { icon: string; bottomText: string };
+  [key in 'PAUSE' | WORKOUT_EXECUTION_STATUS]: { icon: string; bottomText: string };
 };

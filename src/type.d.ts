@@ -88,7 +88,11 @@ type WorkoutExecutionAction = {
   payload: {
     warmupTime?: number;
     remainingTime?: number;
+    currentSetIndex?: number;
+    currentSetLoopIndex?: number;
+    currentSetExerciseIndex?: number;
     status?: WORKOUT_EXECUTION_STATUS;
+    currentActionRemainingTime?: number;
   };
 };
 
