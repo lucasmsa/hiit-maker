@@ -44,7 +44,10 @@ const WorkoutVisualization = () => {
   };
 
   const statusHeaderTitle = {
-    [WORKOUT_EXECUTION_STATUS.WARMUP]: 'Warmup'
+    [WORKOUT_EXECUTION_STATUS.WARMUP]: 'Warmup',
+    [WORKOUT_EXECUTION_STATUS.TRAIN]: 'TRAIN',
+    [WORKOUT_EXECUTION_STATUS.REST]: 'REST TIME',
+    [WORKOUT_EXECUTION_STATUS.FINISH]: 'FINISH'
   };
 
   const playButton = (
@@ -67,10 +70,12 @@ const WorkoutVisualization = () => {
   );
 
   useEffect(() => {
-    if (
+    const timerRunning =
       workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED &&
-      playState !== PLAY_STATE.PAUSE
-    ) {
+      workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.FINISH &&
+      playState !== PLAY_STATE.PAUSE;
+
+    if (timerRunning) {
       if (!currentRemainingTime) {
         console.log('Interval reached its end');
         dispatch(updateWorkoutExecutionActionTransition());

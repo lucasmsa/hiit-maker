@@ -25,6 +25,8 @@ export const updateCurrentAction = (getState: () => States) => {
 
   if (status === WORKOUT_EXECUTION_STATUS.WARMUP) {
     updatedValues['status'] = WORKOUT_EXECUTION_STATUS.TRAIN;
+    updatedValues['actionRemainingTime'] =
+      updatedValues['trainSetExercises'][currentSetExerciseIndex].trainTime;
   } else if (status === WORKOUT_EXECUTION_STATUS.TRAIN) {
     const lastExerciseOnTheLastLoopOfSet =
       updatedValues['setExerciseIndex'] === updatedValues['trainSetExercises'].length - 1 &&
