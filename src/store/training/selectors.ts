@@ -26,7 +26,7 @@ export const getTrainingSetExercises = (state: States) => {
 export const getCurrentSetExercises = (training: TrainSetLoop[], set: number) => {
   const currentSetExercises = training[set].trainSet.exercises;
   return currentSetExercises;
-}
+};
 
 export const getSetRestTime = (state: States) => {
   const training = getTrainSetLoops(state);

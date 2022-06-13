@@ -8,6 +8,10 @@ import { getCurrentSetExercises, getTrainSetLoops } from '../training/selectors'
 export const getWorkoutExecutionState = (state: States) => state.workoutExecution;
 export const getWorkoutExecutionStatus = (state: States) => state.workoutExecution.status;
 export const getWorkoutExecutionPlayState = (state: States) => state.workoutExecution.playState;
+export const getWorkoutExecutionCurrentSet = (state: States) =>
+  state.workoutExecution.currentSetIndex;
+export const getWorkoutExecutionCurrentExercise = (state: States) =>
+  state.workoutExecution.currentSetExerciseIndex;
 export const getCurrentActionRemainingTime = (state: States): number =>
   state.workoutExecution.currentActionRemainingTime;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   BannerContainer,
   BannerIcon,
@@ -8,7 +8,11 @@ import {
   HeaderContainer,
   BottomStatusText,
   HeaderSetAndLogoContainer,
-  TimeCountdownText
+  TimeCountdownText,
+  BackToHomeButtonContainer,
+  BackToHomeText,
+  BackToHomeButton,
+  BannerExerciseImage
 } from './styles';
 import InformationHeaderSection from '../../Home/InformationHeaderSection';
 import { connect, useDispatch, useSelector } from 'react-redux';
@@ -18,12 +22,18 @@ import { PlayButtonHovered, PlayButton } from '../../PlayAndStopButtons/styles';
 import { statusInformations } from '../../../utils/workout/statusInformations';
 import {
   getCurrentActionRemainingTime,
+  getWorkoutExecutionCurrentExercise,
+  getWorkoutExecutionCurrentSet,
   getWorkoutExecutionPlayState,
   getWorkoutExecutionStatus
 } from '../../../store/workoutExecution/selectors';
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
 import { PLAY_STATE, WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
-import { getTrainingDefaultValues } from '../../../store/training/selectors';
+import {
+  getCurrentSetExercises,
+  getTrainingDefaultValues,
+  getTrainSetLoops
+} from '../../../store/training/selectors';
 import { Link } from 'react-router-dom';
 import {
   updateCurrentActionRemainingTime,
@@ -35,6 +45,10 @@ const WorkoutVisualization = () => {
   const dispatch = useDispatch();
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
   const currentRemainingTime = useSelector(getCurrentActionRemainingTime);
+  const currentSet = useSelector(getWorkoutExecutionCurrentSet);
+  const currentExercise = useSelector(getWorkoutExecutionCurrentExercise);
+  const training = useSelector(getTrainSetLoops);
+  const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const playState = useSelector(getWorkoutExecutionPlayState);
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
@@ -44,11 +58,26 @@ const WorkoutVisualization = () => {
   };
 
   const statusHeaderTitle = {
-    [WORKOUT_EXECUTION_STATUS.WARMUP]: 'Warmup',
+    [WORKOUT_EXECUTION_STATUS.WARMUP]: 'WARMUP',
     [WORKOUT_EXECUTION_STATUS.TRAIN]: 'TRAIN',
     [WORKOUT_EXECUTION_STATUS.REST]: 'REST TIME',
     [WORKOUT_EXECUTION_STATUS.FINISH]: 'FINISH'
   };
+
+  const handleBannerInformations = useCallback(() => {
+    if (statusInformations[workoutExecutionStatus].icon === 'WARMUP_ICON') {
+      return <WarmupIcon width={'10vw'} />;
+    } else if (statusInformations[workoutExecutionStatus].icon === 'EXERCISE_IMAGE') {
+      return (
+        <BannerExerciseImage
+          src={setExercises[currentExercise].image}
+          alt={setExercises[currentExercise].name}
+        />
+      );
+    } else {
+      return <BannerIcon icon={statusInformations[workoutExecutionStatus].icon} color={White} />;
+    }
+  }, [workoutExecutionStatus]);
 
   const playButton = (
     <>
@@ -77,7 +106,6 @@ const WorkoutVisualization = () => {
 
     if (timerRunning) {
       if (!currentRemainingTime) {
-        console.log('Interval reached its end');
         dispatch(updateWorkoutExecutionActionTransition());
       }
       const interval = setInterval(() => {
@@ -111,17 +139,19 @@ const WorkoutVisualization = () => {
           <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
         )}
       </HeaderContainer>
-      <BannerContainer>
-        {workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.WARMUP ? (
-          <WarmupIcon width={'10vw'} />
-        ) : (
-          <BannerIcon icon={statusInformations[workoutExecutionStatus].icon} color={White} />
-        )}
-      </BannerContainer>
+      <BannerContainer>{handleBannerInformations()}</BannerContainer>
       <BottomContainer>
         <BottomStatusText>{statusInformations[workoutExecutionStatus].bottomText}</BottomStatusText>
         <TimeCountdownText>{formattedStatusTime}</TimeCountdownText>
-        {playButton}
+        {workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH ? (
+          <BackToHomeButtonContainer to={'/'}>
+            <BackToHomeButton>
+              <BackToHomeText>BACK TO HOME</BackToHomeText>
+            </BackToHomeButton>
+          </BackToHomeButtonContainer>
+        ) : (
+          playButton
+        )}
       </BottomContainer>
     </Container>
   );

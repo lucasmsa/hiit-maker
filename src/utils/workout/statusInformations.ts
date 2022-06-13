@@ -1,5 +1,5 @@
 export const statusInformations = {
-  WARMUP: { icon: 'WarmupIcon', bottomText: 'WARMUP TIME' },
+  WARMUP: { icon: 'WARMUP_ICON', bottomText: 'WARMUP TIME' },
   REST: { icon: 'fa6-solid:clock', bottomText: 'REST TIME' },
   PAUSE: { icon: 'fa6-solid:circle-pause', bottomText: 'SET PAUSED' },
   TRAIN: { icon: 'EXERCISE_IMAGE', bottomText: 'TRAIN TIME' },

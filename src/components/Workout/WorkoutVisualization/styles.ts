@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
-import { Rage, TransparentDarkBlack } from '../../../styles/global';
+import { LightGray, Rage, TransparentDarkBlack } from '../../../styles/global';
 import { ReactComponent as Branding } from '../../../assets/images/WorkoutScreen/logo-workout.svg';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   width: 100%;
@@ -27,8 +28,8 @@ export const HeaderSetAndLogoContainer = styled.div`
 
 export const BannerContainer = styled.div`
   display: flex;
-  height: 45vh;
-  width: 52.5vw;
+  height: 40vh;
+  width: 40vw;
   align-self: center;
   justify-content: center;
   align-items: center;
@@ -36,10 +37,19 @@ export const BannerContainer = styled.div`
   background: ${Rage};
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25));
   margin-bottom: 2.5%;
+  overflow: hidden;
+  background-size: contain;
+`;
+
+export const BannerExerciseImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.625rem;
 `;
 
 export const BannerIcon = styled(Icon)`
-  font-size: 18vw;
+  font-size: 10vw;
 `;
 
 export const BrandingIcon = styled(Branding)`
@@ -73,4 +83,31 @@ export const TimeCountdownText = styled.h3`
   font-size: 2vw;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
+`;
+
+export const BackToHomeButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 16vw;
+  height: 2.5vw;
+  cursor: pointer;
+  background: ${TransparentDarkBlack};
+  border-radius: 1.25rem;
+`;
+
+export const BackToHomeText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1vw;
+  line-height: 1.0625rem;
+  letter-spacing: 0.02em;
+  color: ${LightGray};
+`;
+
+export const BackToHomeButtonContainer = styled(Link)`
+  margin-top: 2.5%;
+  text-decoration: none;
 `;

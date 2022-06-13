@@ -23,10 +23,7 @@ interface ModalProps {
 
 const TrainingNotCreatedModal = ({ modalOpen }: ModalProps) => {
   return (
-    <Modal
-      isOpen={modalOpen}
-      style={customModalStyles}
-      contentLabel="Exercise Modal">
+    <Modal isOpen={modalOpen} style={customModalStyles} contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>
           <ExerciseSelectionText>Training not created</ExerciseSelectionText>
@@ -37,11 +34,12 @@ const TrainingNotCreatedModal = ({ modalOpen }: ModalProps) => {
               <WorkoutNotFoundIcon />
             </WorkoutNotFoundIconContainer>
             <BackToHomeBoldText>
-              You are trying to start a workout that was not created yet, go back to the home screen, create your workout and start it!
+              You are trying to start a workout that was not created yet, go back to the home
+              screen, create your workout and start it!
             </BackToHomeBoldText>
             <ButtonContainer>
               <Link style={{ textDecoration: 'none' }} to={'/'}>
-                <BackToHomeButton onClick={() => {}}>
+                <BackToHomeButton>
                   <BackToHomeButtonText>BACK TO HOME SCREEN</BackToHomeButtonText>
                 </BackToHomeButton>
               </Link>
