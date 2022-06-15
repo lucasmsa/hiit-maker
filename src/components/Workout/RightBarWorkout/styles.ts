@@ -39,6 +39,9 @@ export const NextExercisesWithImageOuterContainer = styled.div`
   margin-top: 5%;
   margin-bottom: 5%;
   justify-content: center;
+  height: 20vh;
+  width: 100%;
+  background: blue;
 `;
 
 export const NextExercisesWithImageInnerContainer = styled.div`
@@ -50,7 +53,7 @@ export const NextExercisesWithImageInnerContainer = styled.div`
 
 export const ExerciseImage = styled.img`
   width: 9vw;
-  height: 14vh;
+  height: 12vh;
   border-radius: 0.625rem;
   margin-bottom: 1rem;
 `;
@@ -73,4 +76,14 @@ export const SetsProgreessContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+`;
+
+export const NoExercisesLeftText = styled.h3`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.02em;
+  color: ${White};
 `;

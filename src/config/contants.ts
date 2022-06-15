@@ -5,7 +5,7 @@ export const INITIAL_DEFAULT_VALUES = {
   exerciseRestTime: 5,
   exerciseTrainTime: 10,
   setRestTime: 15,
-  setRepetitions: 3
+  setRepetitions: 1
 };
 
 export const WORKOUT_EXECUTION_STATUS = {

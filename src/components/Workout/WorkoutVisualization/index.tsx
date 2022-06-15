@@ -65,9 +65,10 @@ const WorkoutVisualization = () => {
   };
 
   const handleBannerInformations = useCallback(() => {
-    if (statusInformations[workoutExecutionStatus].icon === 'WARMUP_ICON') {
+    const currentStatus = playState === 'PAUSE' ? playState : workoutExecutionStatus;
+    if (statusInformations[currentStatus].icon === 'WARMUP_ICON') {
       return <WarmupIcon width={'10vw'} />;
-    } else if (statusInformations[workoutExecutionStatus].icon === 'EXERCISE_IMAGE') {
+    } else if (statusInformations[currentStatus].icon === 'EXERCISE_IMAGE') {
       return (
         <BannerExerciseImage
           src={setExercises[currentExercise].image}
@@ -75,9 +76,9 @@ const WorkoutVisualization = () => {
         />
       );
     } else {
-      return <BannerIcon icon={statusInformations[workoutExecutionStatus].icon} color={White} />;
+      return <BannerIcon icon={statusInformations[currentStatus].icon} color={White} />;
     }
-  }, [workoutExecutionStatus]);
+  }, [workoutExecutionStatus, playState]);
 
   const playButton = (
     <>
@@ -136,12 +137,22 @@ const WorkoutVisualization = () => {
           </Link>
         </HeaderSetAndLogoContainer>
         {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP && (
-          <InformationHeaderSection title="Set 1/3" backgroundColor="BLACK" medium reverse />
+          <InformationHeaderSection
+            title={`Set ${currentSet + 1}/${training.length}`}
+            backgroundColor="BLACK"
+            medium
+            reverse
+          />
         )}
       </HeaderContainer>
       <BannerContainer>{handleBannerInformations()}</BannerContainer>
       <BottomContainer>
-        <BottomStatusText>{statusInformations[workoutExecutionStatus].bottomText}</BottomStatusText>
+        <BottomStatusText>
+          {
+            statusInformations[playState === 'PAUSE' ? playState : workoutExecutionStatus]
+              .bottomText
+          }
+        </BottomStatusText>
         <TimeCountdownText>{formattedStatusTime}</TimeCountdownText>
         {workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH ? (
           <BackToHomeButtonContainer to={'/'}>
