@@ -16,6 +16,7 @@ export const HeaderContainer = styled.div`
   flex-direction: column;
   margin-top: 2.5%;
   margin-bottom: 4%;
+  height: 15vh;
 `;
 
 export const HeaderSetAndLogoContainer = styled.div`

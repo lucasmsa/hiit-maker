@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { DarkGray, LightGray, Rage } from '../../../styles/global';
-import { ReactComponent as SaveChanges } from '../../../assets/images/SettingsScreen/save-icon.svg';
+import { DarkGray, DarkRage, LightGray, Rage } from '../../styles/global';
 
 export const ModalContainer = styled.div`
   display: flex;
@@ -48,6 +47,7 @@ export const ConfirmButton = styled(CancelButton)`
   border: 0;
   background: ${Rage};
   box-shadow: 0px 0.0625rem 0.25rem rgba(238, 55, 63, 0.25);
+  margin-left: 0.625rem;
 `;
 
 export const CancelButtonText = styled.h4`
@@ -89,15 +89,24 @@ export const ConfirmExerciseBoldText = styled.h2`
   letter-spacing: 0.02em;
   color: ${DarkGray};
   margin-bottom: 2rem;
+  width: 28rem;
+  text-align: center;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
 `;
 
-export const SaveChangesIcon = styled(SaveChanges)`
+export const IconCircleContainer = styled.div`
+  display: flex;
+  width: 4.3125rem;
+  height: 4.3125rem;
+  background: ${DarkRage};
   align-self: center;
+  align-items: center;
   margin-bottom: 1.25rem;
+  justify-content: center;
+  border-radius: 50%;
 `;

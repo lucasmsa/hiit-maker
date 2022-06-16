@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { updateCurrentAction } from '../../utils/workout/actionTransition/updateCurrentAction';
 import {
+  RESET_WORKOUT_EXECUTION,
   START_WORKOUT_EXECUTION,
   UPDATE_CURRENT_ACTION_REMAINING_TIME,
   UPDATE_PLAY_STATE,
@@ -69,4 +70,13 @@ export function updateWorkoutExecutionActionTransition() {
 
     return dispatch(action);
   };
+}
+
+export function resetWorkoutExecution() {
+  const action: WorkoutExecutionAction = {
+    type: RESET_WORKOUT_EXECUTION,
+    payload: {}
+  };
+
+  return action;
 }

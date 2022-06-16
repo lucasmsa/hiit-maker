@@ -16,7 +16,7 @@ export const HeaderTexts = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 120%;
   line-height: 1.8125rem;
   letter-spacing: 0.02em;
   align-items: center;
@@ -36,7 +36,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
 export const InformationContainer = styled.div<InformationContainerProps>`
   display: flex;
   flex-direction: row;
-  width: ${({ small, medium }) => (small ? '25%' : medium ? '40%' : '120%')};
+  width: ${({ small, medium }) => (small ? '25%' : medium ? '50%' : '120%')};
   margin-right: 2.625rem;
 `;
 

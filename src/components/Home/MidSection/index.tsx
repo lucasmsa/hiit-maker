@@ -29,7 +29,6 @@ import {
 } from '../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
-import InformationHeaderSection from '../InformationHeaderSection';
 
 const MidSection = () => {
   const dispatch: Dispatch<any> = useDispatch();

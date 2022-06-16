@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import {

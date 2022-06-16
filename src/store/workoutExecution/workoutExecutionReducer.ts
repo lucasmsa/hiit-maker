@@ -1,5 +1,6 @@
 import { PLAY_STATE, WORKOUT_EXECUTION_STATUS } from '../../config/contants';
 import {
+  RESET_WORKOUT_EXECUTION,
   START_WORKOUT_EXECUTION,
   UPDATE_CURRENT_ACTION_REMAINING_TIME,
   UPDATE_PLAY_STATE,
@@ -82,6 +83,9 @@ const reducerFunctions = {
       status: payload.status!,
       currentActionRemainingTime: payload.currentActionRemainingTime!
     };
+  },
+  [RESET_WORKOUT_EXECUTION]: ({ state, action }: IReducer): WorkoutExecutionState => {
+    return workoutExecutionInitialState;
   }
 } as IReducerFunctions;
 

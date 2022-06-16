@@ -1,29 +1,17 @@
-import React, { SetStateAction, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Modal from 'react-modal';
-import {
-  ModalContainer,
-  ModalTopContainer,
-  ModalTextAndButtonsContainer,
-  ModalContentContainer,
-  ButtonContainer,
-  CancelButton,
-  CancelButtonText,
-  ConfirmButton,
-  ConfirmButtonText,
-  ConfirmExerciseBoldText,
-  ExerciseSelectionText,
-  SaveChangesIcon
-} from './styles';
 import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
-import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
 import { updateDefaultTrainingValues } from '../../../store/training/actionCreators';
 import { useDispatch, connect } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { PossibleConfigurations } from '../../../utils/settings/possibleConfigurations';
 import { customModalStyles } from '../../../utils/customModalStyles';
+import ConfirmModalContainerWrapper from '../../ConfirmModalContainerWrapper';
+import { Icon } from '@iconify/react';
+import { White } from '../../../styles/global';
 
-interface ModalProps {
+interface ConfirmChangesModalProps {
   modalOpen: boolean;
   closeModal: () => void;
   newChangesWereMade: () => void;
@@ -39,8 +27,9 @@ const ConfirmChangesModal = ({
   newDefaultValues,
   newChangesWereMade,
   setLastTrainingDefaultValues
-}: ModalProps) => {
+}: ConfirmChangesModalProps) => {
   const dispatch: Dispatch<any> = useDispatch();
+  const saveIconStyle = { color: White };
 
   const handleChangeDefaultValues = useCallback(() => {
     const updateDefaultValuesPromise = (dispatch: any) =>
@@ -70,29 +59,16 @@ const ConfirmChangesModal = ({
       isOpen={modalOpen}
       onRequestClose={closeModal}
       style={customModalStyles}
-      contentLabel="Exercise Modal">
-      <ModalContainer>
-        <ModalTopContainer>
-          <ExerciseSelectionText>Confirm changes?</ExerciseSelectionText>
-          <CancelModalIcon style={{ cursor: 'pointer' }} onClick={closeModal} />
-        </ModalTopContainer>
-        <ModalContentContainer>
-          <ModalTextAndButtonsContainer>
-            <SaveChangesIcon />
-            <ConfirmExerciseBoldText>
-              Confirm adding new default values for your exercise training times
-            </ConfirmExerciseBoldText>
-            <ButtonContainer>
-              <CancelButton onClick={closeModal}>
-                <CancelButtonText>Cancel</CancelButtonText>
-              </CancelButton>
-              <ConfirmButton onClick={() => handleChangeDefaultValues()}>
-                <ConfirmButtonText>Confirm</ConfirmButtonText>
-              </ConfirmButton>
-            </ButtonContainer>
-          </ModalTextAndButtonsContainer>
-        </ModalContentContainer>
-      </ModalContainer>
+      contentLabel="Confirm settings changes modal">
+      <ConfirmModalContainerWrapper
+        closeModal={closeModal}
+        icon={<Icon icon={'ant-design:save-filled'} style={saveIconStyle} fontSize={'2rem'} />}
+        confirm={() => handleChangeDefaultValues()}
+        title={'Confirm changes?'}
+        description={'Confirm adding new default values for your exercise training times'}
+        confirmText={'SAVE CHANGES'}
+        cancelText={'CANCEL'}
+      />
     </Modal>
   );
 };

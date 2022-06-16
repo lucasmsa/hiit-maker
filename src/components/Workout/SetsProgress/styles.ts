@@ -8,7 +8,6 @@ import {
 } from '../../../styles/global';
 import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg';
 import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg';
-import { ReactComponent as ConnectingLine } from '../../../assets/images/WorkoutScreen/connecting-line-workout.svg';
 
 export const Container = styled.div`
   display: flex;

@@ -10,7 +10,6 @@ import {
   InformationIcon,
   SettingsIcon
 } from './styles';
-import { ReactComponent as Branding } from '../../../assets/images/LeftBar/branding.svg';
 import { Link } from 'react-router-dom';
 import AvailableExercises from '../AvailableExercises';
 import Search from '../Search';

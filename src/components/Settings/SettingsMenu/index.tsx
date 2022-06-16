@@ -64,7 +64,7 @@ const SettingsMenu = () => {
       setRestTime: INITIAL_DEFAULT_VALUES.setRestTime,
       setRepetitions: INITIAL_DEFAULT_VALUES.setRepetitions
     }));
-  }, [changesWereMade, newTrainingDefaultValues, lastTrainingDefaultValues]);
+  }, [lastTrainingDefaultValues]);
 
   const settingsConfigurationsOption = useCallback(
     (highlightedText: string, value: number) => (

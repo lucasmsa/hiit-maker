@@ -81,8 +81,8 @@ export default function ExerciseSetCard({
           style={{
             width: '7vw',
             height: '10vh',
-            borderRadius: '10px',
-            marginRight: '24px'
+            borderRadius: '0.625rem',
+            marginRight: '1.5rem'
           }}
           src={image}
           alt="sample-exercise-img"

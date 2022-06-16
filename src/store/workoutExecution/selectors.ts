@@ -27,9 +27,10 @@ export const getNextExercises = (state: States): ExerciseVisualization[] => {
 
   const training = getTrainSetLoops(state);
   const currentTrainSetExercises = getCurrentSetExercises(training, currentSetIndex);
+  const warmupStatus = status === WORKOUT_EXECUTION_STATUS.WARMUP;
 
   const updatedValues = {
-    setExerciseIndex: currentSetExerciseIndex,
+    setExerciseIndex: warmupStatus ? currentSetExerciseIndex - 1 : currentSetExerciseIndex,
     trainSetExercises: currentTrainSetExercises,
     setLoopIndex: currentSetLoopIndex,
     setIndex: currentSetIndex,

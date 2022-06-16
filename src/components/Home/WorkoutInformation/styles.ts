@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${White};
   width: 20.3125rem;
   height: 100vh;
-  padding-top: 2.625rem;
+  padding-top: 2vh;
   overflow-x: hidden;
 `;
 export const TargetMusclesContainer = styled.div`

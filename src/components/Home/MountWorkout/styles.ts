@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 import {
   LightGray,
@@ -19,7 +20,15 @@ export const Container = styled.div`
   border-radius: 1.25rem;
 `;
 
-export const SetHeader = styled.h2`
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+export const SetHeaderText = styled.h2`
   margin-top: 1.25rem;
   margin-bottom: 0.75rem;
   font-family: Montserrat;
@@ -126,4 +135,15 @@ export const CountTextContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   width: 10rem;
+`;
+
+export const ResetIcon = styled(Icon)`
+  cursor: pointer;
+  font-size: 2.25rem;
+  transform: rotate(-90deg);
+  color: ${Rage};
+`;
+
+export const BlankSpace = styled.div`
+  width: 2.25rem;
 `;

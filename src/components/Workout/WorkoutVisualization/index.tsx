@@ -46,22 +46,23 @@ const WorkoutVisualization = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
   const currentRemainingTime = useSelector(getCurrentActionRemainingTime);
   const currentSet = useSelector(getWorkoutExecutionCurrentSet);
-  const currentExercise = useSelector(getWorkoutExecutionCurrentExercise);
+  const currentExerciseIndex = useSelector(getWorkoutExecutionCurrentExercise);
   const training = useSelector(getTrainSetLoops);
   const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const playState = useSelector(getWorkoutExecutionPlayState);
   const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
 
-  const statusTime = {
-    [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime
-  };
-
   const statusHeaderTitle = {
     [WORKOUT_EXECUTION_STATUS.WARMUP]: 'WARMUP',
-    [WORKOUT_EXECUTION_STATUS.TRAIN]: 'TRAIN',
+    [WORKOUT_EXECUTION_STATUS.TRAIN]:
+      workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
+        ? `EXERCISE ${currentExerciseIndex + 1}/${setExercises.length}: ${
+            setExercises[currentExerciseIndex].name
+          }`
+        : '',
     [WORKOUT_EXECUTION_STATUS.REST]: 'REST TIME',
-    [WORKOUT_EXECUTION_STATUS.FINISH]: 'FINISH'
+    [WORKOUT_EXECUTION_STATUS.FINISH]: 'TRAINING FINISHED'
   };
 
   const handleBannerInformations = useCallback(() => {
@@ -71,8 +72,8 @@ const WorkoutVisualization = () => {
     } else if (statusInformations[currentStatus].icon === 'EXERCISE_IMAGE') {
       return (
         <BannerExerciseImage
-          src={setExercises[currentExercise].image}
-          alt={setExercises[currentExercise].name}
+          src={setExercises[currentExerciseIndex].image}
+          alt={setExercises[currentExerciseIndex].name}
         />
       );
     } else {
@@ -127,7 +128,11 @@ const WorkoutVisualization = () => {
       <HeaderContainer>
         <HeaderSetAndLogoContainer>
           <InformationHeaderSection
-            title={statusHeaderTitle[workoutExecutionStatus]}
+            title={
+              workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.WARMUP
+                ? WORKOUT_EXECUTION_STATUS.WARMUP
+                : `Set ${currentSet + 1}/${training.length}`
+            }
             backgroundColor="BLACK"
             small
             reverse
@@ -138,7 +143,7 @@ const WorkoutVisualization = () => {
         </HeaderSetAndLogoContainer>
         {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP && (
           <InformationHeaderSection
-            title={`Set ${currentSet + 1}/${training.length}`}
+            title={statusHeaderTitle[workoutExecutionStatus]}
             backgroundColor="BLACK"
             medium
             reverse

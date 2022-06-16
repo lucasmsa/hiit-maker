@@ -1,4 +1,5 @@
 import { INITIAL_DEFAULT_VALUES } from '../../config/contants';
+import { workoutExecutionInitialState } from '../workoutExecution/workoutExecutionReducer';
 import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,
@@ -9,7 +10,8 @@ import {
   UPDATE_CURRENT_SET,
   REMOVE_CURRENT_SET,
   UPDATE_SET_REST_TIME,
-  UPDATE_DEFAULT_TRAINING_VALUES
+  UPDATE_DEFAULT_TRAINING_VALUES,
+  RESET_TRAINING
 } from './actionTypes';
 
 const trainSetInitialState = {
@@ -296,6 +298,9 @@ const reducerFunctions = {
           : content
       )
     };
+  },
+  [RESET_TRAINING]: ({ state, action }: IReducer): TrainingState => {
+    return initialState;
   }
 } as IReducerFunctions;
 

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dispatch } from 'redux';
 import {
   Container,
-  SetHeader,
+  SetHeaderText,
   SetCounter,
   CounterText,
   SetRestTest,
@@ -12,7 +12,10 @@ import {
   OperationContainer,
   ExercisesLimitCountText,
   ScrollableExercisesContainer,
-  CountTextContainer
+  CountTextContainer,
+  Header,
+  ResetIcon,
+  BlankSpace
 } from './styles';
 import { connect, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ExerciseSetCard from '../ExerciseSetCard';
@@ -32,6 +35,7 @@ import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
+import ResetWorkoutModal from '../ResetWorkoutModal';
 
 const optionsOperation = {
   plus: 1,
@@ -45,6 +49,7 @@ const MountWorkout = () => {
   const setRestTime = useSelector(getSetRestTime);
   const currentSetLoopQuantity = useSelector(getTrainingSetLoopQuantity);
   const currentSetExercises = useSelector(getTrainingSetExercises, shallowEqual);
+  const [resetChangesModalOpen, setResetChangesModalOpen] = useState(false);
   const [currentSetExercisesState, setCurrentSetExercisesState] = useState(currentSetExercises);
   const [setRestTimeInput, setSetRestTimeInput] = useState(setRestTime);
   const [currentSetState, setCurrentSetState] = useState(currentSet);
@@ -84,7 +89,16 @@ const MountWorkout = () => {
 
   return (
     <Container>
-      <SetHeader>Set {currentSet + 1}</SetHeader>
+      <Header>
+        <BlankSpace />
+        <SetHeaderText>Set {currentSet + 1}</SetHeaderText>
+        <ResetIcon
+          onClick={() => {
+            setResetChangesModalOpen(true);
+          }}
+          icon={'codicon:debug-restart'}
+        />
+      </Header>
       <ScrollableExercisesContainer ref={scrollRef}>
         {loading ? (
           <></>
@@ -154,6 +168,12 @@ const MountWorkout = () => {
           </OperationContainer>
         </SetCounter>
       </FooterContainer>
+      <ResetWorkoutModal
+        closeModal={() => {
+          setResetChangesModalOpen(false);
+        }}
+        modalOpen={resetChangesModalOpen}
+      />
     </Container>
   );
 };

@@ -9,7 +9,7 @@ import { Container } from './styles';
 
 const Workout = () => {
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
-  const workoutDidNotStart = workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED
+  const workoutDidNotStart = workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED;
 
   return (
     <Container>

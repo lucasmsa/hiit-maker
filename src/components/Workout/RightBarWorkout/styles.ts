@@ -41,7 +41,6 @@ export const NextExercisesWithImageOuterContainer = styled.div`
   justify-content: center;
   height: 20vh;
   width: 100%;
-  background: blue;
 `;
 
 export const NextExercisesWithImageInnerContainer = styled.div`

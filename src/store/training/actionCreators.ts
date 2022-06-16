@@ -1,4 +1,6 @@
+import { Dispatch } from 'redux';
 import { PossibleConfigurations } from '../../utils/settings/possibleConfigurations';
+import { RESET_WORKOUT_EXECUTION } from '../workoutExecution/actionTypes';
 import {
   ADD_SET,
   ADD_EXERCISE,
@@ -9,7 +11,8 @@ import {
   UPDATE_EXERCISE_TRAIN_TIME,
   UPDATE_CURRENT_SET_LOOP_QUANTITY,
   UPDATE_SET_REST_TIME,
-  UPDATE_DEFAULT_TRAINING_VALUES
+  UPDATE_DEFAULT_TRAINING_VALUES,
+  RESET_TRAINING
 } from './actionTypes';
 
 export function addExercise(exercise: Exercise, set: number) {
@@ -124,4 +127,21 @@ export function removeExercise(index: number, set: number) {
     }
   };
   return action;
+}
+
+export function resetWorkout() {
+  return (dispatch: Dispatch, getState: () => States) => {
+    const resetWorkoutExectionAction: WorkoutExecutionAction = {
+      type: RESET_WORKOUT_EXECUTION,
+      payload: {}
+    };
+
+    const resetTrainingAction: TrainingAction = {
+      type: RESET_TRAINING,
+      payload: { set: 0 }
+    };
+
+    dispatch(resetWorkoutExectionAction);
+    return dispatch(resetTrainingAction);
+  };
 }
