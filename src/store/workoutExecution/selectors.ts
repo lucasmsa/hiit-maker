@@ -14,7 +14,8 @@ export const getWorkoutExecutionCurrentExercise = (state: States) =>
   state.workoutExecution.currentSetExerciseIndex;
 export const getCurrentActionRemainingTime = (state: States): number =>
   state.workoutExecution.currentActionRemainingTime;
-
+export const getWorkoutExecutionCurrentSetLoopIndex = (state: States): number =>
+  state.workoutExecution.currentSetLoopIndex;
 export const getNextExercises = (state: States): ExerciseVisualization[] => {
   const { status, currentSetIndex, currentSetLoopIndex, currentSetExerciseIndex } =
     state.workoutExecution;

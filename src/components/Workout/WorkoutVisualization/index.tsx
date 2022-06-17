@@ -29,11 +29,7 @@ import {
 } from '../../../store/workoutExecution/selectors';
 import { ReactComponent as WarmupIcon } from '../../../assets/images/WorkoutScreen/warmup.svg';
 import { PLAY_STATE, WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
-import {
-  getCurrentSetExercises,
-  getTrainingDefaultValues,
-  getTrainSetLoops
-} from '../../../store/training/selectors';
+import { getCurrentSetExercises, getTrainSetLoops } from '../../../store/training/selectors';
 import { Link } from 'react-router-dom';
 import {
   updateCurrentActionRemainingTime,
@@ -50,7 +46,6 @@ const WorkoutVisualization = () => {
   const training = useSelector(getTrainSetLoops);
   const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const playState = useSelector(getWorkoutExecutionPlayState);
-  const { warmupTime } = useSelector(getTrainingDefaultValues);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
 
   const statusHeaderTitle = {

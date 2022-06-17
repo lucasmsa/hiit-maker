@@ -1,6 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getCurrentSet } from '../../../store/training/selectors';
+import {
+  getCurrentSet,
+  getCurrentSetExercises,
+  getTrainSetLoops
+} from '../../../store/training/selectors';
+import {
+  getWorkoutExecutionCurrentExercise,
+  getWorkoutExecutionCurrentSet,
+  getWorkoutExecutionCurrentSetLoopIndex
+} from '../../../store/workoutExecution/selectors';
 import {
   BottomContainer,
   Container,
@@ -19,14 +28,13 @@ import {
 } from './styles';
 
 const SetsProgress = () => {
-  const currentSet = useSelector(getCurrentSet);
-  const exercisesMock = [
-    { name: 'SQUAT WITHOUT DUMBELLS' },
-    { name: 'PUSH UPS' },
-    { name: 'CRUNCHES' },
-    { name: 'PUSH UPS' },
-    { name: 'CRUNCHES' }
-  ];
+  const training = useSelector(getTrainSetLoops);
+  const currentSet = useSelector(getWorkoutExecutionCurrentSet);
+  const setLoopsQuantity = training[currentSet].loops;
+  const currentExerciseIndex = useSelector(getWorkoutExecutionCurrentExercise);
+  const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
+  const currentSetLoopIndex = useSelector(getWorkoutExecutionCurrentSetLoopIndex);
+  const setLoopsLeft = setLoopsQuantity - (currentSetLoopIndex + 1);
 
   return (
     <Container>
@@ -35,9 +43,9 @@ const SetsProgress = () => {
           <ProgressBlock>
             <ProgressBlockHeaderText>PROGRESS</ProgressBlockHeaderText>
             <ExercisesOnSetContainer>
-              {exercisesMock.map((set, index) => {
+              {setExercises.map(({ name }, index) => {
                 const setIcon =
-                  currentSet === index ? (
+                  currentExerciseIndex === index ? (
                     <StyledSelectedSetIcon />
                   ) : (
                     <StyledNotSelectedSetIcon onClick={() => {}} />
@@ -45,7 +53,7 @@ const SetsProgress = () => {
                 return (
                   <InsideSetContainer>
                     <ExercisesOnSetText style={{ marginTop: index > 0 ? '1.75rem' : 0 }}>
-                      {set.name}
+                      {name.toUpperCase()}
                     </ExercisesOnSetText>
                     <DotsContainer>
                       {index !== 0 && <StyledConnectingLine />}
@@ -56,7 +64,9 @@ const SetsProgress = () => {
               })}
             </ExercisesOnSetContainer>
             <ProgressBlockTimesBottom>
-              <ProgressBlockBottomText>{`${'3'} SET REPETITIONS LEFT`}</ProgressBlockBottomText>
+              <ProgressBlockBottomText>
+                {setLoopsLeft ? `${setLoopsLeft} SET REPETITIONS LEFT` : 'LAST SET REPETITION'}
+              </ProgressBlockBottomText>
             </ProgressBlockTimesBottom>
           </ProgressBlock>
         </TrainingProgressContainer>
