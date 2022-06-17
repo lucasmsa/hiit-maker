@@ -1,27 +1,15 @@
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, Store, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import App from './App';
-import trainingReducer from './store/training/trainingReducer';
-import workoutExecutionReducer from './store/workoutExecution/workoutExecutionReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const reducers = combineReducers({
-  training: trainingReducer,
-  workoutExecution: workoutExecutionReducer
-});
-
-const store: Store<any, any> & {
-  dispatch: DispatchType;
-} = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
-
-export type RootState = ReturnType<typeof store.getState>;
+import { persistor, store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

@@ -23,6 +23,10 @@ const RightBarWorkout = () => {
   const nextExercises = useSelector(getNextExercises);
   const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
 
+  console.log('eu to aqui?');
+  console.log('Who are the next exercises?', nextExercises);
+  console.log('What is the workout execution status?', workoutExecutionStatus);
+
   return (
     <Container>
       <NextExercisesContainer>

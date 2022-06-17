@@ -20,3 +20,5 @@ export const PLAY_STATE = {
   PLAY: 'PLAY',
   PAUSE: 'PAUSE'
 } as PLAY_STATE_TYPES;
+
+export const REDUX_PERSISTANCE_CONFIGURATION_KEY = 'hiit-maker';
