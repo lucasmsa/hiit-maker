@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {
+  DarkRage,
   LightGray,
   Rage,
   TransparentBlackShadow,
@@ -120,7 +121,7 @@ export const ProgressBlockBottomText = styled.h2`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2vw;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${LightGray};
@@ -161,7 +162,7 @@ export const ExercisesOnSetText = styled.h2`
   width: 50%;
   font-style: normal;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1vw;
   line-height: 1.0625rem;
   letter-spacing: 0.02em;
   color: ${TransparentDarkBlack};
@@ -199,7 +200,6 @@ export const StyledNotSelectedSetIcon = styled(NotSelectedSetIcon)`
 
 export const StyledConnectingLine = styled.div`
   background: ${LightGray};
-  transform: translateY(0.125rem);
   width: 0.125rem;
   height: 1.75rem;
 `;
@@ -209,13 +209,12 @@ export const ProgressLine = styled(Line).attrs({
   strokeWidth: 10,
   strokeColor: Rage,
   trailWidth: 9.5,
-
   trailColor: LightGray
 })`
   position: relative;
-  width: 1.6rem;
+  width: 1.75rem;
   height: 0.125rem;
-  transform: rotate(90deg) translateX(0.85rem);
+  transform: rotate(90deg) translateX(0.9rem) translateY(-0.025rem);
 `;
 
 export const ProgressLineContainer = styled.div`
@@ -226,7 +225,41 @@ export const ProgressLineContainer = styled.div`
   margin-top: 0.65rem;
 `;
 
-export const ProgressCircle = styled(Circle)``;
+export const ProgressCircle = styled(Circle).attrs({
+  strokeLinecap: 'round',
+  strokeWidth: 8,
+  strokeColor: Rage,
+  trailWidth: 8,
+  trailColor: LightGray
+})`
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+`;
+
+export const SelectedDotIcon = styled.div`
+  position: absolute;
+  background: ${Rage};
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  top: 22.5%;
+  left: 22.5%;
+`;
+
+export const DotContainer = styled.div`
+  position: relative;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-direction: column;
+`;
+
+export const ProgressCircleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: yellow;
+`;
 
 export const RightSideContainer = styled.div`
   display: flex;
@@ -242,6 +275,5 @@ export const DotIconAndProgressLineContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  height: 100%;
-  width: 3rem;
+  width: 1.25rem;
 `;

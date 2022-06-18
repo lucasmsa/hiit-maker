@@ -15,6 +15,7 @@ import {
 import {
   BottomContainer,
   Container,
+  DotContainer,
   DotIconAndProgressLineContainer,
   ExercisesOnSetContainer,
   ExercisesOnSetText,
@@ -23,8 +24,11 @@ import {
   ProgressBlockBottomText,
   ProgressBlockHeaderText,
   ProgressBlockTimesBottom,
+  ProgressCircle,
+  ProgressCircleContainer,
   ProgressLine,
   RightSideContainer,
+  SelectedDotIcon,
   StyledNotSelectedSetIcon,
   StyledSelectedSetIcon,
   TrainingProgressContainer
@@ -62,7 +66,14 @@ const SetsProgress = () => {
               {setExercises.map(({ name }, index) => {
                 const setIcon =
                   currentExerciseIndex === index ? (
-                    <StyledSelectedSetIcon />
+                    <DotContainer>
+                      <SelectedDotIcon />
+                      <ProgressCircle
+                        percent={getCurrentActionTimePercentage(
+                          actionTotalTime[workoutExecutionStatus],
+                          currentActionRemainingTime
+                        )}></ProgressCircle>
+                    </DotContainer>
                   ) : (
                     <StyledNotSelectedSetIcon />
                   );
