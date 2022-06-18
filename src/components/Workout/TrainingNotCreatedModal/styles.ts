@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { DarkGray, LightGray, Rage } from '../../../styles/global';
-import { ReactComponent as SaveChanges } from '../../../assets/images/SettingsScreen/save-icon.svg';
 import { ReactComponent as WorkoutNotFound } from '../../../assets/images/WorkoutScreen/training-not-created.svg';
 
 export const ModalContainer = styled.div`

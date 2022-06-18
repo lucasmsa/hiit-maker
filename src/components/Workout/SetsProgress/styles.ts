@@ -8,6 +8,7 @@ import {
 } from '../../../styles/global';
 import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg';
 import { ReactComponent as NotSelectedSetIcon } from '../../../assets/images/midSection/not-selected-set.svg';
+import { Line, Circle } from 'rc-progress';
 
 export const Container = styled.div`
   display: flex;
@@ -143,7 +144,6 @@ export const ExercisesOnSetContainer = styled.div`
   flex-direction: column;
   margin-left: 5%;
   margin-right: 5%;
-  overflow-y: scroll;
   margin-bottom: 3rem;
   ::-webkit-scrollbar {
     width: 0.3125rem;
@@ -158,6 +158,7 @@ export const ExercisesOnSetContainer = styled.div`
 
 export const ExercisesOnSetText = styled.h2`
   font-family: Montserrat;
+  width: 50%;
   font-style: normal;
   font-weight: 600;
   font-size: 0.8rem;
@@ -170,6 +171,7 @@ export const ExercisesOnSetText = styled.h2`
 export const InsideSetContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 `;
 
 export const DotsContainer = styled.div`
@@ -192,10 +194,54 @@ export const StyledSelectedSetIcon = styled(SelectedSetIcon)`
 
 export const StyledNotSelectedSetIcon = styled(NotSelectedSetIcon)`
   cursor: pointer;
+  transform: scale(125%);
 `;
 
 export const StyledConnectingLine = styled.div`
   background: ${LightGray};
+  transform: translateY(0.125rem);
   width: 0.125rem;
   height: 1.75rem;
+`;
+
+export const ProgressLine = styled(Line).attrs({
+  strokeLinecap: 'round',
+  strokeWidth: 10,
+  strokeColor: Rage,
+  trailWidth: 9.5,
+
+  trailColor: LightGray
+})`
+  position: relative;
+  width: 1.6rem;
+  height: 0.125rem;
+  transform: rotate(90deg) translateX(0.85rem);
+`;
+
+export const ProgressLineContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.65rem;
+`;
+
+export const ProgressCircle = styled(Circle)``;
+
+export const RightSideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+
+export const DotIconAndProgressLineContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 3rem;
 `;

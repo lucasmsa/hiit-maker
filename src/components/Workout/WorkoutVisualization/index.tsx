@@ -52,9 +52,9 @@ const WorkoutVisualization = () => {
     [WORKOUT_EXECUTION_STATUS.WARMUP]: 'WARMUP',
     [WORKOUT_EXECUTION_STATUS.TRAIN]:
       workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED
-        ? `EXERCISE ${currentExerciseIndex + 1}/${setExercises.length}: ${
-            setExercises[currentExerciseIndex].name
-          }`
+        ? `EXERCISE ${currentExerciseIndex + 1}/${setExercises.length}: ${setExercises[
+            currentExerciseIndex
+          ].name.toUpperCase()}`
         : '',
     [WORKOUT_EXECUTION_STATUS.REST]: 'REST TIME',
     [WORKOUT_EXECUTION_STATUS.FINISH]: 'TRAINING FINISHED'
@@ -74,7 +74,7 @@ const WorkoutVisualization = () => {
     } else {
       return <BannerIcon icon={statusInformations[currentStatus].icon} color={White} />;
     }
-  }, [workoutExecutionStatus, playState]);
+  }, [workoutExecutionStatus, playState, currentExerciseIndex, setExercises]);
 
   const playButton = (
     <>
@@ -111,7 +111,7 @@ const WorkoutVisualization = () => {
 
       return () => clearInterval(interval);
     }
-  }, [currentRemainingTime, workoutExecutionStatus, playState]);
+  }, [currentRemainingTime, workoutExecutionStatus, dispatch, playState]);
 
   const formattedStatusTime = useMemo(
     () => secondsToHourFormat(currentRemainingTime || 0),

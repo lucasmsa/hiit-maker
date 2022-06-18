@@ -1,5 +1,4 @@
 import { INITIAL_DEFAULT_VALUES } from '../../config/contants';
-import { workoutExecutionInitialState } from '../workoutExecution/workoutExecutionReducer';
 import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,

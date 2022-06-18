@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import RightBarWorkout from '../../components/Workout/RightBarWorkout';
 import TrainingNotCreatedModal from '../../components/Workout/TrainingNotCreatedModal';

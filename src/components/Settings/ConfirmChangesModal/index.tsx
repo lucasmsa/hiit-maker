@@ -52,7 +52,7 @@ const ConfirmChangesModal = ({
     setLastTrainingDefaultValues(newDefaultValues);
 
     closeModal();
-  }, [closeModal, dispatch, newDefaultValues]);
+  }, [closeModal, newChangesWereMade, setLastTrainingDefaultValues, dispatch, newDefaultValues]);
 
   return (
     <Modal

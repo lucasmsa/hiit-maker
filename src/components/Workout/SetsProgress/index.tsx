@@ -1,19 +1,21 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  getCurrentSet,
   getCurrentSetExercises,
+  getTrainingDefaultValues,
   getTrainSetLoops
 } from '../../../store/training/selectors';
 import {
+  getCurrentActionRemainingTime,
   getWorkoutExecutionCurrentExercise,
   getWorkoutExecutionCurrentSet,
-  getWorkoutExecutionCurrentSetLoopIndex
+  getWorkoutExecutionCurrentSetLoopIndex,
+  getWorkoutExecutionStatus
 } from '../../../store/workoutExecution/selectors';
 import {
   BottomContainer,
   Container,
-  DotsContainer,
+  DotIconAndProgressLineContainer,
   ExercisesOnSetContainer,
   ExercisesOnSetText,
   InsideSetContainer,
@@ -21,19 +23,33 @@ import {
   ProgressBlockBottomText,
   ProgressBlockHeaderText,
   ProgressBlockTimesBottom,
-  StyledConnectingLine,
+  ProgressLine,
+  RightSideContainer,
   StyledNotSelectedSetIcon,
   StyledSelectedSetIcon,
   TrainingProgressContainer
 } from './styles';
+import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
+import { getCurrentActionTimePercentage } from '../../../utils/workout/getCurrentActionTimePercentage';
 
 const SetsProgress = () => {
   const training = useSelector(getTrainSetLoops);
   const currentSet = useSelector(getWorkoutExecutionCurrentSet);
-  const setLoopsQuantity = training[currentSet].loops;
+  const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
   const currentExerciseIndex = useSelector(getWorkoutExecutionCurrentExercise);
-  const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const currentSetLoopIndex = useSelector(getWorkoutExecutionCurrentSetLoopIndex);
+  const currentActionRemainingTime = useSelector(getCurrentActionRemainingTime);
+  const warmupTime = useSelector(getTrainingDefaultValues).warmupTime;
+  const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
+  const setLoopsQuantity = training[currentSet].loops;
+
+  const actionTotalTime = {
+    [WORKOUT_EXECUTION_STATUS.FINISH]: 100,
+    [WORKOUT_EXECUTION_STATUS.NOT_STARTED]: 0,
+    [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime,
+    [WORKOUT_EXECUTION_STATUS.TRAIN]: setExercises[currentExerciseIndex].trainTime,
+    [WORKOUT_EXECUTION_STATUS.REST]: setExercises[currentExerciseIndex].restTime
+  };
   const setLoopsLeft = setLoopsQuantity - (currentSetLoopIndex + 1);
 
   return (
@@ -48,17 +64,26 @@ const SetsProgress = () => {
                   currentExerciseIndex === index ? (
                     <StyledSelectedSetIcon />
                   ) : (
-                    <StyledNotSelectedSetIcon onClick={() => {}} />
+                    <StyledNotSelectedSetIcon />
                   );
                 return (
                   <InsideSetContainer>
                     <ExercisesOnSetText style={{ marginTop: index > 0 ? '1.75rem' : 0 }}>
                       {name.toUpperCase()}
                     </ExercisesOnSetText>
-                    <DotsContainer>
-                      {index !== 0 && <StyledConnectingLine />}
-                      {setIcon}
-                    </DotsContainer>
+                    <RightSideContainer>
+                      <DotIconAndProgressLineContainer>
+                        {setIcon}
+                        {index < setExercises.length - 1 && (
+                          <ProgressLine
+                            percent={getCurrentActionTimePercentage(
+                              actionTotalTime[workoutExecutionStatus],
+                              currentActionRemainingTime
+                            )}
+                          />
+                        )}
+                      </DotIconAndProgressLineContainer>
+                    </RightSideContainer>
                   </InsideSetContainer>
                 );
               })}

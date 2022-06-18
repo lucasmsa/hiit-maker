@@ -48,6 +48,7 @@ export const NextExercisesWithImageInnerContainer = styled.div`
   flex-direction: column;
   margin: 0 0.5rem;
   align-items: center;
+  margin-bottom: auto;
 `;
 
 export const ExerciseImage = styled.img`
