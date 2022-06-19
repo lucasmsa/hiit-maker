@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { DarkGray } from '../../../styles/global';
 
 export const Container = styled.div`
-  width: 30rem;
-  height: 6.25rem;
+  width: 30vw;
+  height: 12vh;
   margin-top: 1.875rem;
   font-family: Montserrat;
   font-weight: 600;

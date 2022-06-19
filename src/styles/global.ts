@@ -14,6 +14,7 @@ export default createGlobalStyle`
 `;
 
 export const Rage = '#EE373F';
+export const DarkRage = '#DF2C2C';
 export const LightGray = '#EBEBEB';
 export const DarkGray = '#282828';
 export const White = '#FFFFFF';

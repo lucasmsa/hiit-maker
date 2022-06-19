@@ -1,4 +1,4 @@
-import { INITIAL_DEFAULT_VALUES } from '../config/contants';
+import { INITIAL_DEFAULT_VALUES } from '../../config/contants';
 import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,
@@ -9,7 +9,8 @@ import {
   UPDATE_CURRENT_SET,
   REMOVE_CURRENT_SET,
   UPDATE_SET_REST_TIME,
-  UPDATE_DEFAULT_TRAINING_VALUES
+  UPDATE_DEFAULT_TRAINING_VALUES,
+  RESET_TRAINING
 } from './actionTypes';
 
 const trainSetInitialState = {
@@ -96,7 +97,6 @@ const reducerFunctions = {
     if (setsQuantity <= 4) {
       const { setRepetitions, setRestTime } = state.trainingDefaultValues;
       const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
-      console.log('over here, thats the new set state', newSetState);
       const updatedSets = state.trainSetLoops.concat(newSetState);
 
       return {
@@ -177,7 +177,6 @@ const reducerFunctions = {
           }
         : content
     );
-    console.log(`At the reducer, amount of loops here: ${amountOfLoops}`);
     if (amountOfLoops <= 5 && amountOfLoops >= 1) {
       return {
         ...state,
@@ -265,7 +264,6 @@ const reducerFunctions = {
 
   [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set;
-    console.log(state.trainSetLoops[currentSet]);
     const updateExerciseIndex = action.payload.index || 0;
     const timeAdded = action.payload.trainTime || 0;
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map(
@@ -299,6 +297,9 @@ const reducerFunctions = {
           : content
       )
     };
+  },
+  [RESET_TRAINING]: ({ state, action }: IReducer): TrainingState => {
+    return initialState;
   }
 } as IReducerFunctions;
 

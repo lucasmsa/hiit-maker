@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   margin-left: 1.125rem;
   background-color: ${Rage};
-  width: 17.5rem;
+  width: 21vw;
   height: 100vh;
   padding-top: 0.75rem;
 `;

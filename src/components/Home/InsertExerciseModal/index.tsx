@@ -18,24 +18,12 @@ import {
 import { Dispatch } from 'redux';
 import ErrorToast from '../../../toasts/ErrorToast';
 import { ReactComponent as CancelModalIcon } from '../../../assets/images/LeftBar/icons/cancel-modal-icon.svg';
-import { addExercise } from '../../../store/actionCreators';
+import { addExercise } from '../../../store/training/actionCreators';
 import { useDispatch, connect, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { getCurrentSet } from '../../../store/selectors';
-import { TransparentBlackShadow } from '../../../styles/global';
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: 20,
-    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
-  }
-};
+import { getCurrentSet } from '../../../store/training/selectors';
+import { Rage } from '../../../styles/global';
+import { customModalStyles } from '../../../utils/customModalStyles';
 
 interface ModalProps {
   modalOpen: boolean;
@@ -71,9 +59,8 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
       isOpen={modalOpen}
       // onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Exercise Modal"
-    >
+      style={customModalStyles}
+      contentLabel="Exercise Modal">
       <ModalContainer>
         <ModalTopContainer>
           <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
@@ -83,8 +70,7 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
           <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} />
           <ModalTextAndButtonsContainer>
             <ExerciseDescriptionText>
-              Exercise:{' '}
-              <span style={{ color: '#EE373F' }}>{specificExercise.name.toUpperCase()}</span>
+              Exercise: <span style={{ color: Rage }}>{specificExercise.name.toUpperCase()}</span>
             </ExerciseDescriptionText>
             <ConfirmExerciseBoldText>
               Confirm adding this exercise to your workout

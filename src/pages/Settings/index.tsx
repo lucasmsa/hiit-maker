@@ -8,7 +8,7 @@ import { ReactComponent as BackButton } from '../../assets/images/SettingsScreen
 const Settings = () => {
   return (
     <Container>
-      <LeftBar isHomePage={false}></LeftBar>
+      <LeftBar isHomePage={false} />
       <BackButtonContainer>
         <Link to={'/'}>
           <BackButton />

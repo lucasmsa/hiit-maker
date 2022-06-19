@@ -8,9 +8,9 @@ export const Container = styled.div`
   margin-top: 0.75rem;
   box-shadow: 0rem 0.0625rem 0.25rem ${TransparentBlackShadow};
   background-color: ${White};
-  width: 17rem;
-  border-radius: 0.625rem;
-  height: 3rem;
+  width: 20vw;
+  border-radius: 0.625vw;
+  height: 6vh;
   padding-right: 1.125rem;
 `;
 
@@ -23,7 +23,7 @@ export const Header = styled.div`
 export const SearchInput = styled.input`
   border: none;
   outline: none;
-  width: 15rem;
+  width: 18vw;
   font-family: Montserrat;
   &&::-webkit-input-placeholder {
     color: #c3c3c3;

@@ -7,8 +7,8 @@ import {
   updateCurrentSet,
   updateExerciseRestTime,
   updateExerciseTrainTime
-} from '../../../store/actionCreators';
-import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
+} from '../../../store/training/actionCreators';
+import { getTrainingSetExercises, getTrainSetLoops } from '../../../store/training/selectors';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 import TimeInput from '../TimeInput';
 import {
@@ -79,10 +79,10 @@ export default function ExerciseSetCard({
       <ContentsContainer>
         <img
           style={{
-            width: '95px',
-            height: '70px',
-            borderRadius: '10px',
-            marginRight: '24px'
+            width: '7vw',
+            height: '10vh',
+            borderRadius: '0.625rem',
+            marginRight: '1.5rem'
           }}
           src={image}
           alt="sample-exercise-img"

@@ -19,7 +19,7 @@ import {
   ExerciseHeaderContainer,
   ExercisesImagesContainer
 } from './styles';
-import { getTrainingDefaultValues } from '../../../store/selectors';
+import { getTrainingDefaultValues } from '../../../store/training/selectors';
 
 interface IExerciseJSON {
   exercises: {

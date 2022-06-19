@@ -1,15 +1,23 @@
 import React from 'react';
-import LeftBarWorkout from '../../components/Workout/LeftBarWorkout';
-import SetsProgress from '../../components/Workout/SetsProgress';
+import { connect, useSelector } from 'react-redux';
+import RightBarWorkout from '../../components/Workout/RightBarWorkout';
+import TrainingNotCreatedModal from '../../components/Workout/TrainingNotCreatedModal';
+import WorkoutVisualization from '../../components/Workout/WorkoutVisualization';
+import { WORKOUT_EXECUTION_STATUS } from '../../config/contants';
+import { getWorkoutExecutionStatus } from '../../store/workoutExecution/selectors';
 import { Container } from './styles';
 
 const Workout = () => {
+  const workoutExecutionStatus = useSelector(getWorkoutExecutionStatus);
+  const workoutDidNotStart = workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED;
+
   return (
     <Container>
-      <LeftBarWorkout />
-      <SetsProgress />
+      <WorkoutVisualization />
+      <RightBarWorkout />
+      <TrainingNotCreatedModal modalOpen={workoutDidNotStart} />
     </Container>
   );
 };
 
-export default Workout;
+export default connect()(Workout);

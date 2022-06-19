@@ -8,8 +8,9 @@ interface TooltipContainerProps {
 }
 
 export const Container = styled.div`
-  min-width: 16.875rem;
-  height: 6.25rem;
+  min-width: 18vw;
+  height: 12vh;
+  scroll-behavior: smooth;
   justify-content: center;
   margin-left: -1.5rem;
   overflow: hidden;
@@ -33,8 +34,8 @@ export const Item = styled.img`
   border: none;
   user-drag: none;
   -webkit-user-drag: none;
-  width: 5.25rem;
-  height: 3.75rem;
+  width: 6vw;
+  height: 8vh;
   border-radius: 0.75rem;
 `;
 
@@ -58,8 +59,9 @@ export const ExerciseItemContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 6.25rem;
-  width: 6.75rem;
+  overflow: hidden;
+  height: 12vh;
+  width: 8vw;
 `;
 
 export const TooltipContainer = styled.div<TooltipContainerProps>`
@@ -72,9 +74,10 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
 
 export const Tooltip = styled.div`
   position: absolute;
+  z-index: 10;
   transform: translateX(-37.5px) translateY(-10px);
   width: 6.875rem;
-  height: 1.25rem;
+  height: 1.5rem;
   display: flex;
   background: ${LightGray};
   align-items: center;
@@ -86,7 +89,7 @@ export const TooltipText = styled.h3`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 0.5rem;
+  font-size: 70%;
   color: ${DarkGray};
 `;
 
@@ -102,7 +105,8 @@ export const ArrowButton = styled.button`
   cursor: pointer;
   display: flex;
   min-width: 1.25rem;
-  height: 7.5rem;
+  height: 8vh;
+  margin-top: 2.75vh;
   flex-direction: column;
   background: none;
   color: inherit;

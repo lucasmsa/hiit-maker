@@ -1,7 +1,24 @@
 type AfflictedAreas = 'Chest' | 'Legs' | 'Back' | 'Core';
 
+interface States {
+  training: TrainingState;
+  workoutExecution: WorkoutExecutionState;
+}
+
 type IAfflictedAreasCounter<AfflictedAreas> = {
   [Property in keyof AfflictedAreas]: number;
+};
+
+type WORKOUT_EXECUTION_STATUS = 'WARMUP' | 'TRAIN' | 'REST' | 'FINISH' | 'NOT_STARTED';
+
+type PLAY_STATE = 'PLAY' | 'PAUSE';
+
+type WORKOUT_EXECUTION_STATUS_TYPES = {
+  [key in WORKOUT_EXECUTION_STATUS]: WORKOUT_EXECUTION_STATUS;
+};
+
+type PLAY_STATE_TYPES = {
+  [key in PLAY_STATE]: PLAY_STATE;
 };
 
 interface Exercise {
@@ -11,6 +28,9 @@ interface Exercise {
   trainTime: number;
   afflictedBodyPart?: AfflictedAreas;
 }
+
+interface ExerciseVisualization
+  extends Omit<Exercise, 'restTime' | 'trainTime' | 'afflictedBodyPart'> {}
 
 interface TrainSet {
   exercises: Exercise[];
@@ -40,6 +60,15 @@ type TrainingState = {
   totalTrainingTime: number;
 };
 
+type WorkoutExecutionState = {
+  currentSetIndex: number;
+  currentSetLoopIndex: number;
+  currentSetExerciseIndex: number;
+  currentActionRemainingTime: number;
+  status: WORKOUT_EXECUTION_STATUS;
+  playState: PLAY_STATE;
+};
+
 type TrainingAction = {
   type: string;
   payload: {
@@ -51,6 +80,19 @@ type TrainingAction = {
     trainTime?: number;
     setRestTime?: number;
     defaultTrainingValues?: TrainingDefaultValues;
+  };
+};
+
+type WorkoutExecutionAction = {
+  type: string;
+  payload: {
+    warmupTime?: number;
+    remainingTime?: number;
+    currentSetIndex?: number;
+    currentSetLoopIndex?: number;
+    currentSetExerciseIndex?: number;
+    status?: WORKOUT_EXECUTION_STATUS;
+    currentActionRemainingTime?: number;
   };
 };
 

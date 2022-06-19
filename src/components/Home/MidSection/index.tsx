@@ -4,7 +4,6 @@ import {
   AddSetText,
   RemoveSetText,
   SetsContainer,
-  HeaderTextStyle,
   AddSetContainer,
   WorkoutContainer,
   RemoveSetContainer,
@@ -12,9 +11,6 @@ import {
   CurrentTrainingSetsContainer,
   SetsLimitText,
   SetsLimitCountText,
-  HeaderTextContainer,
-  RightTriangle,
-  HorizontalDumbell,
   HeaderInfoContainer
 } from './styles';
 import { ReactComponent as AddSetIcon } from '../../../assets/images/midSection/addSet.svg';
@@ -25,8 +21,12 @@ import { ReactComponent as RemoveSetIcon } from '../../../assets/images/midSecti
 import MountWorkout from '../MountWorkout';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { addSet, removeSet, updateCurrentSet } from '../../../store/actionCreators';
-import { getCurrentSet, getTrainingSetExercises, getTrainSetLoops } from '../../../store/selectors';
+import { addSet, removeSet, updateCurrentSet } from '../../../store/training/actionCreators';
+import {
+  getCurrentSet,
+  getTrainingSetExercises,
+  getTrainSetLoops
+} from '../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
 
@@ -36,28 +36,17 @@ const MidSection = () => {
   const currentSet = useSelector(getCurrentSet);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
   const setsQuantity = trainingSets.length;
-  console.log('at the mid section, here are the training sets', trainingSets);
-  console.log(
-    'at the mid section, here are the training set exercises',
-    currentTrainingSetExercises
-  );
 
   return (
     <Container>
-      <HeaderInfoContainer>
-        <HeaderTextContainer>
-          <HorizontalDumbell />
-          <HeaderTextStyle>Create your workout with a few steps</HeaderTextStyle>
-        </HeaderTextContainer>
-        <RightTriangle />
-      </HeaderInfoContainer>
+      <HeaderInfoContainer />
       <ExercisesContainer>
         <SetsContainer>
           <SetsLimitText>
             Set Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5
           </SetsLimitText>
           <CurrentTrainingSetsContainer>
-            {trainingSets.map((set, index) => {
+            {trainingSets.map((set: TrainSetLoop, index: number) => {
               const setIcon =
                 currentSet === index ? (
                   <SelectedSetIcon key={index} style={{ cursor: 'pointer' }} />
