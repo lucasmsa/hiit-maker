@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   getCurrentSetExercises,
@@ -17,24 +17,25 @@ import {
   Container,
   DotContainer,
   DotIconAndProgressLineContainer,
+  EnlargingCircle,
   ExercisesOnSetContainer,
   ExercisesOnSetText,
+  FilledDotIcon,
   InsideSetContainer,
   ProgressBlock,
   ProgressBlockBottomText,
   ProgressBlockHeaderText,
   ProgressBlockTimesBottom,
   ProgressCircle,
-  ProgressCircleContainer,
   ProgressLine,
   RightSideContainer,
   SelectedDotIcon,
-  StyledNotSelectedSetIcon,
-  StyledSelectedSetIcon,
-  TrainingProgressContainer
+  TrainingProgressContainer,
+  UnfilledDotIcon
 } from './styles';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
 import { getCurrentActionTimePercentage } from '../../../utils/workout/getCurrentActionTimePercentage';
+import { LightGray, Rage } from '../../../styles/global';
 
 const SetsProgress = () => {
   const training = useSelector(getTrainSetLoops);
@@ -46,15 +47,25 @@ const SetsProgress = () => {
   const warmupTime = useSelector(getTrainingDefaultValues).warmupTime;
   const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const setLoopsQuantity = training[currentSet].loops;
+  const setLoopsLeft = setLoopsQuantity - (currentSetLoopIndex + 1);
+  const filteredRestTime =
+    currentExerciseIndex === setExercises.length - 1 && !setLoopsLeft
+      ? setExercises[currentExerciseIndex].restTime + training[currentSet].setRestTime
+      : setExercises[currentExerciseIndex].restTime;
 
   const actionTotalTime = {
     [WORKOUT_EXECUTION_STATUS.FINISH]: 100,
     [WORKOUT_EXECUTION_STATUS.NOT_STARTED]: 0,
     [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime,
     [WORKOUT_EXECUTION_STATUS.TRAIN]: setExercises[currentExerciseIndex].trainTime,
-    [WORKOUT_EXECUTION_STATUS.REST]: setExercises[currentExerciseIndex].restTime
+    [WORKOUT_EXECUTION_STATUS.REST]: filteredRestTime
   };
-  const setLoopsLeft = setLoopsQuantity - (currentSetLoopIndex + 1);
+  const currentActionTimePercentage = useMemo(() => {
+    return getCurrentActionTimePercentage(
+      actionTotalTime[workoutExecutionStatus],
+      currentActionRemainingTime
+    );
+  }, [actionTotalTime, currentActionRemainingTime, workoutExecutionStatus]);
 
   return (
     <Container>
@@ -63,41 +74,89 @@ const SetsProgress = () => {
           <ProgressBlock>
             <ProgressBlockHeaderText>PROGRESS</ProgressBlockHeaderText>
             <ExercisesOnSetContainer>
-              {setExercises.map(({ name }, index) => {
-                const setIcon =
-                  currentExerciseIndex === index ? (
+              {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP ? (
+                setExercises.map(({ name }, index) => {
+                  const setIcon = (
+                    <DotContainer>
+                      {currentExerciseIndex === index &&
+                      workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.TRAIN ? (
+                        <>
+                          <SelectedDotIcon />
+                          <ProgressCircle
+                            percent={
+                              workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.TRAIN
+                                ? currentActionTimePercentage
+                                : 0
+                            }
+                          />
+                        </>
+                      ) : currentExerciseIndex > index ||
+                        (currentExerciseIndex === index &&
+                          workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.REST &&
+                          index < setExercises.length - 1) ||
+                        workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH ? (
+                        <FilledDotIcon />
+                      ) : currentExerciseIndex === setExercises.length - 1 ? (
+                        <>
+                          <EnlargingCircle scaleSum={1 + 0.005 * currentActionTimePercentage} />
+                          <ProgressCircle percent={100} />
+                        </>
+                      ) : (
+                        <UnfilledDotIcon />
+                      )}
+                    </DotContainer>
+                  );
+                  return (
+                    <InsideSetContainer>
+                      <ExercisesOnSetText style={{ marginTop: index > 0 ? '1.75rem' : 0 }}>
+                        {name.toUpperCase()}
+                      </ExercisesOnSetText>
+                      <RightSideContainer>
+                        <DotIconAndProgressLineContainer>
+                          {setIcon}
+                          {index < setExercises.length - 1 ? (
+                            <ProgressLine
+                              lastExerciseLine={
+                                setExercises.length > 1 && index === setExercises.length - 2
+                                  ? true
+                                  : false
+                              }
+                              strokeColor={
+                                workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.REST &&
+                                currentExerciseIndex === index
+                                  ? Rage
+                                  : currentExerciseIndex > index
+                                  ? Rage
+                                  : LightGray
+                              }
+                              percent={
+                                workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.REST &&
+                                currentExerciseIndex === index
+                                  ? currentActionTimePercentage
+                                  : currentExerciseIndex > index
+                                  ? 100
+                                  : 0
+                              }
+                            />
+                          ) : (
+                            <></>
+                          )}
+                        </DotIconAndProgressLineContainer>
+                      </RightSideContainer>
+                    </InsideSetContainer>
+                  );
+                })
+              ) : (
+                <InsideSetContainer>
+                  <ExercisesOnSetText style={{ marginTop: '1.75rem' }}>WARMUP</ExercisesOnSetText>
+                  <RightSideContainer>
                     <DotContainer>
                       <SelectedDotIcon />
-                      <ProgressCircle
-                        percent={getCurrentActionTimePercentage(
-                          actionTotalTime[workoutExecutionStatus],
-                          currentActionRemainingTime
-                        )}></ProgressCircle>
+                      <ProgressCircle percent={currentActionTimePercentage} />
                     </DotContainer>
-                  ) : (
-                    <StyledNotSelectedSetIcon />
-                  );
-                return (
-                  <InsideSetContainer>
-                    <ExercisesOnSetText style={{ marginTop: index > 0 ? '1.75rem' : 0 }}>
-                      {name.toUpperCase()}
-                    </ExercisesOnSetText>
-                    <RightSideContainer>
-                      <DotIconAndProgressLineContainer>
-                        {setIcon}
-                        {index < setExercises.length - 1 && (
-                          <ProgressLine
-                            percent={getCurrentActionTimePercentage(
-                              actionTotalTime[workoutExecutionStatus],
-                              currentActionRemainingTime
-                            )}
-                          />
-                        )}
-                      </DotIconAndProgressLineContainer>
-                    </RightSideContainer>
-                  </InsideSetContainer>
-                );
-              })}
+                  </RightSideContainer>
+                </InsideSetContainer>
+              )}
             </ExercisesOnSetContainer>
             <ProgressBlockTimesBottom>
               <ProgressBlockBottomText>
