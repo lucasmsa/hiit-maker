@@ -29,7 +29,7 @@ const configurableTrainSetInitialState = (loops: number, setRestTime: number) =>
   setRestTime
 });
 
-const initialState = {
+export const trainingInitialState = {
   currentSet: 0,
   afflictedAreas: {
     Chest: 0,
@@ -59,7 +59,7 @@ interface IReducerFunctions {
 
 const reducerFunctions = {
   [ADD_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const newExercise = action.payload.exercise!;
     const setExercises = state.trainSetLoops[currentSet].trainSet.exercises;
 
@@ -166,7 +166,7 @@ const reducerFunctions = {
   },
 
   [UPDATE_CURRENT_SET_LOOP_QUANTITY]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const amountOfLoops = action.payload.loops || 0;
     const updatedTrainSetLoops = state.trainSetLoops.map((content, index) =>
       index === currentSet
@@ -187,7 +187,7 @@ const reducerFunctions = {
   },
 
   [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const removeExerciseIndex = action.payload.index;
     const currentSetExercises = state.trainSetLoops[currentSet].trainSet.exercises;
     const exerciseToBeRemoved = currentSetExercises[removeExerciseIndex!];
@@ -224,7 +224,7 @@ const reducerFunctions = {
   },
 
   [UPDATE_EXERCISE_REST_TIME]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const updateExerciseIndex = action.payload.index || 0;
     const timeAdded = action.payload.restTime || 0;
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map(
@@ -263,7 +263,7 @@ const reducerFunctions = {
   },
 
   [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const updateExerciseIndex = action.payload.index || 0;
     const timeAdded = action.payload.trainTime || 0;
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map(
@@ -299,11 +299,14 @@ const reducerFunctions = {
     };
   },
   [RESET_TRAINING]: ({ state, action }: IReducer): TrainingState => {
-    return initialState;
+    return trainingInitialState;
   }
 } as IReducerFunctions;
 
-const reducer = (state: TrainingState = initialState, action: TrainingAction): TrainingState => {
+const reducer = (
+  state: TrainingState = trainingInitialState,
+  action: TrainingAction
+): TrainingState => {
   return action.type in reducerFunctions ? reducerFunctions[action.type]({ state, action }) : state;
 };
 

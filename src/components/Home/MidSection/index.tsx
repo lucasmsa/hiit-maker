@@ -73,7 +73,7 @@ const MidSection = () => {
             <AddSetContainer
               onClick={() => {
                 if (currentTrainingSetExercises.length) {
-                  dispatch(addSet(currentSet));
+                  dispatch(addSet());
                   dispatch(updateCurrentSet(setsQuantity));
                 } else {
                   toast(

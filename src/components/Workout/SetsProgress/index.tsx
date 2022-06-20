@@ -160,7 +160,9 @@ const SetsProgress = () => {
             </ExercisesOnSetContainer>
             <ProgressBlockTimesBottom>
               <ProgressBlockBottomText>
-                {setLoopsLeft ? `${setLoopsLeft} SET REPETITIONS LEFT` : 'LAST SET REPETITION'}
+                {setLoopsLeft
+                  ? `${setLoopsLeft} SET REPETITION${setLoopsLeft === 1 ? '' : 'S'} LEFT`
+                  : 'LAST SET REPETITION'}
               </ProgressBlockBottomText>
             </ProgressBlockTimesBottom>
           </ProgressBlock>

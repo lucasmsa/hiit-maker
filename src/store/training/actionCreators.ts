@@ -47,12 +47,10 @@ export function updateCurrentSet(set: number) {
   return action;
 }
 
-export function addSet(set: number) {
+export function addSet() {
   const action: TrainingAction = {
     type: ADD_SET,
-    payload: {
-      set
-    }
+    payload: {}
   };
   return action;
 }
