@@ -19,11 +19,15 @@ import ErrorToast from '../../../toasts/ErrorToast';
 import { Link } from 'react-router-dom';
 import InformationHeaderSection from '../InformationHeaderSection';
 import { PlayButton, PlayButtonHovered } from '../../PlayAndStopButtons/styles';
-import { startTraining } from '../../../store/workoutExecution/actionCreators';
+import {
+  resetWorkoutExecution,
+  startTraining
+} from '../../../store/workoutExecution/actionCreators';
 import { Dispatch } from 'redux';
 import MuscleGroupsSection from '../MuscleGroupsSection';
 import { getWorkoutExecutionStatus } from '../../../store/workoutExecution/selectors';
 import { WORKOUT_EXECUTION_STATUS } from '../../../config/contants';
+import { resetWorkout } from '../../../store/training/actionCreators';
 
 const WorkoutInformation = () => {
   const dispatch: Dispatch<any> = useDispatch();
@@ -43,6 +47,10 @@ const WorkoutInformation = () => {
   };
 
   const handlePlayButtonClick = () => {
+    const workoutFinishedOrWasNotStartedYet =
+      workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED ||
+      workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH;
+
     if (!atLeastOneExerciseWasAddedOnEverySet()) {
       toast(
         ErrorToast({
@@ -50,7 +58,10 @@ const WorkoutInformation = () => {
           cannotBuildWorkout: true
         })
       );
-    } else if (workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED) {
+    } else if (workoutFinishedOrWasNotStartedYet) {
+      if (workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH) {
+        dispatch(resetWorkoutExecution());
+      }
       dispatch(startTraining());
     }
   };

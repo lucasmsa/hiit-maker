@@ -40,7 +40,8 @@ export const SetsLimitText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 40%;
+  font-size: 70%;
+  text-align: center;
   line-height: 0.6875rem;
   letter-spacing: 0.02em;
   color: ${TransparentLightBlack};

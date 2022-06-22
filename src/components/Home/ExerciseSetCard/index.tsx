@@ -21,7 +21,8 @@ import {
   RestContainer,
   TextAndDeleteContainer,
   TrainRestContainer,
-  TrainContainer
+  TrainContainer,
+  LeftSideImage
 } from './styles';
 
 interface ExerciseSetCardProps {
@@ -84,16 +85,7 @@ export default function ExerciseSetCard({
       transition={{ duration: 0.4 }}>
       <Container>
         <ContentsContainer>
-          <img
-            style={{
-              width: '7vw',
-              height: '10vh',
-              borderRadius: '0.625rem',
-              marginRight: '1.5rem'
-            }}
-            src={image}
-            alt="sample-exercise-img"
-          />
+          <LeftSideImage src={image} alt={name + '-image'} />
           <ExerciseNameTrainRestContainer>
             <TextAndDeleteContainer>
               <HeaderText>{name}</HeaderText>

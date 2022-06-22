@@ -89,3 +89,10 @@ export const ContentsContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const LeftSideImage = styled.img`
+  width: 7vw;
+  height: 10vh;
+  border-radius: 0.625rem;
+  margin-right: 1.5rem;
+`;

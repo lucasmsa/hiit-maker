@@ -153,7 +153,9 @@ const WorkoutVisualization = () => {
               .bottomText
           }
         </BottomStatusText>
-        <TimeCountdownText>{formattedStatusTime}</TimeCountdownText>
+        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.FINISH && (
+          <TimeCountdownText>{formattedStatusTime}</TimeCountdownText>
+        )}
         {workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.FINISH ? (
           <BackToHomeButtonContainer to={'/'}>
             <BackToHomeButton>

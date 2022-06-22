@@ -12,7 +12,7 @@ export const Container = styled.div`
   background-color: ${Rage};
   width: 24vw;
   height: 100vh;
-  padding-top: 2.625rem;
+  padding-top: 2vw;
 `;
 
 export const Header = styled.div`

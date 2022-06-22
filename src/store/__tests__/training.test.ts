@@ -1,38 +1,29 @@
-import { Store } from 'redux';
-import configureMockStore from 'redux-mock-store';
+import { AnyAction, Store } from 'redux';
+import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { addExercise, addSet } from '../training/actionCreators';
+import { ADD_SET } from '../training/actionTypes';
 import { trainingInitialState } from '../training/trainingReducer';
 
 const mockStore = configureMockStore([thunk]);
 
 describe('Training actions creators', () => {
-  let store: Store;
+  let store: MockStoreEnhanced<{ training: TrainingState }, {}>;
 
   beforeEach(() => {
     store = mockStore({
       training: trainingInitialState
-    });
+    }) as MockStoreEnhanced<{ training: TrainingState }, {}>;
   });
 
-  describe('Add set action', () => {
-    it('should successfully add a new set to the training', () => {
-      console.log('eu to nesse teste?');
-      console.log(store.getState().training.trainSetLoops);
-      store.dispatch(addSet());
-      store.dispatch(
-        addExercise(
-          {
-            image: 'oi',
-            name: 'a',
-            restTime: 2,
-            trainTime: 1,
-            afflictedBodyPart: 'Chest'
-          },
-          2
-        )
-      );
-      console.log(store.getState().training.trainSetLoops);
+  describe('Add set', () => {
+    describe('Action', () => {
+      it('should call add set add set action type', () => {
+        store.dispatch(addSet());
+        const actions = store.getActions();
+
+        expect(actions[0].type).toEqual(ADD_SET);
+      });
     });
   });
 });
