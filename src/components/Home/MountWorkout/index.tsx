@@ -36,6 +36,7 @@ import ErrorToast from '../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';
 import { configurationBoundaries } from '../../../utils/settings/configurationBoundaries';
 import ResetWorkoutModal from '../ResetWorkoutModal';
+import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 
 const optionsOperation = {
   plus: 1,
@@ -103,17 +104,19 @@ const MountWorkout = () => {
         {loading ? (
           <></>
         ) : (
-          currentSetExercisesState.map((exercise: Exercise, index: number) => (
-            <ExerciseSetCard
-              set={currentSet}
-              index={index}
-              key={exercise.name}
-              name={exercise.name}
-              image={exercise.image}
-              restTime={exercise.restTime}
-              trainTime={exercise.trainTime}
-            />
-          ))
+          <AnimatePresence>
+            {currentSetExercisesState.map((exercise: Exercise, index: number) => (
+              <ExerciseSetCard
+                set={currentSet}
+                index={index}
+                key={exercise.name}
+                name={exercise.name}
+                image={exercise.image}
+                restTime={exercise.restTime}
+                trainTime={exercise.trainTime}
+              />
+            ))}
+          </AnimatePresence>
         )}
       </ScrollableExercisesContainer>
       <FooterContainer>

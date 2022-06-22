@@ -8,6 +8,7 @@ export const Container = styled.div`
   font-family: Montserrat;
   font-weight: 600;
   font-size: 0.875rem;
+  overflow: hidden;
 `;
 
 export const ExerciseNameTrainRestContainer = styled.div``;
@@ -80,7 +81,7 @@ export const InputContainer = styled.div`
 export const TextAndDeleteContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 17.5rem;
+  width: 18vw;
   margin-bottom: 1rem;
 `;
 

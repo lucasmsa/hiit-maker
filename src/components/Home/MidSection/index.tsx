@@ -11,7 +11,8 @@ import {
   CurrentTrainingSetsContainer,
   SetsLimitText,
   SetsLimitCountText,
-  HeaderInfoContainer
+  HeaderInfoContainer,
+  HorizontalDumbell
 } from './styles';
 import { ReactComponent as AddSetIcon } from '../../../assets/images/midSection/addSet.svg';
 import { ReactComponent as SelectedSetIcon } from '../../../assets/images/midSection/selected-set.svg';
@@ -29,6 +30,8 @@ import {
 } from '../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../toasts/ErrorToast';
+import InformationHeaderSection from '../InformationHeaderSection';
+import { motion } from 'framer-motion/dist/framer-motion';
 
 const MidSection = () => {
   const dispatch: Dispatch<any> = useDispatch();

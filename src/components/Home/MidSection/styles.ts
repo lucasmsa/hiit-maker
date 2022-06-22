@@ -40,7 +40,7 @@ export const SetsLimitText = styled.h3`
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
-  font-size: 0.5625rem;
+  font-size: 40%;
   line-height: 0.6875rem;
   letter-spacing: 0.02em;
   color: ${TransparentLightBlack};
@@ -84,8 +84,8 @@ export const HeaderTextContainer = styled.div`
 export const HeaderInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 2.5vh;
-  margin-left: -12vw;
+  margin-top: 2vh;
+  margin-left: -5vw;
 `;
 
 export const RightTriangle = styled.div`

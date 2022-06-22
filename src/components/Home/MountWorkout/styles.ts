@@ -101,6 +101,7 @@ export const ScrollableExercisesContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  overflow-x: hidden;
   margin-bottom: 1.5rem;
   ::-webkit-scrollbar {
     width: 0.3125rem;

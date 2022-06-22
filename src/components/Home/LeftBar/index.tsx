@@ -16,6 +16,7 @@ import Search from '../Search';
 import { GITHUB_LINK } from '../../../config/contants';
 import InformationHeaderSection from '../InformationHeaderSection';
 import { HorizontalDumbell } from '../MidSection/styles';
+import { motion } from 'framer-motion/dist/framer-motion';
 
 interface LeftBarProps {
   isHomePage: boolean;
@@ -47,6 +48,7 @@ const LeftBar = ({ isHomePage }: LeftBarProps) => {
           <></>
         )}
       </Container>
+
       <CreateWorkoutHeaderDescriptionContainer>
         {isHomePage && (
           <InformationHeaderSection

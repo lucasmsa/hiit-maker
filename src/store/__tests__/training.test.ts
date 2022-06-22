@@ -21,13 +21,16 @@ describe('Training actions creators', () => {
       console.log(store.getState().training.trainSetLoops);
       store.dispatch(addSet());
       store.dispatch(
-        addExercise({
-          image: 'oi',
-          name: 'a',
-          restTime: 2,
-          trainTime: 1,
-          afflictedBodyPart: 'Chest'
-        })
+        addExercise(
+          {
+            image: 'oi',
+            name: 'a',
+            restTime: 2,
+            trainTime: 1,
+            afflictedBodyPart: 'Chest'
+          },
+          2
+        )
       );
       console.log(store.getState().training.trainSetLoops);
     });

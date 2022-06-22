@@ -1,15 +1,13 @@
 import React from 'react';
 import Home from '../pages/Home';
 import Workout from '../pages/Workout';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { PageTransition } from '@steveeeie/react-page-transition';
 import Settings from '../pages/Settings';
+import AnimatedRoutes from '../components/AnimatedRoutes';
 
-const AppRoutes: React.FC = () => (
-  <Switch>
-    <Route path="/" exact component={Home} />
-    <Route path="/workout" exact component={Workout} />
-    <Route path="/settings" exact component={Settings} />
-  </Switch>
-);
+const AppRoutes: React.FC = () => {
+  return <AnimatedRoutes />;
+};
 
 export default AppRoutes;

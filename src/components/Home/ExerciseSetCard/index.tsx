@@ -1,3 +1,4 @@
+import { motion, useAnimation } from 'framer-motion/dist/framer-motion';
 import React, { ChangeEvent, Dispatch, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as DeleteIcon } from '../../../assets/images/ExerciseCardSet/delete.svg';
@@ -40,6 +41,7 @@ export default function ExerciseSetCard({
   restTime,
   trainTime
 }: ExerciseSetCardProps) {
+  const animation = useAnimation();
   const dispatch: Dispatch<any> = useDispatch();
   const [restTimeInput, setRestTimeInput] = useState(restTime);
   const [trainTimeInput, setTrainTimeInput] = useState(trainTime);
@@ -75,60 +77,66 @@ export default function ExerciseSetCard({
   };
 
   return (
-    <Container>
-      <ContentsContainer>
-        <img
-          style={{
-            width: '7vw',
-            height: '10vh',
-            borderRadius: '0.625rem',
-            marginRight: '1.5rem'
-          }}
-          src={image}
-          alt="sample-exercise-img"
-        />
-        <ExerciseNameTrainRestContainer>
-          <TextAndDeleteContainer>
-            <HeaderText>{name}</HeaderText>
-            <DeleteIcon
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                dispatch(removeExercise(index, set));
-                if (currentTrainingSetExercises.length === 1 && trainSetLoops.length > 1) {
-                  dispatch(removeSet(set));
-                  if (set === 0) {
-                    dispatch(updateCurrentSet(set));
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0 }}
+      transition={{ duration: 0.4 }}>
+      <Container>
+        <ContentsContainer>
+          <img
+            style={{
+              width: '7vw',
+              height: '10vh',
+              borderRadius: '0.625rem',
+              marginRight: '1.5rem'
+            }}
+            src={image}
+            alt="sample-exercise-img"
+          />
+          <ExerciseNameTrainRestContainer>
+            <TextAndDeleteContainer>
+              <HeaderText>{name}</HeaderText>
+              <DeleteIcon
+                style={{ cursor: 'pointer' }}
+                onClick={async () => {
+                  dispatch(removeExercise(index, set));
+                  if (currentTrainingSetExercises.length === 1 && trainSetLoops.length > 1) {
+                    dispatch(removeSet(set));
+                    if (set === 0) {
+                      dispatch(updateCurrentSet(set));
+                    }
                   }
-                }
-              }}
-              width={20}
-              height={20}
-            />
-          </TextAndDeleteContainer>
-          <TrainRestContainer>
-            <TrainContainer>
-              <HeaderTrainRest>TRAIN</HeaderTrainRest>
-              <TimeInput
-                value={trainTimeInput}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(event, 'TRAIN')
-                }
-                onFocusOut={(event: any) => handleInputFocusOut(event, 'TRAIN')}
+                }}
+                width={20}
+                height={20}
               />
-            </TrainContainer>
-            <RestContainer>
-              <HeaderTrainRest>REST</HeaderTrainRest>
-              <TimeInput
-                value={restTimeInput}
-                onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                  handleInputChange(event, 'REST')
-                }
-                onFocusOut={(event: any) => handleInputFocusOut(event, 'REST')}
-              />
-            </RestContainer>
-          </TrainRestContainer>
-        </ExerciseNameTrainRestContainer>
-      </ContentsContainer>
-    </Container>
+            </TextAndDeleteContainer>
+            <TrainRestContainer>
+              <TrainContainer>
+                <HeaderTrainRest>TRAIN</HeaderTrainRest>
+                <TimeInput
+                  value={trainTimeInput}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(event, 'TRAIN')
+                  }
+                  onFocusOut={(event: any) => handleInputFocusOut(event, 'TRAIN')}
+                />
+              </TrainContainer>
+              <RestContainer>
+                <HeaderTrainRest>REST</HeaderTrainRest>
+                <TimeInput
+                  value={restTimeInput}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    handleInputChange(event, 'REST')
+                  }
+                  onFocusOut={(event: any) => handleInputFocusOut(event, 'REST')}
+                />
+              </RestContainer>
+            </TrainRestContainer>
+          </ExerciseNameTrainRestContainer>
+        </ContentsContainer>
+      </Container>
+    </motion.div>
   );
 }

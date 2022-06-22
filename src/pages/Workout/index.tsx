@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
+import { motion } from 'framer-motion/dist/framer-motion';
 import RightBarWorkout from '../../components/Workout/RightBarWorkout';
 import TrainingNotCreatedModal from '../../components/Workout/TrainingNotCreatedModal';
 import WorkoutVisualization from '../../components/Workout/WorkoutVisualization';
@@ -12,11 +13,20 @@ const Workout = () => {
   const workoutDidNotStart = workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED;
 
   return (
-    <Container>
-      <WorkoutVisualization />
-      <RightBarWorkout />
-      <TrainingNotCreatedModal modalOpen={workoutDidNotStart} />
-    </Container>
+    <motion.div
+      initial={{ x: window.innerWidth, overflow: 'hidden' }}
+      animate={{ x: 0, overflow: 'hidden' }}
+      transition={{
+        type: 'spring',
+        duration: 1,
+        overflow: 'hidden'
+      }}>
+      <Container>
+        <WorkoutVisualization />
+        <RightBarWorkout />
+        <TrainingNotCreatedModal modalOpen={workoutDidNotStart} />
+      </Container>
+    </motion.div>
   );
 };
 
