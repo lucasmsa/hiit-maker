@@ -57,8 +57,8 @@ const SetsProgress = () => {
     [WORKOUT_EXECUTION_STATUS.FINISH]: 100,
     [WORKOUT_EXECUTION_STATUS.NOT_STARTED]: 0,
     [WORKOUT_EXECUTION_STATUS.WARMUP]: warmupTime,
-    [WORKOUT_EXECUTION_STATUS.TRAIN]: setExercises[currentExerciseIndex].trainTime,
-    [WORKOUT_EXECUTION_STATUS.REST]: filteredRestTime
+    [WORKOUT_EXECUTION_STATUS.TRAIN]: setExercises[currentExerciseIndex].trainTime || 0,
+    [WORKOUT_EXECUTION_STATUS.REST]: filteredRestTime || 0
   };
   const currentActionTimePercentage = useMemo(() => {
     return getCurrentActionTimePercentage(

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DarkGray, LightGray, Rage } from '../../../styles/global';
+import { DarkGray, LightGray, Rage, TransparentBlackShadow, White } from '../../../styles/global';
 import { ReactComponent as WorkoutNotFound } from '../../../assets/images/WorkoutScreen/training-not-created.svg';
 
 export const ModalContainer = styled.div`
@@ -7,6 +7,13 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   z-index: 3;
   position: relative;
+  display: flex;
+  background: ${White};
+  width: 34rem;
+  height: 19rem;
+  padding: 1rem 2rem;
+  border-radius: 1.25rem;
+  box-shadow: 0px 1px 4px ${TransparentBlackShadow};
 `;
 
 export const ModalTopContainer = styled.div`

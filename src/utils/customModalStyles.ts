@@ -1,14 +1,17 @@
 import { TransparentBlackShadow } from '../styles/global';
 
 export const customModalStyles = {
+  overlay: {
+    background: 'rgba(0, 0, 0, 0.5)',
+    zIndex: '100',
+    backdropFilter: 'blur(0.0313rem)'
+  },
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    borderRadius: 20,
-    boxShadow: `0px 1px 4px ${TransparentBlackShadow}`
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: 'null',
+    overflow: 'hidden',
+    background: 'null'
   }
 };

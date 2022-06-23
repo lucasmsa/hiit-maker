@@ -28,7 +28,7 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
   display: flex;
   align-items: center;
   background: ${({ color }) => (color === 'BLACK' ? TransparentDarkBlack : Rage)};
-  width: ${({ small, medium }) => (small ? '90%' : medium ? '100%' : '120%')};
+  width: ${({ small, medium }) => (small ? '100%' : medium ? '110%' : '120%')};
   height: 6vh;
   padding-left: 3rem;
 `;

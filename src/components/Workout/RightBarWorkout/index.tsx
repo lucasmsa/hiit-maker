@@ -42,7 +42,7 @@ const RightBarWorkout = () => {
         </NextExercisesWithImageOuterContainer>
       </NextExercisesContainer>
       <SetsProgreessContainer>
-        <SetsProgress />
+        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED && <SetsProgress />}
       </SetsProgreessContainer>
     </Container>
   );

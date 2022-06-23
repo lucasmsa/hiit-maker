@@ -126,6 +126,8 @@ const WorkoutVisualization = () => {
             title={
               workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.WARMUP
                 ? WORKOUT_EXECUTION_STATUS.WARMUP
+                : workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED
+                ? `NOT STARTED`
                 : `Set ${currentSet + 1}/${training.length}`
             }
             backgroundColor="BLACK"
@@ -136,14 +138,15 @@ const WorkoutVisualization = () => {
             <BrandingIcon />
           </Link>
         </HeaderSetAndLogoContainer>
-        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP && (
-          <InformationHeaderSection
-            title={statusHeaderTitle[workoutExecutionStatus]}
-            backgroundColor="BLACK"
-            medium
-            reverse
-          />
-        )}
+        {workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.WARMUP &&
+          workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED && (
+            <InformationHeaderSection
+              title={statusHeaderTitle[workoutExecutionStatus]}
+              backgroundColor="BLACK"
+              medium
+              reverse
+            />
+          )}
       </HeaderContainer>
       <BannerContainer>{handleBannerInformations()}</BannerContainer>
       <BottomContainer>

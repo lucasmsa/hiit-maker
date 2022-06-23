@@ -20,6 +20,7 @@ import {
   ExercisesImagesContainer
 } from './styles';
 import { getTrainingDefaultValues } from '../../../store/training/selectors';
+import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 
 interface IExerciseJSON {
   exercises: {
@@ -154,11 +155,13 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
 
   return (
     <Container>
-      <ExerciseModal
-        modalOpen={modalOpen}
-        specificExercise={specificExercise}
-        closeModal={() => setModalOpen(false)}
-      />
+      <AnimatePresence>
+        <ExerciseModal
+          modalOpen={modalOpen}
+          specificExercise={specificExercise}
+          closeModal={() => setModalOpen(false)}
+        />
+      </AnimatePresence>
 
       {exerciseContainer.map((element: any, index) => {
         const bodyPart = Object.keys(element)[0] as AfflictedAreas;
