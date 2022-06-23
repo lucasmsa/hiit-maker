@@ -67,9 +67,7 @@ export function updateSetRest(set: number, setRestTime: number) {
   return action;
 }
 
-export function updateDefaultTrainingValues(defaultTrainingValues: {
-  [key in PossibleConfigurations]: number;
-}) {
+export function updateDefaultTrainingValues(defaultTrainingValues: TrainingDefaultValues) {
   const action: TrainingAction = {
     type: UPDATE_DEFAULT_TRAINING_VALUES,
     payload: {

@@ -82,7 +82,7 @@ export default function ExerciseSetCard({
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       exit={{ scale: 0 }}
-      transition={{ duration: 0.4 }}>
+      transition={{ duration: 0.2 }}>
       <Container>
         <ContentsContainer>
           <LeftSideImage src={image} alt={name + '-image'} />

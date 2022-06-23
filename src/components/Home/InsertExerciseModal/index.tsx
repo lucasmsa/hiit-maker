@@ -24,7 +24,7 @@ import { toast } from 'react-hot-toast';
 import { getCurrentSet } from '../../../store/training/selectors';
 import { Rage } from '../../../styles/global';
 import { customModalStyles } from '../../../utils/customModalStyles';
-import { motion } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import { modalAnimationValues } from '../../../utils/settings/modalAnimationValues';
 
 interface ModalProps {
@@ -62,36 +62,40 @@ const InsertExerciseModal = ({ specificExercise, modalOpen, closeModal }: ModalP
       onRequestClose={closeModal}
       style={customModalStyles}
       contentLabel="Exercise Modal">
-      <motion.div
-        initial={modalAnimationValues.initial}
-        animate={modalAnimationValues.animate}
-        exit={modalAnimationValues.exit}
-        transition={modalAnimationValues.transition}>
-        <ModalContainer>
-          <ModalTopContainer>
-            <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
-          </ModalTopContainer>
-          <ModalContentContainer>
-            <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} />
-            <ModalTextAndButtonsContainer>
-              <ExerciseDescriptionText>
-                Exercise: <span style={{ color: Rage }}>{specificExercise.name.toUpperCase()}</span>
-              </ExerciseDescriptionText>
-              <ConfirmExerciseBoldText>
-                Confirm adding this exercise to your workout
-              </ConfirmExerciseBoldText>
-              <ButtonContainer>
-                <CancelButton onClick={closeModal}>
-                  <CancelButtonText>CANCEL</CancelButtonText>
-                </CancelButton>
-                <ConfirmButton onClick={() => handleAddExerciseToSet()}>
-                  <ConfirmButtonText>ADD EXERCISE</ConfirmButtonText>
-                </ConfirmButton>
-              </ButtonContainer>
-            </ModalTextAndButtonsContainer>
-          </ModalContentContainer>
-        </ModalContainer>
-      </motion.div>
+      <AnimatePresence>
+        <motion.div
+          key={specificExercise.name}
+          initial={modalAnimationValues.initial}
+          animate={modalAnimationValues.animate}
+          exit={modalAnimationValues.exit}
+          transition={modalAnimationValues.transition}>
+          <ModalContainer>
+            <ModalTopContainer>
+              <ExerciseSelectionText>Exercise Selection</ExerciseSelectionText>
+            </ModalTopContainer>
+            <ModalContentContainer>
+              <ModalExerciseImage src={specificExercise.image} alt={specificExercise.name} />
+              <ModalTextAndButtonsContainer>
+                <ExerciseDescriptionText>
+                  Exercise:{' '}
+                  <span style={{ color: Rage }}>{specificExercise.name.toUpperCase()}</span>
+                </ExerciseDescriptionText>
+                <ConfirmExerciseBoldText>
+                  Confirm adding this exercise to your workout
+                </ConfirmExerciseBoldText>
+                <ButtonContainer>
+                  <CancelButton onClick={closeModal}>
+                    <CancelButtonText>CANCEL</CancelButtonText>
+                  </CancelButton>
+                  <ConfirmButton onClick={handleAddExerciseToSet}>
+                    <ConfirmButtonText>ADD EXERCISE</ConfirmButtonText>
+                  </ConfirmButton>
+                </ButtonContainer>
+              </ModalTextAndButtonsContainer>
+            </ModalContentContainer>
+          </ModalContainer>
+        </motion.div>
+      </AnimatePresence>
     </Modal>
   );
 };

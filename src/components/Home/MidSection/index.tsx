@@ -46,7 +46,7 @@ const MidSection = () => {
       <ExercisesContainer>
         <SetsContainer>
           <SetsLimitText>
-            Set Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5
+            Sets Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5
           </SetsLimitText>
           <CurrentTrainingSetsContainer>
             {trainingSets.map((set: TrainSetLoop, index: number) => {

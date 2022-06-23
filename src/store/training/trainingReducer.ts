@@ -58,6 +58,21 @@ interface IReducerFunctions {
 }
 
 const reducerFunctions = {
+  [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
+    const setsQuantity = state.trainSetLoops.length;
+
+    if (setsQuantity <= 4) {
+      const { setRepetitions, setRestTime } = state.trainingDefaultValues;
+      const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
+      const updatedSets = state.trainSetLoops.concat(newSetState);
+
+      return {
+        ...state,
+        trainSetLoops: updatedSets
+      };
+    } else throw new Error('You can only have 5 sets at most!');
+  },
+
   [ADD_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
     const currentSet = action.payload.set!;
     const newExercise = action.payload.exercise!;
@@ -89,21 +104,6 @@ const reducerFunctions = {
         )
       };
     } else throw new Error('You can only have 5 exercises per set');
-  },
-
-  [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
-    const setsQuantity = state.trainSetLoops.length;
-
-    if (setsQuantity <= 4) {
-      const { setRepetitions, setRestTime } = state.trainingDefaultValues;
-      const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
-      const updatedSets = state.trainSetLoops.concat(newSetState);
-
-      return {
-        ...state,
-        trainSetLoops: updatedSets
-      };
-    } else throw new Error('You can only have 5 sets at most!');
   },
 
   [UPDATE_DEFAULT_TRAINING_VALUES]: ({ state, action }: IReducer): TrainingState => {
