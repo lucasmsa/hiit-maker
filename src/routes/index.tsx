@@ -3,15 +3,29 @@ import AnimatedDesktopRoutes from '../components/AnimatedRoutes';
 import useWindowSize from '../hooks/useWindowSize';
 import MobileHome from '../pages/Mobile/Home';
 
+interface ICurrentWindowSize {
+  width: number;
+  height: number;
+}
+
 const AppRoutes: React.FC = () => {
-  const windowSize = useWindowSize();
-  const WINDOW_BREAKPOINT = 1070;
+  const windowSizeHook = useWindowSize();
+  const WINDOW_WIDTH_BREAKPOINT = 1070;
+  const WINDOW_HEIGHT_BREAKPOINT = 615;
 
-  const windowWidth = useMemo<number>(() => {
-    return windowSize.width || WINDOW_BREAKPOINT;
-  }, [windowSize.width]);
+  const currentWindowSize = useMemo<ICurrentWindowSize>(() => {
+    return {
+      width: windowSizeHook.width!,
+      height: windowSizeHook.height!
+    };
+  }, [windowSizeHook.width, windowSizeHook.height]);
 
-  return windowWidth >= WINDOW_BREAKPOINT ? <AnimatedDesktopRoutes /> : <MobileHome />;
+  return currentWindowSize.width >= WINDOW_WIDTH_BREAKPOINT &&
+    currentWindowSize.height >= WINDOW_HEIGHT_BREAKPOINT ? (
+    <AnimatedDesktopRoutes />
+  ) : (
+    <MobileHome />
+  );
 };
 
 export default AppRoutes;

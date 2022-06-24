@@ -31,8 +31,6 @@ const reducerFunctions = {
     const { payload } = action;
     const { warmupTime } = payload;
 
-    console.log('here I am, rock you like a hurricane', payload);
-
     return {
       ...state,
       currentActionRemainingTime: warmupTime!,
@@ -59,7 +57,7 @@ const reducerFunctions = {
         status: status!
       };
     } else {
-      throw new Error('Invalid workout execution status');
+      throw new Error('Invalid workout execution status!');
     }
   },
   [UPDATE_CURRENT_ACTION_REMAINING_TIME]: ({ state, action }: IReducer): WorkoutExecutionState => {
@@ -76,7 +74,6 @@ const reducerFunctions = {
     action
   }: IReducer): WorkoutExecutionState => {
     const { payload } = action;
-    console.log({ payload });
 
     return {
       ...state,

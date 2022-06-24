@@ -308,7 +308,6 @@ export const EnlargingCircle = styled.div<IEnlargingCircle>`
   top: 22.5%;
   left: 22.5%;
   transform: ${({ scaleSum }) => {
-    console.log('I am the scaleSum', scaleSum);
     return `scaleX(${scaleSum}) scaleY(${scaleSum})`;
   }};
   position: absolute;
