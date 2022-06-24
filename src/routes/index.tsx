@@ -1,13 +1,17 @@
-import React from 'react';
-import Home from '../pages/Home';
-import Workout from '../pages/Workout';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { PageTransition } from '@steveeeie/react-page-transition';
-import Settings from '../pages/Settings';
-import AnimatedRoutes from '../components/AnimatedRoutes';
+import React, { useMemo } from 'react';
+import AnimatedDesktopRoutes from '../components/AnimatedRoutes';
+import useWindowSize from '../hooks/useWindowSize';
+import MobileHome from '../pages/Mobile/Home';
 
 const AppRoutes: React.FC = () => {
-  return <AnimatedRoutes />;
+  const windowSize = useWindowSize();
+  const WINDOW_BREAKPOINT = 1070;
+
+  const windowWidth = useMemo<number>(() => {
+    return windowSize.width || WINDOW_BREAKPOINT;
+  }, [windowSize.width]);
+
+  return windowWidth >= WINDOW_BREAKPOINT ? <AnimatedDesktopRoutes /> : <MobileHome />;
 };
 
 export default AppRoutes;

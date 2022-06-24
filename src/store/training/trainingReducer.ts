@@ -58,7 +58,7 @@ interface IReducerFunctions {
 }
 
 const reducerFunctions = {
-  [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
+  [ADD_SET]: ({ state }: IReducer): TrainingState => {
     const setsQuantity = state.trainSetLoops.length;
 
     if (setsQuantity <= 4) {
@@ -147,22 +147,27 @@ const reducerFunctions = {
   [UPDATE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0;
 
-    return {
-      ...state,
-      currentSet: selectedSet
-    };
+    if (selectedSet >= 0 && selectedSet < state.trainSetLoops.length) {
+      return {
+        ...state,
+        currentSet: selectedSet
+      };
+    } else throw new Error('Invalid set index');
   },
 
   [REMOVE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0;
+    const currentSet = state.currentSet;
     const updatedTrainSetLoops = state.trainSetLoops.filter(
-      (trainSetLoop, index) => index !== selectedSet
+      (_trainSetLoop, index) => index !== selectedSet
     );
-    return {
-      ...state,
-      currentSet: selectedSet === 0 ? state.currentSet + 1 : state.currentSet - 1,
-      trainSetLoops: updatedTrainSetLoops
-    };
+    if (selectedSet >= 0 && selectedSet < state.trainSetLoops.length) {
+      return {
+        ...state,
+        currentSet: selectedSet === 0 ? currentSet + 1 : currentSet - 1,
+        trainSetLoops: updatedTrainSetLoops
+      };
+    } else throw new Error('Invalid set index');
   },
 
   [UPDATE_CURRENT_SET_LOOP_QUANTITY]: ({ state, action }: IReducer): TrainingState => {
@@ -195,7 +200,7 @@ const reducerFunctions = {
       currentSetExercises[removeExerciseIndex || 0].restTime +
       currentSetExercises[removeExerciseIndex || 0].trainTime;
     const updatedSetExercises = currentSetExercises.filter(
-      (exercise, index) => index !== removeExerciseIndex
+      (_exercise, index) => index !== removeExerciseIndex
     );
     const updatedTrainSetLoops = state.trainSetLoops.map((content, index) =>
       index === currentSet
@@ -298,7 +303,8 @@ const reducerFunctions = {
       )
     };
   },
-  [RESET_TRAINING]: ({ state, action }: IReducer): TrainingState => {
+
+  [RESET_TRAINING]: (): TrainingState => {
     return trainingInitialState;
   }
 } as IReducerFunctions;

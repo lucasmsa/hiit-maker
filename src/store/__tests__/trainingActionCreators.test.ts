@@ -40,7 +40,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Add set action creator', () => {
-    it('should call add set action type', () => {
+    it('should dispatch add set action type', () => {
       store.dispatch(addSet());
       const actions = store.getActions();
 
@@ -49,7 +49,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Add exercise action creator', () => {
-    it('should call add exercise action type and call the reducer with the exercise and set as its payload', () => {
+    it('should dispatch add exercise action type and call the reducer with the exercise and set as its payload', () => {
       const exercise = exerciseMocks[0];
       store.dispatch(addExercise(exercise, 0));
 
@@ -62,7 +62,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Remove set action creator', () => {
-    it('should call remove set action type with the set to be removed as its payload', () => {
+    it('should dispatch remove set action type with the set to be removed as its payload', () => {
       store.dispatch(removeSet(0));
 
       const actions = store.getActions();
@@ -73,7 +73,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update current set action creator', () => {
-    it('should call update current set action type with the payload as the set to be updated', () => {
+    it('should dispatch update current set action type with the payload as the set to be updated', () => {
       store.dispatch(updateCurrentSet(0));
 
       const actions = store.getActions();
@@ -84,7 +84,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update set rest action creator', () => {
-    it('should call update set rest action type with the set and the new set rest as its payload', () => {
+    it('should dispatch update set rest action type with the set and the new set rest as its payload', () => {
       store.dispatch(updateSetRest(0, 20));
 
       const actions = store.getActions();
@@ -96,7 +96,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update training default values action creator', () => {
-    it('should call update default training values action type with the new default values as the payload', () => {
+    it('should dispatch update default training values action type with the new default values as the payload', () => {
       store.dispatch(updateDefaultTrainingValues(defaultTrainingValuesMock));
 
       const actions = store.getActions();
@@ -107,7 +107,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update current set loop quantity action creator', () => {
-    it('should call update current set loop quantity action type receiving the set and the new amount of loops for the given set', () => {
+    it('should dispatch update current set loop quantity action type receiving the set and the new amount of loops for the given set', () => {
       store.dispatch(updateCurrentSetLoopQuantity(3, 0));
 
       const actions = store.getActions();
@@ -119,7 +119,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update exercise rest time action creator', () => {
-    it('should call update update exercise rest time action type receiving the new set rest, index and set to be added', () => {
+    it('should dispatch update update exercise rest time action type receiving the new set rest, index and set to be added', () => {
       store.dispatch(updateExerciseRestTime(0, 0, 15));
 
       const actions = store.getActions();
@@ -132,7 +132,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Update exercise train time action creator', () => {
-    it('should call update update exercise train time action type receiving the new set rest, index and set to be added', () => {
+    it('should dispatch update update exercise train time action type receiving the new set rest, index and set to be added', () => {
       store.dispatch(updateExerciseTrainTime(0, 0, 20));
 
       const actions = store.getActions();
@@ -145,7 +145,7 @@ describe('Training actions creators', () => {
   });
 
   describe('Remove exercise action creator', () => {
-    it('should call remove exercise action type receiving the exercise index and the set', () => {
+    it('should dispatch remove exercise action type receiving the exercise index and the set', () => {
       store.dispatch(removeExercise(0, 0));
 
       const actions = store.getActions();

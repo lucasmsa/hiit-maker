@@ -17,6 +17,7 @@ export function startTraining() {
       payload: { warmupTime }
     };
 
+    console.log('before dispatching', action);
     return dispatch(action);
   };
 }

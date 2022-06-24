@@ -1,5 +1,3 @@
-import { TransparentBlackShadow } from '../styles/global';
-
 export const customModalStyles = {
   overlay: {
     background: 'rgba(0, 0, 0, 0.5)',

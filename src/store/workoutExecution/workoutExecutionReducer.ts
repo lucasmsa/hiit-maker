@@ -30,6 +30,9 @@ const reducerFunctions = {
   [START_WORKOUT_EXECUTION]: ({ state, action }: IReducer): WorkoutExecutionState => {
     const { payload } = action;
     const { warmupTime } = payload;
+
+    console.log('here I am, rock you like a hurricane', payload);
+
     return {
       ...state,
       currentActionRemainingTime: warmupTime!,
@@ -37,7 +40,7 @@ const reducerFunctions = {
       status: WORKOUT_EXECUTION_STATUS.WARMUP
     };
   },
-  [UPDATE_PLAY_STATE]: ({ state, action }: IReducer): WorkoutExecutionState => {
+  [UPDATE_PLAY_STATE]: ({ state }: IReducer): WorkoutExecutionState => {
     if (state.status === WORKOUT_EXECUTION_STATUS.NOT_STARTED) {
       throw new Error('Cannot update play state when workout was not started!');
     }
@@ -84,7 +87,7 @@ const reducerFunctions = {
       currentActionRemainingTime: payload.currentActionRemainingTime!
     };
   },
-  [RESET_WORKOUT_EXECUTION]: ({ state, action }: IReducer): WorkoutExecutionState => {
+  [RESET_WORKOUT_EXECUTION]: (): WorkoutExecutionState => {
     return workoutExecutionInitialState;
   }
 } as IReducerFunctions;

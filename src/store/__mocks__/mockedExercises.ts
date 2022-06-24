@@ -1,3 +1,5 @@
+import { INITIAL_DEFAULT_VALUES } from '../../config/contants';
+
 export const exerciseMockCreator = ({
   name,
   image,
@@ -23,8 +25,8 @@ export const exerciseMocks = [
   exerciseMockCreator({
     name: 'Bench Press',
     image: 'bench-press.png',
-    restTime: 10,
-    trainTime: 20,
+    restTime: INITIAL_DEFAULT_VALUES.exerciseRestTime,
+    trainTime: INITIAL_DEFAULT_VALUES.exerciseTrainTime,
     afflictedBodyPart: 'Chest'
   }),
   exerciseMockCreator({

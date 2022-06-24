@@ -1,9 +1,8 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { PageTransition } from '@steveeeie/react-page-transition';
-import Home from '../../pages/Home';
-import Workout from '../../pages/Workout';
-import Settings from '../../pages/Settings';
+import Home from '../../pages/Desktop/Home';
+import Workout from '../../pages/Desktop/Workout';
+import Settings from '../../pages/Desktop/Settings';
 import { AnimatePresence } from 'framer-motion/dist/framer-motion';
 
 const AnimatedRoutes = () => {
