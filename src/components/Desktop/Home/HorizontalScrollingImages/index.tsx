@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion/dist/framer-motion';
 import React, { useContext, useEffect, useState } from 'react';
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { exerciseHoverAnimations } from '../../../../utils/hoverAnimations';
 import {
   ArrowButton,
   BalloonTip,
@@ -199,14 +201,18 @@ function Card({
   image: string;
 }) {
   return (
-    <SingleExercise
-      key={name}
-      id={name}
-      image={image}
-      name={name}
-      selectedItem={selected}
-      onClick={onClick}
-    />
+    <motion.div
+      whileHover={exerciseHoverAnimations.whileHover}
+      whileTap={exerciseHoverAnimations.whileTap}>
+      <SingleExercise
+        key={name}
+        id={name}
+        image={image}
+        name={name}
+        selectedItem={selected}
+        onClick={onClick}
+      />
+    </motion.div>
   );
 }
 

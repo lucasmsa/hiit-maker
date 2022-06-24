@@ -93,7 +93,7 @@ export const OperationContainer = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 100%;
+  height: 4vh;
   width: 1.875rem;
 `;
 

@@ -76,7 +76,7 @@ export const TooltipContainer = styled.div<TooltipContainerProps>`
 export const Tooltip = styled.div`
   position: absolute;
   display: flex;
-  transform: translateX(-2.3438rem) translateY(-0.4rem);
+  transform: translateX(-2.3438rem) translateY(-0.2rem) scale(0.9);
   width: 6.875rem;
   align-self: center;
   height: 1.3rem;
@@ -84,23 +84,24 @@ export const Tooltip = styled.div`
   background: ${LightGray};
   align-items: center;
   justify-content: center;
-  border-radius: 0.375rem;
+  border-radius: 1rem;
 `;
 
 export const TooltipText = styled.h3`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 70%;
+  font-size: 60%;
+  text-align: center;
   color: ${DarkGray};
 `;
 
 export const BalloonTip = styled.div`
   width: 0;
   height: 0;
-  border-left: 1.1rem solid transparent;
-  border-right: 1.1rem solid transparent;
-  border-top: 1.1rem solid ${LightGray};
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-top: 1rem solid ${LightGray};
 `;
 
 export const ArrowButton = styled.button`

@@ -15,8 +15,8 @@ const AppRoutes: React.FC = () => {
 
   const currentWindowSize = useMemo<ICurrentWindowSize>(() => {
     return {
-      width: windowSizeHook.width!,
-      height: windowSizeHook.height!
+      width: windowSizeHook.width || WINDOW_WIDTH_BREAKPOINT,
+      height: windowSizeHook.height || WINDOW_HEIGHT_BREAKPOINT
     };
   }, [windowSizeHook.width, windowSizeHook.height]);
 

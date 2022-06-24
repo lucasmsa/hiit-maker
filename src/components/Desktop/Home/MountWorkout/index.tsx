@@ -36,7 +36,8 @@ import ErrorToast from '../../../../toasts/ErrorToast';
 import TimeInput from '../TimeInput';
 import { configurationBoundaries } from '../../../../utils/settings/configurationBoundaries';
 import ResetWorkoutModal from '../ResetWorkoutModal';
-import { AnimatePresence } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
+import { iconHoverAnimations } from '../../../../utils/hoverAnimations';
 
 const optionsOperation = {
   plus: 1,
@@ -64,7 +65,7 @@ const MountWorkout = () => {
         setCurrentSetState(currentSet);
         setCurrentSetExercisesState(currentSetExercises);
         setLoading(false);
-      }, 250);
+      }, 1);
     } else {
       setCurrentSetExercisesState(currentSetExercises);
     }
@@ -151,11 +152,15 @@ const MountWorkout = () => {
           )}
         </SetRestContainer>
         <SetCounter>
-          <OperationContainer
-            onClick={() => handleExerciseCounter('plus')}
-            style={{ marginRight: '24px' }}>
-            <PlusIconCounter style={{ cursor: 'pointer' }} />
-          </OperationContainer>
+          <motion.div
+            whileHover={iconHoverAnimations.whileHover}
+            whileTap={iconHoverAnimations.whileTap}>
+            <OperationContainer
+              onClick={() => handleExerciseCounter('plus')}
+              style={{ marginRight: '24px' }}>
+              <PlusIconCounter style={{ cursor: 'pointer' }} />
+            </OperationContainer>
+          </motion.div>
           <CountTextContainer>
             <CounterText>
               {currentSetExercises?.length ? currentSetLoopQuantity : 0}{' '}
@@ -164,11 +169,15 @@ const MountWorkout = () => {
                 : 'SET REPETITION '}
             </CounterText>
           </CountTextContainer>
-          <OperationContainer
-            onClick={() => handleExerciseCounter('minus')}
-            style={{ marginLeft: '24px' }}>
-            <MinusIconCounter style={{ cursor: 'pointer' }} />
-          </OperationContainer>
+          <motion.div
+            whileHover={iconHoverAnimations.whileHover}
+            whileTap={iconHoverAnimations.whileTap}>
+            <OperationContainer
+              onClick={() => handleExerciseCounter('minus')}
+              style={{ marginLeft: '24px' }}>
+              <MinusIconCounter style={{ cursor: 'pointer' }} />
+            </OperationContainer>
+          </motion.div>
         </SetCounter>
       </FooterContainer>
       <ResetWorkoutModal

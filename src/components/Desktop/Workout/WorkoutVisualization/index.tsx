@@ -18,7 +18,12 @@ import InformationHeaderSection from '../../Home/InformationHeaderSection';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { White } from '../../../../styles/global';
 import { secondsToHourFormat } from '../../../../utils/secondsToHourFormat';
-import { PlayButtonHovered, PlayButton } from '../../../PlayAndStopButtons/styles';
+import {
+  PlayButtonHovered,
+  PlayButton,
+  PausedButton,
+  PausedButtonHovered
+} from '../../../PlayAndStopButtons/styles';
 import { statusInformations } from '../../../../utils/workout/statusInformations';
 import {
   getCurrentActionRemainingTime,
@@ -36,6 +41,7 @@ import {
   updatePlayState,
   updateWorkoutExecutionActionTransition
 } from '../../../../store/workoutExecution/actionCreators';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 
 const WorkoutVisualization = () => {
   const dispatch = useDispatch();
@@ -47,6 +53,19 @@ const WorkoutVisualization = () => {
   const setExercises = useSelector(() => getCurrentSetExercises(training, currentSet));
   const playState = useSelector(getWorkoutExecutionPlayState);
   const [playButtonHovered, setPlayButtonHovered] = useState(false);
+  const iconAnimation = {
+    initial: { scale: 1.3 },
+    animate: { scale: 1.1 },
+    exit: { scale: 0 },
+    transition: { duration: 0.3 }
+  };
+
+  const otherIconAnimation = {
+    initial: { scale: 1.3 },
+    animate: { scale: 1 },
+    exit: { scale: 0 },
+    transition: { duration: 0.3 }
+  };
 
   const statusHeaderTitle = {
     [WORKOUT_EXECUTION_STATUS.WARMUP]: 'WARMUP',
@@ -60,10 +79,29 @@ const WorkoutVisualization = () => {
     [WORKOUT_EXECUTION_STATUS.FINISH]: 'TRAINING FINISHED'
   };
 
+  const informationHeaderTitleText = () => {
+    if (workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.WARMUP) {
+      return WORKOUT_EXECUTION_STATUS.WARMUP;
+    } else if (workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED) {
+      return 'NOT STARTED';
+    } else {
+      return `Set ${currentSet + 1}/${training.length}`;
+    }
+  };
+
   const handleBannerInformations = useCallback(() => {
     const currentStatus = playState === 'PAUSE' ? playState : workoutExecutionStatus;
+
     if (statusInformations[currentStatus].icon === 'WARMUP_ICON') {
-      return <WarmupIcon width={'10vw'} />;
+      return (
+        <motion.div
+          initial={iconAnimation.initial}
+          animate={iconAnimation.animate}
+          exit={iconAnimation.exit}
+          transition={iconAnimation.transition}>
+          <WarmupIcon width={'10vw'} />
+        </motion.div>
+      );
     } else if (statusInformations[currentStatus].icon === 'EXERCISE_IMAGE') {
       return (
         <BannerExerciseImage
@@ -72,28 +110,56 @@ const WorkoutVisualization = () => {
         />
       );
     } else {
-      return <BannerIcon icon={statusInformations[currentStatus].icon} color={White} />;
+      const animationFromRest =
+        currentStatus === WORKOUT_EXECUTION_STATUS.REST ? iconAnimation : otherIconAnimation;
+      return (
+        <motion.div
+          initial={animationFromRest.initial}
+          animate={animationFromRest.animate}
+          exit={animationFromRest.exit}
+          transition={animationFromRest.transition}>
+          <BannerIcon icon={statusInformations[currentStatus].icon} color={White} />
+        </motion.div>
+      );
     }
-  }, [workoutExecutionStatus, playState, currentExerciseIndex, setExercises]);
+  }, [
+    workoutExecutionStatus,
+    playState,
+    currentExerciseIndex,
+    setExercises,
+    iconAnimation,
+    otherIconAnimation
+  ]);
 
-  const playButton = (
-    <>
-      {playButtonHovered ? (
-        <PlayButtonHovered
-          paused={playState === PLAY_STATE.PAUSE}
+  const playButton = () => {
+    let hoveredState, buttonState;
+    const workoutPlaying = playState === PLAY_STATE.PLAY;
+    if (playButtonHovered) {
+      hoveredState = workoutPlaying ? (
+        <PausedButtonHovered
           onClick={() => {
             dispatch(updatePlayState());
           }}
           onMouseLeave={() => setPlayButtonHovered(false)}
         />
       ) : (
-        <PlayButton
-          paused={playState === PLAY_STATE.PAUSE}
-          onMouseEnter={() => setPlayButtonHovered(true)}
+        <PlayButtonHovered
+          onClick={() => {
+            dispatch(updatePlayState());
+          }}
+          onMouseLeave={() => setPlayButtonHovered(false)}
         />
-      )}
-    </>
-  );
+      );
+    } else {
+      buttonState = workoutPlaying ? (
+        <PausedButton onMouseEnter={() => setPlayButtonHovered(true)} />
+      ) : (
+        <PlayButton onMouseEnter={() => setPlayButtonHovered(true)} />
+      );
+    }
+
+    return <>{playButtonHovered ? hoveredState : buttonState}</>;
+  };
 
   useEffect(() => {
     const timerRunning =
@@ -123,13 +189,7 @@ const WorkoutVisualization = () => {
       <HeaderContainer>
         <HeaderSetAndLogoContainer>
           <InformationHeaderSection
-            title={
-              workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.WARMUP
-                ? WORKOUT_EXECUTION_STATUS.WARMUP
-                : workoutExecutionStatus === WORKOUT_EXECUTION_STATUS.NOT_STARTED
-                ? `NOT STARTED`
-                : `Set ${currentSet + 1}/${training.length}`
-            }
+            title={informationHeaderTitleText()}
             backgroundColor="BLACK"
             small
             reverse
@@ -148,7 +208,9 @@ const WorkoutVisualization = () => {
             />
           )}
       </HeaderContainer>
-      <BannerContainer>{handleBannerInformations()}</BannerContainer>
+      <BannerContainer>
+        <AnimatePresence>{handleBannerInformations()}</AnimatePresence>
+      </BannerContainer>
       <BottomContainer>
         <BottomStatusText>
           {
@@ -166,7 +228,7 @@ const WorkoutVisualization = () => {
             </BackToHomeButton>
           </BackToHomeButtonContainer>
         ) : (
-          playButton
+          playButton()
         )}
       </BottomContainer>
     </Container>

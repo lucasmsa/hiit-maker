@@ -38,6 +38,11 @@ const MidSection = () => {
   const currentSet = useSelector(getCurrentSet);
   const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
   const setsQuantity = trainingSets.length;
+  const progressLineAnimation = {
+    initial: { offsetDistance: '0%', scale: 1.5 },
+    animate: { offsetDistance: '50%', scale: 1 },
+    transition: { duration: 0.3 }
+  };
 
   return (
     <Container>
@@ -65,13 +70,12 @@ const MidSection = () => {
                 } else {
                   return (
                     <motion.div
-                      initial={{ offsetDistance: '0%', scale: 1.5 }}
-                      animate={{ offsetDistance: '50%', scale: 1 }}
-                      exit={{ offsetDistance: '0%', scale: 0.5 }}
-                      transition={{ duration: 0.3 }}>
+                      initial={progressLineAnimation.initial}
+                      animate={progressLineAnimation.animate}
+                      transition={progressLineAnimation.transition}>
                       <ConnectingLineWithDotContainer>
                         <ConnectingLine />
-                        {setIcon}
+                        <AnimatePresence>{setIcon}</AnimatePresence>
                       </ConnectingLineWithDotContainer>
                     </motion.div>
                   );

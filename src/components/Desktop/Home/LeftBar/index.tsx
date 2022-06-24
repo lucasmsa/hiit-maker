@@ -15,6 +15,8 @@ import Search from '../Search';
 import { GITHUB_LINK } from '../../../../config/contants';
 import InformationHeaderSection from '../InformationHeaderSection';
 import { HorizontalDumbell } from '../MidSection/styles';
+import { motion } from 'framer-motion/dist/framer-motion';
+import { iconHoverAnimations } from '../../../../utils/hoverAnimations';
 
 interface LeftBarProps {
   isHomePage: boolean;
@@ -29,12 +31,20 @@ const LeftBar = ({ isHomePage }: LeftBarProps) => {
           <BrandingIcon />
         </Header>
         <IconsContainer>
-          <GithubIconLink href={GITHUB_LINK} target="_blank">
-            <GithubIcon />
-          </GithubIconLink>
-          <Link to="/settings">
-            <SettingsIcon />
-          </Link>
+          <motion.div
+            whileHover={iconHoverAnimations.whileHover}
+            whileTap={iconHoverAnimations.whileTap}>
+            <GithubIconLink href={GITHUB_LINK} target="_blank">
+              <GithubIcon />
+            </GithubIconLink>
+          </motion.div>
+          <motion.div
+            whileHover={iconHoverAnimations.whileHover}
+            whileTap={iconHoverAnimations.whileTap}>
+            <Link to="/settings">
+              <SettingsIcon />
+            </Link>
+          </motion.div>
         </IconsContainer>
         {isHomePage ? (
           <>
