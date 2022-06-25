@@ -132,7 +132,7 @@ describe('Training reducer functions', () => {
   describe('Update current set loop quantity reducer function', () => {
     it('should successfully update the current set loop quantity', () => {
       let updatedState = trainingReducer(trainingInitialState, addSet());
-      expect(updatedState.trainSetLoops[1].loops).toEqual(1);
+      expect(updatedState.trainSetLoops[1].loops).toEqual(INITIAL_DEFAULT_VALUES.setRepetitions);
 
       updatedState = trainingReducer(updatedState, updateCurrentSetLoopQuantity(3, 1));
 
@@ -143,7 +143,7 @@ describe('Training reducer functions', () => {
       try {
         let updatedState = trainingReducer(trainingInitialState, addSet());
 
-        expect(updatedState.trainSetLoops[1].loops).toEqual(1);
+        expect(updatedState.trainSetLoops[1].loops).toEqual(INITIAL_DEFAULT_VALUES.setRepetitions);
 
         trainingReducer(updatedState, updateCurrentSetLoopQuantity(6, 1));
       } catch (error: any) {

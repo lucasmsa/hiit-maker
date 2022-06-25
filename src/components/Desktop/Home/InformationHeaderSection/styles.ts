@@ -23,12 +23,14 @@ export const HeaderTexts = styled.h2`
   margin-left: 1rem;
   color: ${White};
 `;
+const headerContainerMediumSizeConditional = (medium: boolean) => (medium ? '110%' : '120%');
+const informationContainerMediumSizeConditional = (medium: boolean) => (medium ? '50%' : '120%');
 
 export const HeaderContainer = styled.div<HeaderContainerProps>`
   display: flex;
   align-items: center;
   background: ${({ color }) => (color === 'BLACK' ? TransparentDarkBlack : Rage)};
-  width: ${({ small, medium }) => (small ? '100%' : medium ? '110%' : '120%')};
+  width: ${({ small, medium }) => (small ? '100%' : headerContainerMediumSizeConditional(medium))};
   height: 6vh;
   padding-left: 3rem;
 `;
@@ -36,7 +38,8 @@ export const HeaderContainer = styled.div<HeaderContainerProps>`
 export const InformationContainer = styled.div<InformationContainerProps>`
   display: flex;
   flex-direction: row;
-  width: ${({ small, medium }) => (small ? '25%' : medium ? '50%' : '120%')};
+  width: ${({ small, medium }) =>
+    small ? '25%' : informationContainerMediumSizeConditional(medium)};
   margin-right: 2.625rem;
 `;
 

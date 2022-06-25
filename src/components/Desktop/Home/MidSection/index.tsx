@@ -41,6 +41,7 @@ const MidSection = () => {
   const progressLineAnimation = {
     initial: { offsetDistance: '0%', scale: 1.5 },
     animate: { offsetDistance: '50%', scale: 1 },
+    exit: { offsetDistance: '0%', scale: 0, y: '-50%' },
     transition: { duration: 0.3 }
   };
 
@@ -53,29 +54,39 @@ const MidSection = () => {
             Sets Limit: <SetsLimitCountText>{setsQuantity}</SetsLimitCountText>/5
           </SetsLimitText>
           <CurrentTrainingSetsContainer>
-            <AnimatePresence>
+            <AnimatePresence presenceAffectsLayout>
               {trainingSets.map((_set: TrainSetLoop, index: number) => {
                 const setIcon =
                   currentSet === index ? (
-                    <SelectedSetIcon key={index} style={{ cursor: 'pointer' }} />
+                    <SelectedSetIcon fontSize={'1rem'} key={index} style={{ cursor: 'pointer' }} />
                   ) : (
                     <NotSelectedSetIcon
                       key={index}
+                      fontSize={'1rem'}
                       style={{ cursor: 'pointer' }}
                       onClick={() => dispatch(updateCurrentSet(index))}
                     />
                   );
+
+                const setIconAnimated = (
+                  <motion.div whileHover={{ scale: 1.5 }} style={{ height: '1rem' }}>
+                    {setIcon}
+                  </motion.div>
+                );
+
                 if (index === 0) {
-                  return setIcon;
+                  return setIconAnimated;
                 } else {
                   return (
                     <motion.div
+                      key={index}
                       initial={progressLineAnimation.initial}
                       animate={progressLineAnimation.animate}
+                      exit={progressLineAnimation.exit}
                       transition={progressLineAnimation.transition}>
                       <ConnectingLineWithDotContainer>
                         <ConnectingLine />
-                        <AnimatePresence>{setIcon}</AnimatePresence>
+                        <AnimatePresence presenceAffectsLayout>{setIconAnimated}</AnimatePresence>
                       </ConnectingLineWithDotContainer>
                     </motion.div>
                   );

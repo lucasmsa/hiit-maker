@@ -27,15 +27,17 @@ export const MuscleGroupImagesContainer = styled.div`
   margin-top: 2.625rem;
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 70%;
   justify-content: space-around;
   align-self: center;
 `;
 
 export const TotalTimeContainer = styled.div`
   margin-top: 4rem;
+
   display: flex;
   flex-direction: column;
+  margin-left: 1.875rem;
   justify-content: flex-start;
   align-items: flex-start;
 `;
@@ -75,14 +77,6 @@ export const InformationContianer = styled.div`
   margin-right: 2.625rem;
 `;
 
-export const LemmeSee = styled.div`
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-bottom: 2.875rem solid white;
-  border-right: 1.5rem solid transparent;
-`;
-
 export const ClockText = styled.h2`
   margin-left: 0.875rem;
   font-family: Montserrat;
@@ -95,12 +89,17 @@ export const ClockText = styled.h2`
 `;
 
 export const TrainingDurationContainer = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
   align-self: center;
+  alignt-items: center;
+  justify-content: center;
+  margin-left: auto;
 `;
 
 export const TrainingDurationText = styled.h3`
   font-family: Montserrat;
-  margin-top: 0.75rem;
   font-style: normal;
   font-weight: 600;
   font-size: 3rem;
@@ -109,11 +108,12 @@ export const TrainingDurationText = styled.h3`
 `;
 
 export const StartTrainingContainer = styled.div`
-  margin-top: 4rem;
+  display: flex;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 1.875rem;
 `;
 
 export const ClockIcon = styled(Clock)`
@@ -124,4 +124,13 @@ export const TargetMusclesIcon = styled(TargetMuscles)`
 `;
 export const ManRunningIcon = styled(ManRunning)`
   width: 2vw;
+`;
+
+export const PlayButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 1.875rem;
+  justify-content: flex-end;
 `;

@@ -105,7 +105,7 @@ const MountWorkout = () => {
         {loading ? (
           <></>
         ) : (
-          <AnimatePresence>
+          <AnimatePresence presenceAffectsLayout>
             {currentSetExercisesState.map((exercise: Exercise, index: number) => (
               <ExerciseSetCard
                 set={currentSet}
@@ -134,7 +134,7 @@ const MountWorkout = () => {
                 onChange={(event: any) => {
                   const { value } = event.target;
                   if (isNaN(+value)) return;
-                  return setSetRestTimeInput(value as any);
+                  return setSetRestTimeInput(value);
                 }}
                 onFocusOut={(event: any) => {
                   const { value } = event.target;

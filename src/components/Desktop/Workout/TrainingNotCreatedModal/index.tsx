@@ -29,6 +29,7 @@ const TrainingNotCreatedModal = ({ modalOpen }: ModalProps) => {
       <motion.div
         initial={modalAnimationValues.initial}
         animate={modalAnimationValues.animate}
+        exit={modalAnimationValues.exit}
         transition={modalAnimationValues.transition}>
         <ModalContainer>
           <ModalTopContainer>

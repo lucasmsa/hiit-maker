@@ -9,7 +9,8 @@ import {
   StartTrainingContainer,
   TargetMusclesIcon,
   ClockIcon,
-  ManRunningIcon
+  ManRunningIcon,
+  PlayButtonContainer
 } from './styles';
 import { toast } from 'react-hot-toast';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -114,7 +115,7 @@ const WorkoutInformation = () => {
           title={'Start now'}
           backgroundColor={'RED'}
         />
-        {playButtonWithLink}
+        <PlayButtonContainer>{playButtonWithLink}</PlayButtonContainer>
       </StartTrainingContainer>
     </Container>
   );

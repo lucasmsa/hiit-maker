@@ -1,4 +1,4 @@
-import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion/dist/framer-motion';
+import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
 import React, { useCallback } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { WORKOUT_EXECUTION_STATUS } from '../../../../config/contants';
@@ -29,24 +29,27 @@ const RightBarWorkout = () => {
     alignItems: 'center',
     marginBottom: 'auto'
   };
+  const nextExercisesMotionAnimations = {
+    initial: { opacity: 0, x: 10 },
+    animate: { opacity: 1, x: 0 },
+    transition: { duration: 0.4 }
+  };
 
   const nextExercisesMap = useCallback(() => {
-    return nextExercises.map(({ name, image }, _index) => (
+    return nextExercises.map(({ name, image }, index) => (
       <motion.div
-        layout
-        transition={{
-          type: 'spring',
-          stiffness: 350,
-          damping: 25
-        }}
+        key={`${name}-${index}`}
+        initial={nextExercisesMotionAnimations.initial}
+        animate={nextExercisesMotionAnimations.animate}
+        transition={nextExercisesMotionAnimations.transition}
         style={nextExercisesMotionStyles}>
-        <NextExercisesWithImageInnerContainer>
+        <NextExercisesWithImageInnerContainer key={index}>
           <ExerciseImage src={image} alt="Next Exercise" />
           <ExerciseName>{name.toUpperCase()}</ExerciseName>
         </NextExercisesWithImageInnerContainer>
       </motion.div>
     ));
-  }, [nextExercises]);
+  }, [nextExercises, nextExercisesMotionAnimations, nextExercisesMotionStyles]);
 
   return (
     <Container>
@@ -54,13 +57,13 @@ const RightBarWorkout = () => {
         <NextExercisesTitleText>NEXT EXERCISES</NextExercisesTitleText>
         <NextExercisesDivider />
         <NextExercisesWithImageOuterContainer>
-          <AnimateSharedLayout>
+          <AnimatePresence presenceAffectsLayout>
             {nextExercises.length
               ? nextExercisesMap()
               : workoutExecutionStatus !== WORKOUT_EXECUTION_STATUS.NOT_STARTED && (
                   <NoExercisesLeftText>NO MORE EXERCISES</NoExercisesLeftText>
                 )}
-          </AnimateSharedLayout>
+          </AnimatePresence>
         </NextExercisesWithImageOuterContainer>
       </NextExercisesContainer>
       <SetsProgreessContainer>
