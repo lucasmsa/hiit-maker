@@ -76,7 +76,7 @@ const AvailableExercises = ({ searchExercise }: AvailableExercisesProps) => {
 
   const loadExercises = useCallback(
     (search: string) => {
-      bodyPartsSetStates.map((exercise) => {
+      bodyPartsSetStates.forEach((exercise) => {
         const afflictedBodyPart = Object.keys(exercise)[0] as AfflictedAreas;
         const setBodyPartExercises = Object.values(exercise)[0] as (
           value: Exercise[] | ((prevVar: Exercise[]) => Exercise[])
