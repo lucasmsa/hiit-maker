@@ -1,12 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 name: CI-CD
 
-env:
-  GITHUB_TOKEN: ${{ secrets.ACCOUNT_GITHUB_TOKEN }}
-  SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
 # Controls when the action will run.
-
-
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
@@ -53,7 +48,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v1.6
         with:
           args: 2
-          sonar.login: SONAR_TOKEN
+          sonar.login: ${{ secrets.SONAR_TOKEN }}
           sonar.projectBaseDir: ./
       - name: Vercel Action
         # You may pin to the exact commit or the version.
