@@ -1,5 +1,4 @@
 import { Dispatch } from 'redux';
-import { PossibleConfigurations } from '../../utils/settings/possibleConfigurations';
 import { RESET_WORKOUT_EXECUTION } from '../workoutExecution/actionTypes';
 import {
   ADD_SET,
@@ -47,12 +46,10 @@ export function updateCurrentSet(set: number) {
   return action;
 }
 
-export function addSet(set: number) {
+export function addSet() {
   const action: TrainingAction = {
     type: ADD_SET,
-    payload: {
-      set
-    }
+    payload: {}
   };
   return action;
 }
@@ -69,9 +66,7 @@ export function updateSetRest(set: number, setRestTime: number) {
   return action;
 }
 
-export function updateDefaultTrainingValues(defaultTrainingValues: {
-  [key in PossibleConfigurations]: number;
-}) {
+export function updateDefaultTrainingValues(defaultTrainingValues: TrainingDefaultValues) {
   const action: TrainingAction = {
     type: UPDATE_DEFAULT_TRAINING_VALUES,
     payload: {
@@ -129,19 +124,23 @@ export function removeExercise(index: number, set: number) {
   return action;
 }
 
+export function resetTraining() {
+  const action: TrainingAction = {
+    type: RESET_TRAINING,
+    payload: {}
+  };
+  return action;
+}
+
 export function resetWorkout() {
-  return (dispatch: Dispatch, getState: () => States) => {
+  return (dispatch: Dispatch, _getState: () => States) => {
     const resetWorkoutExectionAction: WorkoutExecutionAction = {
       type: RESET_WORKOUT_EXECUTION,
       payload: {}
     };
 
-    const resetTrainingAction: TrainingAction = {
-      type: RESET_TRAINING,
-      payload: { set: 0 }
-    };
+    dispatch(resetTraining());
 
-    dispatch(resetWorkoutExectionAction);
-    return dispatch(resetTrainingAction);
+    return dispatch(resetWorkoutExectionAction);
   };
 }

@@ -29,7 +29,7 @@ const configurableTrainSetInitialState = (loops: number, setRestTime: number) =>
   setRestTime
 });
 
-const initialState = {
+export const trainingInitialState = {
   currentSet: 0,
   afflictedAreas: {
     Chest: 0,
@@ -58,8 +58,23 @@ interface IReducerFunctions {
 }
 
 const reducerFunctions = {
+  [ADD_SET]: ({ state }: IReducer): TrainingState => {
+    const setsQuantity = state.trainSetLoops.length;
+
+    if (setsQuantity <= 4) {
+      const { setRepetitions, setRestTime } = state.trainingDefaultValues;
+      const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
+      const updatedSets = state.trainSetLoops.concat(newSetState);
+
+      return {
+        ...state,
+        trainSetLoops: updatedSets
+      };
+    } else throw new Error('You can only have 5 sets at most!');
+  },
+
   [ADD_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const newExercise = action.payload.exercise!;
     const setExercises = state.trainSetLoops[currentSet].trainSet.exercises;
 
@@ -89,21 +104,6 @@ const reducerFunctions = {
         )
       };
     } else throw new Error('You can only have 5 exercises per set');
-  },
-
-  [ADD_SET]: ({ state, action }: IReducer): TrainingState => {
-    const setsQuantity = state.trainSetLoops.length;
-
-    if (setsQuantity <= 4) {
-      const { setRepetitions, setRestTime } = state.trainingDefaultValues;
-      const newSetState = configurableTrainSetInitialState(setRepetitions, setRestTime);
-      const updatedSets = state.trainSetLoops.concat(newSetState);
-
-      return {
-        ...state,
-        trainSetLoops: updatedSets
-      };
-    } else throw new Error('You can only have 5 sets at most!');
   },
 
   [UPDATE_DEFAULT_TRAINING_VALUES]: ({ state, action }: IReducer): TrainingState => {
@@ -147,26 +147,31 @@ const reducerFunctions = {
   [UPDATE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0;
 
-    return {
-      ...state,
-      currentSet: selectedSet
-    };
+    if (selectedSet >= 0 && selectedSet < state.trainSetLoops.length) {
+      return {
+        ...state,
+        currentSet: selectedSet
+      };
+    } else throw new Error('Invalid set index');
   },
 
   [REMOVE_CURRENT_SET]: ({ state, action }: IReducer): TrainingState => {
     const selectedSet = action.payload.set || 0;
+    const currentSet = state.currentSet;
     const updatedTrainSetLoops = state.trainSetLoops.filter(
-      (trainSetLoop, index) => index !== selectedSet
+      (_trainSetLoop, index) => index !== selectedSet
     );
-    return {
-      ...state,
-      currentSet: selectedSet === 0 ? state.currentSet + 1 : state.currentSet - 1,
-      trainSetLoops: updatedTrainSetLoops
-    };
+    if (selectedSet >= 0 && selectedSet < state.trainSetLoops.length) {
+      return {
+        ...state,
+        currentSet: selectedSet === 0 ? currentSet + 1 : currentSet - 1,
+        trainSetLoops: updatedTrainSetLoops
+      };
+    } else throw new Error('Invalid set index');
   },
 
   [UPDATE_CURRENT_SET_LOOP_QUANTITY]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const amountOfLoops = action.payload.loops || 0;
     const updatedTrainSetLoops = state.trainSetLoops.map((content, index) =>
       index === currentSet
@@ -187,7 +192,7 @@ const reducerFunctions = {
   },
 
   [REMOVE_EXERCISE]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const removeExerciseIndex = action.payload.index;
     const currentSetExercises = state.trainSetLoops[currentSet].trainSet.exercises;
     const exerciseToBeRemoved = currentSetExercises[removeExerciseIndex!];
@@ -195,7 +200,7 @@ const reducerFunctions = {
       currentSetExercises[removeExerciseIndex || 0].restTime +
       currentSetExercises[removeExerciseIndex || 0].trainTime;
     const updatedSetExercises = currentSetExercises.filter(
-      (exercise, index) => index !== removeExerciseIndex
+      (_exercise, index) => index !== removeExerciseIndex
     );
     const updatedTrainSetLoops = state.trainSetLoops.map((content, index) =>
       index === currentSet
@@ -224,7 +229,7 @@ const reducerFunctions = {
   },
 
   [UPDATE_EXERCISE_REST_TIME]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const updateExerciseIndex = action.payload.index || 0;
     const timeAdded = action.payload.restTime || 0;
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map(
@@ -263,7 +268,7 @@ const reducerFunctions = {
   },
 
   [UPDATE_EXERCISE_TRAIN_TIME]: ({ state, action }: IReducer): TrainingState => {
-    const currentSet = action.payload.set;
+    const currentSet = action.payload.set!;
     const updateExerciseIndex = action.payload.index || 0;
     const timeAdded = action.payload.trainTime || 0;
     const updatedSetExercises = state.trainSetLoops[currentSet].trainSet.exercises.map(
@@ -298,12 +303,16 @@ const reducerFunctions = {
       )
     };
   },
-  [RESET_TRAINING]: ({ state, action }: IReducer): TrainingState => {
-    return initialState;
+
+  [RESET_TRAINING]: (): TrainingState => {
+    return trainingInitialState;
   }
 } as IReducerFunctions;
 
-const reducer = (state: TrainingState = initialState, action: TrainingAction): TrainingState => {
+const reducer = (
+  state: TrainingState = trainingInitialState,
+  action: TrainingAction
+): TrainingState => {
   return action.type in reducerFunctions ? reducerFunctions[action.type]({ state, action }) : state;
 };
 

@@ -75,7 +75,7 @@ type TrainingAction = {
     index?: number;
     exercise?: Exercise;
     loops?: number;
-    set: number;
+    set?: number;
     restTime?: number;
     trainTime?: number;
     setRestTime?: number;

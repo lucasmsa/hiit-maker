@@ -1,11 +1,11 @@
 export const GITHUB_LINK = 'https://github.com/lucasmsa/hiit-maker';
 
 export const INITIAL_DEFAULT_VALUES = {
-  warmupTime: 5,
-  exerciseRestTime: 5,
-  exerciseTrainTime: 10,
-  setRestTime: 15,
-  setRepetitions: 1
+  warmupTime: 90,
+  exerciseRestTime: 15,
+  exerciseTrainTime: 30,
+  setRestTime: 60,
+  setRepetitions: 3
 };
 
 export const WORKOUT_EXECUTION_STATUS = {
