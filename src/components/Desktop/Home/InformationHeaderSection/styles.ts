@@ -47,16 +47,18 @@ export const LeftTriangle = styled.div`
   position: absolute;
   width: 0;
   height: 0;
-  border-bottom: 6vh solid white;
+  z-index: 5;
+  border-bottom: 6.1vh solid white;
   margin-left: -0.08vw;
-  border-right: 2vw solid transparent;
+  border-right: 2.1vw solid transparent;
 `;
 
 export const RightTriangle = styled.div`
   position: relative;
+  z-index: 5;
   width: 0;
   height: 0;
-  margin-left: -2vw;
-  border-bottom: 6vh solid white;
-  border-left: 2vw solid transparent;
+  margin-left: -2.1vw;
+  border-bottom: 6.1vh solid white;
+  border-left: 2.1vw solid transparent;
 `;
