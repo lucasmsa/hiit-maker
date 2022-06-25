@@ -36,19 +36,25 @@ jobs:
         run: |
           yarn
       # build and test the apps
-      - name: build
+      - name: Test the app
+        run: |
+          yarn test
+      - name: Build the app
         run: |
           yarn build
-          yarn test
-          
-  push_to_vercel:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: amondnet/vercel-action@v20
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+      - name: Vercel Deployment
+  # You may pin to the exact commit or the version.
+  # uses: xmflsct/action-vercel-deployment@dfd18ea029d56a90ce06c154cb40de413840f151
+        uses: xmflsct/action-vercel-deployment@v0.5.3
         with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.ORG_ID}} 
-          vercel-project-id: ${{ secrets.PROJECT_ID}}
-          vercel-args: "--prod"
+          # Your token at Vercel. See https://vercel.com/account/tokens
+          vercelToken: ${{ secrets.VERCEL_TOKEN }}
+          # Your Organization ID at Vercel.
+          vercelOrgId: ${{ secrets.VERCEL_ORGANIZATION_ID }}
+          # Your Project ID at Vercel.
+          vercelProjectId: ${{ secrets.VERCEL_PROJECT_ID }}
+          # Your token at GitHub. See https://github.com/settings/tokens
+          githubToken: ${{ secrets.ACCOUNT_GITHUB_TOKEN }}
+          # If you would like to build through GitHub Actions inatead of Vercel.
+         
+          assignDomain: https://hiit-maker.io/workout
