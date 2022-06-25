@@ -34,9 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: ./
-
+          
       - name: setup node
         uses: actions/setup-node@master
         with:
@@ -58,15 +56,9 @@ jobs:
         # uses: amondnet/vercel-action@168e94457309ea2f8b885de5f181c8d79754b263
         uses: amondnet/vercel-action@v25
         with:
-          # Vercel token
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.VERCEL_ORGANIZATION_ID }}  #Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} #Required 
+          working-directory: ./ #Your Working Directory, Optional
           
-          github-token: ${{ secrets.ACCOUNT_GITHUB_TOKEN }}
-          # if you want to create github deployment, set true, default: false
-          github-deployment: true
-          
-          working-directory: ./
-
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          # You can assign a domain to this deployment. Please note that this domain must have been configured in the project. You can use pull request number via `{{PR_NUMBER}}` and branch via `{{BRANCH}}`
-          alias-domains: https://hiit-maker.io/
