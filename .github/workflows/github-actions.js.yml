@@ -47,9 +47,8 @@ jobs:
         # uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
         uses: SonarSource/sonarcloud-github-action@v1.6
         with:
-          args: 2
-          sonar.login: ${{ secrets.SONAR_TOKEN }}
-          sonar.projectBaseDir: ./
+          login: ${{ secrets.SONAR_TOKEN }}
+          projectBaseDir: ./
       - name: Vercel Action
         # You may pin to the exact commit or the version.
         # uses: amondnet/vercel-action@168e94457309ea2f8b885de5f181c8d79754b263
