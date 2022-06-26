@@ -99,7 +99,7 @@ const WorkoutVisualization = () => {
           animate={iconAnimation.animate}
           exit={iconAnimation.exit}
           transition={iconAnimation.transition}>
-          <WarmupIcon width={'10vw'} />
+          <WarmupIcon width={'8vw'} />
         </motion.div>
       );
     } else if (statusInformations[currentStatus].icon === 'EXERCISE_IMAGE') {
