@@ -27,7 +27,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  
+      - name: SonarQube Quality Gate check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        # Force to fail step after specific time
+        timeout-minutes: 5
+        env:
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   Build_app:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
