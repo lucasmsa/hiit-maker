@@ -12,6 +12,7 @@ export const Container = styled.div`
   width: 20.3125rem;
   height: 100vh;
   padding-top: 2vh;
+  overflow-y: hidden;
   overflow-x: hidden;
 `;
 export const TargetMusclesContainer = styled.div`
@@ -24,7 +25,7 @@ export const TargetMusclesContainer = styled.div`
 `;
 
 export const MuscleGroupImagesContainer = styled.div`
-  margin-top: 2.625rem;
+  margin-top: 2.25rem;
   display: flex;
   flex-direction: row;
   width: 70%;
@@ -33,8 +34,7 @@ export const MuscleGroupImagesContainer = styled.div`
 `;
 
 export const TotalTimeContainer = styled.div`
-  margin-top: 4rem;
-
+  margin-top: 2.25rem;
   display: flex;
   flex-direction: column;
   margin-left: 1.875rem;
@@ -89,8 +89,8 @@ export const ClockText = styled.h2`
 `;
 
 export const TrainingDurationContainer = styled.div`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
   display: flex;
   align-self: center;
   alignt-items: center;

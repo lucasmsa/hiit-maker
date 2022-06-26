@@ -14,7 +14,8 @@ interface SaveChangesProps {
 
 export const Container = styled.div`
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 7vw;
+  margin-bottom: 2vw;
   height: 77.5vh;
   width: 41vw;
   display: flex;

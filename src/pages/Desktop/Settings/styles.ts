@@ -12,7 +12,7 @@ export const BackButtonContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 2vw;
   margin-left: 5%;
   height: 3.5rem;
 `;
