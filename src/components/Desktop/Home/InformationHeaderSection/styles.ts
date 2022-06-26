@@ -50,7 +50,8 @@ export const LeftTriangle = styled.div`
   z-index: 5;
   border-bottom: 6.1vh solid white;
   margin-left: -0.08vw;
-  border-right: 2.1vw solid transparent;
+  border-right: 2vw solid transparent;
+  border-left: 0.08vw solid white;
 `;
 
 export const RightTriangle = styled.div`
@@ -60,5 +61,6 @@ export const RightTriangle = styled.div`
   height: 0;
   margin-left: -2.1vw;
   border-bottom: 6.1vh solid white;
+  border-right: 1vw solid white;
   border-left: 2.1vw solid transparent;
 `;
