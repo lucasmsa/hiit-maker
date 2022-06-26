@@ -17,6 +17,7 @@ jobs:
   SonarCloud:
     name: Sonarcloud
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - uses: actions/checkout@v2
         with:
@@ -58,6 +59,7 @@ jobs:
           
   Vercel_deploy:
     runs-on: ubuntu-latest
+    environment: Production
     steps:
     - uses: actions/checkout@v2
     - uses: amondnet/vercel-action@v20 
