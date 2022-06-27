@@ -3,6 +3,7 @@ export const getTrainSetLoops = (state: States) => state.training.trainSetLoops;
 export const getCurrentSet = (state: States) => state.training.currentSet;
 
 export const getTotalTrainingTime = (state: States) => {
+  let totalTrainingTime = 0;
   const training = getTrainSetLoops(state);
   const { warmupTime } = state.training.trainingDefaultValues;
   const totalExerciseTime = training.reduce(
@@ -10,7 +11,17 @@ export const getTotalTrainingTime = (state: States) => {
       accumulator + set.totalSetTime + (set.trainSet.exercises.length ? set.setRestTime : 0),
     0
   );
-  return totalExerciseTime > 0 ? warmupTime + totalExerciseTime : 0;
+  const currentSetExercises = getCurrentSetExercises(training, training.length - 1);
+
+  if (totalExerciseTime) {
+    const lastExerciseOnTrainingRestValues =
+      training[training.length - 1].setRestTime +
+      currentSetExercises[currentSetExercises.length - 1].restTime;
+
+    totalTrainingTime = warmupTime + totalExerciseTime - lastExerciseOnTrainingRestValues;
+  }
+
+  return totalTrainingTime;
 };
 
 export const getAfflictedBodyParts = (state: States) => {
