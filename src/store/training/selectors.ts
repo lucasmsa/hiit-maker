@@ -14,9 +14,17 @@ export const getTotalTrainingTime = (state: States) => {
   const currentSetExercises = getCurrentSetExercises(training, training.length - 1);
 
   if (totalExerciseTime) {
-    const lastExerciseOnTrainingRestValues =
-      training[training.length - 1].setRestTime +
-      currentSetExercises[currentSetExercises.length - 1].restTime;
+    let lastExerciseOnTrainingRestValues = 0;
+    if (currentSetExercises.length) {
+      lastExerciseOnTrainingRestValues =
+        training[training.length - 1].setRestTime +
+        currentSetExercises[currentSetExercises.length - 1].restTime;
+    } else if (training.length - 2 >= 0) {
+      const lastSet = training.length - 2;
+      const lastSetExercises = getCurrentSetExercises(training, lastSet);
+      lastExerciseOnTrainingRestValues =
+        training[lastSet].setRestTime + lastSetExercises[lastSetExercises.length - 1].restTime;
+    }
 
     totalTrainingTime = warmupTime + totalExerciseTime - lastExerciseOnTrainingRestValues;
   }
