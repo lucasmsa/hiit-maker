@@ -33,7 +33,6 @@
     "react-horizontal-scrolling-menu": "^2.6.1",
     "react-hot-toast": "^2.1.1",
     "react-modal": "^3.14.3",
-    "react-responsive-font-size": "^1.1.6",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "3.4.3",
@@ -75,7 +74,8 @@
   },
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^5.12.1",
-    "**/@typescript-eslint/parser": "^5.12.1"
+    "**/@typescript-eslint/parser": "^5.12.1",
+    "@types/react": "17.0.44"
   },
   "devDependencies": {
     "@iconify/react": "^3.2.1",
