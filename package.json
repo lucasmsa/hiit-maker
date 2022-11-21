@@ -74,7 +74,8 @@
   },
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^5.12.1",
-    "**/@typescript-eslint/parser": "^5.12.1"
+    "**/@typescript-eslint/parser": "^5.12.1",
+    "@types/react": "17.0.44"
   },
   "devDependencies": {
     "@iconify/react": "^3.2.1",
