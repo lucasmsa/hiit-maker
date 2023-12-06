@@ -23,11 +23,7 @@ import MountWorkout from '../MountWorkout';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { addSet, removeSet, updateCurrentSet } from '../../../../store/training/actionCreators';
-import {
-  getCurrentSet,
-  getTrainingSetExercises,
-  getTrainSetLoops
-} from '../../../../store/training/selectors';
+import { getCurrentSet, getTrainSetLoops } from '../../../../store/training/selectors';
 import toast from 'react-hot-toast';
 import ErrorToast from '../../../../toasts/ErrorToast';
 import { AnimatePresence, motion } from 'framer-motion/dist/framer-motion';
@@ -36,7 +32,7 @@ const MidSection = () => {
   const dispatch: Dispatch<any> = useDispatch();
   const trainingSets = useSelector(getTrainSetLoops);
   const currentSet = useSelector(getCurrentSet);
-  const currentTrainingSetExercises = useSelector(getTrainingSetExercises);
+  const allTrainSetsContainExercises = trainingSets.every((set) => set.trainSet.exercises.length);
   const setsQuantity = trainingSets.length;
   const progressLineAnimation = {
     initial: { offsetDistance: '0%', scale: 1.5 },
@@ -97,14 +93,14 @@ const MidSection = () => {
           {trainingSets.length <= 4 && (
             <AddSetContainer
               onClick={() => {
-                if (currentTrainingSetExercises.length) {
+                if (allTrainSetsContainExercises) {
                   dispatch(addSet());
                   dispatch(updateCurrentSet(setsQuantity));
                 } else {
                   toast(
                     ErrorToast({
                       message:
-                        'You must have at least one exercise on the current set before you add new ones'
+                        'You must have at least one exercise on every set before you add new ones'
                     })
                   );
                 }
