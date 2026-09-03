@@ -8,6 +8,7 @@ interface ExerciseTileProps {
   photo: string;
   group: HiitGroup;
   placed?: boolean;
+  caption?: boolean;
   onSelect?: () => void;
   sizes?: string;
   className?: string;
@@ -18,6 +19,7 @@ export function ExerciseTile({
   photo,
   group,
   placed = false,
+  caption = true,
   onSelect,
   sizes = '(min-width: 1024px) 220px, 44vw',
   className,
@@ -35,14 +37,14 @@ export function ExerciseTile({
             src={`/exercises/${photo}-480.webp`}
             srcSet={`/exercises/${photo}-480.webp 480w, /exercises/${photo}-960.webp 960w`}
             sizes={sizes}
-            alt={name}
+            alt={caption ? '' : name}
             loading="lazy"
             decoding="async"
             onError={onError}
           />
         )}
       </span>
-      <span className="tile-caption">{name}</span>
+      {caption && <span className="tile-caption">{name}</span>}
     </>
   );
 

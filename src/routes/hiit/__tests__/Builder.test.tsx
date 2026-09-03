@@ -37,7 +37,7 @@ describe('HIIT builder', () => {
   it('adds a catalog tile to the current set and updates the total', () => {
     renderHiitRoute(`/hiit/${workoutId}`);
     const before = workoutTotalSeconds(currentWorkout());
-    fireEvent.click(screen.getByRole('button', { name: /^Burpee/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Burpee' }));
 
     const firstSet = currentWorkout().sets[0]!;
     expect(firstSet.exercises).toHaveLength(4);
@@ -52,7 +52,7 @@ describe('HIIT builder', () => {
     renderHiitRoute(`/hiit/${workoutId}`);
     const thirdSet = screen.getByRole('region', { name: 'Set 3' });
     fireEvent.focus(within(thirdSet).getAllByLabelText('Train')[0]!);
-    fireEvent.click(screen.getByRole('button', { name: /^Burpee/ }));
+    fireEvent.click(screen.getByRole('button', { name: 'Burpee' }));
     expect(currentWorkout().sets[0]?.exercises).toHaveLength(3);
     expect(currentWorkout().sets[2]?.exercises).toHaveLength(4);
   });
@@ -103,7 +103,7 @@ describe('HIIT builder', () => {
     renderHiitRoute(`/hiit/${workoutId}`);
     const search = screen.getByLabelText('Search exercise or muscle');
     fireEvent.change(search, { target: { value: 'cardio' } });
-    expect(screen.getByRole('button', { name: /^Burpee/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Burpee' })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /^Squat/ })).not.toBeInTheDocument();
     fireEvent.change(search, { target: { value: 'zzz' } });
     expect(screen.getByText('No exercise matches "zzz".')).toBeInTheDocument();

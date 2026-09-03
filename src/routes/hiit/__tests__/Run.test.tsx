@@ -132,7 +132,7 @@ describe('HiitRun live controls', () => {
     renderRun();
     expect(screen.getByText('REST')).toBeInTheDocument();
     expect(screen.getByText('Squat', { selector: '.run-upcoming' })).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: 'Squat' })).toBeInTheDocument();
+    expect(screen.getByText('Squat', { selector: '.tile-caption' })).toBeInTheDocument();
   });
 
   it('stops after confirmation and returns to the builder', () => {
