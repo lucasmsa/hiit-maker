@@ -370,6 +370,23 @@ export const en = {
   'gym.run.repsFor': 'Reps for set {index}',
   'gym.run.secondsFor': 'Seconds for set {index}',
   'gym.run.title': 'Session',
+  'hiit.run.chip.set': 'Set {current}/{total}',
+  'hiit.run.chip.exercise': 'EXERCISE {current}/{total}: {name}',
+  'hiit.run.chip.rest': 'REST TIME',
+  'hiit.run.chip.setRest': 'SET REST',
+  'hiit.run.label.warmup': 'WARM-UP TIME',
+  'hiit.run.label.train': 'TRAIN TIME',
+  'hiit.run.label.rest': 'REST TIME',
+  'hiit.run.label.setRest': 'SET REST',
+  'hiit.run.next.title': 'NEXT EXERCISES',
+  'hiit.run.next.none': 'Last exercise of the workout',
+  'hiit.run.progress': 'PROGRESS',
+  'hiit.run.repsLeft.one': '1 SET REPETITION LEFT',
+  'hiit.run.repsLeft.many': '{count} SET REPETITIONS LEFT',
+  'hiit.run.repsLeft.last': 'LAST SET REPETITION',
+  'hiit.run.startNow': 'Start now',
+  'hiit.run.pauseHint': 'Space pauses and resumes',
+  'hiit.run.backToBuilder': 'Back to the builder',
 } as const;
 
 export type I18nKey = keyof typeof en;
