@@ -1,83 +1,74 @@
+import { muscleIconArt, type Artwork } from '@/assets/original-art';
 import type { MuscleIconName } from '@/lib/muscle-icon';
+import { fitTransform } from '@/lib/svg-fit';
 
 interface MuscleIconProps {
   name: MuscleIconName;
-  size?: 24 | 48;
+  size?: 16 | 24 | 48;
   className?: string;
 }
 
-const paths: Record<MuscleIconName, React.ReactNode> = {
-  chest: (
-    <>
-      <path d="M3 9c2.5-2.6 6.5-2.6 9 0 2.5-2.6 6.5-2.6 9 0" />
-      <path d="M3 9c0 5 4 8 9 7.5 5 .5 9-2.5 9-7.5" />
-      <path d="M12 9v7.5" />
-    </>
-  ),
-  back: (
-    <>
-      <path d="M4 4h16" />
-      <path d="M5.5 4l.7 7.5L12 21l5.8-9.5.7-7.5" />
-      <path d="M12 4v17" />
-    </>
-  ),
-  legs: (
-    <>
-      <path d="M7 3h4v7.5L10 21H7.5l-.8-10z" />
-      <path d="M13 3h4l.3 8-.8 10H14l-1-10.5z" />
-    </>
-  ),
-  core: (
-    <>
-      <rect x="4.5" y="3" width="6" height="5" rx="1.5" />
-      <rect x="13.5" y="3" width="6" height="5" rx="1.5" />
-      <rect x="4.5" y="9.5" width="6" height="5" rx="1.5" />
-      <rect x="13.5" y="9.5" width="6" height="5" rx="1.5" />
-      <rect x="4.5" y="16" width="6" height="5" rx="1.5" />
-      <rect x="13.5" y="16" width="6" height="5" rx="1.5" />
-    </>
-  ),
+const originals: Partial<Record<MuscleIconName, Artwork>> = {
+  chest: muscleIconArt.chest,
+  legs: muscleIconArt.legs,
+  back: muscleIconArt.back,
+  core: muscleIconArt.core,
+};
+
+const drawn: Partial<Record<MuscleIconName, React.ReactNode>> = {
   shoulders: (
     <>
-      <path d="M2.5 12c0-4.5 3.5-7 7-7h5c3.5 0 7 2.5 7 7" />
-      <path d="M2.5 12v8M21.5 12v8" />
-      <path d="M9.5 5v5M14.5 5v5" />
+      <circle cx="8" cy="2.2" r="1.8" />
+      <path d="M0.4 9.2c0-3 2.3-5.4 5.3-5.6l1.5-.1v4.2c0 .8-.7 1.5-1.5 1.5H0.4z" />
+      <path d="M15.6 9.2c0-3-2.3-5.4-5.3-5.6l-1.5-.1v4.2c0 .8.7 1.5 1.5 1.5h5.3z" />
+      <path d="M5.6 10.4h4.8v3.9c0 .6-.5 1.1-1.1 1.1H6.7c-.6 0-1.1-.5-1.1-1.1z" />
     </>
   ),
   arms: (
-    <>
-      <circle cx="17" cy="5" r="2.5" />
-      <path d="M15.2 6.8 11 12" />
-      <path d="M18.8 6.8 15.5 11.6" />
-      <path d="M11 12c-4.5 0-8 3.5-8 8.5" />
-      <path d="M15.5 11.6c3.5 1 5.5 4 5.5 8.9" />
-      <path d="M3 20.5h18" />
-    </>
+    <path d="M10.4 1.2H14a1.4 1.4 0 0 1 1.4 1.4v2.3a1 1 0 0 1-.8 1V13a1.6 1.6 0 0 1-1.6 1.6H2.6A1.6 1.6 0 0 1 1 13v-3c0-3.3 2.2-5.6 4.9-5.6 2.7 0 4.7 2.3 4.7 5.6V5.9a1 1 0 0 1-1-1V2.6a1.4 1.4 0 0 1 .8-1.4z" />
   ),
   cardio: (
     <>
-      <path d="M12 21s-8-5.2-8-11a4 4 0 0 1 8-1.8A4 4 0 0 1 20 10c0 5.8-8 11-8 11z" />
-      <path d="M6 12h3l1.5-3 3 6 1.5-3H18" />
+      <path
+        d="M8 14.1S1.7 10.3 1.7 6a3.3 3.3 0 0 1 6.3-1.4A3.3 3.3 0 0 1 14.3 6c0 4.3-6.3 8.1-6.3 8.1z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.7 8h2.1l1.1-2 1.9 4 1.1-2h2.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </>
   ),
 };
 
 export function MuscleIcon({ name, size = 24, className }: MuscleIconProps) {
+  const original = originals[name];
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={size === 48 ? 1.5 : 2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      viewBox="0 0 16 16"
+      fill="currentColor"
       aria-hidden="true"
       focusable="false"
       className={className}
     >
-      {paths[name]}
+      {original ? (
+        <g transform={fitTransform(original.viewBox, 16)}>
+          {original.paths.map((d, index) => (
+            <path key={index} d={d} />
+          ))}
+        </g>
+      ) : (
+        drawn[name]
+      )}
     </svg>
   );
 }

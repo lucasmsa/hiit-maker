@@ -66,13 +66,13 @@ describe('reorderExercises', () => {
 });
 
 describe('body map fills', () => {
-  it('scales opacity with the busiest region and leaves empty regions at zero', () => {
-    expect(regionOpacity(0, 3)).toBe(0);
-    expect(regionOpacity(3, 3)).toBe(1);
-    expect(regionOpacity(1, 4)).toBe(0.48);
+  it('fills every worked region and leaves empty regions at zero', () => {
+    expect(regionOpacity(0)).toBe(0);
+    expect(regionOpacity(3)).toBe(1);
+    expect(regionOpacity(1)).toBe(1);
     const fills = regionFills({ chest: 2, legs: 4, cardio: 9 });
     expect(fills.find((fill) => fill.region === 'legs')?.opacity).toBe(1);
-    expect(fills.find((fill) => fill.region === 'chest')?.opacity).toBe(0.65);
+    expect(fills.find((fill) => fill.region === 'chest')?.opacity).toBe(1);
     expect(fills.find((fill) => fill.region === 'back')?.opacity).toBe(0);
   });
 });

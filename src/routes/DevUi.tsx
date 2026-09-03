@@ -12,6 +12,7 @@ import { Toggle } from '@/components/ui/Toggle';
 import { Wordmark } from '@/components/ui/Wordmark';
 import { SlidersIcon, PlusIcon } from '@/components/ui/icons';
 import { hiitGroups } from '@/data/hiit-catalog';
+import { BodyMap } from '@/components/hiit/BodyMap';
 
 export function DevUi() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -90,9 +91,26 @@ export function DevUi() {
             <div key={group} className="flex flex-col items-center gap-2">
               <MuscleIcon name={group} size={48} />
               <MuscleIcon name={group} />
+              <MuscleIcon name={group} size={16} />
               <span className="text-1">{group}</span>
             </div>
           ))}
+        </div>
+        <div className="flex flex-wrap gap-3 rounded-button bg-brand p-4 text-white">
+          {hiitGroups.map((group) => (
+            <LaneChip key={group} size="sm" icon={<MuscleIcon name={group} size={16} />}>
+              {group}
+            </LaneChip>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <h2 className="text-5">Body map</h2>
+        <div className="flex flex-wrap gap-10">
+          <BodyMap counts={{}} />
+          <BodyMap counts={{ chest: 2, core: 1, legs: 3 }} />
+          <BodyMap counts={{ back: 2, shoulders: 1, arms: 1, cardio: 2 }} />
         </div>
       </section>
 

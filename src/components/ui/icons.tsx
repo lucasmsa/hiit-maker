@@ -65,17 +65,6 @@ export function ArrowLeftIcon(props: IconProps) {
     </Svg>
   );
 }
-
-export function DumbbellGlyph({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 28 64" aria-hidden="true" focusable="false" className={className} fill="currentColor">
-      <rect x="10.5" y="10" width="7" height="44" rx="2" />
-      <rect x="2" y="0" width="24" height="12" rx="3" />
-      <rect x="2" y="52" width="24" height="12" rx="3" />
-    </svg>
-  );
-}
-
 export function GitHubIcon(props: IconProps) {
   return (
     <Svg {...props}>
