@@ -74,7 +74,11 @@ export interface LibraryActions {
   addSet(workoutId: string): void;
   removeSet(workoutId: string, setId: string): void;
   moveSet(workoutId: string, setId: string, toIndex: number): void;
-  updateSet(workoutId: string, setId: string, patch: Partial<Pick<HiitSet, 'loops' | 'setRestSeconds'>>): void;
+  updateSet(
+    workoutId: string,
+    setId: string,
+    patch: Partial<Pick<HiitSet, 'loops' | 'setRestSeconds'>>,
+  ): void;
   importFromShareHash(fragment: string): string | null;
   importLegacy(result: LegacyImport): void;
 
@@ -90,13 +94,26 @@ export interface LibraryActions {
   addEntry(routineId: string, dayId: string, ref: ExerciseRef): string;
   removeEntry(routineId: string, dayId: string, entryId: string): void;
   moveEntry(routineId: string, dayId: string, entryId: string, toIndex: number): void;
-  updatePrescription(routineId: string, dayId: string, entryId: string, patch: Partial<GymPrescription>): void;
+  updatePrescription(
+    routineId: string,
+    dayId: string,
+    entryId: string,
+    patch: Partial<GymPrescription>,
+  ): void;
+  setPrescription(
+    routineId: string,
+    dayId: string,
+    entryId: string,
+    prescription: GymPrescription,
+  ): void;
 
   startSession(routineId: string, dayId: string): string;
   logSet(logId: string, entryId: string, setIndex: number, setLog: SetLog): void;
   finishSession(logId: string): void;
 
-  updateSettings(patch: Partial<Omit<Settings, 'defaults'>> & { defaults?: Partial<Defaults> }): void;
+  updateSettings(
+    patch: Partial<Omit<Settings, 'defaults'>> & { defaults?: Partial<Defaults> },
+  ): void;
   resetSettings(): void;
   setLastMode(mode: Mode): void;
 }
@@ -155,25 +172,36 @@ export const useLibraryStore = create<LibraryStore>()(
       return {
         ...initialLibraryState(navigatorLanguage),
 
-        createWorkout: (name) => addWorkout(workoutEdit.createWorkout(name, get().settings.defaults, now())),
-        renameWorkout: (id, name) => editWorkout(id, (workout) => workoutEdit.updateWorkout(workout, { name })),
+        createWorkout: (name) =>
+          addWorkout(workoutEdit.createWorkout(name, get().settings.defaults, now())),
+        renameWorkout: (id, name) =>
+          editWorkout(id, (workout) => workoutEdit.updateWorkout(workout, { name })),
         deleteWorkout: (id) =>
           set((state) => ({ workouts: state.workouts.filter((workout) => workout.id !== id) })),
         duplicateWorkout: (id, name) => {
           const source = get().workouts.find((workout) => workout.id === id);
-          return source ? addWorkout(workoutEdit.cloneWorkoutWithNewIds(source, name, now())) : null;
+          return source
+            ? addWorkout(workoutEdit.cloneWorkoutWithNewIds(source, name, now()))
+            : null;
         },
-        updateWorkout: (id, patch) => editWorkout(id, (workout) => workoutEdit.updateWorkout(workout, patch)),
+        updateWorkout: (id, patch) =>
+          editWorkout(id, (workout) => workoutEdit.updateWorkout(workout, patch)),
         addExercise: (workoutId, setId, ref) =>
           editWorkout(workoutId, (workout) =>
-            workoutEdit.addExercise(workout, setId, workoutEdit.newPlacedExercise(ref, get().settings.defaults)),
+            workoutEdit.addExercise(
+              workout,
+              setId,
+              workoutEdit.newPlacedExercise(ref, get().settings.defaults),
+            ),
           ),
         removeExercise: (workoutId, setId, placedId) =>
           editWorkout(workoutId, (workout) => workoutEdit.removeExercise(workout, setId, placedId)),
         moveExercise: (workoutId, from, to) =>
           editWorkout(workoutId, (workout) => workoutEdit.moveExercise(workout, from, to)),
         updateExercise: (workoutId, setId, placedId, patch) =>
-          editWorkout(workoutId, (workout) => workoutEdit.updateExercise(workout, setId, placedId, patch)),
+          editWorkout(workoutId, (workout) =>
+            workoutEdit.updateExercise(workout, setId, placedId, patch),
+          ),
         addSet: (workoutId) =>
           editWorkout(workoutId, (workout) => workoutEdit.addSet(workout, get().settings.defaults)),
         removeSet: (workoutId, setId) =>
@@ -184,7 +212,9 @@ export const useLibraryStore = create<LibraryStore>()(
           editWorkout(workoutId, (workout) => workoutEdit.updateSet(workout, setId, patch)),
         importFromShareHash: (fragment) => {
           const shared = decodeWorkoutShare(fragment);
-          return shared ? addWorkout(workoutEdit.cloneWorkoutWithNewIds(shared, shared.name, now())) : null;
+          return shared
+            ? addWorkout(workoutEdit.cloneWorkoutWithNewIds(shared, shared.name, now()))
+            : null;
         },
         importLegacy: ({ workout, defaults }) => {
           set((state) => ({ settings: { ...state.settings, defaults } }));
@@ -195,14 +225,18 @@ export const useLibraryStore = create<LibraryStore>()(
 
         createRoutine: (name, firstDayName) =>
           addRoutine(routineEdit.createRoutine(name, firstDayName, now())),
-        renameRoutine: (id, name) => editRoutine(id, (routine) => routineEdit.updateRoutine(routine, { name })),
+        renameRoutine: (id, name) =>
+          editRoutine(id, (routine) => routineEdit.updateRoutine(routine, { name })),
         deleteRoutine: (id) =>
           set((state) => ({ routines: state.routines.filter((routine) => routine.id !== id) })),
         duplicateRoutine: (id, name) => {
           const source = get().routines.find((routine) => routine.id === id);
-          return source ? addRoutine(routineEdit.cloneRoutineWithNewIds(source, name, now())) : null;
+          return source
+            ? addRoutine(routineEdit.cloneRoutineWithNewIds(source, name, now()))
+            : null;
         },
-        updateRoutine: (id, patch) => editRoutine(id, (routine) => routineEdit.updateRoutine(routine, patch)),
+        updateRoutine: (id, patch) =>
+          editRoutine(id, (routine) => routineEdit.updateRoutine(routine, patch)),
         addDay: (routineId, name) => {
           const day = routineEdit.newDay(name);
           editRoutine(routineId, (routine) => routineEdit.addDay(routine, day));
@@ -222,9 +256,17 @@ export const useLibraryStore = create<LibraryStore>()(
         removeEntry: (routineId, dayId, entryId) =>
           editRoutine(routineId, (routine) => routineEdit.removeEntry(routine, dayId, entryId)),
         moveEntry: (routineId, dayId, entryId, toIndex) =>
-          editRoutine(routineId, (routine) => routineEdit.moveEntry(routine, dayId, entryId, toIndex)),
+          editRoutine(routineId, (routine) =>
+            routineEdit.moveEntry(routine, dayId, entryId, toIndex),
+          ),
         updatePrescription: (routineId, dayId, entryId, patch) =>
-          editRoutine(routineId, (routine) => routineEdit.updateEntry(routine, dayId, entryId, patch)),
+          editRoutine(routineId, (routine) =>
+            routineEdit.updateEntry(routine, dayId, entryId, patch),
+          ),
+        setPrescription: (routineId, dayId, entryId, prescription) =>
+          editRoutine(routineId, (routine) =>
+            routineEdit.replaceEntryPrescription(routine, dayId, entryId, prescription),
+          ),
 
         startSession: (routineId, dayId) => {
           const log = sessionLog.startSessionLog(routineId, dayId, now());
