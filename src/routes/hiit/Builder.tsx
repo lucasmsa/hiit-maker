@@ -68,10 +68,10 @@ export function HiitBuilder() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="builder">
-        <BuilderRail className="hidden lg:block" {...catalogProps} />
+        {desktop ? <BuilderRail {...catalogProps} /> : null}
 
         <div className="flex min-w-0 flex-col">
-          <BuilderTopBar className="lg:hidden" />
+          {desktop ? null : <BuilderTopBar />}
           <Banner />
           <main
             id="workout-editor"

@@ -16,3 +16,17 @@ if (typeof HTMLDialogElement !== 'undefined' && typeof HTMLDialogElement.prototy
     this.dispatchEvent(new Event('close'));
   };
 }
+
+if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: /min-width/.test(query),
+      media: query,
+      onchange: null,
+      addEventListener: () => undefined,
+      removeEventListener: () => undefined,
+      addListener: () => undefined,
+      removeListener: () => undefined,
+      dispatchEvent: () => false,
+    }) as MediaQueryList;
+}
