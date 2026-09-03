@@ -17,6 +17,7 @@ export function BuilderRail({ className, ...catalog }: BuilderRailProps) {
       languageLabel={languageLabel}
       onToggleLanguage={toggleLanguage}
       className={cx('builder-rail', className)}
+      label={t('hiit.builder.catalog')}
     >
       <a
         href="#workout-editor"
@@ -24,7 +25,7 @@ export function BuilderRail({ className, ...catalog }: BuilderRailProps) {
       >
         {t('hiit.builder.skipToSets')}
       </a>
-      <div className="mt-2" aria-label={t('hiit.builder.catalog')}>
+      <div className="mt-2">
         <CatalogRail id="rail" onRail {...catalog} />
       </div>
     </BrandRail>

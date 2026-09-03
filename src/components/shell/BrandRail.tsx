@@ -14,6 +14,7 @@ interface BrandRailProps {
   languageLabel: string;
   onToggleLanguage: () => void;
   className?: string;
+  label?: string;
   children?: ReactNode;
 }
 
@@ -22,11 +23,12 @@ export function BrandRail({
   languageLabel,
   onToggleLanguage,
   className,
+  label,
   children,
 }: BrandRailProps) {
   const t = useT();
   return (
-    <aside className={cx('brand-rail', className)}>
+    <aside className={cx('brand-rail', className)} aria-label={label}>
       <Wordmark label={t('nav.home')} compact />
       <nav aria-label={t('nav.modes')} className="brand-rail-modes">
         <LaneChipLink
