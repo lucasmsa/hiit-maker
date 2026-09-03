@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { AppShell } from '@/components/shell/AppShell';
 import { HiitBuilder } from '@/routes/hiit/Builder';
-import { HiitLibrary } from '@/routes/hiit/Library';
 import { HiitShared } from '@/routes/hiit/Shared';
 
 export function renderHiitRoute(initialEntry: string) {
@@ -10,12 +9,10 @@ export function renderHiitRoute(initialEntry: string) {
     [
       {
         element: <AppShell />,
-        children: [
-          { path: '/hiit', element: <HiitLibrary /> },
-          { path: '/hiit/shared', element: <HiitShared /> },
-          { path: '/hiit/:id', element: <HiitBuilder /> },
-        ],
+        children: [{ path: '/hiit/shared', element: <HiitShared /> }],
       },
+      { path: '/hiit', element: <HiitBuilder /> },
+      { path: '/hiit/:id', element: <HiitBuilder /> },
       { path: '/hiit/:id/run', element: <div>run</div> },
     ],
     { initialEntries: [initialEntry] },

@@ -26,7 +26,7 @@ describe('library store: seeds and persistence', () => {
     const parsed = JSON.parse(raw!) as { version: number; state: Record<string, unknown> };
     expect(parsed.version).toBe(1);
     expect(parsed.state.lastMode).toBe('gym');
-    expect(Object.keys(parsed.state).sort()).toEqual(['lastMode', 'logs', 'routines', 'settings', 'workouts']);
+    expect(Object.keys(parsed.state).sort()).toEqual(['lastMode', 'lastWorkoutId', 'logs', 'routines', 'settings', 'workouts']);
   });
 });
 
