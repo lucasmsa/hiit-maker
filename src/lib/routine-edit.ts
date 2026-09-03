@@ -31,7 +31,11 @@ export function createRoutine(name: string, firstDayName: string, now: number): 
   };
 }
 
-function replaceDay(routine: GymRoutine, dayId: string, update: (day: GymDay) => GymDay): GymRoutine {
+function replaceDay(
+  routine: GymRoutine,
+  dayId: string,
+  update: (day: GymDay) => GymDay,
+): GymRoutine {
   return { ...routine, days: routine.days.map((day) => (day.id === dayId ? update(day) : day)) };
 }
 
@@ -109,7 +113,23 @@ export function updateEntry(
   return replaceDay(routine, dayId, (day) => ({
     ...day,
     entries: day.entries.map((entry) =>
-      entry.id === entryId ? { ...entry, prescription: { ...entry.prescription, ...patch } } : entry,
+      entry.id === entryId
+        ? { ...entry, prescription: { ...entry.prescription, ...patch } }
+        : entry,
+    ),
+  }));
+}
+
+export function replaceEntryPrescription(
+  routine: GymRoutine,
+  dayId: string,
+  entryId: string,
+  prescription: GymPrescription,
+): GymRoutine {
+  return replaceDay(routine, dayId, (day) => ({
+    ...day,
+    entries: day.entries.map((entry) =>
+      entry.id === entryId ? { ...entry, prescription } : entry,
     ),
   }));
 }

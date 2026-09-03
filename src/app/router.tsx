@@ -9,6 +9,9 @@ import { NotFound } from '@/routes/NotFound';
 import { HiitLibrary } from '@/routes/hiit/Library';
 import { HiitBuilder } from '@/routes/hiit/Builder';
 import { HiitShared } from '@/routes/hiit/Shared';
+import { GymLibrary } from '@/routes/gym/Library';
+import { GymPlan } from '@/routes/gym/Plan';
+import { GymRun } from '@/routes/gym/Run';
 
 export const routes = {
   splash: '/',
@@ -30,6 +33,12 @@ const shellRoutes: RouteObject[] = [
   { path: routes.gymPlan, element: <RoutePlaceholder name="gym plan" /> },
   { path: routes.settings, element: <Settings /> },
   { path: '*', element: <NotFound /> },
+  { path: routes.hiitLibrary, element: <RoutePlaceholder name="hiit library" /> },
+  { path: routes.hiitShared, element: <RoutePlaceholder name="hiit shared" /> },
+  { path: routes.hiitBuilder, element: <RoutePlaceholder name="hiit builder" /> },
+  { path: routes.gymLibrary, element: <GymLibrary /> },
+  { path: routes.gymPlan, element: <GymPlan /> },
+  { path: routes.settings, element: <RoutePlaceholder name="settings" /> },
 ];
 
 if (import.meta.env.DEV) {
@@ -41,4 +50,6 @@ export const router = createBrowserRouter([
   { element: <AppShell />, children: shellRoutes },
   { path: routes.hiitRun, element: <HiitRun /> },
   { path: routes.gymRun, element: <RoutePlaceholder name="gym run" /> },
+  { path: routes.hiitRun, element: <RoutePlaceholder name="hiit run" /> },
+  { path: routes.gymRun, element: <GymRun /> },
 ]);
