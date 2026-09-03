@@ -139,3 +139,28 @@ export function totalRemainingMs(session: RunSession, now: number): number {
     .reduce((total, phase) => total + phase.durationMs, 0);
   return remainingMs(session, now) + rest;
 }
+
+export function backPhase(session: RunSession, now: number): RunSession {
+  if (session.status === 'finished') {
+    return session;
+  }
+  return {
+    ...session,
+    phaseIndex: Math.max(0, session.phaseIndex - 1),
+    phaseStartedAt: now,
+    pausedAt: session.status === 'paused' ? now : null,
+    pausedMs: 0,
+  };
+}
+
+export function scheduleDurationMs(schedule: Phase[]): number {
+  return schedule.reduce((total, phase) => total + phase.durationMs, 0);
+}
+
+export function elapsedTotalMs(session: RunSession, now: number): number {
+  if (session.status === 'finished') {
+    return scheduleDurationMs(session.schedule);
+  }
+  const before = scheduleDurationMs(session.schedule.slice(0, session.phaseIndex));
+  return before + elapsedInPhaseMs(session, now);
+}
