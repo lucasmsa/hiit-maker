@@ -273,6 +273,7 @@ export const en = {
   'hiit.library.renameLabel': 'Workout name',
   'hiit.builder.name': 'Workout name',
   'hiit.builder.back': 'All workouts',
+  'hiit.builder.skipToSets': 'Skip to sets',
   'hiit.builder.addExercise': 'Add exercise',
   'hiit.builder.addSet': 'Add set',
   'hiit.builder.removeSet': 'Remove set',

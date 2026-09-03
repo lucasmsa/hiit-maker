@@ -43,6 +43,12 @@ export function HiitBuilder() {
           className="hidden overflow-y-auto bg-brand px-4 py-6 text-white lg:block"
           aria-label={t('hiit.builder.catalog')}
         >
+          <a
+            href="#workout-editor"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-20 focus:z-50 focus:rounded-[8px] focus:bg-white focus:px-3 focus:py-2 focus:font-bold focus:text-ink"
+          >
+            {t('hiit.builder.skipToSets')}
+          </a>
           <CatalogRail
             id="rail"
             query={builder.query}
@@ -54,7 +60,7 @@ export function HiitBuilder() {
           />
         </aside>
 
-        <main className="min-w-0 px-4 pb-32 pt-6 sm:px-8 lg:overflow-y-auto lg:pb-10">
+        <main id="workout-editor" tabIndex={-1} className="min-w-0 px-4 pb-32 pt-6 outline-none sm:px-8 lg:overflow-y-auto lg:pb-10">
           <Link to="/hiit" className="inline-flex items-center gap-1 font-bold text-ink-soft hover:text-ink">
             <ArrowLeftIcon size={20} />
             {t('hiit.builder.back')}

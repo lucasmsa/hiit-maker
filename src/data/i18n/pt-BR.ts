@@ -277,6 +277,7 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.library.renameLabel': 'Nome do treino',
   'hiit.builder.name': 'Nome do treino',
   'hiit.builder.back': 'Todos os treinos',
+  'hiit.builder.skipToSets': 'Pular para as séries',
   'hiit.builder.addExercise': 'Adicionar exercício',
   'hiit.builder.addSet': 'Adicionar série',
   'hiit.builder.removeSet': 'Remover série',
