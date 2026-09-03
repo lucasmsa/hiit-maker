@@ -8,3 +8,5 @@ test-results
 .DS_Store
 *.log
 .env*.local
+
+.claude/worktrees/
