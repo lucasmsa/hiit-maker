@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useLocation } from 'react-router';
-import type { Mode } from '@/lib/types';
+import type { Language, Mode } from '@/lib/types';
 import { useLibraryStore } from '@/stores/library';
 
 export function modeFromPath(pathname: string): Mode | null {
@@ -13,6 +13,8 @@ export function modeFromPath(pathname: string): Mode | null {
   return null;
 }
 
+const languageLabels: Record<Language, string> = { en: 'en', 'pt-BR': 'pt' };
+
 export function useShell() {
   const location = useLocation();
   const language = useLibraryStore((state) => state.settings.language);
@@ -22,5 +24,10 @@ export function useShell() {
     updateSettings({ language: language === 'en' ? 'pt-BR' : 'en' });
   }, [language, updateSettings]);
 
-  return { language, toggleLanguage, currentMode: modeFromPath(location.pathname) };
+  return {
+    language,
+    languageLabel: languageLabels[language],
+    toggleLanguage,
+    currentMode: modeFromPath(location.pathname),
+  };
 }

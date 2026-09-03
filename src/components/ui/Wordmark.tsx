@@ -6,16 +6,21 @@ interface WordmarkProps {
   to?: string;
   label: string;
   className?: string;
+  compact?: boolean;
 }
 
-export function Wordmark({ to = '/?pick=1', label, className }: WordmarkProps) {
+export function Wordmark({ to = '/?pick=1', label, className, compact = false }: WordmarkProps) {
   return (
-    <Link to={to} className={cx('wordmark', className)} aria-label={label}>
-      <span aria-hidden="true">H</span>
+    <Link to={to} className={cx('wordmark', className)} data-compact={compact} aria-label={label}>
+      <span aria-hidden="true" className="wordmark-letter">
+        H
+      </span>
       <DumbbellGlyph />
-      <DumbbellGlyph />
-      <span aria-hidden="true">T</span>
-      <span aria-hidden="true" className="wordmark-light">
+      <DumbbellGlyph className="wordmark-letter" />
+      <span aria-hidden="true" className="wordmark-letter">
+        T
+      </span>
+      <span aria-hidden="true" className="wordmark-letter wordmark-light">
         maker
       </span>
     </Link>
