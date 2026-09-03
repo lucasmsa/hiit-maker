@@ -394,3 +394,14 @@ dialog.dialog[data-sheet] .dialog-panel {
   font-weight: 500;
   margin-left: 0.18em;
 }
+
+@media (max-width: 639px) {
+  .wordmark[data-compact='true'] .wordmark-letter {
+    display: none;
+  }
+
+  .wordmark[data-compact='true'] svg {
+    height: 1.9rem;
+    margin: 0;
+  }
+}

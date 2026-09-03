@@ -16,9 +16,9 @@ const paths: Record<MuscleIconName, React.ReactNode> = {
   ),
   back: (
     <>
-      <path d="M12 3v18" />
-      <path d="M4 8l8-4 8 4" />
-      <path d="M4 8c0 6 3 9.5 8 13 5-3.5 8-7 8-13" />
+      <path d="M4 4h16" />
+      <path d="M5.5 4l.7 7.5L12 21l5.8-9.5.7-7.5" />
+      <path d="M12 4v17" />
     </>
   ),
   legs: (
@@ -46,8 +46,12 @@ const paths: Record<MuscleIconName, React.ReactNode> = {
   ),
   arms: (
     <>
-      <path d="M4 18c0-5 3-8 7-9l3-5 4 2-3 5.5c2.5 1 4 3.2 4 6.5" />
-      <path d="M4 18h15" />
+      <circle cx="17" cy="5" r="2.5" />
+      <path d="M15.2 6.8 11 12" />
+      <path d="M18.8 6.8 15.5 11.6" />
+      <path d="M11 12c-4.5 0-8 3.5-8 8.5" />
+      <path d="M15.5 11.6c3.5 1 5.5 4 5.5 8.9" />
+      <path d="M3 20.5h18" />
     </>
   ),
   cardio: (
