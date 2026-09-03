@@ -11,6 +11,7 @@ function renderSettings() {
   const router = createMemoryRouter(
     [
       { path: '/settings', element: <Settings /> },
+      { path: '/hiit', element: <h1>builder</h1> },
       { path: '/', element: <h1>splash</h1> },
     ],
     { initialEntries: ['/settings'] },
@@ -25,7 +26,7 @@ beforeEach(() => {
 });
 
 describe('Settings', () => {
-  it('switches the language and persists it', async () => {
+  it('switches the language right away and persists it', async () => {
     const user = userEvent.setup();
     renderSettings();
 
@@ -39,15 +40,41 @@ describe('Settings', () => {
     expect(persisted.state.settings.language).toBe('pt-BR');
   });
 
-  it('clamps a typed default to its bound', async () => {
+  it('keeps default edits in a draft until Save changes, clamped to the bound', async () => {
     const user = userEvent.setup();
     renderSettings();
+
+    const save = screen.getByRole('button', { name: 'Save changes' });
+    expect(save).toBeDisabled();
 
     const warmup = screen.getByLabelText('Warm-up');
     await user.clear(warmup);
     await user.type(warmup, '5000');
 
+    expect(useLibraryStore.getState().settings.defaults.warmupSeconds).toBe(90);
+    expect(save).toBeEnabled();
+
+    await user.click(save);
+
     expect(useLibraryStore.getState().settings.defaults.warmupSeconds).toBe(600);
+    expect(save).toBeDisabled();
+  });
+
+  it('restores the defaults into the draft and asks before leaving with unsaved edits', async () => {
+    const user = userEvent.setup();
+    useLibraryStore.getState().updateSettings({ defaults: { warmupSeconds: 45 } });
+    const router = renderSettings();
+
+    await user.click(screen.getByRole('button', { name: 'Restore settings' }));
+    expect(screen.getByLabelText('Warm-up')).toHaveValue(90);
+    expect(useLibraryStore.getState().settings.defaults.warmupSeconds).toBe(45);
+
+    await user.click(screen.getByRole('button', { name: 'Back' }));
+    expect(screen.getByRole('heading', { name: 'Discard changes?' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Discard' }));
+    expect(router.state.location.pathname).toBe('/hiit');
+    expect(useLibraryStore.getState().settings.defaults.warmupSeconds).toBe(45);
   });
 
   it('deletes all data after confirmation and returns to the splash', async () => {
