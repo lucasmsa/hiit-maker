@@ -5,8 +5,7 @@ import type { Mode } from '@/lib/types';
 import { cx } from '@/lib/cx';
 import { Wordmark } from '@/components/ui/Wordmark';
 import { LaneChipLink } from '@/components/ui/LaneChip';
-import { GitHubIcon } from '@/components/ui/icons';
-import { GearIcon } from '@/components/shell/shell-icons';
+import { GearIcon, GitHubMarkIcon } from '@/components/hiit/OriginalIcons';
 
 export const githubUrl = 'https://github.com/lucasmsa/hiit-maker';
 
@@ -55,10 +54,10 @@ export function BrandRail({
           aria-label={t('nav.github')}
           className="rail-control"
         >
-          <GitHubIcon />
+          <GitHubMarkIcon size={26} />
         </a>
         <Link to="/settings" aria-label={t('nav.settings')} className="rail-control">
-          <GearIcon />
+          <GearIcon size={26} />
         </Link>
         <button
           type="button"

@@ -28,30 +28,6 @@
   }
 }
 
-.builder-rail {
-  background: var(--color-brand);
-  color: #fff;
-}
-
-.rail-control {
-  display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
-  place-items: center;
-  border-radius: var(--radius-button);
-  color: #fff;
-  transition: background-color 150ms ease;
-}
-
-.rail-control:hover {
-  background: rgb(255 255 255 / 0.15);
-}
-
-.builder-rail :focus-visible,
-.builder-topbar :focus-visible {
-  outline-color: #fff;
-}
-
 .rail-heading {
   display: flex;
   align-items: center;
@@ -523,10 +499,3 @@ a.lane-chip-onred:hover::before {
   width: auto;
 }
 
-.builder-wordmark svg {
-  height: 3rem;
-}
-
-.builder-topbar .builder-wordmark svg {
-  height: 2.5rem;
-}
