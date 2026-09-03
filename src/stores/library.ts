@@ -50,6 +50,7 @@ export interface LibraryState {
   logs: GymSessionLog[];
   settings: Settings;
   lastMode: Mode | null;
+  lastWorkoutId: string | null;
 }
 
 export interface LibraryActions {
@@ -117,6 +118,8 @@ export interface LibraryActions {
   ): void;
   resetSettings(): void;
   setLastMode(mode: Mode): void;
+  setLastWorkoutId(id: string | null): void;
+  clearSet(workoutId: string, setId: string): void;
 }
 
 export type LibraryStore = LibraryState & LibraryActions;
@@ -128,6 +131,7 @@ export function initialLibraryState(navigatorLanguage?: string): LibraryState {
     logs: [],
     settings: initialSettings(navigatorLanguage),
     lastMode: null,
+    lastWorkoutId: null,
   };
 }
 
@@ -291,6 +295,9 @@ export const useLibraryStore = create<LibraryStore>()(
             settings: { ...initialSettings(navigatorLanguage), language: state.settings.language },
           })),
         setLastMode: (mode) => set({ lastMode: mode }),
+        setLastWorkoutId: (id) => set({ lastWorkoutId: id }),
+        clearSet: (workoutId, setId) =>
+          editWorkout(workoutId, (workout) => workoutEdit.clearSet(workout, setId)),
       };
     },
     {
@@ -303,6 +310,7 @@ export const useLibraryStore = create<LibraryStore>()(
         logs: state.logs,
         settings: state.settings,
         lastMode: state.lastMode,
+        lastWorkoutId: state.lastWorkoutId,
       }),
       migrate: (persisted) => persisted as LibraryState,
     },

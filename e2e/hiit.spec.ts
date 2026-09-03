@@ -34,7 +34,7 @@ function tile(scope: Locator, name: string): Locator {
   });
 }
 
-function setRegion(page: Page, index: number): Locator {
+function setCard(page: Page, index: number): Locator {
   return page.getByRole('region', { name: `Set ${index}`, exact: true });
 }
 
@@ -44,6 +44,17 @@ function placedRow(set: Locator, name: string): Locator {
 
 function totalTime(page: Page): Locator {
   return page.getByRole('timer', { name: 'Total time' });
+}
+
+function workoutName(page: Page): Locator {
+  return page.getByLabel('Workout name', { exact: true });
+}
+
+async function openSwitcher(page: Page): Promise<Locator> {
+  await page.getByRole('button', { name: 'Workouts' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Workouts' });
+  await expect(dialog).toBeVisible();
+  return dialog;
 }
 
 async function clockSeconds(digits: Locator): Promise<number> {
@@ -56,15 +67,17 @@ async function clockSeconds(digits: Locator): Promise<number> {
 
 async function createWorkout(page: Page): Promise<void> {
   await page.goto('/hiit');
-  await page.getByRole('button', { name: 'New workout' }).click();
+  const switcher = await openSwitcher(page);
+  await switcher.getByRole('button', { name: 'New workout' }).click();
   await expect(page).toHaveURL(/\/hiit\/[^/]+$/);
-  await page.getByLabel('Workout name', { exact: true }).fill(CIRCUIT_NAME);
+  await expect(workoutName(page)).toHaveValue('Untitled workout');
+  await workoutName(page).fill(CIRCUIT_NAME);
 }
 
 async function buildTuesdayCircuit(page: Page): Promise<void> {
   await createWorkout(page);
   const rail = page.getByRole('complementary', { name: 'Exercise catalog' });
-  const set1 = setRegion(page, 1);
+  const set1 = setCard(page, 1);
 
   await expect(totalTime(page)).toHaveText(expectedClock(90, []));
 
@@ -73,12 +86,13 @@ async function buildTuesdayCircuit(page: Page): Promise<void> {
   await expect(placedRow(set1, 'Push-up')).toBeVisible();
   await expect(placedRow(set1, 'Plank')).toBeVisible();
 
-  await placedRow(set1, 'Push-up').getByLabel('Train').fill('20');
-  await expect(placedRow(set1, 'Push-up').getByLabel('Train')).toHaveValue('20');
+  await placedRow(set1, 'Push-up').getByLabel('Train', { exact: true }).fill('20');
+  await expect(placedRow(set1, 'Push-up').getByLabel('Train', { exact: true })).toHaveValue('20');
 
   await page.getByRole('button', { name: 'Add set' }).click();
-  const set2 = setRegion(page, 2);
+  const set2 = setCard(page, 2);
   await expect(set2).toBeVisible();
+  await expect(set1).toBeHidden();
   await tile(rail, 'Burpee').click();
   await expect(placedRow(set2, 'Burpee')).toBeVisible();
 
@@ -93,20 +107,31 @@ async function buildTuesdayCircuit(page: Page): Promise<void> {
 test.describe('hiit golden path on desktop', () => {
   test.skip(({ isMobile }) => isMobile === true, 'desktop layout');
 
-  test('first visit shows the splash and HIIT opens the library', async ({ page }) => {
+  test('first visit shows the splash and HIIT opens the builder', async ({ page }) => {
     await page.goto('/');
     await expect(page.getByRole('button', { name: /^HIIT/ })).toBeVisible();
     await expect(page.getByRole('button', { name: /^Gym/ })).toBeVisible();
     await page.getByRole('button', { name: /^HIIT/ }).click();
     await expect(page).toHaveURL(/\/hiit$/);
-    await expect(page.getByRole('heading', { name: 'Workouts' })).toBeVisible();
-    await expect(page.getByRole('link', { name: EXAMPLE_NAME })).toBeVisible();
+    await expect(workoutName(page)).toHaveValue(EXAMPLE_NAME);
+    await expect(setCard(page, 1)).toBeVisible();
   });
 
-  test('builds a two-set workout and reports its total time', async ({ page }) => {
+  test('builds a two-set workout and comes back to it', async ({ page }) => {
     await buildTuesdayCircuit(page);
     await page.goto('/hiit');
-    await expect(page.getByRole('link', { name: CIRCUIT_NAME })).toBeVisible();
+    await expect(workoutName(page)).toHaveValue(CIRCUIT_NAME);
+    const switcher = await openSwitcher(page);
+    await expect(switcher.getByText(CIRCUIT_NAME)).toBeVisible();
+    await expect(switcher.getByText(EXAMPLE_NAME)).toBeVisible();
+  });
+
+  test('clears the name while editing and falls back on blur', async ({ page }) => {
+    await page.goto('/hiit');
+    await workoutName(page).fill('');
+    await expect(workoutName(page)).toHaveValue('');
+    await workoutName(page).blur();
+    await expect(workoutName(page)).toHaveValue('Untitled workout');
   });
 
   test('shares a workout through the link and saves it from the shared page', async ({ page, context }) => {
@@ -124,7 +149,8 @@ test.describe('hiit golden path on desktop', () => {
     await expect(shared.getByRole('heading', { name: CIRCUIT_NAME })).toBeVisible();
     await shared.getByRole('button', { name: 'Save to library' }).click();
     await expect(shared).toHaveURL(/\/hiit$/);
-    await expect(shared.getByRole('link', { name: CIRCUIT_NAME })).toHaveCount(2);
+    const switcher = await openSwitcher(shared);
+    await expect(switcher.getByText(CIRCUIT_NAME, { exact: true })).toHaveCount(2);
   });
 
   test('runs the example workout on the wall clock', async ({ page }) => {
@@ -177,7 +203,7 @@ test.describe('hiit builder on a phone', () => {
 
   test('adds an exercise through the catalog sheet', async ({ page }) => {
     await createWorkout(page);
-    const set1 = setRegion(page, 1);
+    const set1 = setCard(page, 1);
     await set1.getByRole('button', { name: 'Add exercise' }).click();
 
     const sheet = page.getByRole('dialog', { name: 'Exercise catalog' });
@@ -192,15 +218,15 @@ test.describe('hiit builder on a phone', () => {
     );
   });
 
-  test('library and builder do not scroll sideways', async ({ page }) => {
+  test('builder does not scroll sideways', async ({ page }) => {
     const fitsViewport = () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
 
     await page.goto('/hiit');
-    await expect(page.getByRole('heading', { name: 'Workouts' })).toBeVisible();
+    await expect(setCard(page, 1)).toBeVisible();
     expect(await fitsViewport()).toBe(true);
 
-    await page.getByRole('button', { name: 'New workout' }).click();
-    await expect(setRegion(page, 1)).toBeVisible();
+    await createWorkout(page);
+    await expect(setCard(page, 1)).toBeVisible();
     expect(await fitsViewport()).toBe(true);
   });
 });

@@ -5,7 +5,6 @@ import { HiitRun } from '@/routes/hiit/Run';
 import { DevUi } from '@/routes/DevUi';
 import { Settings } from '@/routes/Settings';
 import { NotFound } from '@/routes/NotFound';
-import { HiitLibrary } from '@/routes/hiit/Library';
 import { HiitBuilder } from '@/routes/hiit/Builder';
 import { HiitShared } from '@/routes/hiit/Shared';
 import { GymLibrary } from '@/routes/gym/Library';
@@ -25,9 +24,7 @@ export const routes = {
 } as const;
 
 const shellRoutes: RouteObject[] = [
-  { path: routes.hiitLibrary, element: <HiitLibrary /> },
   { path: routes.hiitShared, element: <HiitShared /> },
-  { path: routes.hiitBuilder, element: <HiitBuilder /> },
   { path: routes.settings, element: <Settings /> },
   { path: '*', element: <NotFound /> },
   { path: routes.gymLibrary, element: <GymLibrary /> },
@@ -41,6 +38,8 @@ if (import.meta.env.DEV) {
 export const router = createBrowserRouter([
   { path: routes.splash, element: <Splash /> },
   { element: <AppShell />, children: shellRoutes },
+  { path: routes.hiitLibrary, element: <HiitBuilder /> },
+  { path: routes.hiitBuilder, element: <HiitBuilder /> },
   { path: routes.hiitRun, element: <HiitRun /> },
   { path: routes.gymRun, element: <GymRun /> },
 ]);
