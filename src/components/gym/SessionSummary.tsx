@@ -17,23 +17,26 @@ export function SessionSummary({ summary, backTo, t, onBack }: SessionSummaryPro
     { label: t('gym.run.duration'), value: formatDuration(summary.durationMs) },
   ];
   return (
-    <section className="flex flex-col gap-8">
-      <h1 className="text-8 text-recover">{t('run.finished.gym')}</h1>
-      <dl className="grid gap-6 sm:grid-cols-3">
-        {stats.map((stat) => (
-          <div key={stat.label} className="flex flex-col gap-1 border-t-4 border-ink pt-3">
-            <dt className="text-2 font-bold text-ink-soft">{stat.label}</dt>
-            <dd className="font-display text-8 font-black leading-none">{stat.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <Link
-        to={backTo}
-        onClick={onBack}
-        className="inline-flex h-14 w-fit items-center rounded-button bg-ink px-6 font-bold text-3 text-white hover:bg-black"
-      >
-        {t('gym.run.backToRoutine')}
-      </Link>
+    <section className="card mx-auto w-full max-w-[590px] overflow-hidden">
+      <div className="px-6 pt-8 sm:px-10">
+        <h1 className="card-title text-go">{t('run.finished.gym')}</h1>
+        <dl className="mt-8 flex flex-col">
+          {stats.map((stat) => (
+            <div key={stat.label} className="settings-row">
+              <dt className="settings-row-label">{stat.label}</dt>
+              <dd className="pill m-0">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="my-8 text-center">
+          <Link to={backTo} onClick={onBack} className="text-link-red">
+            {t('gym.run.backToRoutine')}
+          </Link>
+        </div>
+      </div>
+      <p className="black-pill w-full rounded-none rounded-b-tile">
+        {t('gym.run.doneCount', { done: summary.setsDone })}
+      </p>
     </section>
   );
 }

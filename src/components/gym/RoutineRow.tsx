@@ -54,7 +54,7 @@ export function RoutineRow({
   };
 
   return (
-    <li className="flex flex-col gap-3 border-b border-ink/10 py-5 sm:flex-row sm:items-center sm:gap-6">
+    <li className="card flex flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:gap-6">
       <div className="min-w-0 flex-1">
         {renaming ? (
           <span ref={focusOnMount} className="contents">
@@ -64,26 +64,23 @@ export function RoutineRow({
               onChange={(event) => onRenameChange(event.target.value)}
               onBlur={onRenameCommit}
               onKeyDown={onKeyDown}
-              className="font-display text-5 font-extrabold"
+              className="rounded-full font-display text-4 font-semibold"
             />
           </span>
         ) : (
           <Link
             to={to}
-            className="block truncate font-display text-6 font-extrabold text-ink hover:text-brand-deep"
+            className="block truncate font-display text-4 font-semibold text-ink hover:text-brand"
           >
             {name}
           </Link>
         )}
-        <p className="mt-1 text-2 text-ink-soft">
+        <p className="mt-1 text-1 text-ink-soft">
           {meta}. {lastSession}
         </p>
       </div>
       <div className="flex items-center gap-1">
-        <Link
-          to={startTo}
-          className="inline-flex h-11 items-center gap-2 rounded-button bg-brand-deep px-4 font-bold text-white transition-colors duration-150 hover:bg-[#a81c23]"
-        >
+        <Link to={startTo} className="red-pill-link">
           <PlayIcon size={18} />
           {startLabel}
         </Link>

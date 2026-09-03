@@ -1,8 +1,10 @@
 import { Reorder } from 'motion/react';
 import { Link, useParams } from 'react-router';
 import { Button } from '@/components/ui/Button';
-import { Field, NumberField, TextInput } from '@/components/ui/Field';
-import { ArrowLeftIcon, PlusIcon } from '@/components/ui/icons';
+import { Field, TextInput } from '@/components/ui/Field';
+import { PillNumber } from '@/components/ui/PillNumber';
+import { PlusIcon } from '@/components/ui/icons';
+import { ChevronLeftIcon } from '@/components/shell/shell-icons';
 import { ConfirmDialog } from '@/components/gym/ConfirmDialog';
 import { DaySection } from '@/components/gym/DaySection';
 import { EntryDialog } from '@/components/gym/EntryDialog';
@@ -22,11 +24,13 @@ export function GymPlan() {
 
   if (!plan.routine) {
     return (
-      <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
-        <p className="text-3">{t('gym.plan.notFound')}</p>
-        <Link to="/gym" className="mt-4 inline-flex items-center gap-2 font-bold text-brand-deep">
-          <ArrowLeftIcon /> {t('gym.plan.backToLibrary')}
-        </Link>
+      <main className="px-4 py-10 sm:px-8">
+        <section className="card mx-auto w-full max-w-[590px] px-6 py-10 text-center">
+          <p className="text-ink-soft">{t('gym.plan.notFound')}</p>
+          <Link to="/gym" className="text-link-red mt-6 inline-block">
+            {t('gym.plan.backToLibrary')}
+          </Link>
+        </section>
       </main>
     );
   }
@@ -34,45 +38,48 @@ export function GymPlan() {
   const routine: GymRoutine = plan.routine;
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6">
-      <Link
-        to="/gym"
-        className="inline-flex items-center gap-2 font-bold text-ink-soft hover:text-ink"
-      >
-        <ArrowLeftIcon size={20} /> {t('gym.plan.backToLibrary')}
+    <main className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-8">
+      <Link to="/gym" className="back-link">
+        <span className="back-link-circle">
+          <ChevronLeftIcon size={20} />
+        </span>
+        {t('gym.plan.backToLibrary')}
       </Link>
 
-      <Field id="routine-name" label={t('gym.plan.name')} className="mt-4">
-        <TextInput
-          id="routine-name"
-          value={routine.name}
-          onChange={(event) => plan.changeName(event.target.value)}
-          onBlur={plan.commitName}
-          className="h-14 font-display text-6 font-extrabold"
-        />
-      </Field>
-      <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <NumberField
-          id="routine-rest"
-          label={t('gym.plan.rest')}
-          value={routine.restSeconds}
-          min={0}
-          max={600}
-          step={5}
-          unit={t('label.seconds')}
-          onChange={plan.changeRest}
-          className="sm:w-56"
-        />
-        <Link
-          to={`/gym/${routine.id}/run`}
-          className="inline-flex h-14 items-center justify-center gap-2 rounded-button bg-brand-deep px-6 font-bold text-3 text-white transition-colors duration-150 hover:bg-[#a81c23]"
-        >
-          <PlayIcon size={20} />
-          {t('gym.library.start')}
-        </Link>
-      </div>
+      <section className="card mt-6 px-5 py-5 sm:px-6">
+        <Field id="routine-name" label={t('gym.plan.name')}>
+          <TextInput
+            id="routine-name"
+            value={routine.name}
+            onChange={(event) => plan.changeName(event.target.value)}
+            onBlur={plan.commitName}
+            className="h-12 rounded-full font-display text-4 font-semibold"
+          />
+        </Field>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+          <div className="settings-row min-h-0 gap-3">
+            <label htmlFor="routine-rest" className="settings-row-label">
+              {t('gym.plan.rest')}
+            </label>
+            <PillNumber
+              id="routine-rest"
+              label={t('gym.plan.rest')}
+              value={routine.restSeconds}
+              min={0}
+              max={600}
+              step={5}
+              unit={t('label.seconds')}
+              onChange={plan.changeRest}
+            />
+          </div>
+          <Link to={`/gym/${routine.id}/run`} className="red-pill-link">
+            <PlayIcon size={20} />
+            {t('gym.library.start')}
+          </Link>
+        </div>
+      </section>
 
-      <div className="mt-10 flex flex-col gap-10">
+      <div className="mt-6 flex flex-col gap-6">
         {routine.days.map((day, index) => (
           <DaySection
             key={day.id}
@@ -96,13 +103,17 @@ export function GymPlan() {
             onRemove={() => plan.requestRemoveDay(day)}
           >
             <DayEntries day={day} plan={plan} nameFor={nameFor} />
-            <Button variant="ghost" onClick={() => plan.openAdd(day.id)} className="self-start">
-              <PlusIcon size={20} />
+            <button
+              type="button"
+              onClick={() => plan.openAdd(day.id)}
+              className="text-link-red inline-flex items-center gap-1 self-start"
+            >
+              <PlusIcon size={16} />
               {t('gym.plan.addExercise')}
-            </Button>
+            </button>
           </DaySection>
         ))}
-        <Button variant="secondary" onClick={plan.createDay} className="self-start">
+        <Button variant="secondary" onClick={plan.createDay} className="self-start rounded-full">
           {t('gym.plan.addDay')}
         </Button>
       </div>
@@ -151,7 +162,7 @@ interface DayEntriesProps {
 function DayEntries({ day, plan, nameFor }: DayEntriesProps) {
   const t = useT();
   if (day.entries.length === 0) {
-    return <p className="text-2 text-ink-soft">{t('gym.plan.emptyDay')}</p>;
+    return <p className="text-1 text-ink-soft">{t('gym.plan.emptyDay')}</p>;
   }
   return (
     <Reorder.Group
@@ -159,7 +170,7 @@ function DayEntries({ day, plan, nameFor }: DayEntriesProps) {
       as="ul"
       values={day.entries.map((entry) => entry.id)}
       onReorder={(ids: string[]) => plan.reorderEntries(day, ids)}
-      className="flex flex-col gap-1.5"
+      className="flex flex-col"
     >
       {day.entries.map((entry, index) => {
         const group = exerciseGroup(entry.ref);

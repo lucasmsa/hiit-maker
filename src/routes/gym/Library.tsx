@@ -10,16 +10,18 @@ export function GymLibrary() {
   const library = useGymLibrary();
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <h1 className="text-8">{t('gym.library.title')}</h1>
-        <Button onClick={library.create}>{t('gym.library.new')}</Button>
+    <main className="mx-auto w-full max-w-4xl px-4 py-6 sm:px-8 sm:py-8">
+      <header className="flex flex-wrap items-center justify-between gap-4">
+        <h1 className="card-title justify-start">{t('gym.library.title')}</h1>
+        <Button variant="secondary" onClick={library.create} className="rounded-full">
+          {t('gym.library.new')}
+        </Button>
       </header>
 
       {library.rows.length === 0 ? (
-        <p className="mt-10 max-w-[40ch] text-3">{t('library.empty.gym')}</p>
+        <p className="card mt-8 px-6 py-8 text-center text-ink-soft">{t('library.empty.gym')}</p>
       ) : (
-        <ul className="mt-6">
+        <ul className="mt-6 flex flex-col gap-4">
           {library.rows.map((row) => (
             <RoutineRow
               key={row.routine.id}

@@ -1,7 +1,5 @@
-import type { CSSProperties } from 'react';
-import { Button } from '@/components/ui/Button';
-import { Digits } from '@/components/ui/Digits';
 import { PhaseBar } from '@/components/ui/PhaseBar';
+import { SkipIcon } from '@/components/shell/shell-icons';
 import { formatClock } from '@/lib/digits';
 
 interface RestBarProps {
@@ -14,8 +12,6 @@ interface RestBarProps {
   onSkip: () => void;
 }
 
-const digitsStyle = { '--digits-size': 'var(--text-7)' } as CSSProperties;
-
 export function RestBar({
   remainingSeconds,
   progress,
@@ -26,24 +22,24 @@ export function RestBar({
   onSkip,
 }: RestBarProps) {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="fixed inset-x-0 bottom-0 z-30 bg-black pb-[env(safe-area-inset-bottom)] text-white"
-    >
-      <PhaseBar progress={progress} color="var(--color-recover)" height={6} />
-      <div className="mx-auto flex max-w-3xl items-center gap-4 px-4 py-3 sm:px-6">
-        <span className="font-display text-4 font-extrabold text-recover">
-          {finished ? finishedLabel : label}
-        </span>
-        <Digits
-          value={formatClock(remainingSeconds * 1000)}
-          style={digitsStyle}
-          className="ml-auto"
-        />
-        <Button variant="inverse" onClick={onSkip} disabled={finished}>
-          {skipLabel}
-        </Button>
+    <div role="status" aria-live="polite" className="rest-card">
+      <div className="rest-card-inner">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <div className="flex items-baseline gap-4">
+            <span className="rest-card-label">{finished ? finishedLabel : label}</span>
+            <span className="rest-card-time">{formatClock(remainingSeconds * 1000)}</span>
+          </div>
+          <PhaseBar progress={progress} color="var(--color-brand)" height={6} />
+        </div>
+        <button
+          type="button"
+          onClick={onSkip}
+          disabled={finished}
+          aria-label={skipLabel}
+          className="pulse-button size-14 shrink-0"
+        >
+          <SkipIcon size={22} />
+        </button>
       </div>
     </div>
   );

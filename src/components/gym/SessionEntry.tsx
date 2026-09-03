@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/Button';
-import { LaneChip } from '@/components/ui/LaneChip';
 import { MuscleIcon } from '@/components/ui/MuscleIcon';
 import { CheckIcon, UndoIcon } from '@/components/gym/gym-icons';
 import type { SetRow } from '@/hooks/useGymSession';
@@ -25,9 +23,6 @@ interface SessionEntryProps {
   onAddSet: () => void;
 }
 
-const cellInput =
-  'h-11 w-full rounded-button border-2 border-ink/20 bg-white px-2 text-center font-body text-2 font-bold text-ink tabular-nums focus:border-ink disabled:bg-chalk disabled:text-ink-soft';
-
 export function SessionEntry({
   id,
   name,
@@ -48,22 +43,18 @@ export function SessionEntry({
   const measureHeading = timeBased ? t('label.seconds') : t('label.reps');
   const details = [prescription, tempo].filter((part): part is string => Boolean(part));
   return (
-    <section
-      aria-labelledby={`${id}-name`}
-      className="flex flex-col gap-3 border-b border-ink/10 py-6"
-    >
+    <section aria-labelledby={`${id}-name`} className="card flex flex-col gap-4 px-5 py-5 sm:px-6">
       <header className="flex items-start gap-3">
-        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-deep">
+        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-paper-dim text-brand">
           <MuscleIcon name={icon} />
         </span>
         <div className="min-w-0 flex-1">
-          <h2 id={`${id}-name`} className="flex flex-wrap items-baseline gap-x-2 text-5">
+          <h2
+            id={`${id}-name`}
+            className="flex flex-wrap items-center gap-x-2 gap-y-1 font-display text-4 font-semibold leading-tight"
+          >
             {name}
-            {optionalLabel ? (
-              <LaneChip size="sm" tone="soft">
-                {optionalLabel}
-              </LaneChip>
-            ) : null}
+            {optionalLabel ? <span className="pill h-6 text-1">{optionalLabel}</span> : null}
           </h2>
           <p className="text-2 font-bold">{details.join(', ')}</p>
           {notes ? <p className="text-1 text-ink-soft">{notes}</p> : null}
@@ -71,17 +62,17 @@ export function SessionEntry({
       </header>
       <table className="w-full border-separate border-spacing-y-1.5">
         <thead>
-          <tr className="text-left text-1 font-bold text-ink-soft">
-            <th scope="col" className="w-20 pl-2 font-bold">
+          <tr className="settings-row-label text-left text-ink-soft">
+            <th scope="col" className="w-20 pl-2 font-semibold">
               {t('gym.run.set')}
             </th>
-            <th scope="col" className="font-bold">
+            <th scope="col" className="font-semibold">
               {t('unit.kg')}
             </th>
-            <th scope="col" className="font-bold">
+            <th scope="col" className="font-semibold">
               {measureHeading}
             </th>
-            <th scope="col" className="w-14 text-center font-bold">
+            <th scope="col" className="w-14 text-center font-semibold">
               {t('gym.run.done')}
             </th>
           </tr>
@@ -91,9 +82,9 @@ export function SessionEntry({
             const number = row.index + 1;
             const previous = previousLabel(row);
             return (
-              <tr key={row.index} className={cx(row.done && '[&>*]:bg-recover/10')}>
-                <th scope="row" className="rounded-l-button pl-2 text-left align-middle">
-                  <span className="font-display text-4 font-extrabold">{number}</span>
+              <tr key={row.index} className={cx(row.done && '[&>*]:bg-go/10')}>
+                <th scope="row" className="rounded-l-full pl-3 text-left align-middle">
+                  <span className="font-display text-3 font-semibold">{number}</span>
                   {previous ? (
                     <span className="block text-1 font-normal text-ink-soft">{previous}</span>
                   ) : null}
@@ -108,7 +99,7 @@ export function SessionEntry({
                     value={row.input.weight}
                     disabled={row.done}
                     onChange={(event) => onInput(row, 'weight', event.target.value)}
-                    className={cellInput}
+                    className="cell-pill"
                   />
                 </td>
                 <td className="px-1 align-middle">
@@ -123,16 +114,16 @@ export function SessionEntry({
                     value={row.input.reps}
                     disabled={row.done}
                     onChange={(event) => onInput(row, 'reps', event.target.value)}
-                    className={cellInput}
+                    className="cell-pill"
                   />
                 </td>
-                <td className="rounded-r-button pr-1 text-center align-middle">
+                <td className="rounded-r-full pr-1 text-center align-middle">
                   {row.done ? (
                     <button
                       type="button"
                       aria-label={t('gym.run.markUndone', { index: number })}
                       onClick={() => onUndo(row)}
-                      className="grid size-11 place-items-center rounded-button bg-recover text-white hover:bg-[#177f55]"
+                      className="grid size-10 place-items-center rounded-full bg-go text-white hover:bg-go-deep"
                     >
                       <UndoIcon size={20} />
                     </button>
@@ -141,7 +132,7 @@ export function SessionEntry({
                       type="button"
                       aria-label={t('gym.run.markDone', { index: number })}
                       onClick={() => onDone(row)}
-                      className="grid size-11 place-items-center rounded-button border-2 border-ink text-ink hover:bg-ink hover:text-white"
+                      className="grid size-10 place-items-center rounded-full border-2 border-brand text-brand hover:bg-brand hover:text-white"
                     >
                       <CheckIcon size={20} />
                     </button>
@@ -152,9 +143,9 @@ export function SessionEntry({
           })}
         </tbody>
       </table>
-      <Button variant="ghost" onClick={onAddSet} className="self-start">
+      <button type="button" onClick={onAddSet} className="text-link-red self-start">
         {t('gym.run.addSet')}
-      </Button>
+      </button>
     </section>
   );
 }

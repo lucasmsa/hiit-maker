@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { branding } from '@/assets/original-art';
 import { useT } from '@/hooks/useT';
 import { useSplash } from '@/hooks/useSplash';
 import { splashWordSize } from '@/lib/splash-word';
@@ -9,7 +10,6 @@ export function Splash() {
   if (redirecting) {
     return null;
   }
-  const hiitWord = t('mode.hiit');
   const gymWord = t('mode.gym');
   return (
     <main className="splash" data-chosen={chosen ?? undefined}>
@@ -18,11 +18,16 @@ export function Splash() {
         type="button"
         className="splash-panel"
         data-mode="hiit"
+        aria-label={t('mode.hiit')}
         onClick={() => choose('hiit')}
         disabled={chosen !== null}
       >
-        <span className="splash-word" style={wordStyle(hiitWord)}>
-          {hiitWord}
+        <span className="splash-logo">
+          <svg viewBox={branding.viewBox} fill="currentColor" aria-hidden="true" focusable="false">
+            {branding.paths.map((d, index) => (
+              <path key={index} d={d} />
+            ))}
+          </svg>
         </span>
         <span className="splash-copy">{t('splash.hiit.description')}</span>
       </button>

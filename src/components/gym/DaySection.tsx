@@ -58,7 +58,7 @@ export function DaySection({
   };
 
   return (
-    <section className="flex flex-col gap-3">
+    <section className="card flex flex-col gap-4 px-5 py-5 sm:px-6">
       <header className="flex flex-wrap items-center gap-2">
         {renaming ? (
           <span ref={focusOnMount} className="contents">
@@ -68,7 +68,7 @@ export function DaySection({
               onChange={(event) => onRenameChange(event.target.value)}
               onBlur={onRenameCommit}
               onKeyDown={onKeyDown}
-              className="max-w-xs font-display text-4 font-extrabold"
+              className="max-w-xs rounded-full font-display text-3 font-semibold"
             />
           </span>
         ) : (
@@ -91,7 +91,7 @@ export function DaySection({
           </IconButton>
         </div>
       </header>
-      {notes ? <p className="text-2 text-ink-soft">{notes}</p> : null}
+      {notes ? <p className="text-1 text-ink-soft">{notes}</p> : null}
       {children}
     </section>
   );
