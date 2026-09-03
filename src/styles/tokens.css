@@ -1,20 +1,33 @@
 @theme {
   --color-brand: #ee373f;
-  --color-brand-deep: #df2c2c;
+  --color-brand-deep: #c8232b;
   --color-brand-soft: #fde8e9;
-  --color-ink: #282828;
-  --color-ink-soft: #5c5c5c;
-  --color-paper: #ffffff;
-  --color-paper-dim: #ebebeb;
-  --color-go: #43c079;
-  --color-go-deep: #2f9a5e;
-  --color-rest: #2b6cb0;
+  --color-chalk: #f4f4f1;
+  --color-ink: #1b1917;
+  --color-ink-soft: #55514c;
+  --color-recover: #1e9e6a;
+  --color-warmup: #f2a93b;
 
-  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-display: 'Big Shoulders Display Variable', 'Arial Narrow', sans-serif;
+  --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
 
-  --radius-tile: 1.25rem;
-  --radius-pill: 999px;
+  --text-1: 0.85rem;
+  --text-2: 1.0625rem;
+  --text-3: 1.328rem;
+  --text-4: 1.66rem;
+  --text-5: 2.075rem;
+  --text-6: 2.594rem;
+  --text-7: 3.244rem;
+  --text-8: 4.05rem;
+  --text-9: 5.06rem;
+  --text-timer: clamp(6rem, 28vw, 20rem);
 
-  --shadow-tile: 0 10px 30px -12px rgb(40 40 40 / 0.35);
+  --radius-tile: 6px;
+  --radius-button: 8px;
+
+  --shadow-lift: 0 18px 40px -16px rgb(0 0 0 / 0.45);
+}
+
+:root {
+  --skew: 12deg;
 }

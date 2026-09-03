@@ -1,5 +1,9 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/big-shoulders-display';
+@import '@fontsource/atkinson-hyperlegible/400.css';
+@import '@fontsource/atkinson-hyperlegible/700.css';
 @import './tokens.css';
+@import './components.css';
 
 :root {
   color-scheme: light;
@@ -7,10 +11,44 @@
 
 body {
   margin: 0;
-  background: var(--color-paper);
+  background: var(--color-chalk);
   color: var(--color-ink);
   font-family: var(--font-body);
+  font-size: var(--text-2);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+button,
+[role='button'],
+a,
+label,
+summary {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  cursor: text;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand-deep);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
