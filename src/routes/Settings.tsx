@@ -80,7 +80,7 @@ export function Settings() {
             <span id="language-label" className="settings-row-label">
               {t('settings.language')}
             </span>
-            <div role="group" aria-labelledby="language-label" className="flex gap-2">
+            <div role="group" aria-labelledby="language-label" className="flex flex-wrap justify-end gap-2">
               {languages.map((language) => {
                 const active = s.settings.language === language;
                 return (
