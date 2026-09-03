@@ -1,5 +1,8 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, type RouteObject } from 'react-router';
 import { RoutePlaceholder } from '@/components/RoutePlaceholder';
+import { AppShell } from '@/components/shell/AppShell';
+import { Splash } from '@/routes/Splash';
+import { DevUi } from '@/routes/DevUi';
 
 export const routes = {
   splash: '/',
@@ -13,14 +16,22 @@ export const routes = {
   settings: '/settings',
 } as const;
 
-export const router = createBrowserRouter([
-  { path: routes.splash, element: <RoutePlaceholder name="splash" /> },
+const shellRoutes: RouteObject[] = [
   { path: routes.hiitLibrary, element: <RoutePlaceholder name="hiit library" /> },
   { path: routes.hiitShared, element: <RoutePlaceholder name="hiit shared" /> },
   { path: routes.hiitBuilder, element: <RoutePlaceholder name="hiit builder" /> },
-  { path: routes.hiitRun, element: <RoutePlaceholder name="hiit run" /> },
   { path: routes.gymLibrary, element: <RoutePlaceholder name="gym library" /> },
   { path: routes.gymPlan, element: <RoutePlaceholder name="gym plan" /> },
-  { path: routes.gymRun, element: <RoutePlaceholder name="gym run" /> },
   { path: routes.settings, element: <RoutePlaceholder name="settings" /> },
+];
+
+if (import.meta.env.DEV) {
+  shellRoutes.push({ path: '/dev/ui', element: <DevUi /> });
+}
+
+export const router = createBrowserRouter([
+  { path: routes.splash, element: <Splash /> },
+  { element: <AppShell />, children: shellRoutes },
+  { path: routes.hiitRun, element: <RoutePlaceholder name="hiit run" /> },
+  { path: routes.gymRun, element: <RoutePlaceholder name="gym run" /> },
 ]);

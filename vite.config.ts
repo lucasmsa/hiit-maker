@@ -11,13 +11,13 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'icons/*.svg'],
+      includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
-        name: 'HIIT Maker',
-        short_name: 'HIIT Maker',
+        name: 'HIIT maker',
+        short_name: 'HIIT maker',
         description: 'Build and run HIIT workouts and gym routines.',
         theme_color: '#EE373F',
-        background_color: '#FFFFFF',
+        background_color: '#F4F4F1',
         display: 'standalone',
         start_url: '/',
         scope: '/',

@@ -4,8 +4,8 @@ interface RoutePlaceholderProps {
 
 export function RoutePlaceholder({ name }: RoutePlaceholderProps) {
   return (
-    <main className="grid min-h-dvh place-items-center bg-paper text-ink">
-      <h1 className="font-display text-6xl font-bold uppercase tracking-tight text-brand">{name}</h1>
+    <main className="grid min-h-[60dvh] place-items-center bg-chalk text-ink">
+      <h1 className="text-8 text-brand">{name}</h1>
     </main>
   );
 }

@@ -197,4 +197,13 @@ export const ptBR: Record<I18nKey, string> = {
   'gym.exercise.plank': 'Prancha',
   'gym.exercise.thoracic-extension': 'Extensão torácica no rolo',
   'gym.exercise.levator-scapulae-stretch': 'Alongamento do levantador da escápula',
+
+  'nav.github': 'GitHub',
+  'nav.home': 'Início',
+  'nav.modes': 'Modo',
+  'action.close': 'Fechar',
+  'action.decrease': 'Diminuir',
+  'action.increase': 'Aumentar',
+  'settings.language.switch': 'Trocar idioma',
+  'splash.choose': 'Escolha como treinar hoje',
 };

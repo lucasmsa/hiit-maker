@@ -194,6 +194,15 @@ export const en = {
   'gym.exercise.plank': 'Plank',
   'gym.exercise.thoracic-extension': 'Thoracic extension over foam roller',
   'gym.exercise.levator-scapulae-stretch': 'Levator scapulae stretch',
+
+  'nav.github': 'GitHub',
+  'nav.home': 'Home',
+  'nav.modes': 'Mode',
+  'action.close': 'Close',
+  'action.decrease': 'Decrease',
+  'action.increase': 'Increase',
+  'settings.language.switch': 'Change language',
+  'splash.choose': 'Choose how you train today',
 } as const;
 
 export type I18nKey = keyof typeof en;
