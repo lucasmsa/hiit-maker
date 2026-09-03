@@ -13,9 +13,9 @@ Accepted
   WebP at 480 and 960 px wide under `public/exercises/<slug>-{480,960}.webp`.
 - `public/exercises/ATTRIBUTION.md` lists, per file: source URL, author, license.
   A photo without a recorded source is not shipped.
-- One CSS treatment (grayscale plus the brand red through `mix-blend-mode`)
-  renders every tile in the same palette, so mixed sources read as one set. Full
-  color returns on hover and focus.
+- Tiles show the photos in full colour, square with the original 1.25 rem
+  radius (amended 2026-09-03: the red duotone treatment of the first pass was
+  dropped after review to match the 2023 tiles).
 - Every `<img>` has `alt` set to the exercise name and an `onError` fallback to
   the muscle-group icon.
 

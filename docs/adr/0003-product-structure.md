@@ -9,9 +9,14 @@ Accepted
 ## Decision
 
 - `/` is a two-panel splash: HIIT or Gym. The choice is remembered; later
-  visits to `/` redirect to that mode's library. The header logo returns to the
+  visits to `/` redirect to that mode's first screen. The logo returns to the
   splash.
-- Routes: `/hiit` (library), `/hiit/:id` (builder), `/hiit/:id/run`;
+- HIIT's first screen is the builder of the current workout. Saved workouts are
+  reached through a switcher next to the workout name (switch, new, duplicate,
+  rename, delete); there is no separate library page (amended 2026-09-03 after
+  review: the original app opened on the builder and that order stays).
+- Routes: `/hiit` (builder of the current workout), `/hiit/:id` (builder),
+  `/hiit/:id/run`;
   `/gym` (library), `/gym/:id` (plan), `/gym/:id/run`; `/settings`.
 - Share: `/hiit/shared#<base64url(JSON)>` carries a whole workout in the URL
   fragment. Opening it imports the workout into the library. No backend.
