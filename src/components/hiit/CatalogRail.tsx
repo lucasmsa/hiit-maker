@@ -1,10 +1,10 @@
-import { Field, TextInput } from '@/components/ui/Field';
 import { GroupRow } from '@/components/hiit/GroupRow';
+import { SearchIcon } from '@/components/hiit/OriginalIcons';
 import { useT } from '@/hooks/useT';
 import { cx } from '@/lib/cx';
 import type { HiitExercise, HiitGroup } from '@/lib/types';
 
-interface CatalogRailProps {
+export interface CatalogRailProps {
   id: string;
   query: string;
   onQueryChange: (query: string) => void;
@@ -14,22 +14,34 @@ interface CatalogRailProps {
   onRail: boolean;
 }
 
-export function CatalogRail({ id, query, onQueryChange, groups, placedIds, onSelect, onRail }: CatalogRailProps) {
+export function CatalogRail({
+  id,
+  query,
+  onQueryChange,
+  groups,
+  placedIds,
+  onSelect,
+  onRail,
+}: CatalogRailProps) {
   const t = useT();
   return (
-    <div className={cx('flex flex-col gap-6', onRail && '[&_label]:text-white')}>
-      <Field id={`${id}-search`} label={t('label.search')}>
-        <TextInput
+    <div className="flex flex-col gap-6">
+      <div className="search-pill" data-on-rail={onRail}>
+        <label htmlFor={`${id}-search`} className="sr-only">
+          {t('label.search')}
+        </label>
+        <SearchIcon size={16} />
+        <input
           id={`${id}-search`}
           type="search"
           value={query}
+          placeholder={t('label.search')}
           onChange={(event) => onQueryChange(event.target.value)}
           autoComplete="off"
-          className={cx(onRail && 'border-transparent')}
         />
-      </Field>
+      </div>
       {groups.length === 0 ? (
-        <p className={cx('font-bold', onRail ? 'text-white' : 'text-ink')}>
+        <p className={cx('text-1 font-bold', onRail ? 'text-white' : 'text-ink')}>
           {t('hiit.builder.noMatches', { query })}
         </p>
       ) : (

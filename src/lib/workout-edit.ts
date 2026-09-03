@@ -185,3 +185,7 @@ export function reorderExercises(workout: HiitWorkout, setId: string, orderedIds
     return { ...set, exercises: [...ordered, ...byId.values()] };
   });
 }
+
+export function clearSet(workout: HiitWorkout, setId: string): HiitWorkout {
+  return replaceSet(workout, setId, (set) => ({ ...set, exercises: [] }));
+}

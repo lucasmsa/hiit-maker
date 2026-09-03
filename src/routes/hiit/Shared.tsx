@@ -17,7 +17,7 @@ export function HiitShared() {
         <h1 className="text-7">{t('hiit.shared.title')}</h1>
         <p className="mt-4 text-3">{t('share.invalid')}</p>
         <LinkButton to="/hiit" variant="secondary" className="mt-6">
-          {t('hiit.shared.backToLibrary')}
+          {t('hiit.builder.back')}
         </LinkButton>
       </main>
     );
@@ -28,7 +28,7 @@ export function HiitShared() {
       <LaneChip tone="brand">{t('hiit.shared.title')}</LaneChip>
       <h1 className="mt-4 text-8">{workout.name}</h1>
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-ink-soft">
-        <span>{t('hiit.library.setCount', { count: summary.setCount })}</span>
+        <span>{t('hiit.builder.setCount', { count: summary.setCount })}</span>
         <span>{t('library.exerciseCount', { count: summary.exerciseCount })}</span>
         <span className="font-bold tabular-nums text-ink">{formatClock(summary.totalSeconds * 1000)}</span>
         {summary.groups.map((group) => (

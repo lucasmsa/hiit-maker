@@ -1,39 +1,54 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useCopyLink } from '@/hooks/useCopyLink';
 import { useT } from '@/hooks/useT';
+import { pickCurrentWorkoutId } from '@/lib/current-workout';
 import { filterCatalog, groupExercises, placedCatalogIds, shareUrl, summarizeWorkout } from '@/lib/hiit-summary';
-import type { HiitWorkout } from '@/lib/types';
+import type { HiitSet, HiitWorkout } from '@/lib/types';
 import { groupCounts, type ExerciseLocation, type ExerciseTarget } from '@/lib/workout-edit';
 import { useLibraryStore } from '@/stores/library';
 
 const FLASH_MS = 900;
+const MAX_LOOPS = 20;
 
 const actions = () => useLibraryStore.getState();
 
-export function useBuilder(workoutId: string | undefined) {
+function clampIndex(index: number, length: number): number {
+  if (length === 0) {
+    return 0;
+  }
+  return Math.min(Math.max(index, 0), length - 1);
+}
+
+export function useBuilder(routeId: string | undefined) {
   const t = useT();
-  const workout: HiitWorkout | null =
-    useLibraryStore((state) => state.workouts.find((candidate) => candidate.id === workoutId)) ?? null;
-  const [selectedSetId, setSelectedSetId] = useState<string | null>(null);
+  const workouts = useLibraryStore((state) => state.workouts);
+  const lastWorkoutId = useLibraryStore((state) => state.lastWorkoutId);
+  const resolvedId = routeId ?? pickCurrentWorkoutId(workouts, lastWorkoutId);
+  const workout: HiitWorkout | null = workouts.find((candidate) => candidate.id === resolvedId) ?? null;
+  const missing = routeId !== undefined && workout === null;
+
+  const [setSelection, setSetSelection] = useState<{ workoutId: string; index: number } | null>(null);
+  const [nameDraft, setNameDraft] = useState<{ workoutId: string; text: string } | null>(null);
   const [query, setQuery] = useState('');
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [optionsFor, setOptionsFor] = useState<string | null>(null);
+  const [clearing, setClearing] = useState(false);
   const [flashId, setFlashId] = useState<string | null>(null);
   const flashTimer = useRef<number | null>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
-  const currentSetId = useMemo(() => {
-    if (!workout) {
-      return null;
+  useEffect(() => {
+    if (routeId === undefined && workouts.length === 0) {
+      const id = actions().createWorkout(t('label.untitledWorkout'));
+      actions().setLastWorkoutId(id);
     }
-    if (selectedSetId && workout.sets.some((set) => set.id === selectedSetId)) {
-      return selectedSetId;
-    }
-    return workout.sets[0]?.id ?? null;
-  }, [workout, selectedSetId]);
+  }, [routeId, workouts.length, t]);
 
-  const summary = useMemo(() => (workout ? summarizeWorkout(workout) : null), [workout]);
-  const counts = useMemo(() => (workout ? groupCounts(workout) : {}), [workout]);
-  const placedIds = useMemo(() => (workout ? placedCatalogIds(workout) : new Set<string>()), [workout]);
-  const catalog = useMemo(() => groupExercises(filterCatalog(query, t)), [query, t]);
+  useEffect(() => {
+    if (workout && workout.id !== lastWorkoutId) {
+      actions().setLastWorkoutId(workout.id);
+    }
+  }, [workout, lastWorkoutId]);
 
   useEffect(() => {
     return () => {
@@ -42,6 +57,23 @@ export function useBuilder(workoutId: string | undefined) {
       }
     };
   }, []);
+
+  const selectedIndex = setSelection && setSelection.workoutId === workout?.id ? setSelection.index : 0;
+  const currentSetIndex = clampIndex(selectedIndex, workout?.sets.length ?? 0);
+  const selectSet = useCallback(
+    (index: number) => {
+      if (workout) {
+        setSetSelection({ workoutId: workout.id, index });
+      }
+    },
+    [workout],
+  );
+  const currentSet: HiitSet | null = workout?.sets[currentSetIndex] ?? null;
+
+  const summary = useMemo(() => (workout ? summarizeWorkout(workout) : null), [workout]);
+  const counts = useMemo(() => (workout ? groupCounts(workout) : {}), [workout]);
+  const placedIds = useMemo(() => (workout ? placedCatalogIds(workout) : new Set<string>()), [workout]);
+  const catalog = useMemo(() => groupExercises(filterCatalog(query, t)), [query, t]);
 
   const flash = useCallback((id: string) => {
     setFlashId(id);
@@ -53,35 +85,51 @@ export function useBuilder(workoutId: string | undefined) {
 
   const addFromCatalog = useCallback(
     (exerciseId: string) => {
-      if (!workout || !currentSetId) {
+      if (!workout || !currentSet) {
         return;
       }
-      actions().addExercise(workout.id, currentSetId, { kind: 'catalog', exerciseId });
+      actions().addExercise(workout.id, currentSet.id, { kind: 'catalog', exerciseId });
       const updatedSet = actions()
         .workouts.find((candidate) => candidate.id === workout.id)
-        ?.sets.find((set) => set.id === currentSetId);
+        ?.sets.find((set) => set.id === currentSet.id);
       const last = updatedSet?.exercises[updatedSet.exercises.length - 1];
       if (last) {
         flash(last.id);
       }
     },
-    [currentSetId, flash, workout],
+    [currentSet, flash, workout],
   );
 
-  const openSheetFor = useCallback((setId: string) => {
-    setSelectedSetId(setId);
-    setSheetOpen(true);
-  }, []);
-  const closeSheet = useCallback(() => setSheetOpen(false), []);
+  const activeDraft = nameDraft && nameDraft.workoutId === workout?.id ? nameDraft.text : null;
+  const nameValue = activeDraft ?? workout?.name ?? '';
 
-  const rename = useCallback(
-    (name: string) => {
-      if (workout && name.trim() !== '') {
-        actions().renameWorkout(workout.id, name);
+  const changeName = useCallback(
+    (value: string) => {
+      if (!workout) {
+        return;
+      }
+      setNameDraft({ workoutId: workout.id, text: value });
+      if (value.trim() !== '') {
+        actions().renameWorkout(workout.id, value);
       }
     },
     [workout],
   );
+
+  const commitName = useCallback(() => {
+    if (workout && nameValue.trim() === '') {
+      actions().renameWorkout(workout.id, t('label.untitledWorkout'));
+    }
+    setNameDraft(null);
+  }, [nameValue, t, workout]);
+
+  const focusName = useCallback(() => {
+    const input = nameInputRef.current;
+    if (input) {
+      input.focus();
+      input.select();
+    }
+  }, []);
 
   const setWarmup = useCallback(
     (seconds: number) => workout && actions().updateWorkout(workout.id, { warmupSeconds: seconds }),
@@ -89,36 +137,44 @@ export function useBuilder(workoutId: string | undefined) {
   );
 
   const setLoops = useCallback(
-    (setId: string, loops: number) => workout && actions().updateSet(workout.id, setId, { loops }),
-    [workout],
+    (loops: number) => {
+      if (workout && currentSet) {
+        actions().updateSet(workout.id, currentSet.id, { loops: Math.min(Math.max(loops, 1), MAX_LOOPS) });
+      }
+    },
+    [currentSet, workout],
   );
 
   const setSetRest = useCallback(
-    (setId: string, seconds: number) =>
-      workout && actions().updateSet(workout.id, setId, { setRestSeconds: seconds }),
-    [workout],
+    (seconds: number) => workout && currentSet && actions().updateSet(workout.id, currentSet.id, { setRestSeconds: seconds }),
+    [currentSet, workout],
   );
 
   const setTrain = useCallback(
-    (setId: string, placedId: string, seconds: number) =>
-      workout && actions().updateExercise(workout.id, setId, placedId, { trainSeconds: seconds }),
-    [workout],
+    (placedId: string, seconds: number) =>
+      workout && currentSet && actions().updateExercise(workout.id, currentSet.id, placedId, { trainSeconds: seconds }),
+    [currentSet, workout],
   );
 
   const setRest = useCallback(
-    (setId: string, placedId: string, seconds: number) =>
-      workout && actions().updateExercise(workout.id, setId, placedId, { restSeconds: seconds }),
-    [workout],
+    (placedId: string, seconds: number) =>
+      workout && currentSet && actions().updateExercise(workout.id, currentSet.id, placedId, { restSeconds: seconds }),
+    [currentSet, workout],
   );
 
   const removeExercise = useCallback(
-    (setId: string, placedId: string) => workout && actions().removeExercise(workout.id, setId, placedId),
-    [workout],
+    (placedId: string) => {
+      if (workout && currentSet) {
+        actions().removeExercise(workout.id, currentSet.id, placedId);
+      }
+      setOptionsFor(null);
+    },
+    [currentSet, workout],
   );
 
   const reorder = useCallback(
-    (setId: string, orderedIds: string[]) => workout && actions().reorderExercises(workout.id, setId, orderedIds),
-    [workout],
+    (orderedIds: string[]) => workout && currentSet && actions().reorderExercises(workout.id, currentSet.id, orderedIds),
+    [currentSet, workout],
   );
 
   const move = useCallback(
@@ -127,36 +183,35 @@ export function useBuilder(workoutId: string | undefined) {
         return;
       }
       actions().moveExercise(workout.id, from, to);
-      setSelectedSetId(to.setId);
+      setOptionsFor(null);
     },
     [workout],
   );
 
   const moveBy = useCallback(
-    (setId: string, placedId: string, delta: -1 | 1) => {
-      const set = workout?.sets.find((candidate) => candidate.id === setId);
-      const index = set?.exercises.findIndex((exercise) => exercise.id === placedId) ?? -1;
-      if (!set || index === -1) {
+    (placedId: string, delta: -1 | 1) => {
+      if (!currentSet) {
         return;
       }
+      const index = currentSet.exercises.findIndex((exercise) => exercise.id === placedId);
       const target = index + delta;
-      if (target < 0 || target >= set.exercises.length) {
+      if (index === -1 || target < 0 || target >= currentSet.exercises.length) {
         return;
       }
-      move({ setId, placedId }, { setId, index: target });
+      move({ setId: currentSet.id, placedId }, { setId: currentSet.id, index: target });
     },
-    [move, workout],
+    [currentSet, move],
   );
 
   const moveToSet = useCallback(
-    (fromSetId: string, placedId: string, toSetId: string) => {
+    (placedId: string, toSetId: string) => {
       const target = workout?.sets.find((set) => set.id === toSetId);
-      if (!target) {
+      if (!currentSet || !target) {
         return;
       }
-      move({ setId: fromSetId, placedId }, { setId: toSetId, index: target.exercises.length });
+      move({ setId: currentSet.id, placedId }, { setId: toSetId, index: target.exercises.length });
     },
-    [move, workout],
+    [currentSet, move, workout],
   );
 
   const addSet = useCallback(() => {
@@ -164,40 +219,51 @@ export function useBuilder(workoutId: string | undefined) {
       return;
     }
     actions().addSet(workout.id);
-    const sets = actions().workouts.find((candidate) => candidate.id === workout.id)?.sets ?? [];
-    const created = sets[sets.length - 1];
-    if (created) {
-      setSelectedSetId(created.id);
-    }
+    setSetSelection({ workoutId: workout.id, index: workout.sets.length });
   }, [workout]);
 
-  const removeSet = useCallback(
-    (setId: string) => workout && actions().removeSet(workout.id, setId),
-    [workout],
-  );
+  const removeCurrentSet = useCallback(() => {
+    if (!workout || !currentSet || workout.sets.length <= 1) {
+      return;
+    }
+    actions().removeSet(workout.id, currentSet.id);
+    setSetSelection({ workoutId: workout.id, index: Math.max(currentSetIndex - 1, 0) });
+  }, [currentSet, currentSetIndex, workout]);
 
-  const getShareUrl = useCallback(
-    () => (workout ? shareUrl(window.location.origin, workout) : ''),
-    [workout],
-  );
+  const confirmClearSet = useCallback(() => {
+    if (workout && currentSet) {
+      actions().clearSet(workout.id, currentSet.id);
+    }
+    setClearing(false);
+  }, [currentSet, workout]);
+
+  const getShareUrl = useCallback(() => (workout ? shareUrl(window.location.origin, workout) : ''), [workout]);
   const share = useCopyLink(getShareUrl);
+
+  const optionsExercise = currentSet?.exercises.find((exercise) => exercise.id === optionsFor) ?? null;
 
   return {
     workout,
+    missing,
     summary,
     counts,
     placedIds,
     catalog,
     query,
     setQuery,
-    currentSetId,
-    selectSet: setSelectedSetId,
+    currentSet,
+    currentSetIndex,
+    selectSet,
     flashId,
+    nameValue,
+    nameInputRef,
+    changeName,
+    commitName,
+    focusName,
     sheetOpen,
-    openSheetFor,
-    closeSheet,
+    openSheet: () => setSheetOpen(true),
+    closeSheet: () => setSheetOpen(false),
     addFromCatalog,
-    rename,
     setWarmup,
     setLoops,
     setSetRest,
@@ -208,7 +274,14 @@ export function useBuilder(workoutId: string | undefined) {
     moveBy,
     moveToSet,
     addSet,
-    removeSet,
+    removeCurrentSet,
+    clearing,
+    requestClearSet: () => setClearing(true),
+    cancelClearSet: () => setClearing(false),
+    confirmClearSet,
+    optionsExercise,
+    openOptions: setOptionsFor,
+    closeOptions: () => setOptionsFor(null),
     share,
   };
 }
