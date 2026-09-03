@@ -1,0 +1,20 @@
+@theme {
+  --color-brand: #ee373f;
+  --color-brand-deep: #df2c2c;
+  --color-brand-soft: #fde8e9;
+  --color-ink: #282828;
+  --color-ink-soft: #5c5c5c;
+  --color-paper: #ffffff;
+  --color-paper-dim: #ebebeb;
+  --color-go: #43c079;
+  --color-go-deep: #2f9a5e;
+  --color-rest: #2b6cb0;
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+
+  --radius-tile: 1.25rem;
+  --radius-pill: 999px;
+
+  --shadow-tile: 0 10px 30px -12px rgb(40 40 40 / 0.35);
+}
