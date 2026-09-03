@@ -3,6 +3,8 @@ import { RoutePlaceholder } from '@/components/RoutePlaceholder';
 import { AppShell } from '@/components/shell/AppShell';
 import { Splash } from '@/routes/Splash';
 import { DevUi } from '@/routes/DevUi';
+import { Settings } from '@/routes/Settings';
+import { NotFound } from '@/routes/NotFound';
 
 export const routes = {
   splash: '/',
@@ -22,7 +24,8 @@ const shellRoutes: RouteObject[] = [
   { path: routes.hiitBuilder, element: <RoutePlaceholder name="hiit builder" /> },
   { path: routes.gymLibrary, element: <RoutePlaceholder name="gym library" /> },
   { path: routes.gymPlan, element: <RoutePlaceholder name="gym plan" /> },
-  { path: routes.settings, element: <RoutePlaceholder name="settings" /> },
+  { path: routes.settings, element: <Settings /> },
+  { path: '*', element: <NotFound /> },
 ];
 
 if (import.meta.env.DEV) {
