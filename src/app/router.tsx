@@ -3,6 +3,9 @@ import { RoutePlaceholder } from '@/components/RoutePlaceholder';
 import { AppShell } from '@/components/shell/AppShell';
 import { Splash } from '@/routes/Splash';
 import { DevUi } from '@/routes/DevUi';
+import { HiitLibrary } from '@/routes/hiit/Library';
+import { HiitBuilder } from '@/routes/hiit/Builder';
+import { HiitShared } from '@/routes/hiit/Shared';
 
 export const routes = {
   splash: '/',
@@ -17,9 +20,9 @@ export const routes = {
 } as const;
 
 const shellRoutes: RouteObject[] = [
-  { path: routes.hiitLibrary, element: <RoutePlaceholder name="hiit library" /> },
-  { path: routes.hiitShared, element: <RoutePlaceholder name="hiit shared" /> },
-  { path: routes.hiitBuilder, element: <RoutePlaceholder name="hiit builder" /> },
+  { path: routes.hiitLibrary, element: <HiitLibrary /> },
+  { path: routes.hiitShared, element: <HiitShared /> },
+  { path: routes.hiitBuilder, element: <HiitBuilder /> },
   { path: routes.gymLibrary, element: <RoutePlaceholder name="gym library" /> },
   { path: routes.gymPlan, element: <RoutePlaceholder name="gym plan" /> },
   { path: routes.settings, element: <RoutePlaceholder name="settings" /> },
