@@ -1,22 +1,32 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import type { FrameArt } from '@/components/run/RunFrame';
+import type { UpcomingItem } from '@/components/run/RunSideBar';
 import { formatClock } from '@/lib/digits';
-import { scheduleDurationMs } from '@/lib/run-clock';
+import type { Translate } from '@/lib/i18n';
+import { scheduleDurationMs, type RunSession } from '@/lib/run-clock';
 import {
   entryState,
   exerciseName,
+  exercisePositionInSet,
   exerciseVisual,
+  frameColor,
   groundKindOf,
+  labelColor,
   nextTrainPhase,
-  phaseWordKey,
+  phaseLabelKey,
+  progressRows,
+  repetitionsLeft,
   setPosition,
   setsInSchedule,
+  upcomingTrainPhases,
   type EntryState,
-  type ExerciseVisual,
   type GroundKind,
+  type ProgressRow,
   type SetPosition,
 } from '@/lib/run-view';
 import { compileHiitSchedule } from '@/lib/schedule';
+import type { Phase } from '@/lib/types';
 import { useLibraryStore } from '@/stores/library';
 import { useRunStore } from '@/stores/run';
 import { runCues, useRunClock } from '@/hooks/useRunClock';
@@ -29,6 +39,7 @@ export type RunScreen = 'missing' | 'start' | 'resume' | 'other' | 'done' | 'liv
 export interface HiitRunView {
   entry: EntryState;
   screen: RunScreen;
+  workoutId: string;
   workoutName: string;
   otherWorkoutName: string;
   totalClock: string;
@@ -36,15 +47,19 @@ export interface HiitRunView {
   remainingClock: string;
   setCount: number;
   ground: GroundKind;
-  phaseKey: string;
-  phaseWord: string;
-  exercise: string | undefined;
-  upcoming: string | undefined;
-  upcomingVisual: ExerciseVisual | undefined;
+  chipSet: string | undefined;
+  chipPhase: string;
+  label: string;
+  labelColor: string;
+  frameColor: string;
+  frameArt: FrameArt;
+  nextText: string | undefined;
+  rows: ProgressRow[];
+  upcoming: UpcomingItem[];
+  repsText: string;
   position: SetPosition | undefined;
-  phaseProgress: number;
-  workoutProgress: number;
   isPaused: boolean;
+  isLive: boolean;
   muted: boolean;
   stopOpen: boolean;
   exitOpen: boolean;
@@ -162,10 +177,14 @@ export function useHiitRun(): { view: HiitRunView; actions: HiitRunActions } {
 
   const activeSchedule = session && entry !== 'fresh' ? session.schedule : schedule;
   const activeDurationMs = scheduleDurationMs(activeSchedule);
+  const position = session && phase ? setPosition(session.schedule, phase) : undefined;
+  const currentName = exerciseName(phase?.ref, t);
+  const upcomingName = exerciseName(upcomingPhase?.ref, t);
 
   const view: HiitRunView = {
     entry,
     screen,
+    workoutId: id,
     workoutName: workout?.name ?? '',
     otherWorkoutName: otherWorkout?.name ?? '',
     totalClock: formatClock(activeDurationMs),
@@ -173,15 +192,19 @@ export function useHiitRun(): { view: HiitRunView; actions: HiitRunActions } {
     remainingClock: formatClock(clock.remainingSeconds * 1000),
     setCount: setsInSchedule(activeSchedule),
     ground,
-    phaseKey: session ? `${session.startedAt}:${session.phaseIndex}:${session.status}` : 'none',
-    phaseWord: t(phaseWordKey[ground]),
-    exercise: exerciseName(phase?.ref, t),
-    upcoming: exerciseName(upcomingPhase?.ref, t),
-    upcomingVisual: exerciseVisual(upcomingPhase?.ref),
-    position: session && phase ? setPosition(session.schedule, phase) : undefined,
-    phaseProgress: clock.progress,
-    workoutProgress: session ? remainingToProgress(clock.totalRemainingSeconds * 1000, activeDurationMs) : 0,
+    chipSet: position ? t('hiit.run.chip.set', { current: position.set, total: position.setCount }) : undefined,
+    chipPhase: chipPhaseText(ground, session, phase, currentName, t),
+    label: t(phaseLabelKey[ground]),
+    labelColor: labelColor[ground],
+    frameColor: frameColor[ground],
+    frameArt: frameArtFor(ground, phase, currentName, upcomingPhase, upcomingName),
+    nextText: isRest(ground) && upcomingName ? `${t('run.next')}: ${upcomingName}` : undefined,
+    rows: session ? progressRows(session, clock.progress, t) : [],
+    upcoming: session ? upcomingItems(session, t) : [],
+    repsText: session ? repsText(session, t) : '',
+    position,
     isPaused,
+    isLive,
     muted,
     stopOpen,
     exitOpen,
@@ -203,9 +226,75 @@ function screenFor(entry: EntryState, entered: boolean): RunScreen {
   }
 }
 
-function remainingToProgress(remainingMs: number, totalMs: number): number {
-  if (totalMs === 0) {
-    return 1;
+function isRest(ground: GroundKind): boolean {
+  return ground === 'rest' || ground === 'setRest';
+}
+
+function chipPhaseText(
+  ground: GroundKind,
+  session: RunSession | null,
+  phase: Phase | undefined,
+  currentName: string | undefined,
+  t: Translate,
+): string {
+  switch (ground) {
+    case 'train': {
+      const inSet = session && phase ? exercisePositionInSet(session.schedule, phase) : undefined;
+      if (!inSet) {
+        return currentName ?? '';
+      }
+      return t('hiit.run.chip.exercise', { current: inSet.current, total: inSet.total, name: currentName ?? '' });
+    }
+    case 'rest':
+      return t('hiit.run.chip.rest');
+    case 'setRest':
+      return t('hiit.run.chip.setRest');
+    case 'warmup':
+      return t('hiit.run.phase.warmup');
+    default:
+      return t('hiit.run.phase.done');
   }
-  return Math.min(1, Math.max(0, 1 - remainingMs / totalMs));
+}
+
+function frameArtFor(
+  ground: GroundKind,
+  phase: Phase | undefined,
+  currentName: string | undefined,
+  upcomingPhase: Phase | undefined,
+  upcomingName: string | undefined,
+): FrameArt {
+  switch (ground) {
+    case 'warmup':
+      return { kind: 'warmup' };
+    case 'train':
+      return photoOrText(exerciseVisual(phase?.ref)?.photo, currentName ?? '');
+    case 'rest':
+    case 'setRest':
+      return photoOrText(exerciseVisual(upcomingPhase?.ref)?.photo, upcomingName ?? '');
+    default:
+      return { kind: 'done' };
+  }
+}
+
+function photoOrText(photo: string | undefined, text: string): FrameArt {
+  return photo ? { kind: 'photo', photo, alt: text } : { kind: 'text', text };
+}
+
+function upcomingItems(session: RunSession, t: Translate): UpcomingItem[] {
+  return upcomingTrainPhases(session, 3).map((entry) => ({
+    key: entry.id,
+    name: exerciseName(entry.ref, t) ?? '',
+    visual: exerciseVisual(entry.ref),
+  }));
+}
+
+function repsText(session: RunSession, t: Translate): string {
+  const left = repetitionsLeft(session.schedule, session.phaseIndex);
+  if (left === 0) {
+    return t('hiit.run.repsLeft.last');
+  }
+  if (left === 1) {
+    return t('hiit.run.repsLeft.one');
+  }
+  return t('hiit.run.repsLeft.many', { count: left });
 }

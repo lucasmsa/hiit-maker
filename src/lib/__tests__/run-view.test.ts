@@ -5,12 +5,17 @@ import { backPhase, startRun, type RunSession } from '@/lib/run-clock';
 import {
   entryState,
   exerciseName,
+  exercisePositionInSet,
   exerciseVisual,
   groundKindOf,
   groundTone,
   nextTrainPhase,
+  progressRows,
+  repetitionsLeft,
+  setExercisesOf,
   setPosition,
   setsInSchedule,
+  upcomingTrainPhases,
   workoutProgress,
 } from '@/lib/run-view';
 import { compileHiitSchedule } from '@/lib/schedule';
@@ -102,6 +107,66 @@ describe('backPhase', () => {
     const moved = backPhase(session({ status: 'paused', pausedAt: T0 + 2_000 }), T0 + 5_000);
     expect(moved).toMatchObject({ phaseIndex: 0, status: 'paused', pausedAt: T0 + 5_000, phaseStartedAt: T0 + 5_000 });
     expect(backPhase(session({ status: 'finished' }), T0).status).toBe('finished');
+  });
+});
+
+describe('progress card rows', () => {
+  const firstSet = hiitExample.sets.filter((set) => set.exercises.length > 0)[0]!;
+  const firstTrainIndex = schedule.findIndex((phase) => phase.kind === 'train');
+  const firstRestIndex = schedule.findIndex((phase) => phase.kind === 'rest');
+
+  it('lists the current set once and marks the active exercise with a ring during train', () => {
+    const rows = progressRows(session({ phaseIndex: firstTrainIndex }), 0.4, t);
+    expect(rows).toHaveLength(firstSet.exercises.length);
+    expect(rows[0]).toMatchObject({ name: 'Push-up', dot: 'train', ringProgress: 0.4, lineProgress: 0, hasLine: true });
+    expect(rows[1]?.dot).toBe('todo');
+    expect(rows[rows.length - 1]?.hasLine).toBe(false);
+  });
+
+  it('fills the dot and animates the line below it during rest', () => {
+    const rows = progressRows(session({ phaseIndex: firstRestIndex }), 0.25, t);
+    expect(rows[0]).toMatchObject({ dot: 'rest', lineProgress: 0.25 });
+    expect(rows[1]).toMatchObject({ dot: 'todo', lineProgress: 0 });
+  });
+
+  it('grows the last dot during the rest that follows the last exercise', () => {
+    const lastOfLoop = schedule.findIndex(
+      (phase) => phase.kind === 'rest' && phase.exerciseIndex === firstSet.exercises.length - 1,
+    );
+    const rows = progressRows(session({ phaseIndex: lastOfLoop }), 0.5, t);
+    expect(rows[rows.length - 1]).toMatchObject({ dot: 'lastRest', ringProgress: 0.5 });
+    expect(rows.slice(0, -1).every((row) => row.dot === 'done' && row.lineProgress === 1)).toBe(true);
+  });
+
+  it('shows a single warm-up row before the sets and nothing once finished', () => {
+    expect(progressRows(session(), 0.1, t)).toEqual([
+      { key: 'warmup', name: 'WARM-UP', dot: 'train', ringProgress: 0.1, lineProgress: 0, hasLine: false },
+    ]);
+    expect(progressRows(session({ status: 'finished' }), 1, t)).toEqual([]);
+  });
+
+  it('resolves the exercises of the set a phase belongs to, including set rest', () => {
+    const setRest = schedule.find((phase) => phase.kind === 'setRest');
+    if (setRest) {
+      expect(setExercisesOf(schedule, setRest)).toHaveLength(firstSet.exercises.length);
+    }
+    expect(setExercisesOf(schedule, schedule[0]!)).toEqual([]);
+  });
+
+  it('counts repetitions left and the exercise position in its set', () => {
+    const firstTrain = schedule[firstTrainIndex]!;
+    expect(repetitionsLeft(schedule, firstTrainIndex)).toBe(firstSet.loops - 1);
+    expect(repetitionsLeft(schedule, 0)).toBe(firstSet.loops);
+    expect(repetitionsLeft(schedule, schedule.length)).toBe(0);
+    expect(exercisePositionInSet(schedule, firstTrain)).toEqual({ current: 1, total: firstSet.exercises.length });
+    expect(exercisePositionInSet(schedule, schedule[0]!)).toBeUndefined();
+  });
+
+  it('lists up to three upcoming train phases', () => {
+    const upcoming = upcomingTrainPhases(session(), 3);
+    expect(upcoming).toHaveLength(3);
+    expect(upcoming.every((phase) => phase.kind === 'train')).toBe(true);
+    expect(upcomingTrainPhases(session({ phaseIndex: schedule.length - 1 }), 3)).toEqual([]);
   });
 });
 

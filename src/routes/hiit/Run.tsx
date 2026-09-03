@@ -1,15 +1,17 @@
 import '@/styles/run.css';
-import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from '@/components/run/ConfirmDialog';
-import { RunControls } from '@/components/run/RunControls';
+import { RoundButtons } from '@/components/run/RoundButtons';
+import { RunChips } from '@/components/run/RunChips';
+import { RunClock } from '@/components/run/RunClock';
+import { RunFrame } from '@/components/run/RunFrame';
 import { RunGate } from '@/components/run/RunGate';
-import { RunGround } from '@/components/run/RunGround';
-import { RunStage } from '@/components/run/RunStage';
-import { RunTopBar } from '@/components/run/RunTopBar';
+import { RunSideBar } from '@/components/run/RunSideBar';
+import { Button } from '@/components/ui/Button';
+import { LaneChip } from '@/components/ui/LaneChip';
+import { Wordmark } from '@/components/ui/Wordmark';
 import { useHiitRun, type HiitRunActions, type HiitRunView } from '@/hooks/useHiitRun';
 import { useT } from '@/hooks/useT';
 import type { Translate } from '@/lib/i18n';
-import { groundColor } from '@/lib/run-view';
 
 export function HiitRun() {
   const t = useT();
@@ -18,9 +20,9 @@ export function HiitRun() {
   if (view.screen === 'missing') {
     return (
       <main className="run-missing">
-        <div className="grid gap-6">
-          <h1 className="text-7">{t('hiit.run.notFound')}</h1>
-          <Button variant="inverse" size="lg" onClick={actions.goToLibrary}>
+        <div className="grid justify-items-center gap-6">
+          <LaneChip className="run-chip">{t('hiit.run.notFound')}</LaneChip>
+          <Button variant="primary" size="lg" onClick={actions.goToLibrary}>
             {t('hiit.run.library')}
           </Button>
         </div>
@@ -28,16 +30,32 @@ export function HiitRun() {
     );
   }
 
+  const live = view.screen === 'live';
+
   return (
-    <RunGround kind={view.screen === 'live' ? view.ground : 'done'} phaseKey={view.phaseKey}>
-      <RunTopBar
-        exitLabel={t('hiit.run.exit')}
-        onExit={actions.requestExit}
-        soundLabel={t('hiit.run.sound')}
-        muted={view.muted}
-        onMutedChange={actions.setMuted}
-      />
-      {renderBody(view, actions, t)}
+    <main className="run" data-live={live}>
+      <div className="run-main">
+        <header className="run-header">
+          {live ? <RunChips setText={view.chipSet} phaseText={view.chipPhase} /> : <div />}
+          <Wordmark to={`/hiit/${view.workoutId}`} label={t('hiit.run.backToBuilder')} className="run-logo" />
+        </header>
+        {renderBody(view, actions, t)}
+      </div>
+      {live ? (
+        <RunSideBar
+          title={t('hiit.run.next.title')}
+          upcoming={view.upcoming}
+          emptyText={t('hiit.run.next.none')}
+          progressTitle={t('hiit.run.progress')}
+          rows={view.rows}
+          footer={view.repsText}
+          soundLabel={t('hiit.run.sound')}
+          muted={view.muted}
+          onMutedChange={actions.setMuted}
+          exitLabel={t('hiit.run.exit')}
+          onExit={actions.requestExit}
+        />
+      ) : null}
       <ConfirmDialog
         id="run-stop"
         open={view.stopOpen}
@@ -58,7 +76,7 @@ export function HiitRun() {
         onConfirm={actions.confirmExit}
         onCancel={actions.cancelExit}
       />
-    </RunGround>
+    </main>
   );
 }
 
@@ -67,7 +85,7 @@ function renderBody(view: HiitRunView, actions: HiitRunActions, t: Translate) {
     case 'start':
       return (
         <RunGate
-          word={t('hiit.run.phase.ready')}
+          chip={t('hiit.run.startNow')}
           title={view.workoutName}
           clock={view.totalClock}
           clockLabel={t('hiit.run.total')}
@@ -79,7 +97,7 @@ function renderBody(view: HiitRunView, actions: HiitRunActions, t: Translate) {
     case 'resume':
       return (
         <RunGate
-          word={t('hiit.run.phase.paused')}
+          chip={t('hiit.run.phase.paused')}
           title={view.workoutName}
           clock={view.totalRemainingClock}
           clockLabel={t('hiit.run.remaining')}
@@ -93,7 +111,7 @@ function renderBody(view: HiitRunView, actions: HiitRunActions, t: Translate) {
     case 'other':
       return (
         <RunGate
-          word={t('hiit.run.phase.paused')}
+          chip={t('hiit.run.phase.paused')}
           title={t('hiit.run.other.title')}
           body={t('hiit.run.other.body', { name: view.otherWorkoutName })}
           primaryLabel={t('hiit.run.other.resume')}
@@ -104,63 +122,51 @@ function renderBody(view: HiitRunView, actions: HiitRunActions, t: Translate) {
       );
     case 'done':
       return (
-        <RunGate
-          word={t('hiit.run.phase.done')}
-          title={t('run.finished')}
-          clock={view.totalClock}
-          clockLabel={t('hiit.run.total')}
-          meta={t('hiit.run.done.sets', { count: view.setCount })}
-          primaryLabel={t('hiit.run.done.again')}
-          onPrimary={actions.start}
-          secondaryLabel={t('hiit.run.done.back')}
-          onSecondary={actions.goToWorkout}
-        />
+        <section className="run-stage">
+          <RunFrame color={view.frameColor} art={view.frameArt} />
+          <RunGate
+            chip={t('hiit.run.phase.done')}
+            title={t('run.finished')}
+            clock={view.totalClock}
+            clockLabel={t('hiit.run.total')}
+            meta={t('hiit.run.done.sets', { count: view.setCount })}
+            primaryLabel={t('hiit.run.done.again')}
+            onPrimary={actions.start}
+            secondaryLabel={t('hiit.run.done.back')}
+            onSecondary={actions.goToWorkout}
+          />
+        </section>
       );
     case 'live':
       return (
-        <>
-          <RunStage
-            phaseWord={view.phaseWord}
-            remainingClock={view.remainingClock}
-            remainingLabel={t('hiit.run.remaining')}
-            exercise={view.ground === 'train' ? view.exercise : undefined}
-            upcoming={view.ground === 'train' ? undefined : view.upcoming}
-            upcomingLabel={t('run.next')}
-            upcomingVisual={view.upcomingVisual}
-            showUpcomingTile={view.ground !== 'train'}
-            positionText={positionText(view, t)}
+        <section className="run-stage">
+          <RunFrame color={view.frameColor} art={view.frameArt} />
+          <RunClock
+            label={view.label}
+            labelColor={view.labelColor}
+            clock={view.remainingClock}
+            clockLabel={t('hiit.run.remaining')}
+            nextText={view.nextText}
           />
-          <RunControls
+          <RoundButtons
             isPaused={view.isPaused}
+            pulsing={view.isLive}
             pauseLabel={t('action.pause')}
             resumeLabel={t('action.resume')}
-            backLabel={t('hiit.run.back')}
-            skipLabel={t('hiit.run.skip')}
-            stopLabel={t('action.stop')}
             onTogglePause={actions.togglePause}
-            onBack={actions.back}
-            onSkip={actions.skip}
+            stopLabel={t('action.stop')}
             onStop={actions.requestStop}
-            phaseProgress={view.phaseProgress}
-            phaseColor={groundColor[view.ground]}
-            phaseLabel={t('hiit.run.phaseProgress')}
-            workoutProgress={view.workoutProgress}
-            workoutLabel={t('hiit.run.workoutProgress')}
+            backLabel={t('hiit.run.back')}
+            onBack={actions.back}
+            skipLabel={t('hiit.run.skip')}
+            onSkip={actions.skip}
+            hint={t('hiit.run.pauseHint')}
           />
-        </>
+        </section>
       );
     default:
       return null;
   }
-}
-
-function positionText(view: HiitRunView, t: Translate): string | undefined {
-  if (!view.position) {
-    return undefined;
-  }
-  const set = t('run.setOf', { current: view.position.set, total: view.position.setCount });
-  const loop = t('run.loopOf', { current: view.position.loop, total: view.position.loopCount });
-  return `${set}, ${loop.toLowerCase()}`;
 }
 
 function setsText(count: number, t: Translate): string {
