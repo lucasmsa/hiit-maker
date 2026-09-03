@@ -40,7 +40,7 @@ export function HiitBuilder() {
     <MotionConfig reducedMotion="user">
       <div className="lg:grid lg:h-[calc(100dvh-4rem)] lg:grid-cols-[320px_minmax(0,1fr)_360px]">
         <aside
-          className="hidden overflow-y-auto bg-brand px-4 py-6 text-white lg:block"
+          className="no-scrollbar hidden overflow-y-auto bg-brand px-4 py-6 text-white lg:block"
           aria-label={t('hiit.builder.catalog')}
         >
           <a

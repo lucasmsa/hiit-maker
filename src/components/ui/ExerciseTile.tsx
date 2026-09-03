@@ -11,6 +11,7 @@ interface ExerciseTileProps {
   caption?: boolean;
   onSelect?: () => void;
   sizes?: string;
+  eager?: boolean;
   className?: string;
 }
 
@@ -21,7 +22,8 @@ export function ExerciseTile({
   placed = false,
   caption = true,
   onSelect,
-  sizes = '(min-width: 1024px) 220px, 44vw',
+  sizes = '(min-width: 1024px) 120px, 40vw',
+  eager = false,
   className,
 }: ExerciseTileProps) {
   const { failed, onError } = useImageFallback(photo);
@@ -38,7 +40,7 @@ export function ExerciseTile({
             srcSet={`/exercises/${photo}-480.webp 480w, /exercises/${photo}-960.webp 960w`}
             sizes={sizes}
             alt={caption ? '' : name}
-            loading="lazy"
+            loading={eager ? 'eager' : 'lazy'}
             decoding="async"
             onError={onError}
           />
@@ -50,13 +52,19 @@ export function ExerciseTile({
 
   if (onSelect) {
     return (
-      <button type="button" className={cx('tile', className)} data-placed={placed} onClick={onSelect}>
+      <button
+        type="button"
+        className={cx('tile', className)}
+        data-placed={placed}
+        data-caption="hover"
+        onClick={onSelect}
+      >
         {body}
       </button>
     );
   }
   return (
-    <div className={cx('tile', className)} data-placed={placed}>
+    <div className={cx('tile', className)} data-placed={placed} data-caption="always">
       {body}
     </div>
   );
