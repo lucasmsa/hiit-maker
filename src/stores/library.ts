@@ -71,6 +71,7 @@ export interface LibraryActions {
     placedId: string,
     patch: Partial<Pick<PlacedExercise, 'trainSeconds' | 'restSeconds'>>,
   ): void;
+  reorderExercises(workoutId: string, setId: string, orderedIds: string[]): void;
   addSet(workoutId: string): void;
   removeSet(workoutId: string, setId: string): void;
   moveSet(workoutId: string, setId: string, toIndex: number): void;
@@ -174,6 +175,8 @@ export const useLibraryStore = create<LibraryStore>()(
           editWorkout(workoutId, (workout) => workoutEdit.moveExercise(workout, from, to)),
         updateExercise: (workoutId, setId, placedId, patch) =>
           editWorkout(workoutId, (workout) => workoutEdit.updateExercise(workout, setId, placedId, patch)),
+        reorderExercises: (workoutId, setId, orderedIds) =>
+          editWorkout(workoutId, (workout) => workoutEdit.reorderExercises(workout, setId, orderedIds)),
         addSet: (workoutId) =>
           editWorkout(workoutId, (workout) => workoutEdit.addSet(workout, get().settings.defaults)),
         removeSet: (workoutId, setId) =>

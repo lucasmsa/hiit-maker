@@ -170,3 +170,18 @@ export function groupCounts(workout: HiitWorkout): Partial<Record<HiitGroup, num
 function clampIndex(index: number, length: number): number {
   return Math.max(0, Math.min(index, length));
 }
+
+export function reorderExercises(workout: HiitWorkout, setId: string, orderedIds: string[]): HiitWorkout {
+  return replaceSet(workout, setId, (set) => {
+    const byId = new Map(set.exercises.map((exercise) => [exercise.id, exercise]));
+    const ordered = orderedIds.flatMap((id) => {
+      const exercise = byId.get(id);
+      if (!exercise) {
+        return [];
+      }
+      byId.delete(id);
+      return [exercise];
+    });
+    return { ...set, exercises: [...ordered, ...byId.values()] };
+  });
+}

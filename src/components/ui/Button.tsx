@@ -25,6 +25,10 @@ const variants: Record<ButtonVariant, string> = {
   inverse: 'bg-white text-ink hover:bg-chalk',
 };
 
+export function buttonClass(variant: ButtonVariant = 'primary', size: ButtonSize = 'md', className?: string): string {
+  return cx(base, sizes[size], variants[variant], className);
+}
+
 export function Button({
   variant = 'primary',
   size = 'md',
@@ -32,7 +36,5 @@ export function Button({
   type = 'button',
   ...rest
 }: ButtonProps) {
-  return (
-    <button type={type} className={cx(base, sizes[size], variants[variant], className)} {...rest} />
-  );
+  return <button type={type} className={buttonClass(variant, size, className)} {...rest} />;
 }
