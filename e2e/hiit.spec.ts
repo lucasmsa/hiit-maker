@@ -135,12 +135,13 @@ test.describe('hiit golden path on desktop', () => {
     await page.getByRole('button', { name: 'Start workout' }).click();
 
     const remaining = page.getByRole('timer', { name: 'Remaining' });
-    await expect(page.getByText('WARM-UP', { exact: true })).toBeVisible();
+    await expect(page.getByText('WARM-UP TIME', { exact: true })).toBeVisible();
     await expect(remaining).toHaveText(/^\d{2}:\d{2}$/);
 
     await page.clock.fastForward(90_000);
-    await expect(page.getByText('TRAIN', { exact: true })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Push-up' })).toBeVisible();
+    await expect(page.getByText('TRAIN TIME', { exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Push-up/ })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'PROGRESS' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Pause' }).click();
     await expect(page.getByRole('button', { name: 'Resume' })).toBeVisible();
@@ -152,12 +153,13 @@ test.describe('hiit golden path on desktop', () => {
     await expect(page.getByRole('button', { name: 'Pause' })).toBeVisible();
 
     await page.getByRole('button', { name: 'Skip' }).click();
-    await expect(page.getByText('REST', { exact: true })).toBeVisible();
+    const restLabel = page.locator('.run-label', { hasText: 'REST TIME' });
+    await expect(restLabel).toBeVisible();
     await expect(page.getByText(/^Next:/)).toBeVisible();
 
     const beforeReload = await clockSeconds(remaining);
     await page.reload();
-    await expect(page.getByText('REST', { exact: true })).toBeVisible();
+    await expect(restLabel).toBeVisible();
     const afterReload = await clockSeconds(remaining);
     expect(afterReload).toBeLessThanOrEqual(beforeReload);
     expect(afterReload).toBeGreaterThan(0);

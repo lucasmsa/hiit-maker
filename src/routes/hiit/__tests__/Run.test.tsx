@@ -77,7 +77,9 @@ describe('HiitRun start screen', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Start workout' }));
 
-    expect(screen.getByText('WARM-UP')).toBeInTheDocument();
+    expect(screen.getByText('WARM-UP TIME')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'WARM-UP' })).toBeInTheDocument();
+    expect(screen.getByText(`${firstSetLoops} SET REPETITIONS LEFT`)).toBeInTheDocument();
     expect(timerText()).toBe('01:30');
     expect(useRunStore.getState().session).toMatchObject({ workoutId: hiitExample.id, status: 'running' });
   });
@@ -117,22 +119,26 @@ describe('HiitRun live controls', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Start workout' }));
     fireEvent.click(screen.getByRole('button', { name: 'Skip' }));
 
-    expect(screen.getByText('TRAIN')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Push-up' })).toBeInTheDocument();
-    expect(screen.getByText(`Set 1 of ${setCount}, round 1 of ${firstSetLoops}`)).toBeInTheDocument();
+    expect(screen.getByText('TRAIN TIME')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Push-up/ })).toBeInTheDocument();
+    expect(screen.getByText(`Set 1/${setCount}`)).toBeInTheDocument();
+    expect(screen.getByText(`${firstSetLoops - 1} SET REPETITIONS LEFT`)).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Push-up' })).toBeInTheDocument();
     expect(timerText()).toBe('00:30');
 
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
-    expect(screen.getByText('WARM-UP')).toBeInTheDocument();
+    expect(screen.getByText('WARM-UP TIME')).toBeInTheDocument();
     expect(timerText()).toBe('01:30');
   });
 
   it('announces the next exercise during rest', () => {
     useRunStore.setState({ session: session({ phaseIndex: 2, phaseStartedAt: T0 }) });
     renderRun();
-    expect(screen.getByText('REST')).toBeInTheDocument();
-    expect(screen.getByText('Squat', { selector: '.run-upcoming' })).toBeInTheDocument();
-    expect(screen.getByText('Squat', { selector: '.tile-caption' })).toBeInTheDocument();
+    expect(screen.getByText('REST TIME', { selector: '.run-label' })).toBeInTheDocument();
+    expect(screen.getByText('Next: Squat')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Squat' })).toBeInTheDocument();
+    expect(screen.getAllByText('Squat', { selector: '.run-upcoming-name' }).length).toBeGreaterThan(0);
+    expect(screen.getByRole('region', { name: 'PROGRESS' })).toBeInTheDocument();
   });
 
   it('stops after confirmation and returns to the builder', () => {
@@ -165,7 +171,7 @@ describe('HiitRun entry states', () => {
     expect(timerText()).toBe(formatClock(remaining));
 
     fireEvent.click(screen.getByRole('button', { name: 'Resume workout' }));
-    expect(screen.getByText('TRAIN')).toBeInTheDocument();
+    expect(screen.getByText('TRAIN TIME')).toBeInTheDocument();
     expect(timerText()).toBe('00:20');
   });
 
@@ -211,7 +217,7 @@ describe('HiitRun entry states', () => {
     expect(screen.getByText(`${setCount} sets completed`)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Run again' }));
-    expect(screen.getByText('WARM-UP')).toBeInTheDocument();
+    expect(screen.getByText('WARM-UP TIME')).toBeInTheDocument();
     expect(useRunStore.getState().session?.phaseIndex).toBe(0);
   });
 });
