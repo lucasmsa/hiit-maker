@@ -44,7 +44,7 @@ export function Splash() {
 
 function wordStyle(word: string): CSSProperties {
   return {
-    '--word-size': splashWordSize(word, 44, 20),
-    '--word-size-narrow': splashWordSize(word, 88, 26),
+    '--word-size': splashWordSize(word, 44, 12),
+    '--word-size-narrow': splashWordSize(word, 88, 18),
   } as CSSProperties;
 }

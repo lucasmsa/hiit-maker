@@ -1,33 +1,43 @@
 @theme {
   --color-brand: #ee373f;
-  --color-brand-deep: #c8232b;
+  --color-brand-deep: #df2c2c;
   --color-brand-soft: #fde8e9;
-  --color-chalk: #f4f4f1;
-  --color-ink: #1b1917;
-  --color-ink-soft: #55514c;
-  --color-recover: #1e9e6a;
+  --color-ink: #282828;
+  --color-ink-soft: #5c5c5c;
+  --color-paper: #ffffff;
+  --color-paper-dim: #ebebeb;
+  --color-go: #43c079;
+  --color-go-deep: #2f9a5e;
   --color-warmup: #f2a93b;
+  --color-chalk: #ffffff;
+  --color-recover: #43c079;
 
-  --font-display: 'Big Shoulders Display Variable', 'Arial Narrow', sans-serif;
-  --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Roboto', system-ui, sans-serif;
 
-  --text-1: 0.85rem;
-  --text-2: 1.0625rem;
-  --text-3: 1.328rem;
-  --text-4: 1.66rem;
-  --text-5: 2.075rem;
-  --text-6: 2.594rem;
-  --text-7: 3.244rem;
-  --text-8: 4.05rem;
-  --text-9: 5.06rem;
-  --text-timer: clamp(6rem, 28vw, 20rem);
+  --text-1: 0.8125rem;
+  --text-2: 1rem;
+  --text-3: 1.25rem;
+  --text-4: 1.5rem;
+  --text-5: 2rem;
+  --text-6: 2.5rem;
+  --text-7: 3.5rem;
+  --text-8: 4.5rem;
+  --text-9: 6rem;
+  --text-timer: clamp(4rem, 12vw, 10rem);
 
-  --radius-tile: 6px;
+  --radius-tile: 1.25rem;
   --radius-button: 8px;
 
-  --shadow-lift: 0 18px 40px -16px rgb(0 0 0 / 0.45);
+  --shadow-lift: 0 10px 30px -12px rgb(40 40 40 / 0.35);
 }
 
 :root {
   --skew: 12deg;
+}
+
+@media (max-width: 719px) {
+  :root {
+    --text-timer: min(22vw, 6rem);
+  }
 }

@@ -1,7 +1,12 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/big-shoulders-display';
-@import '@fontsource/atkinson-hyperlegible/400.css';
-@import '@fontsource/atkinson-hyperlegible/700.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+@import '@fontsource/montserrat/800.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
 @import './tokens.css';
 @import './components.css';
 
@@ -11,7 +16,7 @@
 
 body {
   margin: 0;
-  background: var(--color-chalk);
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--text-2);
@@ -23,9 +28,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.005em;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin: 0;
 }
 
