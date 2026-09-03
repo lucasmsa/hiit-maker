@@ -8,9 +8,15 @@ device: no account, no server, works offline once installed.
 
 Live at https://hiit.lucasmsa.dev
 
-![Builder](docs/screenshots/builder.png)
+## Screens
 
-Screenshots live in `docs/screenshots`.
+![Splash: choose HIIT or Gym](docs/screenshots/splash.png)
+
+![HIIT builder with the exercise catalog, sets and target muscles](docs/screenshots/builder.png)
+
+![Run screen mid-train](docs/screenshots/run.png)
+
+![Gym session with a logged set and the rest timer](docs/screenshots/gym-session.png)
 
 ## HIIT
 
