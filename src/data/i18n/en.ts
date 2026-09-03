@@ -370,6 +370,19 @@ export const en = {
   'gym.run.repsFor': 'Reps for set {index}',
   'gym.run.secondsFor': 'Seconds for set {index}',
   'gym.run.title': 'Session',
+  'settings.row.warmup': 'Default {x}warm-up{/x} time',
+  'settings.row.train': 'Default {x}exercise train{/x} time',
+  'settings.row.rest': 'Default {x}exercise rest{/x} time',
+  'settings.row.setRest': 'Default {x}set rest{/x} time',
+  'settings.row.setRepetitions': 'Default {x}set repetitions{/x}',
+  'settings.restore': 'Restore settings',
+  'settings.save': 'Save changes',
+  'settings.discardTitle': 'Discard changes?',
+  'settings.discardBody': 'Your edits to the defaults were not saved.',
+  'settings.discard': 'Discard',
+  'settings.keepEditing': 'Keep editing',
+  'gym.run.doneCount': '{done} sets done',
+  'gym.run.restLabel': 'Rest',
 } as const;
 
 export type I18nKey = keyof typeof en;

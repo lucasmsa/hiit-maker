@@ -9,6 +9,7 @@
 @import '@fontsource/roboto/700.css';
 @import './tokens.css';
 @import './components.css';
+@import './shell.css';
 
 :root {
   color-scheme: light;
