@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import {
   advanceDuePhases,
+  backPhase,
   pauseRun,
   resumeRun,
   skipPhase,
@@ -22,6 +23,7 @@ export interface RunActions {
   pause(now?: number): void;
   resume(now?: number): void;
   skip(now?: number): void;
+  back(now?: number): void;
   sync(now?: number): number;
   stop(): void;
 }
@@ -44,6 +46,7 @@ export const useRunStore = create<RunStore>()(
         pause: (now = Date.now()) => withSession(pauseRun, now),
         resume: (now = Date.now()) => withSession(resumeRun, now),
         skip: (now = Date.now()) => withSession(skipPhase, now),
+        back: (now = Date.now()) => withSession(backPhase, now),
         sync: (now = Date.now()) => {
           const session = get().session;
           if (!session) {

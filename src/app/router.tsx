@@ -2,6 +2,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router';
 import { RoutePlaceholder } from '@/components/RoutePlaceholder';
 import { AppShell } from '@/components/shell/AppShell';
 import { Splash } from '@/routes/Splash';
+import { HiitRun } from '@/routes/hiit/Run';
 import { DevUi } from '@/routes/DevUi';
 
 export const routes = {
@@ -32,6 +33,6 @@ if (import.meta.env.DEV) {
 export const router = createBrowserRouter([
   { path: routes.splash, element: <Splash /> },
   { element: <AppShell />, children: shellRoutes },
-  { path: routes.hiitRun, element: <RoutePlaceholder name="hiit run" /> },
+  { path: routes.hiitRun, element: <HiitRun /> },
   { path: routes.gymRun, element: <RoutePlaceholder name="gym run" /> },
 ]);
