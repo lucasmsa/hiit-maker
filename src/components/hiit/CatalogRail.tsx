@@ -25,7 +25,7 @@ export function CatalogRail({
 }: CatalogRailProps) {
   const t = useT();
   return (
-    <div className="flex flex-col gap-6">
+    <div className="catalog-rail flex flex-col gap-6">
       <div className="search-pill" data-on-rail={onRail}>
         <label htmlFor={`${id}-search`} className="sr-only">
           {t('label.search')}

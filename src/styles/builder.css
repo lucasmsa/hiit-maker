@@ -28,6 +28,10 @@
   }
 }
 
+.catalog-rail {
+  padding-bottom: 1.5rem;
+}
+
 .rail-heading {
   display: flex;
   align-items: center;
