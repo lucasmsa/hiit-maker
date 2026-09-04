@@ -592,3 +592,88 @@ a.lane-chip-onred:hover::before {
   justify-content: flex-end;
 }
 
+.switcher-body {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.switcher-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.switcher-row {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-paper-dim);
+  border-radius: var(--radius-button);
+  background: #fff;
+}
+
+.switcher-row[data-current='true'] {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+.switcher-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.switcher-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-3);
+}
+
+.switcher-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-1);
+  color: var(--color-ink-soft);
+}
+
+.switcher-meta > * + *:not(.switcher-groups)::before {
+  content: '·';
+  margin-right: 0.5rem;
+}
+
+.switcher-time {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.switcher-groups {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-brand);
+}
+
+.switcher-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.pill.pill-danger {
+  color: var(--color-brand-deep);
+}
+
+.pill.pill-danger:hover {
+  background: var(--color-brand-soft);
+}
+
+@media (max-width: 480px) {
+  .switcher-actions .pill {
+    font-size: var(--text-1);
+    padding: 0 0.65rem;
+  }
+}

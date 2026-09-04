@@ -281,4 +281,5 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.optionsPosition': '{set} · {index} de {total}',
   'hiit.builder.optionsOrder': 'Ordem',
   'hiit.builder.optionsMoveTo': 'Mover para',
+  'hiit.builder.switcher.count': '{count} salvos',
 };

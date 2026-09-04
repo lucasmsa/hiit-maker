@@ -279,6 +279,7 @@ export const en = {
   'hiit.builder.optionsPosition': '{set} · {index} of {total}',
   'hiit.builder.optionsOrder': 'Order',
   'hiit.builder.optionsMoveTo': 'Move to',
+  'hiit.builder.switcher.count': '{count} saved',
 } as const;
 
 export type I18nKey = keyof typeof en;
