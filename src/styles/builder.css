@@ -432,11 +432,38 @@ a.summary-chip[data-tone='brand']:hover {
 
 .exercise-row {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr) auto;
+  grid-template-columns: 1.25rem 100px minmax(0, 1fr) auto;
   gap: 1.25rem;
   align-items: start;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 1rem 0.25rem 0.75rem;
   border-radius: 10px;
+}
+
+.drag-handle {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 5.625rem;
+  color: var(--color-ink-soft);
+  cursor: grab;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.exercise-row:hover .drag-handle,
+.drag-handle:focus-visible {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .drag-handle {
+    opacity: 1;
+  }
 }
 
 .exercise-row img {
@@ -448,14 +475,18 @@ a.summary-chip[data-tone='brand']:hover {
 
 @container set-card (max-width: 479px) {
   .exercise-row {
-    grid-template-columns: 76px minmax(0, 1fr) auto;
+    grid-template-columns: 1.25rem 76px minmax(0, 1fr) auto;
     gap: 0.75rem;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.5rem;
   }
 
   .exercise-row img {
     width: 76px;
     height: 68px;
+  }
+
+  .drag-handle {
+    height: 4.25rem;
   }
 }
 
