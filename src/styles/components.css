@@ -1,0 +1,323 @@
+.lane-chip {
+  --chip-bg: var(--color-ink);
+  --chip-fg: #fff;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 1.1rem 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-3);
+  line-height: 1.2;
+  color: var(--chip-fg);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lane-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--chip-bg);
+  transform: skewX(calc(-1 * var(--skew)));
+  border-radius: 2px;
+  transition: background-color 150ms ease;
+}
+
+.lane-chip[data-size='sm'] {
+  font-size: var(--text-2);
+  padding: 0.22rem 0.85rem 0.26rem;
+}
+
+.lane-chip[data-tone='brand'] {
+  --chip-bg: var(--color-brand);
+}
+
+.lane-chip[data-tone='soft'] {
+  --chip-bg: var(--color-brand-soft);
+  --chip-fg: var(--color-brand-deep);
+}
+
+.lane-chip[data-tone='outline'] {
+  --chip-bg: transparent;
+  --chip-fg: var(--color-ink);
+}
+
+.lane-chip[data-tone='outline']::before {
+  box-shadow: inset 0 0 0 2px var(--color-ink);
+}
+
+a.lane-chip[data-tone='outline']:hover::before {
+  background: rgb(27 25 23 / 0.08);
+}
+
+.tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-tile);
+  background: var(--color-paper-dim);
+  color: #fff;
+  text-align: left;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.tile:hover,
+.tile:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: var(--shadow-lift);
+}
+
+.tile:active {
+  transform: scale(0.96);
+}
+
+.tile[data-placed='true'] {
+  box-shadow: 0 0 0 3px var(--color-go);
+}
+
+.tile[data-placed='true']:hover,
+.tile[data-placed='true']:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--color-go),
+    var(--shadow-lift);
+}
+
+.tile-photo {
+  position: absolute;
+  inset: 0;
+}
+
+.tile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-brand);
+}
+
+.tile-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.5rem 0.6rem 0.5rem;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0));
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-1);
+  line-height: 1.2;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.tile:hover .tile-caption,
+.tile:focus-visible .tile-caption,
+.tile[data-caption='always'] .tile-caption {
+  opacity: 1;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-chevron {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.45));
+}
+
+.rail-chevron[data-side='right'] {
+  right: -0.25rem;
+}
+
+.rail-chevron[data-side='left'] {
+  left: -0.25rem;
+}
+
+[data-rail='false'] .rail-chevron {
+  color: var(--color-ink);
+  filter: drop-shadow(0 1px 1px rgb(255 255 255 / 0.9));
+}
+
+.digits {
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--digits-size, var(--text-timer));
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.digits span {
+  display: inline-block;
+  width: 0.68em;
+  text-align: center;
+}
+
+.digits span[data-glyph=':'] {
+  width: 0.3em;
+}
+
+.phase-bar {
+  --bar-h: 14px;
+  position: relative;
+  height: var(--bar-h);
+  width: 100%;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.16);
+}
+
+.phase-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: var(--bar-color, var(--color-brand));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - var(--bar-h) * tan(var(--skew))) 100%,
+    0 100%
+  );
+  transform: translateX(calc(var(--progress) * 100% - 100%));
+  transition: transform 250ms linear;
+}
+
+dialog.dialog {
+  border: 0;
+  padding: 0;
+  margin: auto;
+  width: min(92vw, 34rem);
+  max-height: 88dvh;
+  background: transparent;
+  color: var(--color-ink);
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+
+dialog.dialog[open] {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  dialog.dialog[open] {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+dialog.dialog::backdrop {
+  background: rgb(27 25 23 / 0.62);
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+
+dialog.dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog.dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.dialog-panel {
+  position: relative;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-height: 88dvh;
+  overflow: auto;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+dialog.dialog[data-sheet] {
+  margin: auto 0 0 0;
+  width: 100%;
+  max-width: 100%;
+  transform: translateY(100%);
+}
+
+dialog.dialog[data-sheet][open] {
+  transform: none;
+}
+
+@starting-style {
+  dialog.dialog[data-sheet][open] {
+    transform: translateY(100%);
+  }
+}
+
+dialog.dialog[data-sheet] .dialog-panel {
+  border-radius: 14px 14px 0 0;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wordmark svg {
+  display: block;
+  height: 2rem;
+  width: auto;
+}
+
+.wordmark .wordmark-mark {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .wordmark[data-compact='true'] .wordmark-full {
+    display: none;
+  }
+
+  .wordmark[data-compact='true'] .wordmark-mark {
+    display: block;
+    height: 1.75rem;
+  }
+}

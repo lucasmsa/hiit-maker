@@ -1,0 +1,8 @@
+{
+  "framework": "vite",
+  "installCommand": "npx -y pnpm@11.21.0 install --frozen-lockfile",
+  "buildCommand": "npx -y pnpm@11.21.0 build",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
