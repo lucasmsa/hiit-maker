@@ -6,6 +6,7 @@ import { ExerciseCardRow } from '@/components/hiit/ExerciseCardRow';
 import { ResetArrowIcon } from '@/components/hiit/OriginalIcons';
 import { PillNumber } from '@/components/hiit/PillNumber';
 import { useT } from '@/hooks/useT';
+import { MAX_EXERCISES_PER_SET } from '@/lib/workout-limits';
 import type { HiitSet } from '@/lib/types';
 
 interface SetCardProps {
@@ -46,6 +47,12 @@ export function SetCard({
     <section aria-label={title} className="set-card">
       <header className="relative px-6 pt-6">
         <h2 className="set-title">{title}</h2>
+        <p className="set-count">
+          {t('hiit.builder.exerciseCount', {
+            n: set.exercises.length,
+            max: MAX_EXERCISES_PER_SET,
+          })}
+        </p>
         <IconButton
           label={`${t('hiit.builder.clearSet')}: ${title}`}
           onClick={onClear}

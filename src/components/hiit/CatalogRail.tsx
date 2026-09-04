@@ -10,6 +10,7 @@ export interface CatalogRailProps {
   onQueryChange: (query: string) => void;
   groups: Array<{ group: HiitGroup; exercises: HiitExercise[] }>;
   placedIds: Set<string>;
+  setFull: boolean;
   onSelect: (exerciseId: string) => void;
   onRail: boolean;
 }
@@ -20,6 +21,7 @@ export function CatalogRail({
   onQueryChange,
   groups,
   placedIds,
+  setFull,
   onSelect,
   onRail,
 }: CatalogRailProps) {
@@ -51,6 +53,7 @@ export function CatalogRail({
             group={group}
             exercises={exercises}
             placedIds={placedIds}
+            setFull={setFull}
             onSelect={onSelect}
             onRail={onRail}
           />

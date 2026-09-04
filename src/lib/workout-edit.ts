@@ -1,4 +1,5 @@
 import { newId } from '@/lib/id';
+import { MAX_EXERCISES_PER_SET, MAX_SETS } from '@/lib/workout-limits';
 import type { Defaults, ExerciseRef, HiitGroup, HiitSet, HiitWorkout, PlacedExercise } from '@/lib/types';
 import { findHiitExercise } from '@/data/hiit-catalog';
 
@@ -39,7 +40,18 @@ function replaceSet(workout: HiitWorkout, setId: string, update: (set: HiitSet) 
 }
 
 export function addExercise(workout: HiitWorkout, setId: string, placed: PlacedExercise): HiitWorkout {
-  return replaceSet(workout, setId, (set) => ({ ...set, exercises: [...set.exercises, placed] }));
+  const added = placed.ref;
+  return replaceSet(workout, setId, (set) => {
+    if (set.exercises.length >= MAX_EXERCISES_PER_SET) {
+      return set;
+    }
+    const duplicate =
+      added.kind === 'catalog' &&
+      set.exercises.some(
+        (exercise) => exercise.ref.kind === 'catalog' && exercise.ref.exerciseId === added.exerciseId,
+      );
+    return duplicate ? set : { ...set, exercises: [...set.exercises, placed] };
+  });
 }
 
 export function removeExercise(workout: HiitWorkout, setId: string, placedId: string): HiitWorkout {
@@ -93,6 +105,9 @@ export function moveExercise(
 }
 
 export function addSet(workout: HiitWorkout, defaults: Defaults): HiitWorkout {
+  if (workout.sets.length >= MAX_SETS) {
+    return workout;
+  }
   return { ...workout, sets: [...workout.sets, newSet(defaults)] };
 }
 

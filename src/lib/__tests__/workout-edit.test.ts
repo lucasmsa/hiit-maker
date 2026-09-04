@@ -40,14 +40,18 @@ describe('workout edits', () => {
     expect(removed.sets[0]?.exercises).toHaveLength(0);
   });
 
-  it('allows the same exercise twice with distinct ids', () => {
+  it('keeps the same exercise out of one set but allows it in another', () => {
     const base = createWorkout('W', initialDefaults, 0);
-    const setId = base.sets[0]!.id;
+    const withSecondSet = addSet(base, initialDefaults);
+    const [setOne, setTwo] = withSecondSet.sets;
     const first = newPlacedExercise({ kind: 'catalog', exerciseId: 'plank' }, initialDefaults);
-    const second = newPlacedExercise({ kind: 'catalog', exerciseId: 'plank' }, initialDefaults);
-    const doubled = addExercise(addExercise(base, setId, first), setId, second);
-    expect(doubled.sets[0]?.exercises.map((exercise) => exercise.id)).toEqual([first.id, second.id]);
-    expect(first.id).not.toBe(second.id);
+    const again = newPlacedExercise({ kind: 'catalog', exerciseId: 'plank' }, initialDefaults);
+    const elsewhere = newPlacedExercise({ kind: 'catalog', exerciseId: 'plank' }, initialDefaults);
+    const placed = addExercise(withSecondSet, setOne!.id, first);
+    const refused = addExercise(placed, setOne!.id, again);
+    expect(refused.sets[0]?.exercises.map((exercise) => exercise.id)).toEqual([first.id]);
+    const other = addExercise(refused, setTwo!.id, elsewhere);
+    expect(other.sets[1]?.exercises.map((exercise) => exercise.id)).toEqual([elsewhere.id]);
   });
 
   it('moves an exercise between sets at a clamped index', () => {

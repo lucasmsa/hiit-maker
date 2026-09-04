@@ -6,6 +6,7 @@ import {
   UnselectedSetDot,
 } from '@/components/hiit/OriginalIcons';
 import { useT } from '@/hooks/useT';
+import { MAX_SETS } from '@/lib/workout-limits';
 import { cx } from '@/lib/cx';
 
 interface SetStepperProps {
@@ -38,6 +39,7 @@ export function SetStepper({
     >
       <span className="text-ink-soft">
         {t('hiit.builder.setsLabel')}: <span className="text-brand">{count}</span>
+        <span className="text-ink-soft">/{MAX_SETS}</span>
       </span>
       <div className="stepper-dots">
         {indexes.map((index) => (
@@ -55,7 +57,13 @@ export function SetStepper({
         ))}
       </div>
       <div className="stepper-actions">
-        <button type="button" className="stepper-action" data-tone="go" onClick={onAdd}>
+        <button
+          type="button"
+          className="stepper-action"
+          data-tone="go"
+          onClick={onAdd}
+          disabled={count >= MAX_SETS}
+        >
           <AddSetIcon />
           {t('hiit.builder.addSet')}
         </button>

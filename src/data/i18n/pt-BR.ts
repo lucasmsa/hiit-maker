@@ -264,6 +264,7 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.clearSet': 'Limpar série',
   'hiit.builder.clearSet.title': 'Limpar {set}?',
   'hiit.builder.clearSet.body': 'Todos os exercícios dela são removidos.',
+  'hiit.builder.exerciseCount': 'Exercícios {n}/{max}',
   'hiit.builder.setsLabel': 'Séries',
   'hiit.builder.setRepetitions': '{count} repetições da série',
   'hiit.builder.startNow': 'Começar agora',
@@ -278,4 +279,8 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.setCount': '{count} séries',
   'hiit.builder.open': 'Abrir',
   'hiit.builder.dragHandle': 'Arraste para reordenar {name}',
+  'hiit.builder.optionsPosition': '{set} · {index} de {total}',
+  'hiit.builder.optionsOrder': 'Ordem',
+  'hiit.builder.optionsMoveTo': 'Mover para',
+  'hiit.builder.switcher.count': '{count} salvos',
 };

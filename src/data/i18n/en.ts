@@ -262,6 +262,7 @@ export const en = {
   'hiit.builder.clearSet': 'Clear set',
   'hiit.builder.clearSet.title': 'Clear {set}?',
   'hiit.builder.clearSet.body': 'Every exercise in it is removed.',
+  'hiit.builder.exerciseCount': 'Exercises {n}/{max}',
   'hiit.builder.setsLabel': 'Sets',
   'hiit.builder.setRepetitions': '{count} set repetitions',
   'hiit.builder.startNow': 'Start now',
@@ -276,6 +277,10 @@ export const en = {
   'hiit.builder.setCount': '{count} sets',
   'hiit.builder.open': 'Open',
   'hiit.builder.dragHandle': 'Drag to reorder {name}',
+  'hiit.builder.optionsPosition': '{set} · {index} of {total}',
+  'hiit.builder.optionsOrder': 'Order',
+  'hiit.builder.optionsMoveTo': 'Move to',
+  'hiit.builder.switcher.count': '{count} saved',
 } as const;
 
 export type I18nKey = keyof typeof en;

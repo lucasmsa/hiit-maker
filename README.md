@@ -51,7 +51,7 @@ Node 22 and pnpm (see `packageManager` in `package.json`).
 - Vite, React 19, TypeScript strict, Tailwind v4 over CSS-variable tokens,
   motion for animation.
 - Two Zustand stores with versioned persistence: the library (workouts,
-  routines, logs, settings) and the active run.
+  settings) and the active run.
 - Pure functions in `src/lib` (schedule compilation, run clock, share codec,
   editors); components render only, hooks hold behaviour.
 - Installable PWA with the app shell and catalog photos precached.

@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'HIIT maker',
         short_name: 'HIIT maker',
-        description: 'Build and run HIIT workouts and gym routines.',
+        description: 'Build and run HIIT workouts.',
         theme_color: '#EE373F',
         background_color: '#F4F4F1',
         display: 'standalone',
