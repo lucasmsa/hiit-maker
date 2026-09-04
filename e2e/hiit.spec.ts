@@ -154,7 +154,7 @@ test.describe('hiit golden path on desktop', () => {
     await shared.goto(sharedUrl);
     await expect(shared.getByRole('heading', { name: CIRCUIT_NAME })).toBeVisible();
     await shared.getByRole('button', { name: 'Save to library' }).click();
-    await expect(shared).toHaveURL(/\/w\/[^/]+$/);
+    await expect(shared).toHaveURL(/localhost:\d+\/$/);
     const switcher = await openSwitcher(shared);
     await expect(switcher.getByText(CIRCUIT_NAME, { exact: true })).toHaveCount(2);
   });
