@@ -1,4 +1,4 @@
-import { muscleIconArt, type Artwork } from '@/assets/original-art';
+import { muscleIconArt, type IconArtwork } from '@/assets/original-art';
 import type { MuscleIconName } from '@/lib/muscle-icon';
 import { fitTransform } from '@/lib/svg-fit';
 
@@ -8,7 +8,7 @@ interface MuscleIconProps {
   className?: string;
 }
 
-const originals: Partial<Record<MuscleIconName, Artwork>> = {
+const originals: Partial<Record<MuscleIconName, IconArtwork>> = {
   chest: muscleIconArt.chest,
   legs: muscleIconArt.legs,
   back: muscleIconArt.back,
@@ -62,8 +62,8 @@ export function MuscleIcon({ name, size = 24, className }: MuscleIconProps) {
     >
       {original ? (
         <g transform={fitTransform(original.viewBox, 16)}>
-          {original.paths.map((d, index) => (
-            <path key={index} d={d} />
+          {original.shapes.map((shape, index) => (
+            <path key={index} {...shape} />
           ))}
         </g>
       ) : (
