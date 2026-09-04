@@ -6,7 +6,7 @@ Build interval circuits in the browser, then run them from a phone with a timer
 readable from across the room. Everything stays on the device: no account, no
 server, works offline once installed.
 
-Live at https://hiit.lucasmsa.dev
+Live at https://hiit-maker.lucasmsa.com
 
 ## Screens
 

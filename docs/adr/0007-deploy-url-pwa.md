@@ -1,16 +1,18 @@
-# 7. Deploy through the Vercel Git integration, hiit.lucasmsa.dev, installable PWA
+# 7. Deploy through the Vercel Git integration, a custom subdomain, installable PWA
 
 Date: 2026-09-03
 
 ## Status
 
-Accepted
+Accepted. Amended 2026-09-04: the domain is `hiit-maker.lucasmsa.com`.
+`lucasmsa.dev` was never registered; `lucasmsa.com` was bought instead and its
+apex serves the personal site.
 
 ## Decision
 
 - The Vercel project is renamed `hiitmaker` (`hiitmaker.vercel.app`).
   `hiit-maker.vercel.app` belongs to an unrelated product.
-- Custom domain `hiit.lucasmsa.dev`. The apex is reserved for the personal site.
+- Custom domain `hiit-maker.lucasmsa.com`. The apex is reserved for the personal site.
 - Production deploys from `prod`, previews from pull requests, through the
   Vercel Git integration. The GitHub Action deploy job and its secrets are
   removed.
@@ -30,4 +32,4 @@ icon matters.
 ## Consequences
 
 - The workflow file has no secrets.
-- Canonical URL in meta tags and README is `https://hiit.lucasmsa.dev`.
+- Canonical URL in meta tags and README is `https://hiit-maker.lucasmsa.com`.
