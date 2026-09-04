@@ -274,7 +274,6 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.removeSet': 'Remover série',
   'hiit.builder.setTitle': 'Série {n}',
   'hiit.builder.emptySet': 'Escolha exercícios do catálogo para preencher esta série.',
-  'hiit.builder.drag': 'Arraste para reordenar',
   'hiit.builder.start': 'Começar treino',
   'hiit.builder.shareLink': 'Compartilhar link',
   'hiit.builder.copyFailed': 'Não foi possível copiar. Selecione o link abaixo.',
@@ -414,4 +413,5 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.newWorkout': 'Novo treino',
   'hiit.builder.setCount': '{count} séries',
   'hiit.builder.open': 'Abrir',
+  'hiit.builder.dragHandle': 'Arraste para reordenar {name}',
 };

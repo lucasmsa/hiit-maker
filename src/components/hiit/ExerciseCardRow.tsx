@@ -1,6 +1,7 @@
 import { Reorder, useDragControls } from 'motion/react';
 import { IconButton } from '@/components/ui/IconButton';
 import { MuscleIcon } from '@/components/ui/MuscleIcon';
+import { GripIcon } from '@/components/hiit/HiitIcons';
 import { DeleteIcon, MoreIcon } from '@/components/hiit/OriginalIcons';
 import { PillNumber } from '@/components/hiit/PillNumber';
 import { useT } from '@/hooks/useT';
@@ -35,18 +36,19 @@ export function ExerciseCardRow({ placed, flashing, onTrain, onRest, onRemove, o
     >
       <button
         type="button"
-        aria-label={`${t('hiit.builder.drag')}: ${name}`}
+        aria-label={t('hiit.builder.dragHandle', { name })}
         onPointerDown={(event) => controls.start(event)}
-        className="cursor-grab touch-none rounded-[10px] active:cursor-grabbing"
+        className="drag-handle"
       >
-        {photo ? (
-          <img src={`/exercises/${photo}-480.webp`} alt="" width={100} height={90} loading="lazy" />
-        ) : (
-          <span className="grid h-[90px] w-[100px] place-items-center rounded-[10px] bg-paper-dim text-brand">
-            {group ? <MuscleIcon name={group} size={48} /> : <span className="font-display text-5 font-bold">{name.slice(0, 1)}</span>}
-          </span>
-        )}
+        <GripIcon size={20} />
       </button>
+      {photo ? (
+        <img src={`/exercises/${photo}-480.webp`} alt="" width={100} height={90} loading="lazy" />
+      ) : (
+        <span className="grid h-[90px] w-[100px] place-items-center rounded-[10px] bg-paper-dim text-brand">
+          {group ? <MuscleIcon name={group} size={48} /> : <span className="font-display text-5 font-bold">{name.slice(0, 1)}</span>}
+        </span>
+      )}
       <div className="flex min-w-0 flex-col gap-3 pt-1">
         <span className="truncate font-body text-2 font-medium">{name}</span>
         <div className="flex flex-wrap gap-6">

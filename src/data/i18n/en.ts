@@ -270,7 +270,6 @@ export const en = {
   'hiit.builder.removeSet': 'Remove set',
   'hiit.builder.setTitle': 'Set {n}',
   'hiit.builder.emptySet': 'Pick exercises from the catalog to fill this set.',
-  'hiit.builder.drag': 'Drag to reorder',
   'hiit.builder.start': 'Start workout',
   'hiit.builder.shareLink': 'Share link',
   'hiit.builder.copyFailed': 'Copy failed. Select the link below.',
@@ -408,6 +407,7 @@ export const en = {
   'hiit.builder.newWorkout': 'New workout',
   'hiit.builder.setCount': '{count} sets',
   'hiit.builder.open': 'Open',
+  'hiit.builder.dragHandle': 'Drag to reorder {name}',
 } as const;
 
 export type I18nKey = keyof typeof en;

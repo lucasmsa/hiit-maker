@@ -51,11 +51,13 @@ Muscle group glyphs come from Game Icons (https://game-icons.net), CC BY 3.0, by
 
 | Group | Icon | Source |
 |---|---|---|
-| chest | muscular-torso | https://game-icons.net/1x1/delapouite/muscular-torso.html |
+| chest | push-up | drawn for this project |
 | legs | leg | https://game-icons.net/1x1/delapouite/leg.html |
 | arms | biceps | https://game-icons.net/1x1/delapouite/biceps.html |
 | cardio | heart-beats | https://game-icons.net/1x1/delapouite/heart-beats.html |
 | core | body-balance | https://game-icons.net/1x1/delapouite/body-balance.html |
 | shoulders | strong-man | https://game-icons.net/1x1/delapouite/strong-man.html |
 | back | pull-up | drawn for this project |
+
+The chest and back glyphs are original drawings, not Game Icons artwork.
 

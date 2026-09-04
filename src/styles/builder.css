@@ -28,6 +28,10 @@
   }
 }
 
+.catalog-rail {
+  padding-bottom: 1.5rem;
+}
+
 .rail-heading {
   display: flex;
   align-items: center;
@@ -116,7 +120,6 @@
   max-width: 590px;
   min-height: 34rem;
   overflow: hidden;
-  border: 1px solid var(--color-paper-dim);
   border-radius: var(--radius-tile);
   background: #fff;
   box-shadow: 0 4px 24px rgb(40 40 40 / 0.08);
@@ -282,12 +285,25 @@
 .stepper-dots::before {
   content: '';
   position: absolute;
-  top: 0.75rem;
-  bottom: 0.75rem;
+  top: 0.5625rem;
+  bottom: 0.5625rem;
   left: 50%;
   width: 2px;
   transform: translateX(-50%);
   background: var(--color-paper-dim);
+}
+
+.stepper-dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  transition: transform 150ms ease;
 }
 
 .stepper[data-orientation='horizontal'] .stepper-dots {
@@ -297,24 +313,11 @@
 .stepper[data-orientation='horizontal'] .stepper-dots::before {
   top: 50%;
   bottom: auto;
-  left: 0.75rem;
-  right: 0.75rem;
+  left: 0.5625rem;
+  right: 0.5625rem;
   width: auto;
   height: 2px;
   transform: translateY(-50%);
-}
-
-.stepper[data-orientation='horizontal'] .stepper-dot {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  transition: transform 150ms ease;
 }
 
 .stepper-dot:hover {
@@ -433,11 +436,38 @@ a.summary-chip[data-tone='brand']:hover {
 
 .exercise-row {
   display: grid;
-  grid-template-columns: 100px minmax(0, 1fr) auto;
+  grid-template-columns: 1.25rem 100px minmax(0, 1fr) auto;
   gap: 1.25rem;
   align-items: start;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 1rem 0.25rem 0.75rem;
   border-radius: 10px;
+}
+
+.drag-handle {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 5.625rem;
+  color: var(--color-ink-soft);
+  cursor: grab;
+  touch-action: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.exercise-row:hover .drag-handle,
+.drag-handle:focus-visible {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .drag-handle {
+    opacity: 1;
+  }
 }
 
 .exercise-row img {
@@ -449,14 +479,18 @@ a.summary-chip[data-tone='brand']:hover {
 
 @container set-card (max-width: 479px) {
   .exercise-row {
-    grid-template-columns: 76px minmax(0, 1fr) auto;
+    grid-template-columns: 1.25rem 76px minmax(0, 1fr) auto;
     gap: 0.75rem;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.5rem;
   }
 
   .exercise-row img {
     width: 76px;
     height: 68px;
+  }
+
+  .drag-handle {
+    height: 4.25rem;
   }
 }
 
