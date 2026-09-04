@@ -47,9 +47,9 @@ function FrontBody({ fills }: { fills: RegionFill[] }) {
   return (
     <svg viewBox={bodyFront.viewBox} className="h-52 w-auto" aria-hidden="true" focusable="false">
       <Silhouette art={bodyFront} className="fill-ink" />
-      <Overlay art={muscleOverlays.chest} transform="translate(12.6 23.6)" fill={fillFor(fills, 'chest')} />
-      <Overlay art={muscleOverlays.core} transform="translate(15.7 38.8)" fill={fillFor(fills, 'core')} />
-      <Overlay art={muscleOverlays.legs} transform="translate(13.1 69) scale(0.95)" fill={fillFor(fills, 'legs')} />
+      <Overlay art={muscleOverlays.chest} transform="translate(12.65 36.5)" fill={fillFor(fills, 'chest')} />
+      <Overlay art={muscleOverlays.core} transform="translate(15.65 50)" fill={fillFor(fills, 'core')} />
+      <Overlay art={muscleOverlays.legs} transform="translate(12.6 70) scale(0.95)" fill={fillFor(fills, 'legs')} />
       <g
         data-region="shoulders"
         data-count={shoulders.count}
@@ -57,12 +57,12 @@ function FrontBody({ fills }: { fills: RegionFill[] }) {
         fillOpacity={shoulders.opacity}
         style={overlayStyle}
       >
-        <ellipse cx="5.6" cy="25.8" rx="4.3" ry="3.1" />
-        <ellipse cx="42.7" cy="25.8" rx="4.3" ry="3.1" />
+        <ellipse cx="6.2" cy="29.5" rx="4.4" ry="3" />
+        <ellipse cx="42.1" cy="29.5" rx="4.4" ry="3" />
       </g>
       <g data-region="arms" data-count={arms.count} fill="var(--color-go)" fillOpacity={arms.opacity} style={overlayStyle}>
-        <rect x="1.6" y="33.5" width="6.2" height="29" rx="3.1" />
-        <rect x="40.5" y="33.5" width="6.2" height="29" rx="3.1" />
+        <rect x="1.7" y="37" width="5.9" height="27" rx="2.95" />
+        <rect x="40.7" y="37" width="5.9" height="27" rx="2.95" />
       </g>
     </svg>
   );
@@ -72,7 +72,7 @@ function BackBody({ fills }: { fills: RegionFill[] }) {
   return (
     <svg viewBox={bodyBack.viewBox} className="h-28 w-auto" aria-hidden="true" focusable="false">
       <Silhouette art={bodyBack} className="fill-ink" />
-      <Overlay art={muscleOverlays.back} transform="translate(23 27)" fill={fillFor(fills, 'back')} />
+      <Overlay art={muscleOverlays.back} transform="translate(26.75 26) scale(0.78)" fill={fillFor(fills, 'back')} />
     </svg>
   );
 }
