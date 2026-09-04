@@ -260,8 +260,10 @@ dialog.dialog[open]::backdrop {
 .dialog-panel {
   position: relative;
   background: #fff;
-  border-radius: 10px;
-  padding: 1.5rem;
+  border: 1px solid var(--color-paper-dim);
+  border-radius: var(--radius-tile);
+  box-shadow: 0 6px 28px -10px rgb(40 40 40 / 0.22);
+  padding: 1.75rem;
   max-height: 88dvh;
   overflow: auto;
 }

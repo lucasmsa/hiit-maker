@@ -278,4 +278,7 @@ export const ptBR: Record<I18nKey, string> = {
   'hiit.builder.setCount': '{count} séries',
   'hiit.builder.open': 'Abrir',
   'hiit.builder.dragHandle': 'Arraste para reordenar {name}',
+  'hiit.builder.optionsPosition': '{set} · {index} de {total}',
+  'hiit.builder.optionsOrder': 'Ordem',
+  'hiit.builder.optionsMoveTo': 'Mover para',
 };
