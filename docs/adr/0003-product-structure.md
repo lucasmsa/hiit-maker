@@ -8,6 +8,8 @@ Accepted
 
 ## Decision
 
+- Amended 2026-09-04 by [ADR-0008](0008-drop-gym-mode.md): gym mode and the
+  splash are removed, and `/` is the builder. The rest of this record stands.
 - `/` is a two-panel splash: HIIT or Gym. The choice is remembered; later
   visits to `/` redirect to that mode's first screen. The logo returns to the
   splash.

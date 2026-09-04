@@ -4,6 +4,9 @@ Date: 2026-09-03
 
 ## Status
 
+Superseded by [ADR-0008](0008-drop-gym-mode.md) on 2026-09-04: gym mode was
+removed from the app.
+
 Accepted
 
 ## Decision
