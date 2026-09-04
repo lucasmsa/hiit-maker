@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const port = Number(process.env.PLAYWRIGHT_PORT ?? 4173);
+const baseURL = `http://localhost:${port}`;
+
 export default defineConfig({
   testDir: 'e2e',
   fullyParallel: true,
@@ -7,7 +10,7 @@ export default defineConfig({
   reporter: process.env.CI ? 'github' : 'list',
   expect: { timeout: 10_000 },
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL,
     trace: 'on-first-retry',
     permissions: ['clipboard-read', 'clipboard-write'],
   },
@@ -16,8 +19,8 @@ export default defineConfig({
     { name: 'phone', use: { ...devices['Pixel 7'] } },
   ],
   webServer: {
-    command: 'pnpm build && pnpm preview --port 4173 --strictPort',
-    url: 'http://localhost:4173',
+    command: `pnpm build && pnpm preview --port ${port} --strictPort`,
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
