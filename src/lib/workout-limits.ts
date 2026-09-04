@@ -1,5 +1,5 @@
 export const MAX_EXERCISES_PER_SET = 5;
-export const MAX_SETS = 8;
+export const MAX_SETS = 5;
 
 export function setIsFull(exerciseCount: number): boolean {
   return exerciseCount >= MAX_EXERCISES_PER_SET;
