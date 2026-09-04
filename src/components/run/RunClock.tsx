@@ -15,7 +15,9 @@ export function RunClock({ label, labelColor, clock, clockLabel, nextText }: Run
         {label}
       </p>
       <Digits value={clock} label={clockLabel} className="run-digits" />
-      {nextText ? <p className="run-next-line">{nextText}</p> : null}
+      <p className="run-next-line" aria-hidden={nextText ? undefined : true}>
+        {nextText ?? ' '}
+      </p>
     </div>
   );
 }
