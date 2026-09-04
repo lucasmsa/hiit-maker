@@ -2,12 +2,12 @@
 
 The 2023 interface is the specification. Its assets (logo, muscle icons, body
 silhouettes, skewed labels, pulsing play button, set-progress dots and ring) are
-reused from git history, not redrawn. New screens (gym mode, settings, splash)
-are composed from the same parts. Changes are limited to defects (clipped
-tooltips, dead photos, broken layouts, no keyboard access) and to what the
-product now needs (saved workouts, gym mode, phone layout).
+reused from git history, not redrawn. New screens are composed from the same
+parts. Changes are limited to defects (clipped tooltips, dead photos, broken
+layouts, no keyboard access) and to what the product now needs (saved workouts,
+phone layout).
 
-Subject: a workout builder for bodyweight interval circuits and gym routines.
+Subject: a workout builder for bodyweight interval circuits.
 Primary job: build fast on a laptop, read the timer from a phone on the floor.
 
 ## Palette (from the original `global.ts`)
@@ -53,19 +53,19 @@ Primary job: build fast on a laptop, read the timer from a phone on the floor.
 ## Layout
 
 Builder (>= 1024 px) as in 2023: red left bar with logo, icon row (GitHub,
-settings, now also HIIT | Gym and language), search, muscle groups with a
+settings and language), search, muscle groups with a
 square-tile row each and a chevron at the right edge; centre card "Set N" with
 the vertical set stepper (dots, add set, remove set), exercise rows with
 TRAIN / REST pills, SET REST, and the black "+ N SET REPETITIONS -" bar at the
 bottom; right column with Target muscles, Total time, Start now and the play
 button. The workout name and a switcher for saved workouts sit above the set
-card. The builder is the first screen after the splash.
+card. The builder is the app's first screen.
 
 Phone: the same blocks stacked; the catalog opens as a bottom sheet; a sticky
 bottom bar holds total time and Start now.
 
-Gym pages, settings and the splash reuse the red bar, the skewed labels and the
-pills; nothing introduces a new visual device.
+Settings reuses the red bar, the skewed labels and the pills; nothing
+introduces a new visual device.
 
 ## Tiles
 
@@ -78,7 +78,7 @@ partially visible next tile are the scroll affordance.
 
 Original: hover lift on tiles, pulsing play button, ring and enlarging circle
 on the run screen. New: layout springs on add and reorder, phase colour fade.
-Nothing plays without a user action except the splash reveal. Reduced motion
+Nothing plays without a user action. Reduced motion
 leaves opacity only.
 
 ## Copy

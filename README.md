@@ -2,23 +2,19 @@
 
 [![CI](https://github.com/lucasmsa/hiit-maker/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/lucasmsa/hiit-maker/actions/workflows/ci.yml)
 
-Build interval circuits and gym routines in the browser, then run them from a
-phone with a timer readable from across the room. Everything stays on the
-device: no account, no server, works offline once installed.
+Build interval circuits in the browser, then run them from a phone with a timer
+readable from across the room. Everything stays on the device: no account, no
+server, works offline once installed.
 
 Live at https://hiit.lucasmsa.dev
 
 ## Screens
 
-![Splash: choose HIIT or Gym](docs/screenshots/splash.png)
-
-![HIIT builder with the exercise catalog, sets and target muscles](docs/screenshots/builder.png)
+![Builder with the exercise catalog, sets and target muscles](docs/screenshots/builder.png)
 
 ![Run screen mid-train](docs/screenshots/run.png)
 
-![Gym session with a logged set and the rest timer](docs/screenshots/gym-session.png)
-
-## HIIT
+## Workouts
 
 - Catalog of 40 bodyweight exercises across chest, back, legs, core,
   shoulders, arms and cardio, each with a photo.
@@ -30,15 +26,6 @@ Live at https://hiit.lucasmsa.dev
   does not drift the countdown. Sound cues at 3, 2, 1 and on every phase change.
   The screen stays awake during a run.
 - Share a workout as a link; opening it imports the workout.
-
-## Gym
-
-- Routines organised by day, each entry with sets, a rep range or hold time,
-  tempo, per-side and optional flags, and notes.
-- Session runner with set check-off, weight and reps entry, and the last logged
-  values prefilled for the next session. Rest timer between sets.
-- Ships with a Push / Pull / Legs + prehab template and a catalog of 37 gym
-  exercises; any exercise can also be typed in.
 
 Interface in English and Brazilian Portuguese.
 
