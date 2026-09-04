@@ -3,6 +3,7 @@ import { useCopyLink } from '@/hooks/useCopyLink';
 import { useT } from '@/hooks/useT';
 import { pickCurrentWorkoutId } from '@/lib/current-workout';
 import { filterCatalog, groupExercises, placedCatalogIds, shareUrl, summarizeWorkout } from '@/lib/hiit-summary';
+import { setIsFull } from '@/lib/workout-limits';
 import type { HiitSet, HiitWorkout } from '@/lib/types';
 import { groupCounts, type ExerciseLocation, type ExerciseTarget } from '@/lib/workout-edit';
 import { useLibraryStore } from '@/stores/library';
@@ -73,6 +74,7 @@ export function useBuilder(routeId: string | undefined) {
   const summary = useMemo(() => (workout ? summarizeWorkout(workout) : null), [workout]);
   const counts = useMemo(() => (workout ? groupCounts(workout) : {}), [workout]);
   const placedIds = useMemo(() => placedCatalogIds(currentSet), [currentSet]);
+  const setFull = setIsFull(currentSet?.exercises.length ?? 0);
   const catalog = useMemo(() => groupExercises(filterCatalog(query, t)), [query, t]);
 
   const flash = useCallback((id: string) => {
@@ -248,6 +250,7 @@ export function useBuilder(routeId: string | undefined) {
     summary,
     counts,
     placedIds,
+    setFull,
     catalog,
     query,
     setQuery,

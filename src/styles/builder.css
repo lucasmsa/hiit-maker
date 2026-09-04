@@ -132,6 +132,13 @@
   font-size: var(--text-4);
   text-align: center;
 }
+.set-count {
+  margin-top: 0.25rem;
+  text-align: center;
+  font-size: var(--text-1);
+  color: var(--color-ink-soft);
+}
+
 
 .pill-label {
   font-family: var(--font-display);
@@ -676,4 +683,17 @@ a.lane-chip-onred:hover::before {
     font-size: var(--text-1);
     padding: 0 0.65rem;
   }
+}
+
+.tile[data-unavailable] {
+  cursor: not-allowed;
+}
+
+.tile[data-unavailable]:not([data-placed='true']) {
+  opacity: 0.45;
+}
+
+.tile[data-unavailable]:hover {
+  transform: none;
+  box-shadow: none;
 }

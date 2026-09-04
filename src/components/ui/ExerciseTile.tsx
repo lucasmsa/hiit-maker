@@ -10,6 +10,7 @@ interface ExerciseTileProps {
   placed?: boolean;
   caption?: boolean;
   onSelect?: () => void;
+  unavailable?: boolean;
   sizes?: string;
   eager?: boolean;
   className?: string;
@@ -22,6 +23,7 @@ export function ExerciseTile({
   placed = false,
   caption = true,
   onSelect,
+  unavailable = false,
   sizes = '(min-width: 1024px) 120px, 40vw',
   eager = false,
   className,
@@ -57,7 +59,9 @@ export function ExerciseTile({
         className={cx('tile', className)}
         data-placed={placed}
         data-caption="hover"
-        onClick={onSelect}
+        onClick={unavailable ? undefined : onSelect}
+        aria-disabled={unavailable || undefined}
+        data-unavailable={unavailable || undefined}
       >
         {body}
       </button>

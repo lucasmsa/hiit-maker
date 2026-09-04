@@ -55,6 +55,7 @@ export function HiitBuilder() {
     onQueryChange: builder.setQuery,
     groups: builder.catalog,
     placedIds: builder.placedIds,
+    setFull: builder.setFull,
     onSelect: builder.addFromCatalog,
   };
   const stepperProps = {

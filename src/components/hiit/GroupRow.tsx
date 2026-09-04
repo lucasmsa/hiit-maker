@@ -11,11 +11,12 @@ interface GroupRowProps {
   group: HiitGroup;
   exercises: HiitExercise[];
   placedIds: Set<string>;
+  setFull: boolean;
   onSelect: (exerciseId: string) => void;
   onRail: boolean;
 }
 
-export function GroupRow({ group, exercises, placedIds, onSelect, onRail }: GroupRowProps) {
+export function GroupRow({ group, exercises, placedIds, setFull, onSelect, onRail }: GroupRowProps) {
   const t = useT();
   const { ref, scrollLeft, scrollRight, onScroll, atStart, atEnd } = useHorizontalScroller();
   const name = groupName(group, t);
@@ -41,6 +42,7 @@ export function GroupRow({ group, exercises, placedIds, onSelect, onRail }: Grou
                 photo={exercise.photo}
                 group={exercise.group}
                 placed={placedIds.has(exercise.id)}
+                unavailable={placedIds.has(exercise.id) || setFull}
                 onSelect={() => onSelect(exercise.id)}
                 sizes={onRail ? '88px' : '136px'}
                 eager={onRail}

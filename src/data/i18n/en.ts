@@ -262,6 +262,7 @@ export const en = {
   'hiit.builder.clearSet': 'Clear set',
   'hiit.builder.clearSet.title': 'Clear {set}?',
   'hiit.builder.clearSet.body': 'Every exercise in it is removed.',
+  'hiit.builder.exerciseCount': 'Exercises {n}/{max}',
   'hiit.builder.setsLabel': 'Sets',
   'hiit.builder.setRepetitions': '{count} set repetitions',
   'hiit.builder.startNow': 'Start now',
