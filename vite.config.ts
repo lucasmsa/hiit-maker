@@ -15,7 +15,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icons/*.png'],
+      includeAssets: ['favicon.ico', 'favicon.svg', 'icons/*.png'],
       manifest: {
         name: 'HIIT maker',
         short_name: 'HIIT maker',
