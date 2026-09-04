@@ -3,7 +3,7 @@ import type { I18nKey } from '@/data/i18n';
 import type { Translate } from '@/lib/i18n';
 import { workoutTotalSeconds } from '@/lib/schedule';
 import { encodeWorkoutShare } from '@/lib/share';
-import type { ExerciseRef, HiitExercise, HiitGroup, HiitWorkout } from '@/lib/types';
+import type { ExerciseRef, HiitExercise, HiitGroup, HiitSet, HiitWorkout } from '@/lib/types';
 import { exerciseCount, groupCounts } from '@/lib/workout-edit';
 
 export interface WorkoutSummary {
@@ -60,13 +60,11 @@ export function groupExercises(exercises: HiitExercise[]): Array<{ group: HiitGr
     .filter((entry) => entry.exercises.length > 0);
 }
 
-export function placedCatalogIds(workout: HiitWorkout): Set<string> {
+export function placedCatalogIds(set: HiitSet | null): Set<string> {
   const ids = new Set<string>();
-  for (const set of workout.sets) {
-    for (const placed of set.exercises) {
-      if (placed.ref.kind === 'catalog') {
-        ids.add(placed.ref.exerciseId);
-      }
+  for (const placed of set?.exercises ?? []) {
+    if (placed.ref.kind === 'catalog') {
+      ids.add(placed.ref.exerciseId);
     }
   }
   return ids;

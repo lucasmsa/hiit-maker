@@ -72,7 +72,7 @@ export function useBuilder(routeId: string | undefined) {
 
   const summary = useMemo(() => (workout ? summarizeWorkout(workout) : null), [workout]);
   const counts = useMemo(() => (workout ? groupCounts(workout) : {}), [workout]);
-  const placedIds = useMemo(() => (workout ? placedCatalogIds(workout) : new Set<string>()), [workout]);
+  const placedIds = useMemo(() => placedCatalogIds(currentSet), [currentSet]);
   const catalog = useMemo(() => groupExercises(filterCatalog(query, t)), [query, t]);
 
   const flash = useCallback((id: string) => {

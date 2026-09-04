@@ -39,11 +39,19 @@ describe('normalizeText', () => {
 });
 
 describe('placedCatalogIds', () => {
-  it('collects every catalog id placed in any set', () => {
-    const ids = placedCatalogIds(hiitExample);
-    expect(ids.has('push-up')).toBe(true);
-    expect(ids.has('burpee')).toBe(true);
-    expect(ids.has('dips')).toBe(false);
+  it('collects the catalog ids of one set only', () => {
+    const first = placedCatalogIds(hiitExample.sets[0] ?? null);
+    expect(first.has('push-up')).toBe(true);
+    expect(first.has('dips')).toBe(false);
+
+    const others = hiitExample.sets.slice(1).flatMap((set) => [...placedCatalogIds(set)]);
+    for (const id of first) {
+      expect(others).not.toContain(id);
+    }
+  });
+
+  it('returns an empty set when there is no current set', () => {
+    expect(placedCatalogIds(null).size).toBe(0);
   });
 });
 
