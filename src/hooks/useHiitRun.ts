@@ -125,8 +125,8 @@ export function useHiitRun(): { view: HiitRunView; actions: HiitRunActions } {
 
   useSpaceToggle(isLive || isPaused, togglePause);
 
-  const goToWorkout = useCallback(() => navigate(`/hiit/${id}`), [navigate, id]);
-  const goToLibrary = useCallback(() => navigate('/hiit'), [navigate]);
+  const goToWorkout = useCallback(() => navigate(`/w/${id}`), [navigate, id]);
+  const goToLibrary = useCallback(() => navigate('/'), [navigate]);
 
   const actions = useMemo<HiitRunActions>(
     () => ({
@@ -160,7 +160,7 @@ export function useHiitRun(): { view: HiitRunView; actions: HiitRunActions } {
       },
       resumeOther: () => {
         if (session?.workoutId) {
-          navigate(`/hiit/${session.workoutId}/run`);
+          navigate(`/w/${session.workoutId}/run`);
         }
       },
       goToWorkout,

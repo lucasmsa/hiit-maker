@@ -469,35 +469,7 @@
   color: var(--color-ink);
 }
 
-.splash {
-  background: var(--color-ink);
-}
-
-.splash-panel[data-mode='gym'] {
-  background: var(--color-ink);
-}
-
-.splash-logo {
-  display: block;
-  width: min(40vw, 32rem);
-  color: #fff;
-}
-
-.splash-logo svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.splash-copy {
-  font-family: var(--font-body);
-  font-weight: 500;
-}
-
 @media (max-width: 719px) {
-  .splash-logo {
-    width: min(70vw, 20rem);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

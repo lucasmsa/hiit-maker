@@ -24,7 +24,7 @@ const totalStyle = { '--digits-size': '3rem', fontWeight: 600 } as CSSProperties
 export function WorkoutSummary({ workoutId, summary, counts, share }: WorkoutSummaryProps) {
   const t = useT();
   const canStart = summary.exerciseCount > 0;
-  const runPath = `/hiit/${workoutId}/run`;
+  const runPath = `/w/${workoutId}/run`;
   return (
     <div className="flex flex-col gap-7">
       <section className="flex flex-col items-center gap-5" aria-label={t('label.targetMuscles')}>

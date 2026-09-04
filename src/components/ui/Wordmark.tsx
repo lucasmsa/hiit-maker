@@ -19,7 +19,7 @@ function BrandSvg({ viewBox, className }: { viewBox: string; className: string }
   );
 }
 
-export function Wordmark({ to = '/?pick=1', label, className, compact = false }: WordmarkProps) {
+export function Wordmark({ to = '/', label, className, compact = false }: WordmarkProps) {
   return (
     <Link to={to} className={cx('wordmark', className)} data-compact={compact} aria-label={label}>
       <BrandSvg viewBox={branding.viewBox} className="wordmark-full" />

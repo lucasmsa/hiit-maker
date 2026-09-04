@@ -38,7 +38,7 @@ describe('HIIT builder', () => {
   });
 
   it('opens the current workout at /hiit and remembers it', () => {
-    renderHiitRoute('/hiit');
+    renderHiitRoute('/');
     expect(screen.getByLabelText('Workout name')).toHaveValue('Full body starter');
     expect(setCard(1)).toBeInTheDocument();
     expect(screen.queryByRole('region', { name: 'Set 2' })).not.toBeInTheDocument();
@@ -48,13 +48,13 @@ describe('HIIT builder', () => {
 
   it('creates a workout when none is saved', () => {
     useLibraryStore.setState({ ...initialLibraryState('en-US'), workouts: [] });
-    renderHiitRoute('/hiit');
+    renderHiitRoute('/');
     expect(screen.getByLabelText('Workout name')).toHaveValue('Untitled workout');
     expect(useLibraryStore.getState().workouts).toHaveLength(1);
   });
 
   it('lets the name be cleared while typing and restores a name on blur', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     const name = screen.getByLabelText('Workout name');
     fireEvent.change(name, { target: { value: '' } });
     expect(name).toHaveValue('');
@@ -68,7 +68,7 @@ describe('HIIT builder', () => {
   });
 
   it('adds a catalog tile to the visible set and updates the total', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     const before = workoutTotalSeconds(currentWorkout());
     fireEvent.click(screen.getByRole('button', { name: 'Burpee' }));
 
@@ -81,7 +81,7 @@ describe('HIIT builder', () => {
   });
 
   it('switches sets with the stepper and adds to the chosen one', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(screen.getByRole('button', { name: 'Set 3' }));
     expect(setCard(3)).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Burpee' }));
@@ -90,7 +90,7 @@ describe('HIIT builder', () => {
   });
 
   it('edits train, rest and set rest through the pills', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     const card = setCard(1);
     fireEvent.change(within(card).getAllByLabelText('Train')[0]!, { target: { value: '45' } });
     fireEvent.change(within(card).getAllByLabelText('Rest')[0]!, { target: { value: '20' } });
@@ -103,7 +103,7 @@ describe('HIIT builder', () => {
   });
 
   it('changes set repetitions from the black bar', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(screen.getByRole('button', { name: 'One more set repetition' }));
     expect(currentWorkout().sets[0]?.loops).toBe(hiitExample.sets[0]!.loops + 1);
     fireEvent.click(screen.getByRole('button', { name: 'One less set repetition' }));
@@ -111,7 +111,7 @@ describe('HIIT builder', () => {
   });
 
   it('removes and reorders exercises through the row actions', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(screen.getByRole('button', { name: 'Remove: Push-up' }));
     expect(currentWorkout().sets[0]?.exercises.map((placed) => placed.ref)).toEqual([
       { kind: 'catalog', exerciseId: 'squat' },
@@ -126,7 +126,7 @@ describe('HIIT builder', () => {
   });
 
   it('moves an exercise to another set', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(within(openOptions('Push-up')).getByRole('button', { name: 'Move to Set 2' }));
     expect(currentWorkout().sets[0]?.exercises).toHaveLength(2);
     expect(currentWorkout().sets[1]?.exercises.map((placed) => placed.ref)).toContainEqual({
@@ -136,7 +136,7 @@ describe('HIIT builder', () => {
   });
 
   it('adds and removes sets from the stepper and clears a set', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(screen.getByRole('button', { name: 'Add set' }));
     expect(currentWorkout().sets).toHaveLength(4);
     expect(setCard(4)).toBeInTheDocument();
@@ -155,7 +155,7 @@ describe('HIIT builder', () => {
   });
 
   it('filters the catalog by name and group without moving other groups', () => {
-    renderHiitRoute(`/hiit/${workoutId}`);
+    renderHiitRoute(`/w/${workoutId}`);
     const search = screen.getAllByLabelText('Search exercise or muscle')[0]!;
     fireEvent.change(search, { target: { value: 'cardio' } });
     expect(screen.getByRole('button', { name: 'Burpee' })).toBeInTheDocument();
@@ -165,7 +165,7 @@ describe('HIIT builder', () => {
   });
 
   it('switches, creates, duplicates and deletes workouts from the switcher', () => {
-    const { router } = renderHiitRoute(`/hiit/${workoutId}`);
+    const { router } = renderHiitRoute(`/w/${workoutId}`);
     fireEvent.click(screen.getByRole('button', { name: 'Workouts' }));
     const dialog = screen.getByRole('dialog', { name: 'Workouts' });
     expect(within(dialog).getByText('Full body starter')).toBeInTheDocument();
@@ -175,7 +175,7 @@ describe('HIIT builder', () => {
     const workouts = useLibraryStore.getState().workouts;
     expect(workouts).toHaveLength(2);
     expect(workouts[0]?.name).toBe('Full body starter copy');
-    expect(router.state.location.pathname).toBe(`/hiit/${workouts[0]?.id}`);
+    expect(router.state.location.pathname).toBe(`/w/${workouts[0]?.id}`);
 
     fireEvent.click(screen.getByRole('button', { name: 'Workouts' }));
     fireEvent.click(
@@ -197,15 +197,15 @@ describe('HIIT builder', () => {
       }),
     );
     expect(useLibraryStore.getState().workouts).toHaveLength(2);
-    expect(router.state.location.pathname).toBe('/hiit');
+    expect(router.state.location.pathname).toBe('/');
   });
 
   it('explains when the workout does not exist', () => {
-    renderHiitRoute('/hiit/missing');
+    renderHiitRoute('/w/missing');
     expect(screen.getByText('This workout is not on this device.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Go to your workouts' })).toHaveAttribute(
       'href',
-      '/hiit',
+      '/',
     );
   });
 });

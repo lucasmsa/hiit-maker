@@ -38,7 +38,7 @@ export function HiitBuilder() {
     return (
       <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
         <p className="text-3">{t('hiit.builder.notFound')}</p>
-        <LinkButton to="/hiit" variant="secondary" className="mt-6">
+        <LinkButton to="/" variant="secondary" className="mt-6">
           {t('hiit.builder.back')}
         </LinkButton>
       </main>
@@ -147,7 +147,7 @@ export function HiitBuilder() {
           </div>
           {canStart ? (
             <Link
-              to={`/hiit/${workout.id}/run`}
+              to={`/w/${workout.id}/run`}
               className="summary-chip"
               data-fit="true"
               data-tone="brand"

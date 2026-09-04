@@ -66,10 +66,10 @@ async function clockSeconds(digits: Locator): Promise<number> {
 }
 
 async function createWorkout(page: Page): Promise<void> {
-  await page.goto('/hiit');
+  await page.goto('/');
   const switcher = await openSwitcher(page);
   await switcher.getByRole('button', { name: 'New workout' }).click();
-  await expect(page).toHaveURL(/\/hiit\/[^/]+$/);
+  await expect(page).toHaveURL(/\/w\/[^/]+$/);
   await expect(workoutName(page)).toHaveValue('Untitled workout');
   await workoutName(page).fill(CIRCUIT_NAME);
 }
@@ -107,19 +107,25 @@ async function buildTuesdayCircuit(page: Page): Promise<void> {
 test.describe('hiit golden path on desktop', () => {
   test.skip(({ isMobile }) => isMobile === true, 'desktop layout');
 
-  test('first visit shows the splash and HIIT opens the builder', async ({ page }) => {
+  test('first visit opens the builder with the example workout', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('button', { name: /^HIIT/ })).toBeVisible();
-    await expect(page.getByRole('button', { name: /^Gym/ })).toBeVisible();
-    await page.getByRole('button', { name: /^HIIT/ }).click();
-    await expect(page).toHaveURL(/\/hiit$/);
     await expect(workoutName(page)).toHaveValue(EXAMPLE_NAME);
+    await expect(setCard(page, 1)).toBeVisible();
+  });
+
+  test('redirects the old hiit and gym paths', async ({ page }) => {
+    await page.goto(`/hiit/${EXAMPLE_ID}`);
+    await expect(page).toHaveURL(new RegExp(`/w/${EXAMPLE_ID}$`));
+    await expect(workoutName(page)).toHaveValue(EXAMPLE_NAME);
+
+    await page.goto('/gym');
+    await expect(page).toHaveURL(/\/$/);
     await expect(setCard(page, 1)).toBeVisible();
   });
 
   test('builds a two-set workout and comes back to it', async ({ page }) => {
     await buildTuesdayCircuit(page);
-    await page.goto('/hiit');
+    await page.goto('/');
     await expect(workoutName(page)).toHaveValue(CIRCUIT_NAME);
     const switcher = await openSwitcher(page);
     await expect(switcher.getByText(CIRCUIT_NAME)).toBeVisible();
@@ -127,7 +133,7 @@ test.describe('hiit golden path on desktop', () => {
   });
 
   test('clears the name while editing and falls back on blur', async ({ page }) => {
-    await page.goto('/hiit');
+    await page.goto('/');
     await workoutName(page).fill('');
     await expect(workoutName(page)).toHaveValue('');
     await workoutName(page).blur();
@@ -141,21 +147,21 @@ test.describe('hiit golden path on desktop', () => {
     await page.getByRole('button', { name: 'Share link' }).click();
     await expect(page.getByRole('button', { name: 'Link copied' })).toBeVisible();
     const sharedUrl = await page.evaluate(() => navigator.clipboard.readText());
-    expect(sharedUrl).toMatch(/\/hiit\/shared#.+/);
+    expect(sharedUrl).toMatch(/\/shared#.+/);
     expect(sharedUrl).not.toBe(workoutUrl);
 
     const shared = await context.newPage();
     await shared.goto(sharedUrl);
     await expect(shared.getByRole('heading', { name: CIRCUIT_NAME })).toBeVisible();
     await shared.getByRole('button', { name: 'Save to library' }).click();
-    await expect(shared).toHaveURL(/\/hiit$/);
+    await expect(shared).toHaveURL(/\/w\/[^/]+$/);
     const switcher = await openSwitcher(shared);
     await expect(switcher.getByText(CIRCUIT_NAME, { exact: true })).toHaveCount(2);
   });
 
   test('runs the example workout on the wall clock', async ({ page }) => {
     await page.clock.install();
-    await page.goto(`/hiit/${EXAMPLE_ID}/run`);
+    await page.goto(`/w/${EXAMPLE_ID}/run`);
 
     await expect(page.getByRole('heading', { name: EXAMPLE_NAME })).toBeVisible();
     await page.getByRole('button', { name: 'Start workout' }).click();
@@ -194,7 +200,7 @@ test.describe('hiit golden path on desktop', () => {
     const dialog = page.getByRole('dialog');
     await expect(dialog.getByRole('heading', { name: 'Stop workout?' })).toBeVisible();
     await dialog.getByRole('button', { name: 'Stop workout' }).click();
-    await expect(page).toHaveURL(new RegExp(`/hiit/${EXAMPLE_ID}$`));
+    await expect(page).toHaveURL(new RegExp(`/w/${EXAMPLE_ID}$`));
   });
 });
 
@@ -221,7 +227,7 @@ test.describe('hiit builder on a phone', () => {
   test('builder does not scroll sideways', async ({ page }) => {
     const fitsViewport = () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
 
-    await page.goto('/hiit');
+    await page.goto('/');
     await expect(setCard(page, 1)).toBeVisible();
     expect(await fitsViewport()).toBe(true);
 

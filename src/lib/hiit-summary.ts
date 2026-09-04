@@ -85,5 +85,5 @@ export function photoOf(ref: ExerciseRef): string | null {
 }
 
 export function shareUrl(origin: string, workout: HiitWorkout): string {
-  return `${origin}/hiit/shared#${encodeWorkoutShare(workout)}`;
+  return `${origin}/shared#${encodeWorkoutShare(workout)}`;
 }

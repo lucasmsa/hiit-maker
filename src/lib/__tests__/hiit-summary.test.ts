@@ -58,7 +58,7 @@ describe('placedCatalogIds', () => {
 describe('shareUrl', () => {
   it('produces a link whose fragment decodes back to the workout', () => {
     const url = new URL(shareUrl('https://hiit.example', hiitExample));
-    expect(url.pathname).toBe('/hiit/shared');
+    expect(url.pathname).toBe('/shared');
     expect(decodeWorkoutShare(url.hash)).toEqual(hiitExample);
   });
 });

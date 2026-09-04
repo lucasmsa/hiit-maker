@@ -9,11 +9,11 @@ export function renderHiitRoute(initialEntry: string) {
     [
       {
         element: <AppShell />,
-        children: [{ path: '/hiit/shared', element: <HiitShared /> }],
+        children: [{ path: '/shared', element: <HiitShared /> }],
       },
-      { path: '/hiit', element: <HiitBuilder /> },
-      { path: '/hiit/:id', element: <HiitBuilder /> },
-      { path: '/hiit/:id/run', element: <div>run</div> },
+      { path: '/', element: <HiitBuilder /> },
+      { path: '/w/:id', element: <HiitBuilder /> },
+      { path: '/w/:id/run', element: <div>run</div> },
     ],
     { initialEntries: [initialEntry] },
   );

@@ -16,7 +16,7 @@ export function HiitShared() {
       <main className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
         <h1 className="text-7">{t('hiit.shared.title')}</h1>
         <p className="mt-4 text-3">{t('share.invalid')}</p>
-        <LinkButton to="/hiit" variant="secondary" className="mt-6">
+        <LinkButton to="/" variant="secondary" className="mt-6">
           {t('hiit.builder.back')}
         </LinkButton>
       </main>

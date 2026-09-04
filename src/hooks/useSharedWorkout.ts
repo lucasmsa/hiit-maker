@@ -14,14 +14,14 @@ export function useSharedWorkout() {
 
   const save = useCallback(() => {
     if (importFromShareHash(hash)) {
-      navigate('/hiit');
+      navigate('/');
     }
   }, [hash, importFromShareHash, navigate]);
 
   const open = useCallback(() => {
     const id = importFromShareHash(hash);
     if (id) {
-      navigate(`/hiit/${id}`);
+      navigate(`/w/${id}`);
     }
   }, [hash, importFromShareHash, navigate]);
 

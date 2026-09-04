@@ -19,11 +19,11 @@ const firstSetLoops = hiitExample.sets[0]!.loops;
 function renderRun(id = hiitExample.id) {
   const router = createMemoryRouter(
     [
-      { path: '/hiit', element: <div>library</div> },
-      { path: '/hiit/:id', element: <div>builder</div> },
-      { path: '/hiit/:id/run', element: <HiitRun /> },
+      { path: '/', element: <div>library</div> },
+      { path: '/w/:id', element: <div>builder</div> },
+      { path: '/w/:id/run', element: <HiitRun /> },
     ],
-    { initialEntries: [`/hiit/${id}/run`] },
+    { initialEntries: [`/w/${id}/run`] },
   );
   render(<RouterProvider router={router} />);
   return router;
@@ -88,7 +88,7 @@ describe('HiitRun start screen', () => {
     const router = renderRun('missing-id');
     expect(screen.getByText('This workout does not exist.')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Back to library' }));
-    expect(router.state.location.pathname).toBe('/hiit');
+    expect(router.state.location.pathname).toBe('/');
   });
 });
 
@@ -147,7 +147,7 @@ describe('HiitRun live controls', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Stop' }));
     fireEvent.click(screen.getByRole('button', { name: 'Stop workout' }));
     expect(useRunStore.getState().session).toBeNull();
-    expect(router.state.location.pathname).toBe(`/hiit/${hiitExample.id}`);
+    expect(router.state.location.pathname).toBe(`/w/${hiitExample.id}`);
   });
 
   it('pauses when leaving mid-run', () => {
@@ -156,7 +156,7 @@ describe('HiitRun live controls', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Exit' }));
     fireEvent.click(screen.getByRole('button', { name: 'Pause and leave' }));
     expect(useRunStore.getState().session?.status).toBe('paused');
-    expect(router.state.location.pathname).toBe(`/hiit/${hiitExample.id}`);
+    expect(router.state.location.pathname).toBe(`/w/${hiitExample.id}`);
   });
 });
 
@@ -193,7 +193,7 @@ describe('HiitRun entry states', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Start this one' }));
     expect(useRunStore.getState().session?.workoutId).toBe(hiitExample.id);
-    expect(router.state.location.pathname).toBe(`/hiit/${hiitExample.id}/run`);
+    expect(router.state.location.pathname).toBe(`/w/${hiitExample.id}/run`);
   });
 
   it('navigates to the other run when asked', () => {
@@ -203,7 +203,7 @@ describe('HiitRun entry states', () => {
     useRunStore.setState({ session: session({ workoutId: 'other-id' }) });
     const router = renderRun();
     fireEvent.click(screen.getByRole('button', { name: 'Resume that one' }));
-    expect(router.state.location.pathname).toBe('/hiit/other-id/run');
+    expect(router.state.location.pathname).toBe('/w/other-id/run');
   });
 
   it('finishes into the done screen and can run again', () => {

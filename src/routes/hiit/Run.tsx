@@ -37,7 +37,7 @@ export function HiitRun() {
       <div className="run-main">
         <header className="run-header">
           {live ? <RunChips setText={view.chipSet} phaseText={view.chipPhase} /> : <div />}
-          <Wordmark to={`/hiit/${view.workoutId}`} label={t('hiit.run.backToBuilder')} className="run-logo" />
+          <Wordmark to={`/w/${view.workoutId}`} label={t('hiit.run.backToBuilder')} className="run-logo" />
         </header>
         {renderBody(view, actions, t)}
       </div>

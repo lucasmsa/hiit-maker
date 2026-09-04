@@ -29,7 +29,7 @@ export function useWorkoutSwitcher(currentId: string | null, focusName: () => vo
   const select = useCallback(
     (id: string) => {
       setOpen(false);
-      navigate(`/hiit/${id}`);
+      navigate(`/w/${id}`);
     },
     [navigate],
   );
@@ -37,7 +37,7 @@ export function useWorkoutSwitcher(currentId: string | null, focusName: () => vo
   const createNew = useCallback(() => {
     const id = createWorkout(t('label.untitledWorkout'));
     setOpen(false);
-    navigate(`/hiit/${id}`);
+    navigate(`/w/${id}`);
   }, [createWorkout, navigate, t]);
 
   const duplicate = useCallback(
@@ -49,7 +49,7 @@ export function useWorkoutSwitcher(currentId: string | null, focusName: () => vo
       const copyId = duplicateWorkout(id, t('hiit.builder.copyOf', { name: source.name }));
       if (copyId) {
         setOpen(false);
-        navigate(`/hiit/${copyId}`);
+        navigate(`/w/${copyId}`);
       }
     },
     [duplicateWorkout, navigate, t, workouts],
@@ -69,7 +69,7 @@ export function useWorkoutSwitcher(currentId: string | null, focusName: () => vo
     setDeletingId(null);
     if (wasCurrent) {
       setOpen(false);
-      navigate('/hiit');
+      navigate('/');
     }
   }, [currentId, deleteWorkout, deletingId, navigate]);
 
