@@ -272,27 +272,40 @@
 }
 
 .stepper-dots {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2.5rem;
+}
+
+.stepper-dots::before {
+  content: '';
+  position: absolute;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--color-paper-dim);
 }
 
 .stepper[data-orientation='horizontal'] .stepper-dots {
   flex-direction: row;
 }
 
-.stepper-line {
-  width: 2px;
-  height: 2.5rem;
-  background: var(--color-paper-dim);
-}
-
-.stepper[data-orientation='horizontal'] .stepper-line {
-  width: 2.5rem;
+.stepper[data-orientation='horizontal'] .stepper-dots::before {
+  top: 50%;
+  bottom: auto;
+  left: 0.75rem;
+  right: 0.75rem;
+  width: auto;
   height: 2px;
+  transform: translateY(-50%);
 }
 
-.stepper-dot {
+.stepper[data-orientation='horizontal'] .stepper-dot {
+  position: relative;
   display: grid;
   place-items: center;
   width: 1.5rem;

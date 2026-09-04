@@ -42,7 +42,6 @@ export function SetStepper({
       <div className="stepper-dots">
         {indexes.map((index) => (
           <Fragment key={index}>
-            {index > 0 ? <span className="stepper-line" aria-hidden="true" /> : null}
             <button
               type="button"
               className="stepper-dot"
