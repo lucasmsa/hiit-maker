@@ -116,7 +116,6 @@
   max-width: 590px;
   min-height: 34rem;
   overflow: hidden;
-  border: 1px solid var(--color-paper-dim);
   border-radius: var(--radius-tile);
   background: #fff;
   box-shadow: 0 4px 24px rgb(40 40 40 / 0.08);
