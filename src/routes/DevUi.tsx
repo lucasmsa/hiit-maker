@@ -55,7 +55,7 @@ export function DevUi() {
           <LaneChip>Target muscles</LaneChip>
           <LaneChip tone="brand">Start now</LaneChip>
           <LaneChip tone="soft">Set 2</LaneChip>
-          <LaneChip tone="outline">Gym</LaneChip>
+          <LaneChip tone="outline">Outline</LaneChip>
           <LaneChip size="sm">Total time</LaneChip>
           <LaneChip size="sm" tone="brand" icon={<MuscleIcon name="core" />}>
             Core
