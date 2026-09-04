@@ -223,7 +223,6 @@ export const en = {
   'settings.about': 'About',
   'settings.about.version': 'Version {version}',
   'settings.about.source': 'Source on GitHub',
-  'settings.about.decisions': 'Decision records',
   'settings.about.photoCredits': 'Photo credits',
   'settings.seconds': 's',
   'notFound.title': 'Nothing here',

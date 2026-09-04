@@ -11,7 +11,6 @@ import { Toggle } from '@/components/ui/Toggle';
 import { ChevronLeftIcon, GearIcon } from '@/components/shell/shell-icons';
 
 const repoUrl = 'https://github.com/lucasmsa/hiit-maker';
-const decisionsUrl = `${repoUrl}/tree/dev/docs/adr`;
 const photoCreditsUrl = `${repoUrl}/blob/dev/public/exercises/ATTRIBUTION.md`;
 
 const rows = [
@@ -125,7 +124,6 @@ export function Settings() {
           <div className="mt-8 mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-1 text-ink-soft">
             <span>{t('settings.about.version', { version: s.version })}</span>
             <ExternalLink href={repoUrl}>{t('settings.about.source')}</ExternalLink>
-            <ExternalLink href={decisionsUrl}>{t('settings.about.decisions')}</ExternalLink>
             <ExternalLink href={photoCreditsUrl}>{t('settings.about.photoCredits')}</ExternalLink>
           </div>
         </div>
