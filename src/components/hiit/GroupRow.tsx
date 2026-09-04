@@ -29,7 +29,7 @@ export function GroupRow({ group, exercises, placedIds, onSelect, onRail }: Grou
         <div
           ref={ref}
           onScroll={onScroll}
-          className="no-scrollbar -mx-1 flex min-h-[6rem] snap-x snap-mandatory gap-3 overflow-x-auto px-1 py-1"
+          className="no-scrollbar -mx-2 -my-3 flex min-h-[6rem] snap-x snap-mandatory scroll-pl-2 gap-3 overflow-x-auto px-2 py-3"
         >
           {exercises.map((exercise) => (
             <div
