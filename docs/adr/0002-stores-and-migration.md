@@ -15,9 +15,13 @@ Accepted
   timestamp, pause bookkeeping. Persisted under `hiit-maker/run` so a reload
   resumes the run. Remaining time is derived from timestamps
   ([ADR-0005](0005-run-engine.md)), so no per-second writes happen.
-- Every placed exercise, set, day and entry carries an id from
-  `crypto.randomUUID()`. Duplicates in a set are allowed. There is no cap on sets
-  or exercises per set.
+- Every placed exercise and set carries an id from `crypto.randomUUID()`.
+- Amended 2026-09-04: the builder caps a set at 5 exercises and a workout at 8
+  sets, and refuses the same exercise twice inside one set. The counters and the
+  refusal toast from the 2023 app come back with them. The same exercise in two
+  different sets stays allowed, which is what the ids are for. Lifting the caps
+  produced a set of 19 exercises with one movement listed twice, which is not a
+  circuit anyone would run.
 - Reset of a workout touches that workout only. Settings live in their own slice
   and have their own reset.
 - Actions are typed functions on the store. No string action types, no optional
