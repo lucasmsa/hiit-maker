@@ -143,14 +143,14 @@ a.lane-chip[data-tone='outline']:hover::before {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1.75rem;
+  width: 1.5rem;
   display: grid;
   place-items: center;
   padding: 0;
   border: 0;
   color: #fff;
-  background: linear-gradient(to right, rgb(238 55 63 / 0), rgb(238 55 63 / 0.9) 60%);
-  filter: drop-shadow(0 1px 4px rgb(0 0 0 / 0.4));
+  background: transparent;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.45));
 }
 
 .rail-chevron[data-side='right'] {
@@ -159,17 +159,11 @@ a.lane-chip[data-tone='outline']:hover::before {
 
 .rail-chevron[data-side='left'] {
   left: -0.25rem;
-  background: linear-gradient(to left, rgb(238 55 63 / 0), rgb(238 55 63 / 0.9) 60%);
 }
 
 [data-rail='false'] .rail-chevron {
   color: var(--color-ink);
-  background: linear-gradient(to right, rgb(255 255 255 / 0), rgb(255 255 255 / 0.95) 55%);
-  filter: none;
-}
-
-[data-rail='false'] .rail-chevron[data-side='left'] {
-  background: linear-gradient(to left, rgb(255 255 255 / 0), rgb(255 255 255 / 0.95) 55%);
+  filter: drop-shadow(0 1px 1px rgb(255 255 255 / 0.9));
 }
 
 .digits {
