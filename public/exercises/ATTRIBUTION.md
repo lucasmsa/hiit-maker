@@ -44,3 +44,18 @@ All photos are used under the Pexels License (https://www.pexels.com/license/). 
 | arm-circles | https://www.pexels.com/photo/full-shot-of-a-man-standing-with-arms-outstretched-8846450/ | Mart Production | Pexels License |  |
 | skater-jump | https://www.pexels.com/photo/man-in-black-tank-top-and-shorts-jumping-on-gray-concrete-road-7817265/ | Mike Jumapao | Pexels License | jump; near match |
 | butt-kick | https://www.pexels.com/photo/running-shirtless-man-in-black-shorts-4803912/ | Ketut Subiyanto | Pexels License | running stride; near match |
+
+## Icons
+
+Muscle group glyphs come from Game Icons (https://game-icons.net), CC BY 3.0, by the Game Icons contributors (Lorc, Delapouite and others as credited on each icon page).
+
+| Group | Icon | Source |
+|---|---|---|
+| chest | muscular-torso | https://game-icons.net/1x1/delapouite/muscular-torso.html |
+| legs | leg | https://game-icons.net/1x1/delapouite/leg.html |
+| arms | biceps | https://game-icons.net/1x1/delapouite/biceps.html |
+| cardio | heart-beats | https://game-icons.net/1x1/delapouite/heart-beats.html |
+| core | body-balance | https://game-icons.net/1x1/delapouite/body-balance.html |
+| shoulders | strong-man | https://game-icons.net/1x1/delapouite/strong-man.html |
+| back | pull-up | drawn for this project |
+

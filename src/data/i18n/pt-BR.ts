@@ -227,7 +227,7 @@ export const ptBR: Record<I18nKey, string> = {
   'settings.about': 'Sobre',
   'settings.about.version': 'Versão {version}',
   'settings.about.source': 'Código no GitHub',
-  'settings.about.photoCredits': 'Créditos das fotos',
+  'settings.about.credits': 'Créditos',
   'settings.seconds': 's',
   'notFound.title': 'Nada aqui',
   'notFound.body': 'Este endereço não corresponde a um treino, rotina ou página.',

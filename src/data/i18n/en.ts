@@ -223,7 +223,7 @@ export const en = {
   'settings.about': 'About',
   'settings.about.version': 'Version {version}',
   'settings.about.source': 'Source on GitHub',
-  'settings.about.photoCredits': 'Photo credits',
+  'settings.about.credits': 'Credits',
   'settings.seconds': 's',
   'notFound.title': 'Nothing here',
   'notFound.body': 'This address does not match a workout, routine or page.',

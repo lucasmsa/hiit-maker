@@ -73,10 +73,11 @@ Node 22 and pnpm (see `packageManager` in `package.json`).
 - CI runs typecheck, lint, tests and build on `dev`, `prod` and pull requests.
   Deploys go through the Vercel Git integration.
 
-## Photo credits
+## Credits
 
-Exercise photos are used under the Pexels License. Sources and authors are
-listed in [public/exercises/ATTRIBUTION.md](public/exercises/ATTRIBUTION.md).
+Exercise photos are used under the Pexels License and the muscle group icons
+are Game Icons (CC BY 3.0). Sources and authors are listed in
+[public/exercises/ATTRIBUTION.md](public/exercises/ATTRIBUTION.md).
 
 ## License
 
