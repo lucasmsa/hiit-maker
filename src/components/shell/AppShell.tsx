@@ -3,11 +3,10 @@ import { useShell } from '@/hooks/useShell';
 import { BrandRail } from '@/components/shell/BrandRail';
 
 export function AppShell() {
-  const { languageLabel, toggleLanguage, currentMode } = useShell();
+  const { languageLabel, toggleLanguage } = useShell();
   return (
     <div className="min-h-dvh bg-paper text-ink lg:grid lg:grid-cols-[320px_minmax(0,1fr)]">
       <BrandRail
-        currentMode={currentMode}
         languageLabel={languageLabel}
         onToggleLanguage={toggleLanguage}
       />

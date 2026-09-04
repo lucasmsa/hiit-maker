@@ -107,11 +107,6 @@ export function Settings() {
           />
           <p className="-mt-2 text-1 text-ink-soft">{t('settings.sound.hint')}</p>
 
-          <div className="settings-row">
-            <span className="settings-row-label">{t('settings.units.weight')}</span>
-            <span className="pill">{t('settings.units.kg')}</span>
-          </div>
-
           <hr className="my-8 border-0 border-t border-paper-dim" />
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">

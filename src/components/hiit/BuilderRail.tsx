@@ -13,7 +13,6 @@ export function BuilderRail({ className, ...catalog }: BuilderRailProps) {
   const { languageLabel, toggleLanguage } = useShell();
   return (
     <BrandRail
-      currentMode="hiit"
       languageLabel={languageLabel}
       onToggleLanguage={toggleLanguage}
       className={cx('builder-rail', className)}

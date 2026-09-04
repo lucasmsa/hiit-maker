@@ -11,7 +11,7 @@ function renderSettings() {
   const router = createMemoryRouter(
     [
       { path: '/settings', element: <Settings /> },
-      { path: '/hiit', element: <h1>builder</h1> },
+      { path: '/', element: <h1>builder</h1> },
       { path: '/', element: <h1>splash</h1> },
     ],
     { initialEntries: ['/settings'] },
@@ -73,14 +73,13 @@ describe('Settings', () => {
     expect(screen.getByRole('heading', { name: 'Discard changes?' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Discard' }));
-    expect(router.state.location.pathname).toBe('/hiit');
+    expect(router.state.location.pathname).toBe('/');
     expect(useLibraryStore.getState().settings.defaults.warmupSeconds).toBe(45);
   });
 
-  it('deletes all data after confirmation and returns to the splash', async () => {
+  it('deletes all data after confirmation and returns to the builder', async () => {
     const user = userEvent.setup();
     useLibraryStore.getState().createWorkout('Doomed');
-    useLibraryStore.getState().setLastMode('gym');
     expect(useLibraryStore.getState().workouts).toHaveLength(2);
     const router = renderSettings();
 
@@ -89,10 +88,8 @@ describe('Settings', () => {
 
     const state = useLibraryStore.getState();
     expect(state.workouts.map((workout) => workout.id)).toEqual([hiitExample.id]);
-    expect(state.lastMode).toBeNull();
     expect(localStorage.getItem(LIBRARY_STORAGE_KEY)).toBeNull();
     expect(localStorage.getItem(RUN_STORAGE_KEY)).toBeNull();
     expect(router.state.location.pathname).toBe('/');
-    expect(router.state.location.search).toBe('?pick=1');
   });
 });

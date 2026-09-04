@@ -29,14 +29,13 @@ function sameDraft(a: SettingsDraft, b: SettingsDraft): boolean {
 export function useSettings() {
   const navigate = useNavigate();
   const settings = useLibraryStore((state) => state.settings);
-  const lastMode = useLibraryStore((state) => state.lastMode);
   const updateSettings = useLibraryStore((state) => state.updateSettings);
   const [draft, setDraft] = useState<SettingsDraft>(() => draftOf(settings));
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [discardOpen, setDiscardOpen] = useState(false);
 
   const dirty = !sameDraft(draft, draftOf(settings));
-  const backTarget = `/${lastMode ?? 'hiit'}`;
+  const backTarget = '/';
 
   const setDefault = useCallback((key: keyof Defaults, value: number) => {
     setDraft((current) => ({
@@ -84,7 +83,7 @@ export function useSettings() {
   const deleteAllData = useCallback(() => {
     clearAllData(navigator.language);
     setConfirmOpen(false);
-    navigate('/?pick=1');
+    navigate('/');
   }, [navigate]);
 
   return {

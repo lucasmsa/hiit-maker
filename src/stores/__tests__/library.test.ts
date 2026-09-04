@@ -1,9 +1,12 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { gymTemplate } from '@/data/gym-template';
 import { hiitExample } from '@/data/hiit-example';
 import { encodeWorkoutShare } from '@/lib/share';
-import { lastSetsFor } from '@/lib/session-log';
-import { LIBRARY_STORAGE_KEY, initialLibraryState, useLibraryStore } from '@/stores/library';
+import {
+  LIBRARY_STORAGE_KEY,
+  dropGymState,
+  initialLibraryState,
+  useLibraryStore,
+} from '@/stores/library';
 
 const store = () => useLibraryStore.getState();
 
@@ -12,21 +15,20 @@ beforeEach(() => {
 });
 
 describe('library store: seeds and persistence', () => {
-  it('starts with the example workout and the template routine', () => {
+  it('starts with the example workout', () => {
     expect(store().workouts.map((workout) => workout.id)).toEqual([hiitExample.id]);
-    expect(store().routines.map((routine) => routine.id)).toEqual([gymTemplate.id]);
-    expect(store().lastMode).toBeNull();
+    expect(store().lastWorkoutId).toBeNull();
     expect(store().settings.language).toBe('en');
   });
 
   it('persists state under a versioned key without functions', () => {
-    store().setLastMode('gym');
+    store().setLastWorkoutId(hiitExample.id);
     const raw = localStorage.getItem(LIBRARY_STORAGE_KEY);
     expect(raw).not.toBeNull();
     const parsed = JSON.parse(raw!) as { version: number; state: Record<string, unknown> };
-    expect(parsed.version).toBe(1);
-    expect(parsed.state.lastMode).toBe('gym');
-    expect(Object.keys(parsed.state).sort()).toEqual(['lastMode', 'lastWorkoutId', 'logs', 'routines', 'settings', 'workouts']);
+    expect(parsed.version).toBe(2);
+    expect(parsed.state.lastWorkoutId).toBe(hiitExample.id);
+    expect(Object.keys(parsed.state).sort()).toEqual(['lastWorkoutId', 'settings', 'workouts']);
   });
 });
 
@@ -114,63 +116,6 @@ describe('library store: workouts', () => {
   });
 });
 
-describe('library store: routines and sessions', () => {
-  it('creates, edits and deletes routines', () => {
-    const id = store().createRoutine('Upper', 'Day A');
-    expect(store().routines[0]).toMatchObject({ id, name: 'Upper', restSeconds: 90 });
-
-    store().renameRoutine(id, 'Upper body');
-    store().updateRoutine(id, { restSeconds: 120 });
-    expect(store().routines[0]).toMatchObject({ name: 'Upper body', restSeconds: 120 });
-
-    const dayA = store().routines[0]!.days[0]!.id;
-    const dayB = store().addDay(id, 'Day B');
-    store().updateDay(id, dayB, { notes: 'Light' });
-    store().moveDay(id, dayB, 0);
-    expect(store().routines[0]?.days.map((day) => day.name)).toEqual(['Day B', 'Day A']);
-    expect(store().routines[0]?.days[0]?.notes).toBe('Light');
-
-    const entryId = store().addEntry(id, dayA, { kind: 'catalog', exerciseId: 'squat' });
-    const secondEntry = store().addEntry(id, dayA, { kind: 'custom', name: 'Sled push' });
-    store().moveEntry(id, dayA, secondEntry, 0);
-    store().updatePrescription(id, dayA, entryId, { sets: { min: 5, max: 5 }, optional: true });
-    const day = store().routines[0]!.days.find((entry) => entry.id === dayA)!;
-    expect(day.entries.map((entry) => entry.id)).toEqual([secondEntry, entryId]);
-    expect(day.entries[1]?.prescription).toMatchObject({ sets: { min: 5, max: 5 }, optional: true });
-
-    store().removeEntry(id, dayA, secondEntry);
-    store().removeDay(id, dayB);
-    expect(store().routines[0]?.days).toHaveLength(1);
-    expect(store().routines[0]?.days[0]?.entries).toHaveLength(1);
-
-    const copy = store().duplicateRoutine(id, 'Copy');
-    expect(copy).not.toBeNull();
-    store().deleteRoutine(id);
-    store().deleteRoutine(copy!);
-    expect(store().routines.map((routine) => routine.id)).toEqual([gymTemplate.id]);
-  });
-
-  it('logs sets and surfaces the last logged values per exercise', () => {
-    const pushDay = gymTemplate.days.find((day) => day.name === 'Push')!;
-    const lateralRaise = pushDay.entries.find(
-      (entry) => entry.ref.kind === 'catalog' && entry.ref.exerciseId === 'lateral-raise',
-    )!;
-
-    const logId = store().startSession(gymTemplate.id, pushDay.id);
-    store().logSet(logId, lateralRaise.id, 0, { weightKg: 8, reps: 14, done: true, at: 1 });
-    store().logSet(logId, lateralRaise.id, 1, { weightKg: 8, reps: 12, done: true, at: 2 });
-    store().finishSession(logId);
-
-    const log = store().logs[0]!;
-    expect(log.finishedAt).toBeDefined();
-    expect(log.entries[lateralRaise.id]).toHaveLength(2);
-
-    const last = lastSetsFor(store().logs, store().routines, { kind: 'catalog', exerciseId: 'lateral-raise' });
-    expect(last?.map((set) => set.reps)).toEqual([14, 12]);
-    expect(lastSetsFor(store().logs, store().routines, { kind: 'catalog', exerciseId: 'squat' })).toBeUndefined();
-  });
-});
-
 describe('library store: settings', () => {
   it('merges partial defaults and other settings', () => {
     store().updateSettings({ muted: true, defaults: { trainSeconds: 45 } });
@@ -184,8 +129,44 @@ describe('library store: settings', () => {
     expect(store().settings.defaults.trainSeconds).toBe(30);
   });
 
-  it('remembers the last mode', () => {
-    store().setLastMode('hiit');
-    expect(store().lastMode).toBe('hiit');
+  it('remembers the last workout opened', () => {
+    store().setLastWorkoutId('abc');
+    expect(store().lastWorkoutId).toBe('abc');
+  });
+});
+
+describe('library store: migration to v2', () => {
+  it('drops gym state from a v1 payload and keeps the workouts', () => {
+    const v1 = {
+      workouts: [hiitExample],
+      routines: [{ id: 'r1', name: 'Push / Pull / Legs', restSeconds: 90, days: [] }],
+      logs: [{ id: 'l1', routineId: 'r1', dayId: 'd1', startedAt: 1, entries: {} }],
+      settings: {
+        language: 'pt-BR',
+        unit: 'kg',
+        muted: true,
+        defaults: { warmupSeconds: 60, trainSeconds: 40, restSeconds: 20, setRestSeconds: 45, setRepetitions: 2 },
+      },
+      lastMode: 'gym',
+      lastWorkoutId: hiitExample.id,
+    };
+
+    const migrated = dropGymState(v1) as unknown as Record<string, unknown>;
+
+    expect(migrated.workouts).toEqual([hiitExample]);
+    expect(migrated.lastWorkoutId).toBe(hiitExample.id);
+    expect(migrated.settings).toEqual({
+      language: 'pt-BR',
+      muted: true,
+      defaults: { warmupSeconds: 60, trainSeconds: 40, restSeconds: 20, setRestSeconds: 45, setRepetitions: 2 },
+    });
+    expect(Object.keys(migrated).sort()).toEqual(['lastWorkoutId', 'settings', 'workouts']);
+  });
+
+  it('falls back to defaults when a v1 payload is empty', () => {
+    const migrated = dropGymState({});
+    expect(migrated.workouts).toEqual([]);
+    expect(migrated.lastWorkoutId).toBeNull();
+    expect(migrated.settings.defaults.trainSeconds).toBe(30);
   });
 });

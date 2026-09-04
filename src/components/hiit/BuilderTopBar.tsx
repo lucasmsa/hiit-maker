@@ -10,7 +10,6 @@ export function BuilderTopBar({ className }: BuilderTopBarProps) {
   const { languageLabel, toggleLanguage } = useShell();
   return (
     <BrandRail
-      currentMode="hiit"
       languageLabel={languageLabel}
       onToggleLanguage={toggleLanguage}
       className={cx(className)}
