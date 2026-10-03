@@ -1,10 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { inject } from '@vercel/analytics';
 import { App } from '@/app/App';
 import { runLegacyMigration } from '@/app/bootstrap';
 import '@/styles/index.css';
 
 runLegacyMigration();
+inject();
 
 const root = document.getElementById('root');
 if (!root) {
