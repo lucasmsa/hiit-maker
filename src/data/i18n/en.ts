@@ -166,6 +166,7 @@ export const en = {
   'settings.data.confirmAction': 'Delete everything',
   'settings.about': 'About',
   'settings.about.version': 'Version {version}',
+  'settings.about.author': 'Made by lucasmsa',
   'settings.about.source': 'Source on GitHub',
   'settings.about.credits': 'Credits',
   'settings.seconds': 's',
