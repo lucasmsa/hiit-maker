@@ -11,6 +11,7 @@ import { Toggle } from '@/components/ui/Toggle';
 import { ChevronLeftIcon, GearIcon } from '@/components/shell/shell-icons';
 
 const repoUrl = 'https://github.com/lucasmsa/hiit-maker';
+const authorUrl = 'https://lucasmsa.com';
 const creditsUrl = `${repoUrl}/blob/dev/public/exercises/ATTRIBUTION.md`;
 
 const rows = [
@@ -118,6 +119,9 @@ export function Settings() {
 
           <div className="mt-8 mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-1 text-ink-soft">
             <span>{t('settings.about.version', { version: s.version })}</span>
+            <ExternalLink href={authorUrl} rel="author noreferrer">
+              {t('settings.about.author')}
+            </ExternalLink>
             <ExternalLink href={repoUrl}>{t('settings.about.source')}</ExternalLink>
             <ExternalLink href={creditsUrl}>{t('settings.about.credits')}</ExternalLink>
           </div>
@@ -182,12 +186,12 @@ function RowLabel({ template }: { template: string }) {
   );
 }
 
-function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
+function ExternalLink({ href, rel = 'noreferrer', children }: { href: string; rel?: string; children: ReactNode }) {
   return (
     <a
       href={href}
       target="_blank"
-      rel="noreferrer"
+      rel={rel}
       className="font-bold text-brand underline decoration-2 underline-offset-4 hover:text-brand-deep"
     >
       {children}

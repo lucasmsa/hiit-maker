@@ -168,6 +168,7 @@ export const ptBR: Record<I18nKey, string> = {
   'settings.data.confirmAction': 'Apagar tudo',
   'settings.about': 'Sobre',
   'settings.about.version': 'Versão {version}',
+  'settings.about.author': 'Feito por lucasmsa',
   'settings.about.source': 'Código no GitHub',
   'settings.about.credits': 'Créditos',
   'settings.seconds': 's',
